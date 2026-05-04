@@ -1,4 +1,4 @@
-import { ITestRequest, ITestResponse } from './test.interface';
+import { ITestRequest, ITestResponse } from './user.interface';
 import prisma from '../../shared/prisma';
 
 export const testService = {

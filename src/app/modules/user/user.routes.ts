@@ -1,7 +1,7 @@
 import { Router } from 'express';
-import { createTest, getAllTests, getTestById } from './test.controller';
+import { createTest, getAllTests, getTestById } from './user.controller';
 import validateRequest from '../../middlewares/validateRequest';
-import { createTestValidation, getTestValidation } from './test.validation';
+import { createTestValidation, getTestValidation } from './user.validation';
 
 const router = Router();
 

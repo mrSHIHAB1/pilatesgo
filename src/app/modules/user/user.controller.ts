@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
 import catchAsync from '../../shared/catchAsync';
 import sendResponse from '../../shared/sendResponse';
-import { testService } from './test.service';
-import { ITestResponse } from './test.interface';
+import { testService } from './user.service';
+import { ITestResponse } from './user.interface';
 
 // POST handler - Create a new test entry
 export const createTest = catchAsync(async (req: Request, res: Response) => {

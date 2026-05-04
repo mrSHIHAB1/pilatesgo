@@ -1,0 +1,40 @@
+
+enum UserRole {
+  ADMIN
+  USER
+}
+
+model User {
+  id                String         @id @default(cuid())
+  email             String         @unique
+  fullName          String
+  password          String
+  authProviders     AuthProvider[]
+  gender            String?
+  age               Int
+  height            Float
+  weight            Float
+  mainGoal          String
+  familiarity       String
+  workoutPreference String
+  motivation        String
+  activity          String
+  workoutProblem    String
+  workoutRoutine    String
+  role              UserRole       @default(USER)
+  createdAt         DateTime       @default(now())
+  isDeleted         Boolean        @default(false)
+  isVerified        Boolean        @default(false)
+  updatedAt         DateTime       @updatedAt
+}
+
+model AuthProvider {
+  id         String @id @default(cuid())
+  provider   String
+  providerId String
+  userId     String
+  user       User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerId])
+}
+
