@@ -1,37 +1,60 @@
 import { Request, Response } from 'express';
 import catchAsync from '../../shared/catchAsync';
 import sendResponse from '../../shared/sendResponse';
-import { testService } from './user.service';
-import { ITestResponse } from './user.interface';
+import { userService } from './user.service';
+import { 
+  ICreateUserResponse, 
+  IVerifyOTPResponse, 
+  ICompleteProfileResponse 
+} from './user.interface';
 
-// POST handler - Create a new test entry
-export const createTest = catchAsync(async (req: Request, res: Response) => {
-  const { name, email } = req.body;
+// Step 1: POST handler - Create a new user entry with email, name, and password
+export const createUser = catchAsync(async (req: Request, res: Response) => {
+  const result = await userService.createUser(req.body);
 
-  const result = await testService.createTest({
-    name,
-    email,
-  });
-
-  sendResponse<ITestResponse>(res, {
+  sendResponse(res, {
     statusCode: 201,
     success: true,
-    message: 'Test entry created successfully',
+    message: 'User account created. Please check your email for OTP.',
     data: result,
   });
 });
 
-// GET handler - Retrieve all test entries
-export const getAllTests = catchAsync(async (req: Request, res: Response) => {
+// Step 2: POST handler - Verify OTP
+export const verifytheOtp = catchAsync(async (req: Request, res: Response) => {
+  const result = await userService.verifyOTPService(req.body);
+
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: 'Email verified successfully. You can now complete your profile.',
+    data: result,
+  });
+});
+
+// Step 3: POST handler - Complete user profile
+export const completeProfile = catchAsync(async (req: Request, res: Response) => {
+  const result = await userService.completeProfile(req.body);
+
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: 'Profile completed successfully',
+    data: result,
+  });
+});
+
+// GET handler - Retrieve all user entries
+export const getAllUsers = catchAsync(async (req: Request, res: Response) => {
   const page = req.query.page ? parseInt(req.query.page as string) : 1;
   const limit = req.query.limit ? parseInt(req.query.limit as string) : 10;
 
-  const result = await testService.getAllTests(page, limit);
+  const result = await userService.getAllUsers(page, limit);
 
-  sendResponse<ITestResponse[]>(res, {
+  sendResponse(res, {
     statusCode: 200,
     success: true,
-    message: 'Test entries retrieved successfully',
+    message: 'User entries retrieved successfully',
     meta: {
       page: page,
       limit: limit,
@@ -41,26 +64,26 @@ export const getAllTests = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
-// GET handler - Retrieve a single test entry by ID
-export const getTestById = catchAsync(async (req: Request, res: Response) => {
+// GET handler - Retrieve a single user entry by ID
+export const getUserById = catchAsync(async (req: Request, res: Response) => {
   const id = Array.isArray(req.params.id) ? req.params.id[0] : req.params.id;
 
-  const result = await testService.getTestById(id);
+  const result = await userService.getUserById(id);
 
   if (!result) {
-    sendResponse<null>(res, {
+    sendResponse(res, {
       statusCode: 404,
       success: false,
-      message: 'Test entry not found',
+      message: 'User entry not found',
       data: null,
     });
     return;
   }
 
-  sendResponse<ITestResponse>(res, {
+  sendResponse(res, {
     statusCode: 200,
     success: true,
-    message: 'Test entry retrieved successfully',
+    message: 'User entry retrieved successfully',
     data: result,
   });
 });

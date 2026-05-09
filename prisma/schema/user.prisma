@@ -1,3 +1,12 @@
+// ============================================
+// User Module - Models Reference
+// ============================================
+// Actual definitions are in schema.prisma
+//
+// Models:
+// - UserRole: Enum for user roles (ADMIN, USER)
+// - User: Main user model with authentication and profile data
+// - AuthProvider: OAuth provider integration (Google, GitHub, etc.)
 
 enum UserRole {
   ADMIN
@@ -25,6 +34,7 @@ model User {
   createdAt         DateTime       @default(now())
   isDeleted         Boolean        @default(false)
   isVerified        Boolean        @default(false)
+  isProfileComplete Boolean        @default(false)
   updatedAt         DateTime       @updatedAt
 }
 
@@ -37,4 +47,5 @@ model AuthProvider {
 
   @@unique([provider, providerId])
 }
+
 

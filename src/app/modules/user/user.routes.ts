@@ -1,28 +1,42 @@
 import { Router } from 'express';
-import { createTest, getAllTests, getTestById } from './user.controller';
+import { createUser, getAllUsers, getUserById, verifytheOtp, completeProfile } from './user.controller';
 import validateRequest from '../../middlewares/validateRequest';
-import { createTestValidation, getTestValidation } from './user.validation';
+import { createUserValidation, getUserValidation, verifyOTPValidation, completeProfileValidation } from './user.validation';
 
 const router = Router();
 
-// POST /test - Create a new test entry
+// Step 1: POST /create-user - Create a new user with email, name, password
 router.post(
-  '/test',
-  validateRequest(createTestValidation),
-  createTest
+  '/create-user',
+  validateRequest(createUserValidation),
+  createUser
 );
 
-// GET /test - Retrieve all test entries
+// Step 2: POST /verify-otp - Verify OTP sent to email
+router.post(
+  '/verify-otp',
+  validateRequest(verifyOTPValidation),
+  verifytheOtp
+);
+
+// Step 3: POST /complete-profile - Complete user profile after OTP verification
+router.post(
+  '/complete-profile',
+  validateRequest(completeProfileValidation),
+  completeProfile
+);
+
+// GET /users - Retrieve all user entries
 router.get(
-  '/test',
-  validateRequest(getTestValidation),
-  getAllTests
+  '/users',
+  validateRequest(getUserValidation),
+  getAllUsers 
 );
 
-// GET /test/:id - Retrieve a single test entry
+// GET /users/:id - Retrieve a single user entry
 router.get(
-  '/test/:id',
-  getTestById
+  '/users/:id',
+  getUserById
 );
 
-export const testRoutes = router;
+export const userRoutes = router;
