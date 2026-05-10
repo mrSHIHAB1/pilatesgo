@@ -3,10 +3,17 @@ import catchAsync from '../../shared/catchAsync';
 import sendResponse from '../../shared/sendResponse';
 import { authService } from './auth.service';
 import { ILoginResponse, IGetMeResponse } from './auth.interface';
+import { setAuthCookie } from '../../../utils/setCookie';
 
 // Login controller
 export const login = catchAsync(async (req: Request, res: Response) => {
   const result = await authService.login(req.body);
+
+  // Set tokens in cookies
+  setAuthCookie(res, {
+    accessToken: result.accessToken,
+    refreshToken: result.refreshToken,
+  });
 
   sendResponse(res, {
     statusCode: 200,

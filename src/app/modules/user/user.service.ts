@@ -19,9 +19,6 @@ import { envVars } from '../../config/env';
 const createUser = async (payload: ICreateUserRequest): Promise<ICreateUserResponse> => {
 
   const { email, fullName, password } = payload;
-  const otp = generateOTP();
-  await storeOTP(email, otp);
-  await sendOTPEmail(email, otp, fullName);
 
   // Check if user already exists
   const existingUser = await prisma.user.findUnique({
@@ -31,6 +28,9 @@ const createUser = async (payload: ICreateUserRequest): Promise<ICreateUserRespo
   if (existingUser) {
     throw new ApiError(httpStatus.CONFLICT, 'Email already registered');
   }
+  const otp = generateOTP();
+  await storeOTP(email, otp);
+  await sendOTPEmail(email, otp, fullName);
 
   // Hash password
   const salt = parseInt(envVars.BCRYPT_SALT_ROUND || '10');
@@ -98,6 +98,7 @@ const verifyOTPService = async (payload: IVerifyOTPRequest): Promise<IVerifyOTPR
   return {
     message: 'OTP verified successfully',
     isVerified: true,
+    isProfileComplete: user.isProfileComplete,
   };
 };
 
@@ -193,7 +194,7 @@ const getAllUsers = async (page?: number, limit?: number): Promise<{
   ]);
 
   return {
-    data: users.map((user) => ({
+    data: users.map((user: any) => ({
       id: user.id,
       name: user.fullName || '',
       email: user.email,

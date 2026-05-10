@@ -34,6 +34,7 @@ export interface IVerifyOTPRequest {
 export interface IVerifyOTPResponse {
   message: string;
   isVerified: boolean;
+  isProfileComplete?: boolean;
 }
 
 // Step 3: Complete Profile

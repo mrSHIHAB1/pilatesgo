@@ -9,7 +9,13 @@ import { envVars } from "../config/env";
 const auth = (...roles: string[]) => {
     return async (req: Request & { user?: any }, res: Response, next: NextFunction) => {
         try {
-            const token = req.headers.authorization || req.cookies.accessToken;
+            let token = req.headers.authorization || req.cookies.accessToken;
+
+            // Remove 'Bearer ' prefix if present
+            if (token && token.startsWith('Bearer ')) {
+                token = token.slice(7);
+            }
+
             console.log({ token }, "from auth guard");
 
             if (!token) {
