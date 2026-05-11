@@ -19,7 +19,7 @@ const uploadVideo = async (file: Express.Multer.File,payload: Omit<ICreateVideoR
 
   // Get video duration from Cloudinary response
   const duration = uploadResult.duration ? Math.round(uploadResult.duration) : undefined;
-
+  
   // Create video record in database with Cloudinary URL
   const video = await prisma.video.create({
     data: {

@@ -5,6 +5,9 @@ import { videoService } from './video.service';
 
 // Upload video file to Cloudinary
 export const uploadVideo = catchAsync(async (req: Request, res: Response) => {
+    console.log('Received upload request with body:', req.body);
+    console.log('File info:', req.file ? { filename: req.file.filename, mimetype: req.file.mimetype } : 'No file');
+    
   if (!req.file) {
     return sendResponse(res, {
       statusCode: 400,
@@ -13,8 +16,10 @@ export const uploadVideo = catchAsync(async (req: Request, res: Response) => {
       data: null,
     });
   }
-
-  const result = await videoService.uploadVideo(req.file, req.body);
+const payload = JSON.parse(req.body.data);
+ 
+console.log('Parsed payload:', payload);
+  const result = await videoService.uploadVideo(req.file, payload);
 
   sendResponse(res, {
     statusCode: 201,
