@@ -353,6 +353,8 @@ export type UserWhereInput = {
   isProfileComplete?: Prisma.BoolFilter<"User"> | boolean
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   authProviders?: Prisma.AuthProviderListRelationFilter
+  programs?: Prisma.ProgramListRelationFilter
+  workouts?: Prisma.WorkoutListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -378,6 +380,8 @@ export type UserOrderByWithRelationInput = {
   isProfileComplete?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   authProviders?: Prisma.AuthProviderOrderByRelationAggregateInput
+  programs?: Prisma.ProgramOrderByRelationAggregateInput
+  workouts?: Prisma.WorkoutOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -406,6 +410,8 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   isProfileComplete?: Prisma.BoolFilter<"User"> | boolean
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   authProviders?: Prisma.AuthProviderListRelationFilter
+  programs?: Prisma.ProgramListRelationFilter
+  workouts?: Prisma.WorkoutListRelationFilter
 }, "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -487,6 +493,8 @@ export type UserCreateInput = {
   isProfileComplete?: boolean
   updatedAt?: Date | string
   authProviders?: Prisma.AuthProviderCreateNestedManyWithoutUserInput
+  programs?: Prisma.ProgramCreateNestedManyWithoutCreatorInput
+  workouts?: Prisma.WorkoutCreateNestedManyWithoutCreatorInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -512,6 +520,8 @@ export type UserUncheckedCreateInput = {
   isProfileComplete?: boolean
   updatedAt?: Date | string
   authProviders?: Prisma.AuthProviderUncheckedCreateNestedManyWithoutUserInput
+  programs?: Prisma.ProgramUncheckedCreateNestedManyWithoutCreatorInput
+  workouts?: Prisma.WorkoutUncheckedCreateNestedManyWithoutCreatorInput
 }
 
 export type UserUpdateInput = {
@@ -537,6 +547,8 @@ export type UserUpdateInput = {
   isProfileComplete?: Prisma.BoolFieldUpdateOperationsInput | boolean
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   authProviders?: Prisma.AuthProviderUpdateManyWithoutUserNestedInput
+  programs?: Prisma.ProgramUpdateManyWithoutCreatorNestedInput
+  workouts?: Prisma.WorkoutUpdateManyWithoutCreatorNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -562,6 +574,8 @@ export type UserUncheckedUpdateInput = {
   isProfileComplete?: Prisma.BoolFieldUpdateOperationsInput | boolean
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   authProviders?: Prisma.AuthProviderUncheckedUpdateManyWithoutUserNestedInput
+  programs?: Prisma.ProgramUncheckedUpdateManyWithoutCreatorNestedInput
+  workouts?: Prisma.WorkoutUncheckedUpdateManyWithoutCreatorNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -634,6 +648,11 @@ export type UserUncheckedUpdateManyInput = {
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isProfileComplete?: Prisma.BoolFieldUpdateOperationsInput | boolean
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type UserNullableScalarRelationFilter = {
+  is?: Prisma.UserWhereInput | null
+  isNot?: Prisma.UserWhereInput | null
 }
 
 export type UserCountOrderByAggregateInput = {
@@ -725,12 +744,20 @@ export type UserScalarRelationFilter = {
   isNot?: Prisma.UserWhereInput
 }
 
-export type StringFieldUpdateOperationsInput = {
-  set?: string
+export type UserCreateNestedOneWithoutProgramsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutProgramsInput, Prisma.UserUncheckedCreateWithoutProgramsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutProgramsInput
+  connect?: Prisma.UserWhereUniqueInput
 }
 
-export type NullableStringFieldUpdateOperationsInput = {
-  set?: string | null
+export type UserUpdateOneWithoutProgramsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutProgramsInput, Prisma.UserUncheckedCreateWithoutProgramsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutProgramsInput
+  upsert?: Prisma.UserUpsertWithoutProgramsInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutProgramsInput, Prisma.UserUpdateWithoutProgramsInput>, Prisma.UserUncheckedUpdateWithoutProgramsInput>
 }
 
 export type IntFieldUpdateOperationsInput = {
@@ -753,10 +780,6 @@ export type EnumUserRoleFieldUpdateOperationsInput = {
   set?: $Enums.UserRole
 }
 
-export type DateTimeFieldUpdateOperationsInput = {
-  set?: Date | string
-}
-
 export type BoolFieldUpdateOperationsInput = {
   set?: boolean
 }
@@ -773,6 +796,142 @@ export type UserUpdateOneRequiredWithoutAuthProvidersNestedInput = {
   upsert?: Prisma.UserUpsertWithoutAuthProvidersInput
   connect?: Prisma.UserWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutAuthProvidersInput, Prisma.UserUpdateWithoutAuthProvidersInput>, Prisma.UserUncheckedUpdateWithoutAuthProvidersInput>
+}
+
+export type UserCreateNestedOneWithoutWorkoutsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutWorkoutsInput, Prisma.UserUncheckedCreateWithoutWorkoutsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutWorkoutsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneWithoutWorkoutsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutWorkoutsInput, Prisma.UserUncheckedCreateWithoutWorkoutsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutWorkoutsInput
+  upsert?: Prisma.UserUpsertWithoutWorkoutsInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutWorkoutsInput, Prisma.UserUpdateWithoutWorkoutsInput>, Prisma.UserUncheckedUpdateWithoutWorkoutsInput>
+}
+
+export type UserCreateWithoutProgramsInput = {
+  id?: string
+  email: string
+  fullName: string
+  password: string
+  gender?: string | null
+  age: number
+  height: number
+  weight: number
+  mainGoal: string
+  familiarity: string
+  workoutPreference: string
+  motivation: string
+  activity: string
+  workoutProblem: string
+  workoutRoutine: string
+  role?: $Enums.UserRole
+  createdAt?: Date | string
+  isDeleted?: boolean
+  isVerified?: boolean
+  isProfileComplete?: boolean
+  updatedAt?: Date | string
+  authProviders?: Prisma.AuthProviderCreateNestedManyWithoutUserInput
+  workouts?: Prisma.WorkoutCreateNestedManyWithoutCreatorInput
+}
+
+export type UserUncheckedCreateWithoutProgramsInput = {
+  id?: string
+  email: string
+  fullName: string
+  password: string
+  gender?: string | null
+  age: number
+  height: number
+  weight: number
+  mainGoal: string
+  familiarity: string
+  workoutPreference: string
+  motivation: string
+  activity: string
+  workoutProblem: string
+  workoutRoutine: string
+  role?: $Enums.UserRole
+  createdAt?: Date | string
+  isDeleted?: boolean
+  isVerified?: boolean
+  isProfileComplete?: boolean
+  updatedAt?: Date | string
+  authProviders?: Prisma.AuthProviderUncheckedCreateNestedManyWithoutUserInput
+  workouts?: Prisma.WorkoutUncheckedCreateNestedManyWithoutCreatorInput
+}
+
+export type UserCreateOrConnectWithoutProgramsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutProgramsInput, Prisma.UserUncheckedCreateWithoutProgramsInput>
+}
+
+export type UserUpsertWithoutProgramsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutProgramsInput, Prisma.UserUncheckedUpdateWithoutProgramsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutProgramsInput, Prisma.UserUncheckedCreateWithoutProgramsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutProgramsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutProgramsInput, Prisma.UserUncheckedUpdateWithoutProgramsInput>
+}
+
+export type UserUpdateWithoutProgramsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  age?: Prisma.IntFieldUpdateOperationsInput | number
+  height?: Prisma.FloatFieldUpdateOperationsInput | number
+  weight?: Prisma.FloatFieldUpdateOperationsInput | number
+  mainGoal?: Prisma.StringFieldUpdateOperationsInput | string
+  familiarity?: Prisma.StringFieldUpdateOperationsInput | string
+  workoutPreference?: Prisma.StringFieldUpdateOperationsInput | string
+  motivation?: Prisma.StringFieldUpdateOperationsInput | string
+  activity?: Prisma.StringFieldUpdateOperationsInput | string
+  workoutProblem?: Prisma.StringFieldUpdateOperationsInput | string
+  workoutRoutine?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isProfileComplete?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  authProviders?: Prisma.AuthProviderUpdateManyWithoutUserNestedInput
+  workouts?: Prisma.WorkoutUpdateManyWithoutCreatorNestedInput
+}
+
+export type UserUncheckedUpdateWithoutProgramsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  age?: Prisma.IntFieldUpdateOperationsInput | number
+  height?: Prisma.FloatFieldUpdateOperationsInput | number
+  weight?: Prisma.FloatFieldUpdateOperationsInput | number
+  mainGoal?: Prisma.StringFieldUpdateOperationsInput | string
+  familiarity?: Prisma.StringFieldUpdateOperationsInput | string
+  workoutPreference?: Prisma.StringFieldUpdateOperationsInput | string
+  motivation?: Prisma.StringFieldUpdateOperationsInput | string
+  activity?: Prisma.StringFieldUpdateOperationsInput | string
+  workoutProblem?: Prisma.StringFieldUpdateOperationsInput | string
+  workoutRoutine?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isProfileComplete?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  authProviders?: Prisma.AuthProviderUncheckedUpdateManyWithoutUserNestedInput
+  workouts?: Prisma.WorkoutUncheckedUpdateManyWithoutCreatorNestedInput
 }
 
 export type UserCreateWithoutAuthProvidersInput = {
@@ -797,6 +956,8 @@ export type UserCreateWithoutAuthProvidersInput = {
   isVerified?: boolean
   isProfileComplete?: boolean
   updatedAt?: Date | string
+  programs?: Prisma.ProgramCreateNestedManyWithoutCreatorInput
+  workouts?: Prisma.WorkoutCreateNestedManyWithoutCreatorInput
 }
 
 export type UserUncheckedCreateWithoutAuthProvidersInput = {
@@ -821,6 +982,8 @@ export type UserUncheckedCreateWithoutAuthProvidersInput = {
   isVerified?: boolean
   isProfileComplete?: boolean
   updatedAt?: Date | string
+  programs?: Prisma.ProgramUncheckedCreateNestedManyWithoutCreatorInput
+  workouts?: Prisma.WorkoutUncheckedCreateNestedManyWithoutCreatorInput
 }
 
 export type UserCreateOrConnectWithoutAuthProvidersInput = {
@@ -861,6 +1024,8 @@ export type UserUpdateWithoutAuthProvidersInput = {
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isProfileComplete?: Prisma.BoolFieldUpdateOperationsInput | boolean
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  programs?: Prisma.ProgramUpdateManyWithoutCreatorNestedInput
+  workouts?: Prisma.WorkoutUpdateManyWithoutCreatorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAuthProvidersInput = {
@@ -885,6 +1050,128 @@ export type UserUncheckedUpdateWithoutAuthProvidersInput = {
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isProfileComplete?: Prisma.BoolFieldUpdateOperationsInput | boolean
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  programs?: Prisma.ProgramUncheckedUpdateManyWithoutCreatorNestedInput
+  workouts?: Prisma.WorkoutUncheckedUpdateManyWithoutCreatorNestedInput
+}
+
+export type UserCreateWithoutWorkoutsInput = {
+  id?: string
+  email: string
+  fullName: string
+  password: string
+  gender?: string | null
+  age: number
+  height: number
+  weight: number
+  mainGoal: string
+  familiarity: string
+  workoutPreference: string
+  motivation: string
+  activity: string
+  workoutProblem: string
+  workoutRoutine: string
+  role?: $Enums.UserRole
+  createdAt?: Date | string
+  isDeleted?: boolean
+  isVerified?: boolean
+  isProfileComplete?: boolean
+  updatedAt?: Date | string
+  authProviders?: Prisma.AuthProviderCreateNestedManyWithoutUserInput
+  programs?: Prisma.ProgramCreateNestedManyWithoutCreatorInput
+}
+
+export type UserUncheckedCreateWithoutWorkoutsInput = {
+  id?: string
+  email: string
+  fullName: string
+  password: string
+  gender?: string | null
+  age: number
+  height: number
+  weight: number
+  mainGoal: string
+  familiarity: string
+  workoutPreference: string
+  motivation: string
+  activity: string
+  workoutProblem: string
+  workoutRoutine: string
+  role?: $Enums.UserRole
+  createdAt?: Date | string
+  isDeleted?: boolean
+  isVerified?: boolean
+  isProfileComplete?: boolean
+  updatedAt?: Date | string
+  authProviders?: Prisma.AuthProviderUncheckedCreateNestedManyWithoutUserInput
+  programs?: Prisma.ProgramUncheckedCreateNestedManyWithoutCreatorInput
+}
+
+export type UserCreateOrConnectWithoutWorkoutsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutWorkoutsInput, Prisma.UserUncheckedCreateWithoutWorkoutsInput>
+}
+
+export type UserUpsertWithoutWorkoutsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutWorkoutsInput, Prisma.UserUncheckedUpdateWithoutWorkoutsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutWorkoutsInput, Prisma.UserUncheckedCreateWithoutWorkoutsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutWorkoutsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutWorkoutsInput, Prisma.UserUncheckedUpdateWithoutWorkoutsInput>
+}
+
+export type UserUpdateWithoutWorkoutsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  age?: Prisma.IntFieldUpdateOperationsInput | number
+  height?: Prisma.FloatFieldUpdateOperationsInput | number
+  weight?: Prisma.FloatFieldUpdateOperationsInput | number
+  mainGoal?: Prisma.StringFieldUpdateOperationsInput | string
+  familiarity?: Prisma.StringFieldUpdateOperationsInput | string
+  workoutPreference?: Prisma.StringFieldUpdateOperationsInput | string
+  motivation?: Prisma.StringFieldUpdateOperationsInput | string
+  activity?: Prisma.StringFieldUpdateOperationsInput | string
+  workoutProblem?: Prisma.StringFieldUpdateOperationsInput | string
+  workoutRoutine?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isProfileComplete?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  authProviders?: Prisma.AuthProviderUpdateManyWithoutUserNestedInput
+  programs?: Prisma.ProgramUpdateManyWithoutCreatorNestedInput
+}
+
+export type UserUncheckedUpdateWithoutWorkoutsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  age?: Prisma.IntFieldUpdateOperationsInput | number
+  height?: Prisma.FloatFieldUpdateOperationsInput | number
+  weight?: Prisma.FloatFieldUpdateOperationsInput | number
+  mainGoal?: Prisma.StringFieldUpdateOperationsInput | string
+  familiarity?: Prisma.StringFieldUpdateOperationsInput | string
+  workoutPreference?: Prisma.StringFieldUpdateOperationsInput | string
+  motivation?: Prisma.StringFieldUpdateOperationsInput | string
+  activity?: Prisma.StringFieldUpdateOperationsInput | string
+  workoutProblem?: Prisma.StringFieldUpdateOperationsInput | string
+  workoutRoutine?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isProfileComplete?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  authProviders?: Prisma.AuthProviderUncheckedUpdateManyWithoutUserNestedInput
+  programs?: Prisma.ProgramUncheckedUpdateManyWithoutCreatorNestedInput
 }
 
 
@@ -894,10 +1181,14 @@ export type UserUncheckedUpdateWithoutAuthProvidersInput = {
 
 export type UserCountOutputType = {
   authProviders: number
+  programs: number
+  workouts: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   authProviders?: boolean | UserCountOutputTypeCountAuthProvidersArgs
+  programs?: boolean | UserCountOutputTypeCountProgramsArgs
+  workouts?: boolean | UserCountOutputTypeCountWorkoutsArgs
 }
 
 /**
@@ -915,6 +1206,20 @@ export type UserCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensi
  */
 export type UserCountOutputTypeCountAuthProvidersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.AuthProviderWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountProgramsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ProgramWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountWorkoutsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.WorkoutWhereInput
 }
 
 
@@ -941,6 +1246,8 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   isProfileComplete?: boolean
   updatedAt?: boolean
   authProviders?: boolean | Prisma.User$authProvidersArgs<ExtArgs>
+  programs?: boolean | Prisma.User$programsArgs<ExtArgs>
+  workouts?: boolean | Prisma.User$workoutsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -1019,6 +1326,8 @@ export type UserSelectScalar = {
 export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "fullName" | "password" | "gender" | "age" | "height" | "weight" | "mainGoal" | "familiarity" | "workoutPreference" | "motivation" | "activity" | "workoutProblem" | "workoutRoutine" | "role" | "createdAt" | "isDeleted" | "isVerified" | "isProfileComplete" | "updatedAt", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   authProviders?: boolean | Prisma.User$authProvidersArgs<ExtArgs>
+  programs?: boolean | Prisma.User$programsArgs<ExtArgs>
+  workouts?: boolean | Prisma.User$workoutsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -1028,6 +1337,8 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   name: "User"
   objects: {
     authProviders: Prisma.$AuthProviderPayload<ExtArgs>[]
+    programs: Prisma.$ProgramPayload<ExtArgs>[]
+    workouts: Prisma.$WorkoutPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1446,6 +1757,8 @@ readonly fields: UserFieldRefs;
 export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   authProviders<T extends Prisma.User$authProvidersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$authProvidersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AuthProviderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  programs<T extends Prisma.User$programsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$programsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProgramPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  workouts<T extends Prisma.User$workoutsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$workoutsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$WorkoutPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1910,6 +2223,54 @@ export type User$authProvidersArgs<ExtArgs extends runtime.Types.Extensions.Inte
   take?: number
   skip?: number
   distinct?: Prisma.AuthProviderScalarFieldEnum | Prisma.AuthProviderScalarFieldEnum[]
+}
+
+/**
+ * User.programs
+ */
+export type User$programsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Program
+   */
+  select?: Prisma.ProgramSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Program
+   */
+  omit?: Prisma.ProgramOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ProgramInclude<ExtArgs> | null
+  where?: Prisma.ProgramWhereInput
+  orderBy?: Prisma.ProgramOrderByWithRelationInput | Prisma.ProgramOrderByWithRelationInput[]
+  cursor?: Prisma.ProgramWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ProgramScalarFieldEnum | Prisma.ProgramScalarFieldEnum[]
+}
+
+/**
+ * User.workouts
+ */
+export type User$workoutsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Workout
+   */
+  select?: Prisma.WorkoutSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Workout
+   */
+  omit?: Prisma.WorkoutOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.WorkoutInclude<ExtArgs> | null
+  where?: Prisma.WorkoutWhereInput
+  orderBy?: Prisma.WorkoutOrderByWithRelationInput | Prisma.WorkoutOrderByWithRelationInput[]
+  cursor?: Prisma.WorkoutWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.WorkoutScalarFieldEnum | Prisma.WorkoutScalarFieldEnum[]
 }
 
 /**

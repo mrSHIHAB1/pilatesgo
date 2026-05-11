@@ -8,6 +8,11 @@
  *
  * 🟢 You can import this file directly.
  */
+export type * from './models/Category'
+export type * from './models/Exercise'
+export type * from './models/Program'
 export type * from './models/User'
 export type * from './models/AuthProvider'
+export type * from './models/Video'
+export type * from './models/Workout'
 export type * from './commonInputTypes'

@@ -1,0 +1,24 @@
+enum DifficultyLevel {
+  BEGINNER
+  INTERMEDIATE
+  ADVANCED
+}
+
+enum Visibility {
+  PUBLIC
+  PRIVATE
+}
+
+model Video {
+  id           String          @id @default(uuid())
+  title        String
+  url          String
+  difficulty   DifficultyLevel
+  visibility   Visibility
+  duration     Int? // seconds
+  categoriesId String?
+  category     Category?       @relation(fields: [categoriesId], references: [id])
+  createdAt    DateTime        @default(now())
+  updatedAt    DateTime        @updatedAt
+  exercises    Exercise[]
+}

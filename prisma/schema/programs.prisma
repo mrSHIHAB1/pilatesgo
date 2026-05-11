@@ -1,0 +1,16 @@
+model Program {
+  id            String          @id @default(uuid())
+  title         String
+  description   String?
+  thumbnail     String?
+  difficulty    DifficultyLevel
+  creatorId     String?
+  creator       User?           @relation(fields: [creatorId], references: [id])
+  categoryId    String?
+  category      Category?       @relation(fields: [categoryId], references: [id])
+  durationWeeks Int?
+  coverImage    String?
+  workouts      Workout[]
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+}

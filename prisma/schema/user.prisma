@@ -18,9 +18,11 @@ model User {
   createdAt         DateTime       @default(now())
   isDeleted         Boolean        @default(false)
   isVerified        Boolean        @default(false)
-  isProfileComplete Boolean   @default(false) 
+  isProfileComplete Boolean        @default(false)
   updatedAt         DateTime       @updatedAt
   authProviders     AuthProvider[]
+  programs          Program[]
+  workouts          Workout[]
 }
 
 model AuthProvider {
