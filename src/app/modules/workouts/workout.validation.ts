@@ -11,6 +11,7 @@ export const createWorkoutValidation = z.object({
     categoryId: z.string().optional(),
     creatorId: z.string().optional(),
     programId: z.string().optional(),
+    exerciseIds: z.array(z.string()).optional(),
   }),
 });
 
@@ -26,6 +27,7 @@ export const updateWorkoutValidation = z.object({
     categoryId: z.string().optional(),
     creatorId: z.string().optional(),
     programId: z.string().optional(),
+    exerciseIds: z.array(z.string()).optional(),
   }),
 });
 

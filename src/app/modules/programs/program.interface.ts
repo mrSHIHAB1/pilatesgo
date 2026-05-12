@@ -7,6 +7,7 @@ export interface ICreateProgramRequest {
   categoryId?: string;
   durationWeeks?: number;
   coverImage?: string;
+  workoutIds?: string[];
 }
 
 export interface IUpdateProgramRequest {
@@ -19,6 +20,7 @@ export interface IUpdateProgramRequest {
   categoryId?: string;
   durationWeeks?: number;
   coverImage?: string;
+  workoutIds?: string[];
 }
 
 export interface IProgramResponse {
@@ -31,6 +33,7 @@ export interface IProgramResponse {
   categoryId: string | null;
   durationWeeks: number | null;
   coverImage: string | null;
+  workouts?: any[];
   createdAt: Date;
   updatedAt: Date;
 }

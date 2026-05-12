@@ -17,6 +17,7 @@ import {
   deleteVideoValidation,
 } from './video.validation';
 import { fileUploader } from '../../helpers/fileUploader';
+import auth from '../../middlewares/auth';
 
 const router = Router();
 
@@ -32,10 +33,10 @@ router.post(
 router.post('/create', validateRequest(createVideoValidation), createVideo);
 
 // GET /videos - Get all videos with pagination and filters
-router.get('/all', validateRequest(getVideosValidation), getAllVideos);
+router.get('/all',auth(), getAllVideos);
 
 // GET /videos/:id - Get a specific video by ID
-router.get('/by-id/:id', validateRequest(getVideoValidation), getVideoById);
+router.get('/by-id/:id', auth(), getVideoById);
 
 // PUT /videos/:id - Update a video
 router.put('/update/:id', validateRequest(updateVideoValidation), updateVideo);

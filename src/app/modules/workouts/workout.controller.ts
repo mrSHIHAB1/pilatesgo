@@ -5,7 +5,9 @@ import { workoutService } from './workout.service';
 
 // Create a new workout
 export const createWorkout = catchAsync(async (req: Request, res: Response) => {
-  const result = await workoutService.createWorkout(req.body);
+  const userId = (req.user as { userId: string }).userId;
+  console.log({ userId, body: req.body }, "from create workout controller");
+  const result = await workoutService.createWorkout({ ...req.body, creatorId: userId });
 
   sendResponse(res, {
     statusCode: 201,

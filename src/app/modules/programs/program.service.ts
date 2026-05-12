@@ -36,6 +36,17 @@ const createProgram = async (payload: ICreateProgramRequest): Promise<IProgramRe
     }
   }
 
+  // Validate workouts exist if workoutIds are provided
+  if (payload.workoutIds && payload.workoutIds.length > 0) {
+    const workouts = await prisma.workout.findMany({
+      where: { id: { in: payload.workoutIds } },
+    });
+
+    if (workouts.length !== payload.workoutIds.length) {
+      throw new ApiError(httpStatus.NOT_FOUND, 'One or more workouts not found');
+    }
+  }
+
   const program = await prisma.program.create({
     data: {
       title: payload.title,
@@ -46,6 +57,17 @@ const createProgram = async (payload: ICreateProgramRequest): Promise<IProgramRe
       categoryId: payload.categoryId,
       durationWeeks: payload.durationWeeks,
       coverImage: payload.coverImage,
+      // Connect workouts to the program
+      ...(payload.workoutIds && payload.workoutIds.length > 0 && {
+        workouts: {
+          connect: payload.workoutIds.map((id) => ({ id })),
+        },
+      }),
+    },
+    include: {
+      workouts: true,
+      category: true,
+      creator: true,
     },
   });
 
@@ -175,6 +197,17 @@ const updateProgram = async (id: string, payload: IUpdateProgramRequest): Promis
     }
   }
 
+  // Validate workouts exist if workoutIds are provided
+  if (payload.workoutIds && payload.workoutIds.length > 0) {
+    const workouts = await prisma.workout.findMany({
+      where: { id: { in: payload.workoutIds } },
+    });
+
+    if (workouts.length !== payload.workoutIds.length) {
+      throw new ApiError(httpStatus.NOT_FOUND, 'One or more workouts not found');
+    }
+  }
+
   const updatedProgram = await prisma.program.update({
     where: { id },
     data: {
@@ -186,6 +219,17 @@ const updateProgram = async (id: string, payload: IUpdateProgramRequest): Promis
       categoryId: payload.categoryId,
       durationWeeks: payload.durationWeeks,
       coverImage: payload.coverImage,
+      // Update workouts connection
+      ...(payload.workoutIds && {
+        workouts: {
+          set: payload.workoutIds.map((id) => ({ id })),
+        },
+      }),
+    },
+    include: {
+      workouts: true,
+      category: true,
+      creator: true,
     },
   });
 

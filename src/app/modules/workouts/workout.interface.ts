@@ -6,6 +6,7 @@ export interface ICreateWorkoutRequest {
   categoryId?: string;
   creatorId?: string;
   programId?: string;
+  exerciseIds?: string[];
 }
 
 export interface IUpdateWorkoutRequest {
@@ -17,6 +18,7 @@ export interface IUpdateWorkoutRequest {
   categoryId?: string;
   creatorId?: string;
   programId?: string;
+  exerciseIds?: string[];
 }
 
 export interface IWorkoutResponse {
@@ -28,6 +30,7 @@ export interface IWorkoutResponse {
   categoryId: string | null;
   creatorId: string | null;
   programId: string | null;
+  exercises?: any[];
   createdAt: Date;
   updatedAt: Date;
 }

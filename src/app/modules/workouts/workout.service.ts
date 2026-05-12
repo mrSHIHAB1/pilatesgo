@@ -47,6 +47,17 @@ const createWorkout = async (payload: ICreateWorkoutRequest): Promise<IWorkoutRe
     }
   }
 
+  // Validate exercises exist if exerciseIds are provided
+  if (payload.exerciseIds && payload.exerciseIds.length > 0) {
+    const exercises = await prisma.exercise.findMany({
+      where: { id: { in: payload.exerciseIds } },
+    });
+
+    if (exercises.length !== payload.exerciseIds.length) {
+      throw new ApiError(httpStatus.NOT_FOUND, 'One or more exercises not found');
+    }
+  }
+
   const workout = await prisma.workout.create({
     data: {
       title: payload.title,
@@ -56,6 +67,18 @@ const createWorkout = async (payload: ICreateWorkoutRequest): Promise<IWorkoutRe
       categoryId: payload.categoryId,
       creatorId: payload.creatorId,
       programId: payload.programId,
+      // Connect exercises to the workout
+      ...(payload.exerciseIds && payload.exerciseIds.length > 0 && {
+        exercises: {
+          connect: payload.exerciseIds.map((id) => ({ id })),
+        },
+      }),
+    },
+    include: {
+      exercises: true,
+      category: true,
+      creator: true,
+      program: true,
     },
   });
 
@@ -106,7 +129,7 @@ const getAllWorkouts = async (
       take: limit,
       include: {
         category: true,
-        creator: true,
+     
         program: true,
         exercises: true,
       },
@@ -203,6 +226,17 @@ const updateWorkout = async (id: string, payload: IUpdateWorkoutRequest): Promis
     }
   }
 
+  // Validate exercises exist if exerciseIds are provided
+  if (payload.exerciseIds && payload.exerciseIds.length > 0) {
+    const exercises = await prisma.exercise.findMany({
+      where: { id: { in: payload.exerciseIds } },
+    });
+
+    if (exercises.length !== payload.exerciseIds.length) {
+      throw new ApiError(httpStatus.NOT_FOUND, 'One or more exercises not found');
+    }
+  }
+
   const updatedWorkout = await prisma.workout.update({
     where: { id },
     data: {
@@ -213,6 +247,18 @@ const updateWorkout = async (id: string, payload: IUpdateWorkoutRequest): Promis
       categoryId: payload.categoryId,
       creatorId: payload.creatorId,
       programId: payload.programId,
+      // Update exercises connection
+      ...(payload.exerciseIds && {
+        exercises: {
+          set: payload.exerciseIds.map((id) => ({ id })),
+        },
+      }),
+    },
+    include: {
+      exercises: true,
+      category: true,
+      creator: true,
+      program: true,
     },
   });
 

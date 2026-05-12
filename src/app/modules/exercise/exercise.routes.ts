@@ -14,6 +14,7 @@ import {
   updateExerciseValidation,
   deleteExerciseValidation,
 } from './exercise.validation';
+import auth from '../../middlewares/auth';
 
 const router = Router();
 
@@ -21,13 +22,13 @@ const router = Router();
 router.post('/create', validateRequest(createExerciseValidation), createExercise);
 
 // GET /exercises - Get all exercises with pagination, search, and filters
-router.get('/all', validateRequest(getExercisesValidation), getAllExercises);
+router.get('/all', auth(), getAllExercises);
 
 // GET /exercises/:id - Get a specific exercise by ID
-router.get('/by-id/:id', validateRequest(getExerciseValidation), getExerciseById);
+router.get('/by-id/:id', auth(), validateRequest(getExerciseValidation), getExerciseById);
 
 // PUT /exercises/:id - Update an exercise
-router.put('/update/:id', validateRequest(updateExerciseValidation), updateExercise);
+router.put('/update/:id', auth(), validateRequest(updateExerciseValidation), updateExercise);
 
 // DELETE /exercises/:id - Delete an exercise
 router.delete('/delete/:id', validateRequest(deleteExerciseValidation), deleteExercise);
