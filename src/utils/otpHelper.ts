@@ -37,3 +37,22 @@ export const otpExists = async (email: string): Promise<boolean> => {
   const otp = await redisClient.get(key);
   return !!otp;
 };
+
+// Mark OTP as verified (used for flows like forgot-password)
+export const markOTPVerified = async (email: string): Promise<void> => {
+  const key = `otp_verified:${email}`;
+  await redisClient.setex(key, OTP_EXPIRY, 'true');
+};
+
+// Check if OTP was verified recently
+export const isOTPVerified = async (email: string): Promise<boolean> => {
+  const key = `otp_verified:${email}`;
+  const value = await redisClient.get(key);
+  return value === 'true';
+};
+
+// Clear OTP verified marker
+export const clearOTPVerified = async (email: string): Promise<void> => {
+  const key = `otp_verified:${email}`;
+  await redisClient.del(key);
+};

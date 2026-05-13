@@ -10,7 +10,6 @@ export const createWorkoutValidation = z.object({
     duration: z.number().int().positive().optional(),
     categoryId: z.string().optional(),
     creatorId: z.string().optional(),
-    programId: z.string().optional(),
     exerciseIds: z.array(z.string()).optional(),
   }),
 });
@@ -26,7 +25,6 @@ export const updateWorkoutValidation = z.object({
     duration: z.number().int().positive().optional(),
     categoryId: z.string().optional(),
     creatorId: z.string().optional(),
-    programId: z.string().optional(),
     exerciseIds: z.array(z.string()).optional(),
   }),
 });
@@ -45,7 +43,6 @@ export const getWorkoutsValidation = z.object({
     categoryId: z.string().optional(),
     difficulty: z.enum(['BEGINNER', 'INTERMEDIATE', 'ADVANCED']).optional(),
     creatorId: z.string().optional(),
-    programId: z.string().optional(),
   }),
 });
 

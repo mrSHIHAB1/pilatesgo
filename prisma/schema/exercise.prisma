@@ -12,4 +12,6 @@ model Exercise {
   videos       Video[]
   workout      Workout?        @relation(fields: [workoutId], references: [id])
   workoutId    String?
+  programWeeks ProgramWeek[]   @relation("ProgramWeekExercises")
+  completions  UserProgramExerciseCompletion[]
 }

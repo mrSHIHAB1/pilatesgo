@@ -23,6 +23,8 @@ model User {
   authProviders     AuthProvider[]
   programs          Program[]
   workouts          Workout[]
+  programEnrollments UserProgramEnrollment[]
+  programCompletions UserProgramExerciseCompletion[]
 }
 
 model AuthProvider {

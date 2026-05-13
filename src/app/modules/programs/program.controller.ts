@@ -25,19 +25,13 @@ export const createProgram = catchAsync(async (req: Request, res: Response) => {
     }
   }
 
-  // Parse workoutIds from form-data (handle single string or array)
-  let workoutIds: string[] | undefined = undefined;
-  if (req.body.workoutIds) {
-    workoutIds = Array.isArray(req.body.workoutIds)
-      ? req.body.workoutIds
-      : [req.body.workoutIds];
-  }
-
-  // Parse durationWeeks (handle both duration and durationWeeks field names)
-  const durationWeeks = req.body.durationWeeks || req.body.duration;
-console.log(req.body, "from create program controller");
-const payload = JSON.parse(req.body.data);
-
+  const rawPayload = req.body?.data ? JSON.parse(req.body.data) : req.body;
+  const payload = {
+    ...rawPayload,
+    creatorId: rawPayload?.creatorId ?? userId,
+    coverImage: coverImageUrl,
+    durationWeeks: rawPayload?.durationWeeks ?? rawPayload?.duration,
+  };
 
   const result = await programService.createProgram(payload);
 
@@ -124,27 +118,14 @@ export const updateProgram = catchAsync(async (req: Request, res: Response) => {
     }
   }
 
-  // Parse workoutIds from form-data (handle single string or array)
-  let workoutIds: string[] | undefined = undefined;
-  if (req.body.workoutIds) {
-    workoutIds = Array.isArray(req.body.workoutIds)
-      ? req.body.workoutIds
-      : [req.body.workoutIds];
-  }
-
-  // Parse durationWeeks (handle both duration and durationWeeks field names)
-  const durationWeeks = req.body.durationWeeks || req.body.duration;
+  const rawPayload = req.body?.data ? JSON.parse(req.body.data) : req.body;
+  const durationWeeks = rawPayload?.durationWeeks ?? rawPayload?.duration;
 
   const updateData = {
+    ...rawPayload,
     id,
-    title: req.body.title,
-    difficulty: req.body.difficulty,
-    description: req.body.description,
-    thumbnail: req.body.thumbnail,
-    categoryId: req.body.categoryId,
     durationWeeks: durationWeeks ? parseInt(durationWeeks) : undefined,
     coverImage: coverImageUrl,
-    workoutIds,
   };
 
   const result = await programService.updateProgram(id, updateData);

@@ -1,7 +1,20 @@
 import { Router } from 'express';
-import { login, getMe, refreshAccessToken } from './auth.controller';
+import {
+  login,
+  getMe,
+  refreshAccessToken,
+  forgotPasswordSendOtp,
+  forgotPasswordVerifyOtp,
+  forgotPasswordResetPassword,
+} from './auth.controller';
 import validateRequest from '../../middlewares/validateRequest';
-import { loginValidation, refreshTokenValidation } from './auth.validation';
+import {
+  loginValidation,
+  refreshTokenValidation,
+  forgotPasswordSendOtpValidation,
+  forgotPasswordVerifyOtpValidation,
+  forgotPasswordResetPasswordValidation,
+} from './auth.validation';
 import auth from '../../middlewares/auth';
 
 const router = Router();
@@ -17,6 +30,25 @@ router.post(
   '/refresh-token',
   validateRequest(refreshTokenValidation),
   refreshAccessToken
+);
+
+// Forgot password flow
+router.post(
+  '/forgot-password/send-otp',
+  validateRequest(forgotPasswordSendOtpValidation),
+  forgotPasswordSendOtp
+);
+
+router.post(
+  '/forgot-password/verify-otp',
+  validateRequest(forgotPasswordVerifyOtpValidation),
+  forgotPasswordVerifyOtp
+);
+
+router.post(
+  '/forgot-password/reset-password',
+  validateRequest(forgotPasswordResetPasswordValidation),
+  forgotPasswordResetPassword
 );
 
 export const authRoutes = router;

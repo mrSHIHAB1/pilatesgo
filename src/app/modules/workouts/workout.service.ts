@@ -36,17 +36,6 @@ const createWorkout = async (payload: ICreateWorkoutRequest): Promise<IWorkoutRe
     }
   }
 
-  // Validate program exists if programId is provided
-  if (payload.programId) {
-    const program = await prisma.program.findUnique({
-      where: { id: payload.programId },
-    });
-
-    if (!program) {
-      throw new ApiError(httpStatus.NOT_FOUND, 'Program not found');
-    }
-  }
-
   // Validate exercises exist if exerciseIds are provided
   if (payload.exerciseIds && payload.exerciseIds.length > 0) {
     const exercises = await prisma.exercise.findMany({
@@ -66,7 +55,6 @@ const createWorkout = async (payload: ICreateWorkoutRequest): Promise<IWorkoutRe
       duration: payload.duration,
       categoryId: payload.categoryId,
       creatorId: payload.creatorId,
-      programId: payload.programId,
       // Connect exercises to the workout
       ...(payload.exerciseIds && payload.exerciseIds.length > 0 && {
         exercises: {
@@ -78,7 +66,6 @@ const createWorkout = async (payload: ICreateWorkoutRequest): Promise<IWorkoutRe
       exercises: true,
       category: true,
       creator: true,
-      program: true,
     },
   });
 
@@ -92,8 +79,7 @@ const getAllWorkouts = async (
   search?: string,
   categoryId?: string,
   difficulty?: string,
-  creatorId?: string,
-  programId?: string
+  creatorId?: string
 ): Promise<IWorkoutListResponse> => {
   const skip = (page - 1) * limit;
 
@@ -118,10 +104,6 @@ const getAllWorkouts = async (
     where.creatorId = creatorId;
   }
 
-  if (programId) {
-    where.programId = programId;
-  }
-
   const [workouts, total] = await Promise.all([
     prisma.workout.findMany({
       where,
@@ -130,7 +112,6 @@ const getAllWorkouts = async (
       include: {
         category: true,
      
-        program: true,
         exercises: true,
       },
       orderBy: { createdAt: 'desc' },
@@ -156,7 +137,6 @@ const getWorkoutById = async (id: string): Promise<any> => {
     include: {
       category: true,
       creator: true,
-      program: true,
       exercises: true,
     },
   });
@@ -215,17 +195,6 @@ const updateWorkout = async (id: string, payload: IUpdateWorkoutRequest): Promis
     }
   }
 
-  // Validate program exists if programId is provided
-  if (payload.programId) {
-    const program = await prisma.program.findUnique({
-      where: { id: payload.programId },
-    });
-
-    if (!program) {
-      throw new ApiError(httpStatus.NOT_FOUND, 'Program not found');
-    }
-  }
-
   // Validate exercises exist if exerciseIds are provided
   if (payload.exerciseIds && payload.exerciseIds.length > 0) {
     const exercises = await prisma.exercise.findMany({
@@ -246,7 +215,6 @@ const updateWorkout = async (id: string, payload: IUpdateWorkoutRequest): Promis
       duration: payload.duration,
       categoryId: payload.categoryId,
       creatorId: payload.creatorId,
-      programId: payload.programId,
       // Update exercises connection
       ...(payload.exerciseIds && {
         exercises: {
@@ -258,7 +226,6 @@ const updateWorkout = async (id: string, payload: IUpdateWorkoutRequest): Promis
       exercises: true,
       category: true,
       creator: true,
-      program: true,
     },
   });
 

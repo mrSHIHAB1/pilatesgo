@@ -387,6 +387,9 @@ export const ModelName = {
   Category: 'Category',
   Exercise: 'Exercise',
   Program: 'Program',
+  ProgramWeek: 'ProgramWeek',
+  UserProgramEnrollment: 'UserProgramEnrollment',
+  UserProgramExerciseCompletion: 'UserProgramExerciseCompletion',
   User: 'User',
   AuthProvider: 'AuthProvider',
   Video: 'Video',
@@ -406,7 +409,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "category" | "exercise" | "program" | "user" | "authProvider" | "video" | "workout"
+    modelProps: "category" | "exercise" | "program" | "programWeek" | "userProgramEnrollment" | "userProgramExerciseCompletion" | "user" | "authProvider" | "video" | "workout"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -629,6 +632,228 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.ProgramCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.ProgramCountAggregateOutputType> | number
+        }
+      }
+    }
+    ProgramWeek: {
+      payload: Prisma.$ProgramWeekPayload<ExtArgs>
+      fields: Prisma.ProgramWeekFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ProgramWeekFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProgramWeekPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ProgramWeekFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProgramWeekPayload>
+        }
+        findFirst: {
+          args: Prisma.ProgramWeekFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProgramWeekPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ProgramWeekFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProgramWeekPayload>
+        }
+        findMany: {
+          args: Prisma.ProgramWeekFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProgramWeekPayload>[]
+        }
+        create: {
+          args: Prisma.ProgramWeekCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProgramWeekPayload>
+        }
+        createMany: {
+          args: Prisma.ProgramWeekCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ProgramWeekCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProgramWeekPayload>[]
+        }
+        delete: {
+          args: Prisma.ProgramWeekDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProgramWeekPayload>
+        }
+        update: {
+          args: Prisma.ProgramWeekUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProgramWeekPayload>
+        }
+        deleteMany: {
+          args: Prisma.ProgramWeekDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ProgramWeekUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ProgramWeekUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProgramWeekPayload>[]
+        }
+        upsert: {
+          args: Prisma.ProgramWeekUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProgramWeekPayload>
+        }
+        aggregate: {
+          args: Prisma.ProgramWeekAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateProgramWeek>
+        }
+        groupBy: {
+          args: Prisma.ProgramWeekGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ProgramWeekGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ProgramWeekCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ProgramWeekCountAggregateOutputType> | number
+        }
+      }
+    }
+    UserProgramEnrollment: {
+      payload: Prisma.$UserProgramEnrollmentPayload<ExtArgs>
+      fields: Prisma.UserProgramEnrollmentFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.UserProgramEnrollmentFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserProgramEnrollmentPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.UserProgramEnrollmentFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserProgramEnrollmentPayload>
+        }
+        findFirst: {
+          args: Prisma.UserProgramEnrollmentFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserProgramEnrollmentPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.UserProgramEnrollmentFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserProgramEnrollmentPayload>
+        }
+        findMany: {
+          args: Prisma.UserProgramEnrollmentFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserProgramEnrollmentPayload>[]
+        }
+        create: {
+          args: Prisma.UserProgramEnrollmentCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserProgramEnrollmentPayload>
+        }
+        createMany: {
+          args: Prisma.UserProgramEnrollmentCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.UserProgramEnrollmentCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserProgramEnrollmentPayload>[]
+        }
+        delete: {
+          args: Prisma.UserProgramEnrollmentDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserProgramEnrollmentPayload>
+        }
+        update: {
+          args: Prisma.UserProgramEnrollmentUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserProgramEnrollmentPayload>
+        }
+        deleteMany: {
+          args: Prisma.UserProgramEnrollmentDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.UserProgramEnrollmentUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.UserProgramEnrollmentUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserProgramEnrollmentPayload>[]
+        }
+        upsert: {
+          args: Prisma.UserProgramEnrollmentUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserProgramEnrollmentPayload>
+        }
+        aggregate: {
+          args: Prisma.UserProgramEnrollmentAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateUserProgramEnrollment>
+        }
+        groupBy: {
+          args: Prisma.UserProgramEnrollmentGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.UserProgramEnrollmentGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.UserProgramEnrollmentCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.UserProgramEnrollmentCountAggregateOutputType> | number
+        }
+      }
+    }
+    UserProgramExerciseCompletion: {
+      payload: Prisma.$UserProgramExerciseCompletionPayload<ExtArgs>
+      fields: Prisma.UserProgramExerciseCompletionFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.UserProgramExerciseCompletionFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserProgramExerciseCompletionPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.UserProgramExerciseCompletionFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserProgramExerciseCompletionPayload>
+        }
+        findFirst: {
+          args: Prisma.UserProgramExerciseCompletionFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserProgramExerciseCompletionPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.UserProgramExerciseCompletionFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserProgramExerciseCompletionPayload>
+        }
+        findMany: {
+          args: Prisma.UserProgramExerciseCompletionFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserProgramExerciseCompletionPayload>[]
+        }
+        create: {
+          args: Prisma.UserProgramExerciseCompletionCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserProgramExerciseCompletionPayload>
+        }
+        createMany: {
+          args: Prisma.UserProgramExerciseCompletionCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.UserProgramExerciseCompletionCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserProgramExerciseCompletionPayload>[]
+        }
+        delete: {
+          args: Prisma.UserProgramExerciseCompletionDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserProgramExerciseCompletionPayload>
+        }
+        update: {
+          args: Prisma.UserProgramExerciseCompletionUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserProgramExerciseCompletionPayload>
+        }
+        deleteMany: {
+          args: Prisma.UserProgramExerciseCompletionDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.UserProgramExerciseCompletionUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.UserProgramExerciseCompletionUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserProgramExerciseCompletionPayload>[]
+        }
+        upsert: {
+          args: Prisma.UserProgramExerciseCompletionUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserProgramExerciseCompletionPayload>
+        }
+        aggregate: {
+          args: Prisma.UserProgramExerciseCompletionAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateUserProgramExerciseCompletion>
+        }
+        groupBy: {
+          args: Prisma.UserProgramExerciseCompletionGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.UserProgramExerciseCompletionGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.UserProgramExerciseCompletionCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.UserProgramExerciseCompletionCountAggregateOutputType> | number
         }
       }
     }
@@ -1010,6 +1235,44 @@ export const ProgramScalarFieldEnum = {
 export type ProgramScalarFieldEnum = (typeof ProgramScalarFieldEnum)[keyof typeof ProgramScalarFieldEnum]
 
 
+export const ProgramWeekScalarFieldEnum = {
+  id: 'id',
+  programId: 'programId',
+  weekNumber: 'weekNumber',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ProgramWeekScalarFieldEnum = (typeof ProgramWeekScalarFieldEnum)[keyof typeof ProgramWeekScalarFieldEnum]
+
+
+export const UserProgramEnrollmentScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  programId: 'programId',
+  status: 'status',
+  startedAt: 'startedAt',
+  completedAt: 'completedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type UserProgramEnrollmentScalarFieldEnum = (typeof UserProgramEnrollmentScalarFieldEnum)[keyof typeof UserProgramEnrollmentScalarFieldEnum]
+
+
+export const UserProgramExerciseCompletionScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  programId: 'programId',
+  programWeekId: 'programWeekId',
+  exerciseId: 'exerciseId',
+  completedAt: 'completedAt',
+  createdAt: 'createdAt'
+} as const
+
+export type UserProgramExerciseCompletionScalarFieldEnum = (typeof UserProgramExerciseCompletionScalarFieldEnum)[keyof typeof UserProgramExerciseCompletionScalarFieldEnum]
+
+
 export const UserScalarFieldEnum = {
   id: 'id',
   email: 'email',
@@ -1070,7 +1333,6 @@ export const WorkoutScalarFieldEnum = {
   duration: 'duration',
   categoryId: 'categoryId',
   creatorId: 'creatorId',
-  programId: 'programId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -1161,6 +1423,20 @@ export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'In
  * Reference to a field of type 'Int[]'
  */
 export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+    
+
+
+/**
+ * Reference to a field of type 'ProgramEnrollmentStatus'
+ */
+export type EnumProgramEnrollmentStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ProgramEnrollmentStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'ProgramEnrollmentStatus[]'
+ */
+export type ListEnumProgramEnrollmentStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ProgramEnrollmentStatus[]'>
     
 
 
@@ -1325,6 +1601,9 @@ export type GlobalOmitConfig = {
   category?: Prisma.CategoryOmit
   exercise?: Prisma.ExerciseOmit
   program?: Prisma.ProgramOmit
+  programWeek?: Prisma.ProgramWeekOmit
+  userProgramEnrollment?: Prisma.UserProgramEnrollmentOmit
+  userProgramExerciseCompletion?: Prisma.UserProgramExerciseCompletionOmit
   user?: Prisma.UserOmit
   authProvider?: Prisma.AuthProviderOmit
   video?: Prisma.VideoOmit

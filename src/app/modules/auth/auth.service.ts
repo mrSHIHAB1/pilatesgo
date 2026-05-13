@@ -2,8 +2,29 @@ import bcrypt from 'bcryptjs';
 import httpStatus from 'http-status-codes';
 import ApiError from '../../errors/ApiError';
 import prisma from '../../shared/prisma';
-import { ILoginRequest, ILoginResponse, IGetMeResponse } from './auth.interface';
+import {
+  ILoginRequest,
+  ILoginResponse,
+  IGetMeResponse,
+  IForgotPasswordSendOtpRequest,
+  IForgotPasswordSendOtpResponse,
+  IForgotPasswordVerifyOtpRequest,
+  IForgotPasswordVerifyOtpResponse,
+  IForgotPasswordResetPasswordRequest,
+  IForgotPasswordResetPasswordResponse,
+} from './auth.interface';
 import { createUserTokens, createNewAccessTokenWithRefreshToken } from '../../../utils/userTokens';
+import {
+  generateOTP,
+  storeOTP,
+  verifyOTP,
+  deleteOTP,
+  markOTPVerified,
+  isOTPVerified,
+  clearOTPVerified,
+} from '../../../utils/otpHelper';
+import { sendForgotPasswordOTPEmail } from '../../helpers/emailHelper';
+import { envVars } from '../../config/env';
 
 export const authService = {
   // Login - Authenticate user with email and password
@@ -81,5 +102,82 @@ export const authService = {
   refreshToken: async (refreshToken: string): Promise<{ accessToken: string }> => {
     const accessToken = await createNewAccessTokenWithRefreshToken(refreshToken);
     return { accessToken };
+  },
+
+  // Step 1: Send OTP for forgot password
+  forgotPasswordSendOtp: async (
+    payload: IForgotPasswordSendOtpRequest
+  ): Promise<IForgotPasswordSendOtpResponse> => {
+    const { email } = payload;
+
+    const user = await prisma.user.findUnique({ where: { email } });
+
+    // Do not reveal whether the account exists
+    if (!user || user.isDeleted) {
+      return { message: 'If an account exists for this email, an OTP has been sent.' };
+    }
+
+    const otp = generateOTP();
+    await storeOTP(email, otp);
+    await sendForgotPasswordOTPEmail(email, otp, user.fullName || '');
+
+    return { message: 'If an account exists for this email, an OTP has been sent.' };
+  },
+
+  // Step 2: Verify OTP for forgot password
+  forgotPasswordVerifyOtp: async (
+    payload: IForgotPasswordVerifyOtpRequest
+  ): Promise<IForgotPasswordVerifyOtpResponse> => {
+    const { email, otp } = payload;
+
+    const user = await prisma.user.findUnique({ where: { email } });
+    if (!user || user.isDeleted) {
+      throw new ApiError(httpStatus.BAD_REQUEST, 'Invalid or expired OTP');
+    }
+
+    const isValid = await verifyOTP(email, otp);
+    if (!isValid) {
+      throw new ApiError(httpStatus.BAD_REQUEST, 'Invalid or expired OTP');
+    }
+
+    // Consume OTP and allow password reset for a short window
+    await deleteOTP(email);
+    await markOTPVerified(email);
+
+    return {
+      message: 'OTP verified successfully',
+      isVerified: true,
+    };
+  },
+
+  // Step 3: Reset password after OTP verification
+  forgotPasswordResetPassword: async (
+    payload: IForgotPasswordResetPasswordRequest
+  ): Promise<IForgotPasswordResetPasswordResponse> => {
+    const { email, newPassword } = payload;
+
+    const user = await prisma.user.findUnique({ where: { email } });
+    if (!user || user.isDeleted) {
+      throw new ApiError(httpStatus.BAD_REQUEST, 'Unable to reset password');
+    }
+
+    const verified = await isOTPVerified(email);
+    if (!verified) {
+      throw new ApiError(httpStatus.FORBIDDEN, 'OTP verification required');
+    }
+
+    const salt = parseInt(envVars.BCRYPT_SALT_ROUND || '10');
+    const hashedPassword = await bcrypt.hash(newPassword, salt);
+
+    await prisma.user.update({
+      where: { email },
+      data: {
+        password: hashedPassword,
+      },
+    });
+
+    await clearOTPVerified(email);
+
+    return { message: 'Password reset successfully' };
   },
 };

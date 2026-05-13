@@ -9,6 +9,15 @@
 * 🟢 You can import this file directly.
 */
 
+export const ProgramEnrollmentStatus = {
+  ACTIVE: 'ACTIVE',
+  PAUSED: 'PAUSED',
+  COMPLETED: 'COMPLETED'
+} as const
+
+export type ProgramEnrollmentStatus = (typeof ProgramEnrollmentStatus)[keyof typeof ProgramEnrollmentStatus]
+
+
 export const UserRole = {
   ADMIN: 'ADMIN',
   USER: 'USER'

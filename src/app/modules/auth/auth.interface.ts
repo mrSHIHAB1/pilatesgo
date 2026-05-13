@@ -31,3 +31,30 @@ export interface IGetMeResponse {
   isVerified: boolean;
   createdAt: Date;
 }
+
+export interface IForgotPasswordSendOtpRequest {
+  email: string;
+}
+
+export interface IForgotPasswordVerifyOtpRequest {
+  email: string;
+  otp: string;
+}
+
+export interface IForgotPasswordResetPasswordRequest {
+  email: string;
+  newPassword: string;
+}
+
+export interface IForgotPasswordSendOtpResponse {
+  message: string;
+}
+
+export interface IForgotPasswordVerifyOtpResponse {
+  message: string;
+  isVerified: boolean;
+}
+
+export interface IForgotPasswordResetPasswordResponse {
+  message: string;
+}

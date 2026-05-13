@@ -35,3 +35,28 @@ export const deleteProgramValidation = z.object({
     id: z.string({ message: 'Program ID is required' }),
   }),
 });
+
+export const activateProgramValidation = z.object({
+  params: z.object({
+    programId: z.string({ message: 'Program ID is required' }),
+  }),
+});
+
+export const getProgramProgressValidation = z.object({
+  params: z.object({
+    programId: z.string({ message: 'Program ID is required' }),
+  }),
+});
+
+export const setExerciseDoneValidation = z.object({
+  params: z.object({
+    programId: z.string({ message: 'Program ID is required' }),
+    programWeekId: z.string({ message: 'Program Week ID is required' }),
+    exerciseId: z.string({ message: 'Exercise ID is required' }),
+  }),
+  body: z
+    .object({
+      done: z.boolean({ message: 'done must be boolean' }).optional(),
+    })
+    .optional(),
+});

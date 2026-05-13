@@ -1,6 +1,7 @@
-import * as Prisma from "../../../generated/prisma/internal/prismaNamespace";
+import * as Prisma from "../../../prisma/generated/prisma/internal/prismaNamespace";
 import { NextFunction, Request, Response } from "express";
 import httpStatus from "http-status";
+import ApiError from "../errors/ApiError";
 
 // Sanitize error to prevent exposing sensitive information in production
 const sanitizeError = (error: any) => {
@@ -22,6 +23,17 @@ const globalErrorHandler = (err: any, req: Request, res: Response, next: NextFun
     let success = false;
     let message = err.message || "Something went wrong!";
     let error = err;
+
+    if (err instanceof ApiError) {
+        statusCode = err.statusCode;
+        message = err.message;
+    }
+
+    if (err?.name === 'ZodError') {
+        statusCode = httpStatus.BAD_REQUEST;
+        message = err.message;
+        error = err;
+    }
 
     if (err instanceof Prisma.PrismaClientValidationError) {
         message = 'Validation Error';

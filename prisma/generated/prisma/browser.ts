@@ -33,6 +33,21 @@ export type Exercise = Prisma.ExerciseModel
  */
 export type Program = Prisma.ProgramModel
 /**
+ * Model ProgramWeek
+ * 
+ */
+export type ProgramWeek = Prisma.ProgramWeekModel
+/**
+ * Model UserProgramEnrollment
+ * 
+ */
+export type UserProgramEnrollment = Prisma.UserProgramEnrollmentModel
+/**
+ * Model UserProgramExerciseCompletion
+ * 
+ */
+export type UserProgramExerciseCompletion = Prisma.UserProgramExerciseCompletionModel
+/**
  * Model User
  * 
  */

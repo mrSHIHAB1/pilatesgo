@@ -3,6 +3,52 @@ import ApiError from '../../errors/ApiError';
 import prisma from '../../shared/prisma';
 import { ICreateProgramRequest, IUpdateProgramRequest, IProgramResponse, IProgramListResponse } from './program.interface';
 
+const validateWeeksPayload = async (weeks: NonNullable<ICreateProgramRequest['weeks']>): Promise<void> => {
+  const weekNumbers = new Set<number>();
+  const allExerciseIds: string[] = [];
+
+  for (const week of weeks) {
+    if (!Number.isInteger(week.weekNumber) || week.weekNumber < 1) {
+      throw new ApiError(httpStatus.BAD_REQUEST, 'weekNumber must be a positive integer');
+    }
+    if (weekNumbers.has(week.weekNumber)) {
+      throw new ApiError(httpStatus.BAD_REQUEST, `Duplicate weekNumber: ${week.weekNumber}`);
+    }
+    weekNumbers.add(week.weekNumber);
+
+    if (!Array.isArray(week.exerciseIds)) {
+      throw new ApiError(httpStatus.BAD_REQUEST, 'exerciseIds must be an array of strings');
+    }
+
+    const uniqueWeekExerciseIds = new Set(week.exerciseIds);
+    if (uniqueWeekExerciseIds.size !== week.exerciseIds.length) {
+      throw new ApiError(
+        httpStatus.BAD_REQUEST,
+        `Duplicate exerciseIds found in weekNumber ${week.weekNumber}`
+      );
+    }
+
+    allExerciseIds.push(...week.exerciseIds);
+  }
+
+  const uniqueExerciseIds = Array.from(new Set(allExerciseIds));
+  if (uniqueExerciseIds.length > 0) {
+    const exercises = await prisma.exercise.findMany({
+      where: { id: { in: uniqueExerciseIds } },
+      select: { id: true },
+    });
+
+    if (exercises.length !== uniqueExerciseIds.length) {
+      const found = new Set(exercises.map((e) => e.id));
+      const missing = uniqueExerciseIds.filter((id) => !found.has(id));
+      throw new ApiError(
+        httpStatus.NOT_FOUND,
+        `One or more exercises not found: ${missing.join(', ')}`
+      );
+    }
+  }
+};
+
 // Create a new program
 const createProgram = async (payload: ICreateProgramRequest): Promise<IProgramResponse> => {
   // Check if program with same title already exists
@@ -36,15 +82,8 @@ const createProgram = async (payload: ICreateProgramRequest): Promise<IProgramRe
     }
   }
 
-  // Validate workouts exist if workoutIds are provided
-  if (payload.workoutIds && payload.workoutIds.length > 0) {
-    const workouts = await prisma.workout.findMany({
-      where: { id: { in: payload.workoutIds } },
-    });
-
-    if (workouts.length !== payload.workoutIds.length) {
-      throw new ApiError(httpStatus.NOT_FOUND, 'One or more workouts not found');
-    }
+  if (payload.weeks) {
+    await validateWeeksPayload(payload.weeks);
   }
 
   const program = await prisma.program.create({
@@ -57,15 +96,22 @@ const createProgram = async (payload: ICreateProgramRequest): Promise<IProgramRe
       categoryId: payload.categoryId,
       durationWeeks: payload.durationWeeks,
       coverImage: payload.coverImage,
-      // Connect workouts to the program
-      ...(payload.workoutIds && payload.workoutIds.length > 0 && {
-        workouts: {
-          connect: payload.workoutIds.map((id) => ({ id })),
+      ...(payload.weeks && {
+        weeks: {
+          create: payload.weeks.map((week) => ({
+            weekNumber: week.weekNumber,
+            exercises: {
+              connect: week.exerciseIds.map((id) => ({ id })),
+            },
+          })),
         },
       }),
     },
     include: {
-      workouts: true,
+      weeks: {
+        orderBy: { weekNumber: 'asc' },
+        include: { exercises: true },
+      },
       category: true,
       creator: true,
     },
@@ -114,7 +160,10 @@ const getAllPrograms = async (
       include: {
         category: true,
         creator: true,
-        workouts: true,
+        weeks: {
+          orderBy: { weekNumber: 'asc' },
+          include: { exercises: true },
+        },
       },
       orderBy: { createdAt: 'desc' },
     }),
@@ -139,7 +188,10 @@ const getProgramById = async (id: string): Promise<any> => {
     include: {
       category: true,
       creator: true,
-      workouts: true,
+      weeks: {
+        orderBy: { weekNumber: 'asc' },
+        include: { exercises: true },
+      },
     },
   });
 
@@ -197,15 +249,8 @@ const updateProgram = async (id: string, payload: IUpdateProgramRequest): Promis
     }
   }
 
-  // Validate workouts exist if workoutIds are provided
-  if (payload.workoutIds && payload.workoutIds.length > 0) {
-    const workouts = await prisma.workout.findMany({
-      where: { id: { in: payload.workoutIds } },
-    });
-
-    if (workouts.length !== payload.workoutIds.length) {
-      throw new ApiError(httpStatus.NOT_FOUND, 'One or more workouts not found');
-    }
+  if (payload.weeks) {
+    await validateWeeksPayload(payload.weeks);
   }
 
   const updatedProgram = await prisma.program.update({
@@ -219,15 +264,23 @@ const updateProgram = async (id: string, payload: IUpdateProgramRequest): Promis
       categoryId: payload.categoryId,
       durationWeeks: payload.durationWeeks,
       coverImage: payload.coverImage,
-      // Update workouts connection
-      ...(payload.workoutIds && {
-        workouts: {
-          set: payload.workoutIds.map((id) => ({ id })),
+      ...(payload.weeks && {
+        weeks: {
+          deleteMany: {},
+          create: payload.weeks.map((week) => ({
+            weekNumber: week.weekNumber,
+            exercises: {
+              connect: week.exerciseIds.map((exerciseId) => ({ id: exerciseId })),
+            },
+          })),
         },
       }),
     },
     include: {
-      workouts: true,
+      weeks: {
+        orderBy: { weekNumber: 'asc' },
+        include: { exercises: true },
+      },
       category: true,
       creator: true,
     },

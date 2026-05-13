@@ -25,7 +25,6 @@ export const getAllWorkouts = catchAsync(async (req: Request, res: Response) => 
   const categoryId = req.query.categoryId as string | undefined;
   const difficulty = req.query.difficulty as string | undefined;
   const creatorId = req.query.creatorId as string | undefined;
-  const programId = req.query.programId as string | undefined;
 
   const result = await workoutService.getAllWorkouts(
     page,
@@ -33,8 +32,7 @@ export const getAllWorkouts = catchAsync(async (req: Request, res: Response) => 
     search,
     categoryId,
     difficulty,
-    creatorId,
-    programId
+    creatorId
   );
 
   sendResponse(res, {

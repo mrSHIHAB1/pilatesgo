@@ -54,6 +54,9 @@ export const ModelName = {
   Category: 'Category',
   Exercise: 'Exercise',
   Program: 'Program',
+  ProgramWeek: 'ProgramWeek',
+  UserProgramEnrollment: 'UserProgramEnrollment',
+  UserProgramExerciseCompletion: 'UserProgramExerciseCompletion',
   User: 'User',
   AuthProvider: 'AuthProvider',
   Video: 'Video',
@@ -119,6 +122,44 @@ export const ProgramScalarFieldEnum = {
 export type ProgramScalarFieldEnum = (typeof ProgramScalarFieldEnum)[keyof typeof ProgramScalarFieldEnum]
 
 
+export const ProgramWeekScalarFieldEnum = {
+  id: 'id',
+  programId: 'programId',
+  weekNumber: 'weekNumber',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ProgramWeekScalarFieldEnum = (typeof ProgramWeekScalarFieldEnum)[keyof typeof ProgramWeekScalarFieldEnum]
+
+
+export const UserProgramEnrollmentScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  programId: 'programId',
+  status: 'status',
+  startedAt: 'startedAt',
+  completedAt: 'completedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type UserProgramEnrollmentScalarFieldEnum = (typeof UserProgramEnrollmentScalarFieldEnum)[keyof typeof UserProgramEnrollmentScalarFieldEnum]
+
+
+export const UserProgramExerciseCompletionScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  programId: 'programId',
+  programWeekId: 'programWeekId',
+  exerciseId: 'exerciseId',
+  completedAt: 'completedAt',
+  createdAt: 'createdAt'
+} as const
+
+export type UserProgramExerciseCompletionScalarFieldEnum = (typeof UserProgramExerciseCompletionScalarFieldEnum)[keyof typeof UserProgramExerciseCompletionScalarFieldEnum]
+
+
 export const UserScalarFieldEnum = {
   id: 'id',
   email: 'email',
@@ -179,7 +220,6 @@ export const WorkoutScalarFieldEnum = {
   duration: 'duration',
   categoryId: 'categoryId',
   creatorId: 'creatorId',
-  programId: 'programId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const

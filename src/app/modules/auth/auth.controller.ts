@@ -2,7 +2,13 @@ import { Request, Response } from 'express';
 import catchAsync from '../../shared/catchAsync';
 import sendResponse from '../../shared/sendResponse';
 import { authService } from './auth.service';
-import { ILoginResponse, IGetMeResponse } from './auth.interface';
+import {
+  ILoginResponse,
+  IGetMeResponse,
+  IForgotPasswordSendOtpResponse,
+  IForgotPasswordVerifyOtpResponse,
+  IForgotPasswordResetPasswordResponse,
+} from './auth.interface';
 import { setAuthCookie } from '../../../utils/setCookie';
 
 // Login controller
@@ -57,6 +63,39 @@ export const refreshAccessToken = catchAsync(async (req: Request, res: Response)
     statusCode: 200,
     success: true,
     message: 'Access token refreshed successfully',
+    data: result,
+  });
+});
+
+export const forgotPasswordSendOtp = catchAsync(async (req: Request, res: Response) => {
+  const result = await authService.forgotPasswordSendOtp(req.body);
+
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: 'OTP sent (if account exists)',
+    data: result,
+  });
+});
+
+export const forgotPasswordVerifyOtp = catchAsync(async (req: Request, res: Response) => {
+  const result = await authService.forgotPasswordVerifyOtp(req.body);
+
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: 'OTP verified successfully',
+    data: result,
+  });
+});
+
+export const forgotPasswordResetPassword = catchAsync(async (req: Request, res: Response) => {
+  const result = await authService.forgotPasswordResetPassword(req.body);
+
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: 'Password reset successfully',
     data: result,
   });
 });
