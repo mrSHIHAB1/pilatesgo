@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { createUser, getAllUsers, getUserById, verifytheOtp, completeProfile } from './user.controller';
+import { createUser, getAllUsers, getUserById, verifytheOtp, completeProfile, getMyWeeklyStats } from './user.controller';
 import validateRequest from '../../middlewares/validateRequest';
 import { createUserValidation, getUserValidation, verifyOTPValidation, completeProfileValidation } from './user.validation';
 import auth from '../../middlewares/auth';
@@ -18,6 +18,9 @@ router.post('/complete-profile',validateRequest(completeProfileValidation),compl
 
 // GET /users - Retrieve all user entries
 router.get('/users',validateRequest(getUserValidation),getAllUsers);
+
+// GET /me/weekly-stats - Weekly streak + time spent (computed from exercise durations)
+router.get('/me/weekly-stats', auth(), getMyWeeklyStats);
 
 // GET /users/:id - Retrieve a single user entry
 router.get('/users/:id',auth(UserRole.ADMIN),getUserById);

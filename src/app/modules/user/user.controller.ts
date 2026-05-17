@@ -5,7 +5,8 @@ import { userService } from './user.service';
 import { 
   ICreateUserResponse, 
   IVerifyOTPResponse, 
-  ICompleteProfileResponse 
+  ICompleteProfileResponse,
+  IWeeklyStatsResponse 
 } from './user.interface';
 
 // Step 1: POST handler - Create a new user entry with email, name, and password
@@ -84,6 +85,30 @@ export const getUserById = catchAsync(async (req: Request, res: Response) => {
     statusCode: 200,
     success: true,
     message: 'User entry retrieved successfully',
+    data: result,
+  });
+});
+
+// GET handler - Refresh + retrieve my weekly stats (streak + time spent)
+export const getMyWeeklyStats = catchAsync(async (req: Request & { user?: any }, res: Response) => {
+  const userId = req.user?.userId;
+
+  if (!userId) {
+    sendResponse(res, {
+      statusCode: 401,
+      success: false,
+      message: 'You are not authorized!',
+      data: null,
+    });
+    return;
+  }
+
+  const result = await userService.refreshMyWeeklyStats(userId);
+
+  sendResponse<IWeeklyStatsResponse>(res, {
+    statusCode: 200,
+    success: true,
+    message: 'Weekly stats retrieved successfully',
     data: result,
   });
 });

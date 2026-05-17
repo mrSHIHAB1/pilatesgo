@@ -79,12 +79,12 @@ export const authService = {
         height: true,
         weight: true,
         mainGoal: true,
-        familiarity: true,
         workoutPreference: true,
         motivation: true,
-        activity: true,
-        workoutProblem: true,
         workoutRoutine: true,
+        fimiliarityWithPilates: true,
+        activeCurrently: true,
+        likeToWorkOn: true,
         role: true,
         isVerified: true,
         createdAt: true,
@@ -95,7 +95,24 @@ export const authService = {
       throw new ApiError(httpStatus.NOT_FOUND, 'User not found');
     }
 
-    return user as IGetMeResponse;
+    return {
+      id: user.id,
+      email: user.email,
+      fullName: user.fullName,
+      age: user.age ?? 0,
+      height: user.height,
+      weight: user.weight,
+      mainGoal: user.mainGoal ?? '',
+      familiarity: user.fimiliarityWithPilates ?? '',
+      workoutPreference: user.workoutPreference ?? '',
+      motivation: user.motivation ?? '',
+      activity: user.activeCurrently ?? '',
+      workoutProblem: user.likeToWorkOn ?? '',
+      workoutRoutine: user.workoutRoutine ? String(user.workoutRoutine) : '',
+      role: String(user.role),
+      isVerified: user.isVerified,
+      createdAt: user.createdAt,
+    };
   },
 
   // Refresh access token

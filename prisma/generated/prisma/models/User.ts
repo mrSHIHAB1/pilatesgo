@@ -30,83 +30,146 @@ export type UserAvgAggregateOutputType = {
   age: number | null
   height: number | null
   weight: number | null
+  startingWeight: number | null
+  currentWeight: number | null
+  dailyStepsGoal: number | null
+  goalWeight: number | null
+  weeklyStreak: number | null
+  weeklyTimeSpentSeconds: number | null
 }
 
 export type UserSumAggregateOutputType = {
   age: number | null
   height: number | null
   weight: number | null
+  startingWeight: number | null
+  currentWeight: number | null
+  dailyStepsGoal: number | null
+  goalWeight: number | null
+  weeklyStreak: number | null
+  weeklyTimeSpentSeconds: number | null
 }
 
 export type UserMinAggregateOutputType = {
   id: string | null
   email: string | null
-  fullName: string | null
   password: string | null
-  gender: string | null
+  fullName: string | null
+  gender: $Enums.Gender | null
   age: number | null
   height: number | null
   weight: number | null
   mainGoal: string | null
-  familiarity: string | null
-  workoutPreference: string | null
+  likeToWorkOn: string | null
+  fimiliarityWithPilates: string | null
+  activeCurrently: string | null
+  wayOfWorkingOut: string | null
   motivation: string | null
-  activity: string | null
-  workoutProblem: string | null
-  workoutRoutine: string | null
+  workoutPreference: string | null
+  workoutRoutine: $Enums.WorkoutRoutine | null
+  NotificationsEnabled: boolean | null
+  dateOfBirth: Date | null
+  startingWeight: number | null
+  currentWeight: number | null
+  fitnessLevel: $Enums.FitnessLevel | null
+  dailyStepsGoal: number | null
+  units: $Enums.UnitSystem | null
+  goalWeight: number | null
+  activitylevel: $Enums.ActivityLevel | null
+  activityDetails: string | null
+  mostAttentionTo: $Enums.AttentionArea | null
+  weeklyStreak: number | null
+  weeklyTimeSpentSeconds: number | null
+  weeklyStatsWeekStart: Date | null
+  weeklyStatsUpdatedAt: Date | null
   role: $Enums.UserRole | null
-  createdAt: Date | null
   isDeleted: boolean | null
   isVerified: boolean | null
   isProfileComplete: boolean | null
+  createdAt: Date | null
   updatedAt: Date | null
 }
 
 export type UserMaxAggregateOutputType = {
   id: string | null
   email: string | null
-  fullName: string | null
   password: string | null
-  gender: string | null
+  fullName: string | null
+  gender: $Enums.Gender | null
   age: number | null
   height: number | null
   weight: number | null
   mainGoal: string | null
-  familiarity: string | null
-  workoutPreference: string | null
+  likeToWorkOn: string | null
+  fimiliarityWithPilates: string | null
+  activeCurrently: string | null
+  wayOfWorkingOut: string | null
   motivation: string | null
-  activity: string | null
-  workoutProblem: string | null
-  workoutRoutine: string | null
+  workoutPreference: string | null
+  workoutRoutine: $Enums.WorkoutRoutine | null
+  NotificationsEnabled: boolean | null
+  dateOfBirth: Date | null
+  startingWeight: number | null
+  currentWeight: number | null
+  fitnessLevel: $Enums.FitnessLevel | null
+  dailyStepsGoal: number | null
+  units: $Enums.UnitSystem | null
+  goalWeight: number | null
+  activitylevel: $Enums.ActivityLevel | null
+  activityDetails: string | null
+  mostAttentionTo: $Enums.AttentionArea | null
+  weeklyStreak: number | null
+  weeklyTimeSpentSeconds: number | null
+  weeklyStatsWeekStart: Date | null
+  weeklyStatsUpdatedAt: Date | null
   role: $Enums.UserRole | null
-  createdAt: Date | null
   isDeleted: boolean | null
   isVerified: boolean | null
   isProfileComplete: boolean | null
+  createdAt: Date | null
   updatedAt: Date | null
 }
 
 export type UserCountAggregateOutputType = {
   id: number
   email: number
-  fullName: number
   password: number
+  fullName: number
   gender: number
   age: number
   height: number
   weight: number
   mainGoal: number
-  familiarity: number
-  workoutPreference: number
+  likeToWorkOn: number
+  fimiliarityWithPilates: number
+  activeCurrently: number
+  wayOfWorkingOut: number
   motivation: number
-  activity: number
-  workoutProblem: number
+  workoutPreference: number
   workoutRoutine: number
+  NotificationsEnabled: number
+  dateOfBirth: number
+  startingWeight: number
+  currentWeight: number
+  fitnessLevel: number
+  classes: number
+  focusZones: number
+  specialPrograms: number
+  dailyStepsGoal: number
+  units: number
+  goalWeight: number
+  activitylevel: number
+  activityDetails: number
+  mostAttentionTo: number
+  weeklyStreak: number
+  weeklyTimeSpentSeconds: number
+  weeklyStatsWeekStart: number
+  weeklyStatsUpdatedAt: number
   role: number
-  createdAt: number
   isDeleted: number
   isVerified: number
   isProfileComplete: number
+  createdAt: number
   updatedAt: number
   _all: number
 }
@@ -116,83 +179,146 @@ export type UserAvgAggregateInputType = {
   age?: true
   height?: true
   weight?: true
+  startingWeight?: true
+  currentWeight?: true
+  dailyStepsGoal?: true
+  goalWeight?: true
+  weeklyStreak?: true
+  weeklyTimeSpentSeconds?: true
 }
 
 export type UserSumAggregateInputType = {
   age?: true
   height?: true
   weight?: true
+  startingWeight?: true
+  currentWeight?: true
+  dailyStepsGoal?: true
+  goalWeight?: true
+  weeklyStreak?: true
+  weeklyTimeSpentSeconds?: true
 }
 
 export type UserMinAggregateInputType = {
   id?: true
   email?: true
-  fullName?: true
   password?: true
+  fullName?: true
   gender?: true
   age?: true
   height?: true
   weight?: true
   mainGoal?: true
-  familiarity?: true
-  workoutPreference?: true
+  likeToWorkOn?: true
+  fimiliarityWithPilates?: true
+  activeCurrently?: true
+  wayOfWorkingOut?: true
   motivation?: true
-  activity?: true
-  workoutProblem?: true
+  workoutPreference?: true
   workoutRoutine?: true
+  NotificationsEnabled?: true
+  dateOfBirth?: true
+  startingWeight?: true
+  currentWeight?: true
+  fitnessLevel?: true
+  dailyStepsGoal?: true
+  units?: true
+  goalWeight?: true
+  activitylevel?: true
+  activityDetails?: true
+  mostAttentionTo?: true
+  weeklyStreak?: true
+  weeklyTimeSpentSeconds?: true
+  weeklyStatsWeekStart?: true
+  weeklyStatsUpdatedAt?: true
   role?: true
-  createdAt?: true
   isDeleted?: true
   isVerified?: true
   isProfileComplete?: true
+  createdAt?: true
   updatedAt?: true
 }
 
 export type UserMaxAggregateInputType = {
   id?: true
   email?: true
-  fullName?: true
   password?: true
+  fullName?: true
   gender?: true
   age?: true
   height?: true
   weight?: true
   mainGoal?: true
-  familiarity?: true
-  workoutPreference?: true
+  likeToWorkOn?: true
+  fimiliarityWithPilates?: true
+  activeCurrently?: true
+  wayOfWorkingOut?: true
   motivation?: true
-  activity?: true
-  workoutProblem?: true
+  workoutPreference?: true
   workoutRoutine?: true
+  NotificationsEnabled?: true
+  dateOfBirth?: true
+  startingWeight?: true
+  currentWeight?: true
+  fitnessLevel?: true
+  dailyStepsGoal?: true
+  units?: true
+  goalWeight?: true
+  activitylevel?: true
+  activityDetails?: true
+  mostAttentionTo?: true
+  weeklyStreak?: true
+  weeklyTimeSpentSeconds?: true
+  weeklyStatsWeekStart?: true
+  weeklyStatsUpdatedAt?: true
   role?: true
-  createdAt?: true
   isDeleted?: true
   isVerified?: true
   isProfileComplete?: true
+  createdAt?: true
   updatedAt?: true
 }
 
 export type UserCountAggregateInputType = {
   id?: true
   email?: true
-  fullName?: true
   password?: true
+  fullName?: true
   gender?: true
   age?: true
   height?: true
   weight?: true
   mainGoal?: true
-  familiarity?: true
-  workoutPreference?: true
+  likeToWorkOn?: true
+  fimiliarityWithPilates?: true
+  activeCurrently?: true
+  wayOfWorkingOut?: true
   motivation?: true
-  activity?: true
-  workoutProblem?: true
+  workoutPreference?: true
   workoutRoutine?: true
+  NotificationsEnabled?: true
+  dateOfBirth?: true
+  startingWeight?: true
+  currentWeight?: true
+  fitnessLevel?: true
+  classes?: true
+  focusZones?: true
+  specialPrograms?: true
+  dailyStepsGoal?: true
+  units?: true
+  goalWeight?: true
+  activitylevel?: true
+  activityDetails?: true
+  mostAttentionTo?: true
+  weeklyStreak?: true
+  weeklyTimeSpentSeconds?: true
+  weeklyStatsWeekStart?: true
+  weeklyStatsUpdatedAt?: true
   role?: true
-  createdAt?: true
   isDeleted?: true
   isVerified?: true
   isProfileComplete?: true
+  createdAt?: true
   updatedAt?: true
   _all?: true
 }
@@ -286,24 +412,43 @@ export type UserGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
 export type UserGroupByOutputType = {
   id: string
   email: string
-  fullName: string
   password: string
-  gender: string | null
-  age: number
+  fullName: string
+  gender: $Enums.Gender | null
+  age: number | null
   height: number
   weight: number
-  mainGoal: string
-  familiarity: string
-  workoutPreference: string
-  motivation: string
-  activity: string
-  workoutProblem: string
-  workoutRoutine: string
+  mainGoal: string | null
+  likeToWorkOn: string | null
+  fimiliarityWithPilates: string | null
+  activeCurrently: string | null
+  wayOfWorkingOut: string | null
+  motivation: string | null
+  workoutPreference: string | null
+  workoutRoutine: $Enums.WorkoutRoutine | null
+  NotificationsEnabled: boolean
+  dateOfBirth: Date | null
+  startingWeight: number
+  currentWeight: number
+  fitnessLevel: $Enums.FitnessLevel | null
+  classes: $Enums.WorkoutClass[]
+  focusZones: $Enums.FocusZone[]
+  specialPrograms: $Enums.SpecialProgram[]
+  dailyStepsGoal: number | null
+  units: $Enums.UnitSystem
+  goalWeight: number | null
+  activitylevel: $Enums.ActivityLevel | null
+  activityDetails: string | null
+  mostAttentionTo: $Enums.AttentionArea | null
+  weeklyStreak: number
+  weeklyTimeSpentSeconds: number
+  weeklyStatsWeekStart: Date | null
+  weeklyStatsUpdatedAt: Date | null
   role: $Enums.UserRole
-  createdAt: Date
   isDeleted: boolean
   isVerified: boolean
   isProfileComplete: boolean
+  createdAt: Date
   updatedAt: Date
   _count: UserCountAggregateOutputType | null
   _avg: UserAvgAggregateOutputType | null
@@ -333,24 +478,43 @@ export type UserWhereInput = {
   NOT?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
   id?: Prisma.StringFilter<"User"> | string
   email?: Prisma.StringFilter<"User"> | string
-  fullName?: Prisma.StringFilter<"User"> | string
   password?: Prisma.StringFilter<"User"> | string
-  gender?: Prisma.StringNullableFilter<"User"> | string | null
-  age?: Prisma.IntFilter<"User"> | number
+  fullName?: Prisma.StringFilter<"User"> | string
+  gender?: Prisma.EnumGenderNullableFilter<"User"> | $Enums.Gender | null
+  age?: Prisma.IntNullableFilter<"User"> | number | null
   height?: Prisma.FloatFilter<"User"> | number
   weight?: Prisma.FloatFilter<"User"> | number
-  mainGoal?: Prisma.StringFilter<"User"> | string
-  familiarity?: Prisma.StringFilter<"User"> | string
-  workoutPreference?: Prisma.StringFilter<"User"> | string
-  motivation?: Prisma.StringFilter<"User"> | string
-  activity?: Prisma.StringFilter<"User"> | string
-  workoutProblem?: Prisma.StringFilter<"User"> | string
-  workoutRoutine?: Prisma.StringFilter<"User"> | string
+  mainGoal?: Prisma.StringNullableFilter<"User"> | string | null
+  likeToWorkOn?: Prisma.StringNullableFilter<"User"> | string | null
+  fimiliarityWithPilates?: Prisma.StringNullableFilter<"User"> | string | null
+  activeCurrently?: Prisma.StringNullableFilter<"User"> | string | null
+  wayOfWorkingOut?: Prisma.StringNullableFilter<"User"> | string | null
+  motivation?: Prisma.StringNullableFilter<"User"> | string | null
+  workoutPreference?: Prisma.StringNullableFilter<"User"> | string | null
+  workoutRoutine?: Prisma.EnumWorkoutRoutineNullableFilter<"User"> | $Enums.WorkoutRoutine | null
+  NotificationsEnabled?: Prisma.BoolFilter<"User"> | boolean
+  dateOfBirth?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
+  startingWeight?: Prisma.FloatFilter<"User"> | number
+  currentWeight?: Prisma.FloatFilter<"User"> | number
+  fitnessLevel?: Prisma.EnumFitnessLevelNullableFilter<"User"> | $Enums.FitnessLevel | null
+  classes?: Prisma.EnumWorkoutClassNullableListFilter<"User">
+  focusZones?: Prisma.EnumFocusZoneNullableListFilter<"User">
+  specialPrograms?: Prisma.EnumSpecialProgramNullableListFilter<"User">
+  dailyStepsGoal?: Prisma.IntNullableFilter<"User"> | number | null
+  units?: Prisma.EnumUnitSystemFilter<"User"> | $Enums.UnitSystem
+  goalWeight?: Prisma.FloatNullableFilter<"User"> | number | null
+  activitylevel?: Prisma.EnumActivityLevelNullableFilter<"User"> | $Enums.ActivityLevel | null
+  activityDetails?: Prisma.StringNullableFilter<"User"> | string | null
+  mostAttentionTo?: Prisma.EnumAttentionAreaNullableFilter<"User"> | $Enums.AttentionArea | null
+  weeklyStreak?: Prisma.IntFilter<"User"> | number
+  weeklyTimeSpentSeconds?: Prisma.IntFilter<"User"> | number
+  weeklyStatsWeekStart?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
+  weeklyStatsUpdatedAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   role?: Prisma.EnumUserRoleFilter<"User"> | $Enums.UserRole
-  createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   isDeleted?: Prisma.BoolFilter<"User"> | boolean
   isVerified?: Prisma.BoolFilter<"User"> | boolean
   isProfileComplete?: Prisma.BoolFilter<"User"> | boolean
+  createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   authProviders?: Prisma.AuthProviderListRelationFilter
   programs?: Prisma.ProgramListRelationFilter
@@ -362,24 +526,43 @@ export type UserWhereInput = {
 export type UserOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   email?: Prisma.SortOrder
-  fullName?: Prisma.SortOrder
   password?: Prisma.SortOrder
+  fullName?: Prisma.SortOrder
   gender?: Prisma.SortOrderInput | Prisma.SortOrder
-  age?: Prisma.SortOrder
+  age?: Prisma.SortOrderInput | Prisma.SortOrder
   height?: Prisma.SortOrder
   weight?: Prisma.SortOrder
-  mainGoal?: Prisma.SortOrder
-  familiarity?: Prisma.SortOrder
-  workoutPreference?: Prisma.SortOrder
-  motivation?: Prisma.SortOrder
-  activity?: Prisma.SortOrder
-  workoutProblem?: Prisma.SortOrder
-  workoutRoutine?: Prisma.SortOrder
+  mainGoal?: Prisma.SortOrderInput | Prisma.SortOrder
+  likeToWorkOn?: Prisma.SortOrderInput | Prisma.SortOrder
+  fimiliarityWithPilates?: Prisma.SortOrderInput | Prisma.SortOrder
+  activeCurrently?: Prisma.SortOrderInput | Prisma.SortOrder
+  wayOfWorkingOut?: Prisma.SortOrderInput | Prisma.SortOrder
+  motivation?: Prisma.SortOrderInput | Prisma.SortOrder
+  workoutPreference?: Prisma.SortOrderInput | Prisma.SortOrder
+  workoutRoutine?: Prisma.SortOrderInput | Prisma.SortOrder
+  NotificationsEnabled?: Prisma.SortOrder
+  dateOfBirth?: Prisma.SortOrderInput | Prisma.SortOrder
+  startingWeight?: Prisma.SortOrder
+  currentWeight?: Prisma.SortOrder
+  fitnessLevel?: Prisma.SortOrderInput | Prisma.SortOrder
+  classes?: Prisma.SortOrder
+  focusZones?: Prisma.SortOrder
+  specialPrograms?: Prisma.SortOrder
+  dailyStepsGoal?: Prisma.SortOrderInput | Prisma.SortOrder
+  units?: Prisma.SortOrder
+  goalWeight?: Prisma.SortOrderInput | Prisma.SortOrder
+  activitylevel?: Prisma.SortOrderInput | Prisma.SortOrder
+  activityDetails?: Prisma.SortOrderInput | Prisma.SortOrder
+  mostAttentionTo?: Prisma.SortOrderInput | Prisma.SortOrder
+  weeklyStreak?: Prisma.SortOrder
+  weeklyTimeSpentSeconds?: Prisma.SortOrder
+  weeklyStatsWeekStart?: Prisma.SortOrderInput | Prisma.SortOrder
+  weeklyStatsUpdatedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   role?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
   isDeleted?: Prisma.SortOrder
   isVerified?: Prisma.SortOrder
   isProfileComplete?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   authProviders?: Prisma.AuthProviderOrderByRelationAggregateInput
   programs?: Prisma.ProgramOrderByRelationAggregateInput
@@ -394,24 +577,43 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
   OR?: Prisma.UserWhereInput[]
   NOT?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
-  fullName?: Prisma.StringFilter<"User"> | string
   password?: Prisma.StringFilter<"User"> | string
-  gender?: Prisma.StringNullableFilter<"User"> | string | null
-  age?: Prisma.IntFilter<"User"> | number
+  fullName?: Prisma.StringFilter<"User"> | string
+  gender?: Prisma.EnumGenderNullableFilter<"User"> | $Enums.Gender | null
+  age?: Prisma.IntNullableFilter<"User"> | number | null
   height?: Prisma.FloatFilter<"User"> | number
   weight?: Prisma.FloatFilter<"User"> | number
-  mainGoal?: Prisma.StringFilter<"User"> | string
-  familiarity?: Prisma.StringFilter<"User"> | string
-  workoutPreference?: Prisma.StringFilter<"User"> | string
-  motivation?: Prisma.StringFilter<"User"> | string
-  activity?: Prisma.StringFilter<"User"> | string
-  workoutProblem?: Prisma.StringFilter<"User"> | string
-  workoutRoutine?: Prisma.StringFilter<"User"> | string
+  mainGoal?: Prisma.StringNullableFilter<"User"> | string | null
+  likeToWorkOn?: Prisma.StringNullableFilter<"User"> | string | null
+  fimiliarityWithPilates?: Prisma.StringNullableFilter<"User"> | string | null
+  activeCurrently?: Prisma.StringNullableFilter<"User"> | string | null
+  wayOfWorkingOut?: Prisma.StringNullableFilter<"User"> | string | null
+  motivation?: Prisma.StringNullableFilter<"User"> | string | null
+  workoutPreference?: Prisma.StringNullableFilter<"User"> | string | null
+  workoutRoutine?: Prisma.EnumWorkoutRoutineNullableFilter<"User"> | $Enums.WorkoutRoutine | null
+  NotificationsEnabled?: Prisma.BoolFilter<"User"> | boolean
+  dateOfBirth?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
+  startingWeight?: Prisma.FloatFilter<"User"> | number
+  currentWeight?: Prisma.FloatFilter<"User"> | number
+  fitnessLevel?: Prisma.EnumFitnessLevelNullableFilter<"User"> | $Enums.FitnessLevel | null
+  classes?: Prisma.EnumWorkoutClassNullableListFilter<"User">
+  focusZones?: Prisma.EnumFocusZoneNullableListFilter<"User">
+  specialPrograms?: Prisma.EnumSpecialProgramNullableListFilter<"User">
+  dailyStepsGoal?: Prisma.IntNullableFilter<"User"> | number | null
+  units?: Prisma.EnumUnitSystemFilter<"User"> | $Enums.UnitSystem
+  goalWeight?: Prisma.FloatNullableFilter<"User"> | number | null
+  activitylevel?: Prisma.EnumActivityLevelNullableFilter<"User"> | $Enums.ActivityLevel | null
+  activityDetails?: Prisma.StringNullableFilter<"User"> | string | null
+  mostAttentionTo?: Prisma.EnumAttentionAreaNullableFilter<"User"> | $Enums.AttentionArea | null
+  weeklyStreak?: Prisma.IntFilter<"User"> | number
+  weeklyTimeSpentSeconds?: Prisma.IntFilter<"User"> | number
+  weeklyStatsWeekStart?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
+  weeklyStatsUpdatedAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   role?: Prisma.EnumUserRoleFilter<"User"> | $Enums.UserRole
-  createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   isDeleted?: Prisma.BoolFilter<"User"> | boolean
   isVerified?: Prisma.BoolFilter<"User"> | boolean
   isProfileComplete?: Prisma.BoolFilter<"User"> | boolean
+  createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   authProviders?: Prisma.AuthProviderListRelationFilter
   programs?: Prisma.ProgramListRelationFilter
@@ -423,24 +625,43 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
 export type UserOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   email?: Prisma.SortOrder
-  fullName?: Prisma.SortOrder
   password?: Prisma.SortOrder
+  fullName?: Prisma.SortOrder
   gender?: Prisma.SortOrderInput | Prisma.SortOrder
-  age?: Prisma.SortOrder
+  age?: Prisma.SortOrderInput | Prisma.SortOrder
   height?: Prisma.SortOrder
   weight?: Prisma.SortOrder
-  mainGoal?: Prisma.SortOrder
-  familiarity?: Prisma.SortOrder
-  workoutPreference?: Prisma.SortOrder
-  motivation?: Prisma.SortOrder
-  activity?: Prisma.SortOrder
-  workoutProblem?: Prisma.SortOrder
-  workoutRoutine?: Prisma.SortOrder
+  mainGoal?: Prisma.SortOrderInput | Prisma.SortOrder
+  likeToWorkOn?: Prisma.SortOrderInput | Prisma.SortOrder
+  fimiliarityWithPilates?: Prisma.SortOrderInput | Prisma.SortOrder
+  activeCurrently?: Prisma.SortOrderInput | Prisma.SortOrder
+  wayOfWorkingOut?: Prisma.SortOrderInput | Prisma.SortOrder
+  motivation?: Prisma.SortOrderInput | Prisma.SortOrder
+  workoutPreference?: Prisma.SortOrderInput | Prisma.SortOrder
+  workoutRoutine?: Prisma.SortOrderInput | Prisma.SortOrder
+  NotificationsEnabled?: Prisma.SortOrder
+  dateOfBirth?: Prisma.SortOrderInput | Prisma.SortOrder
+  startingWeight?: Prisma.SortOrder
+  currentWeight?: Prisma.SortOrder
+  fitnessLevel?: Prisma.SortOrderInput | Prisma.SortOrder
+  classes?: Prisma.SortOrder
+  focusZones?: Prisma.SortOrder
+  specialPrograms?: Prisma.SortOrder
+  dailyStepsGoal?: Prisma.SortOrderInput | Prisma.SortOrder
+  units?: Prisma.SortOrder
+  goalWeight?: Prisma.SortOrderInput | Prisma.SortOrder
+  activitylevel?: Prisma.SortOrderInput | Prisma.SortOrder
+  activityDetails?: Prisma.SortOrderInput | Prisma.SortOrder
+  mostAttentionTo?: Prisma.SortOrderInput | Prisma.SortOrder
+  weeklyStreak?: Prisma.SortOrder
+  weeklyTimeSpentSeconds?: Prisma.SortOrder
+  weeklyStatsWeekStart?: Prisma.SortOrderInput | Prisma.SortOrder
+  weeklyStatsUpdatedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   role?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
   isDeleted?: Prisma.SortOrder
   isVerified?: Prisma.SortOrder
   isProfileComplete?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
   _avg?: Prisma.UserAvgOrderByAggregateInput
@@ -455,48 +676,86 @@ export type UserScalarWhereWithAggregatesInput = {
   NOT?: Prisma.UserScalarWhereWithAggregatesInput | Prisma.UserScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"User"> | string
   email?: Prisma.StringWithAggregatesFilter<"User"> | string
-  fullName?: Prisma.StringWithAggregatesFilter<"User"> | string
   password?: Prisma.StringWithAggregatesFilter<"User"> | string
-  gender?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
-  age?: Prisma.IntWithAggregatesFilter<"User"> | number
+  fullName?: Prisma.StringWithAggregatesFilter<"User"> | string
+  gender?: Prisma.EnumGenderNullableWithAggregatesFilter<"User"> | $Enums.Gender | null
+  age?: Prisma.IntNullableWithAggregatesFilter<"User"> | number | null
   height?: Prisma.FloatWithAggregatesFilter<"User"> | number
   weight?: Prisma.FloatWithAggregatesFilter<"User"> | number
-  mainGoal?: Prisma.StringWithAggregatesFilter<"User"> | string
-  familiarity?: Prisma.StringWithAggregatesFilter<"User"> | string
-  workoutPreference?: Prisma.StringWithAggregatesFilter<"User"> | string
-  motivation?: Prisma.StringWithAggregatesFilter<"User"> | string
-  activity?: Prisma.StringWithAggregatesFilter<"User"> | string
-  workoutProblem?: Prisma.StringWithAggregatesFilter<"User"> | string
-  workoutRoutine?: Prisma.StringWithAggregatesFilter<"User"> | string
+  mainGoal?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  likeToWorkOn?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  fimiliarityWithPilates?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  activeCurrently?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  wayOfWorkingOut?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  motivation?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  workoutPreference?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  workoutRoutine?: Prisma.EnumWorkoutRoutineNullableWithAggregatesFilter<"User"> | $Enums.WorkoutRoutine | null
+  NotificationsEnabled?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
+  dateOfBirth?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
+  startingWeight?: Prisma.FloatWithAggregatesFilter<"User"> | number
+  currentWeight?: Prisma.FloatWithAggregatesFilter<"User"> | number
+  fitnessLevel?: Prisma.EnumFitnessLevelNullableWithAggregatesFilter<"User"> | $Enums.FitnessLevel | null
+  classes?: Prisma.EnumWorkoutClassNullableListFilter<"User">
+  focusZones?: Prisma.EnumFocusZoneNullableListFilter<"User">
+  specialPrograms?: Prisma.EnumSpecialProgramNullableListFilter<"User">
+  dailyStepsGoal?: Prisma.IntNullableWithAggregatesFilter<"User"> | number | null
+  units?: Prisma.EnumUnitSystemWithAggregatesFilter<"User"> | $Enums.UnitSystem
+  goalWeight?: Prisma.FloatNullableWithAggregatesFilter<"User"> | number | null
+  activitylevel?: Prisma.EnumActivityLevelNullableWithAggregatesFilter<"User"> | $Enums.ActivityLevel | null
+  activityDetails?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  mostAttentionTo?: Prisma.EnumAttentionAreaNullableWithAggregatesFilter<"User"> | $Enums.AttentionArea | null
+  weeklyStreak?: Prisma.IntWithAggregatesFilter<"User"> | number
+  weeklyTimeSpentSeconds?: Prisma.IntWithAggregatesFilter<"User"> | number
+  weeklyStatsWeekStart?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
+  weeklyStatsUpdatedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
   role?: Prisma.EnumUserRoleWithAggregatesFilter<"User"> | $Enums.UserRole
-  createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
   isDeleted?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
   isVerified?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
   isProfileComplete?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
+  createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
 }
 
 export type UserCreateInput = {
   id?: string
   email: string
-  fullName: string
   password: string
-  gender?: string | null
-  age: number
-  height: number
-  weight: number
-  mainGoal: string
-  familiarity: string
-  workoutPreference: string
-  motivation: string
-  activity: string
-  workoutProblem: string
-  workoutRoutine: string
+  fullName: string
+  gender?: $Enums.Gender | null
+  age?: number | null
+  height?: number
+  weight?: number
+  mainGoal?: string | null
+  likeToWorkOn?: string | null
+  fimiliarityWithPilates?: string | null
+  activeCurrently?: string | null
+  wayOfWorkingOut?: string | null
+  motivation?: string | null
+  workoutPreference?: string | null
+  workoutRoutine?: $Enums.WorkoutRoutine | null
+  NotificationsEnabled?: boolean
+  dateOfBirth?: Date | string | null
+  startingWeight?: number
+  currentWeight?: number
+  fitnessLevel?: $Enums.FitnessLevel | null
+  classes?: Prisma.UserCreateclassesInput | $Enums.WorkoutClass[]
+  focusZones?: Prisma.UserCreatefocusZonesInput | $Enums.FocusZone[]
+  specialPrograms?: Prisma.UserCreatespecialProgramsInput | $Enums.SpecialProgram[]
+  dailyStepsGoal?: number | null
+  units?: $Enums.UnitSystem
+  goalWeight?: number | null
+  activitylevel?: $Enums.ActivityLevel | null
+  activityDetails?: string | null
+  mostAttentionTo?: $Enums.AttentionArea | null
+  weeklyStreak?: number
+  weeklyTimeSpentSeconds?: number
+  weeklyStatsWeekStart?: Date | string | null
+  weeklyStatsUpdatedAt?: Date | string | null
   role?: $Enums.UserRole
-  createdAt?: Date | string
   isDeleted?: boolean
   isVerified?: boolean
   isProfileComplete?: boolean
+  createdAt?: Date | string
   updatedAt?: Date | string
   authProviders?: Prisma.AuthProviderCreateNestedManyWithoutUserInput
   programs?: Prisma.ProgramCreateNestedManyWithoutCreatorInput
@@ -508,24 +767,43 @@ export type UserCreateInput = {
 export type UserUncheckedCreateInput = {
   id?: string
   email: string
-  fullName: string
   password: string
-  gender?: string | null
-  age: number
-  height: number
-  weight: number
-  mainGoal: string
-  familiarity: string
-  workoutPreference: string
-  motivation: string
-  activity: string
-  workoutProblem: string
-  workoutRoutine: string
+  fullName: string
+  gender?: $Enums.Gender | null
+  age?: number | null
+  height?: number
+  weight?: number
+  mainGoal?: string | null
+  likeToWorkOn?: string | null
+  fimiliarityWithPilates?: string | null
+  activeCurrently?: string | null
+  wayOfWorkingOut?: string | null
+  motivation?: string | null
+  workoutPreference?: string | null
+  workoutRoutine?: $Enums.WorkoutRoutine | null
+  NotificationsEnabled?: boolean
+  dateOfBirth?: Date | string | null
+  startingWeight?: number
+  currentWeight?: number
+  fitnessLevel?: $Enums.FitnessLevel | null
+  classes?: Prisma.UserCreateclassesInput | $Enums.WorkoutClass[]
+  focusZones?: Prisma.UserCreatefocusZonesInput | $Enums.FocusZone[]
+  specialPrograms?: Prisma.UserCreatespecialProgramsInput | $Enums.SpecialProgram[]
+  dailyStepsGoal?: number | null
+  units?: $Enums.UnitSystem
+  goalWeight?: number | null
+  activitylevel?: $Enums.ActivityLevel | null
+  activityDetails?: string | null
+  mostAttentionTo?: $Enums.AttentionArea | null
+  weeklyStreak?: number
+  weeklyTimeSpentSeconds?: number
+  weeklyStatsWeekStart?: Date | string | null
+  weeklyStatsUpdatedAt?: Date | string | null
   role?: $Enums.UserRole
-  createdAt?: Date | string
   isDeleted?: boolean
   isVerified?: boolean
   isProfileComplete?: boolean
+  createdAt?: Date | string
   updatedAt?: Date | string
   authProviders?: Prisma.AuthProviderUncheckedCreateNestedManyWithoutUserInput
   programs?: Prisma.ProgramUncheckedCreateNestedManyWithoutCreatorInput
@@ -537,24 +815,43 @@ export type UserUncheckedCreateInput = {
 export type UserUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  fullName?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  age?: Prisma.IntFieldUpdateOperationsInput | number
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+  age?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   height?: Prisma.FloatFieldUpdateOperationsInput | number
   weight?: Prisma.FloatFieldUpdateOperationsInput | number
-  mainGoal?: Prisma.StringFieldUpdateOperationsInput | string
-  familiarity?: Prisma.StringFieldUpdateOperationsInput | string
-  workoutPreference?: Prisma.StringFieldUpdateOperationsInput | string
-  motivation?: Prisma.StringFieldUpdateOperationsInput | string
-  activity?: Prisma.StringFieldUpdateOperationsInput | string
-  workoutProblem?: Prisma.StringFieldUpdateOperationsInput | string
-  workoutRoutine?: Prisma.StringFieldUpdateOperationsInput | string
+  mainGoal?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  likeToWorkOn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fimiliarityWithPilates?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  activeCurrently?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  wayOfWorkingOut?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  motivation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  workoutPreference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  workoutRoutine?: Prisma.NullableEnumWorkoutRoutineFieldUpdateOperationsInput | $Enums.WorkoutRoutine | null
+  NotificationsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  startingWeight?: Prisma.FloatFieldUpdateOperationsInput | number
+  currentWeight?: Prisma.FloatFieldUpdateOperationsInput | number
+  fitnessLevel?: Prisma.NullableEnumFitnessLevelFieldUpdateOperationsInput | $Enums.FitnessLevel | null
+  classes?: Prisma.UserUpdateclassesInput | $Enums.WorkoutClass[]
+  focusZones?: Prisma.UserUpdatefocusZonesInput | $Enums.FocusZone[]
+  specialPrograms?: Prisma.UserUpdatespecialProgramsInput | $Enums.SpecialProgram[]
+  dailyStepsGoal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  units?: Prisma.EnumUnitSystemFieldUpdateOperationsInput | $Enums.UnitSystem
+  goalWeight?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  activitylevel?: Prisma.NullableEnumActivityLevelFieldUpdateOperationsInput | $Enums.ActivityLevel | null
+  activityDetails?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mostAttentionTo?: Prisma.NullableEnumAttentionAreaFieldUpdateOperationsInput | $Enums.AttentionArea | null
+  weeklyStreak?: Prisma.IntFieldUpdateOperationsInput | number
+  weeklyTimeSpentSeconds?: Prisma.IntFieldUpdateOperationsInput | number
+  weeklyStatsWeekStart?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  weeklyStatsUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isProfileComplete?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   authProviders?: Prisma.AuthProviderUpdateManyWithoutUserNestedInput
   programs?: Prisma.ProgramUpdateManyWithoutCreatorNestedInput
@@ -566,24 +863,43 @@ export type UserUpdateInput = {
 export type UserUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  fullName?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  age?: Prisma.IntFieldUpdateOperationsInput | number
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+  age?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   height?: Prisma.FloatFieldUpdateOperationsInput | number
   weight?: Prisma.FloatFieldUpdateOperationsInput | number
-  mainGoal?: Prisma.StringFieldUpdateOperationsInput | string
-  familiarity?: Prisma.StringFieldUpdateOperationsInput | string
-  workoutPreference?: Prisma.StringFieldUpdateOperationsInput | string
-  motivation?: Prisma.StringFieldUpdateOperationsInput | string
-  activity?: Prisma.StringFieldUpdateOperationsInput | string
-  workoutProblem?: Prisma.StringFieldUpdateOperationsInput | string
-  workoutRoutine?: Prisma.StringFieldUpdateOperationsInput | string
+  mainGoal?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  likeToWorkOn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fimiliarityWithPilates?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  activeCurrently?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  wayOfWorkingOut?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  motivation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  workoutPreference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  workoutRoutine?: Prisma.NullableEnumWorkoutRoutineFieldUpdateOperationsInput | $Enums.WorkoutRoutine | null
+  NotificationsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  startingWeight?: Prisma.FloatFieldUpdateOperationsInput | number
+  currentWeight?: Prisma.FloatFieldUpdateOperationsInput | number
+  fitnessLevel?: Prisma.NullableEnumFitnessLevelFieldUpdateOperationsInput | $Enums.FitnessLevel | null
+  classes?: Prisma.UserUpdateclassesInput | $Enums.WorkoutClass[]
+  focusZones?: Prisma.UserUpdatefocusZonesInput | $Enums.FocusZone[]
+  specialPrograms?: Prisma.UserUpdatespecialProgramsInput | $Enums.SpecialProgram[]
+  dailyStepsGoal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  units?: Prisma.EnumUnitSystemFieldUpdateOperationsInput | $Enums.UnitSystem
+  goalWeight?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  activitylevel?: Prisma.NullableEnumActivityLevelFieldUpdateOperationsInput | $Enums.ActivityLevel | null
+  activityDetails?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mostAttentionTo?: Prisma.NullableEnumAttentionAreaFieldUpdateOperationsInput | $Enums.AttentionArea | null
+  weeklyStreak?: Prisma.IntFieldUpdateOperationsInput | number
+  weeklyTimeSpentSeconds?: Prisma.IntFieldUpdateOperationsInput | number
+  weeklyStatsWeekStart?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  weeklyStatsUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isProfileComplete?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   authProviders?: Prisma.AuthProviderUncheckedUpdateManyWithoutUserNestedInput
   programs?: Prisma.ProgramUncheckedUpdateManyWithoutCreatorNestedInput
@@ -595,72 +911,129 @@ export type UserUncheckedUpdateInput = {
 export type UserCreateManyInput = {
   id?: string
   email: string
-  fullName: string
   password: string
-  gender?: string | null
-  age: number
-  height: number
-  weight: number
-  mainGoal: string
-  familiarity: string
-  workoutPreference: string
-  motivation: string
-  activity: string
-  workoutProblem: string
-  workoutRoutine: string
+  fullName: string
+  gender?: $Enums.Gender | null
+  age?: number | null
+  height?: number
+  weight?: number
+  mainGoal?: string | null
+  likeToWorkOn?: string | null
+  fimiliarityWithPilates?: string | null
+  activeCurrently?: string | null
+  wayOfWorkingOut?: string | null
+  motivation?: string | null
+  workoutPreference?: string | null
+  workoutRoutine?: $Enums.WorkoutRoutine | null
+  NotificationsEnabled?: boolean
+  dateOfBirth?: Date | string | null
+  startingWeight?: number
+  currentWeight?: number
+  fitnessLevel?: $Enums.FitnessLevel | null
+  classes?: Prisma.UserCreateclassesInput | $Enums.WorkoutClass[]
+  focusZones?: Prisma.UserCreatefocusZonesInput | $Enums.FocusZone[]
+  specialPrograms?: Prisma.UserCreatespecialProgramsInput | $Enums.SpecialProgram[]
+  dailyStepsGoal?: number | null
+  units?: $Enums.UnitSystem
+  goalWeight?: number | null
+  activitylevel?: $Enums.ActivityLevel | null
+  activityDetails?: string | null
+  mostAttentionTo?: $Enums.AttentionArea | null
+  weeklyStreak?: number
+  weeklyTimeSpentSeconds?: number
+  weeklyStatsWeekStart?: Date | string | null
+  weeklyStatsUpdatedAt?: Date | string | null
   role?: $Enums.UserRole
-  createdAt?: Date | string
   isDeleted?: boolean
   isVerified?: boolean
   isProfileComplete?: boolean
+  createdAt?: Date | string
   updatedAt?: Date | string
 }
 
 export type UserUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  fullName?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  age?: Prisma.IntFieldUpdateOperationsInput | number
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+  age?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   height?: Prisma.FloatFieldUpdateOperationsInput | number
   weight?: Prisma.FloatFieldUpdateOperationsInput | number
-  mainGoal?: Prisma.StringFieldUpdateOperationsInput | string
-  familiarity?: Prisma.StringFieldUpdateOperationsInput | string
-  workoutPreference?: Prisma.StringFieldUpdateOperationsInput | string
-  motivation?: Prisma.StringFieldUpdateOperationsInput | string
-  activity?: Prisma.StringFieldUpdateOperationsInput | string
-  workoutProblem?: Prisma.StringFieldUpdateOperationsInput | string
-  workoutRoutine?: Prisma.StringFieldUpdateOperationsInput | string
+  mainGoal?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  likeToWorkOn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fimiliarityWithPilates?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  activeCurrently?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  wayOfWorkingOut?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  motivation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  workoutPreference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  workoutRoutine?: Prisma.NullableEnumWorkoutRoutineFieldUpdateOperationsInput | $Enums.WorkoutRoutine | null
+  NotificationsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  startingWeight?: Prisma.FloatFieldUpdateOperationsInput | number
+  currentWeight?: Prisma.FloatFieldUpdateOperationsInput | number
+  fitnessLevel?: Prisma.NullableEnumFitnessLevelFieldUpdateOperationsInput | $Enums.FitnessLevel | null
+  classes?: Prisma.UserUpdateclassesInput | $Enums.WorkoutClass[]
+  focusZones?: Prisma.UserUpdatefocusZonesInput | $Enums.FocusZone[]
+  specialPrograms?: Prisma.UserUpdatespecialProgramsInput | $Enums.SpecialProgram[]
+  dailyStepsGoal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  units?: Prisma.EnumUnitSystemFieldUpdateOperationsInput | $Enums.UnitSystem
+  goalWeight?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  activitylevel?: Prisma.NullableEnumActivityLevelFieldUpdateOperationsInput | $Enums.ActivityLevel | null
+  activityDetails?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mostAttentionTo?: Prisma.NullableEnumAttentionAreaFieldUpdateOperationsInput | $Enums.AttentionArea | null
+  weeklyStreak?: Prisma.IntFieldUpdateOperationsInput | number
+  weeklyTimeSpentSeconds?: Prisma.IntFieldUpdateOperationsInput | number
+  weeklyStatsWeekStart?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  weeklyStatsUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isProfileComplete?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type UserUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  fullName?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  age?: Prisma.IntFieldUpdateOperationsInput | number
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+  age?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   height?: Prisma.FloatFieldUpdateOperationsInput | number
   weight?: Prisma.FloatFieldUpdateOperationsInput | number
-  mainGoal?: Prisma.StringFieldUpdateOperationsInput | string
-  familiarity?: Prisma.StringFieldUpdateOperationsInput | string
-  workoutPreference?: Prisma.StringFieldUpdateOperationsInput | string
-  motivation?: Prisma.StringFieldUpdateOperationsInput | string
-  activity?: Prisma.StringFieldUpdateOperationsInput | string
-  workoutProblem?: Prisma.StringFieldUpdateOperationsInput | string
-  workoutRoutine?: Prisma.StringFieldUpdateOperationsInput | string
+  mainGoal?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  likeToWorkOn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fimiliarityWithPilates?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  activeCurrently?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  wayOfWorkingOut?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  motivation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  workoutPreference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  workoutRoutine?: Prisma.NullableEnumWorkoutRoutineFieldUpdateOperationsInput | $Enums.WorkoutRoutine | null
+  NotificationsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  startingWeight?: Prisma.FloatFieldUpdateOperationsInput | number
+  currentWeight?: Prisma.FloatFieldUpdateOperationsInput | number
+  fitnessLevel?: Prisma.NullableEnumFitnessLevelFieldUpdateOperationsInput | $Enums.FitnessLevel | null
+  classes?: Prisma.UserUpdateclassesInput | $Enums.WorkoutClass[]
+  focusZones?: Prisma.UserUpdatefocusZonesInput | $Enums.FocusZone[]
+  specialPrograms?: Prisma.UserUpdatespecialProgramsInput | $Enums.SpecialProgram[]
+  dailyStepsGoal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  units?: Prisma.EnumUnitSystemFieldUpdateOperationsInput | $Enums.UnitSystem
+  goalWeight?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  activitylevel?: Prisma.NullableEnumActivityLevelFieldUpdateOperationsInput | $Enums.ActivityLevel | null
+  activityDetails?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mostAttentionTo?: Prisma.NullableEnumAttentionAreaFieldUpdateOperationsInput | $Enums.AttentionArea | null
+  weeklyStreak?: Prisma.IntFieldUpdateOperationsInput | number
+  weeklyTimeSpentSeconds?: Prisma.IntFieldUpdateOperationsInput | number
+  weeklyStatsWeekStart?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  weeklyStatsUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isProfileComplete?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -674,27 +1047,70 @@ export type UserScalarRelationFilter = {
   isNot?: Prisma.UserWhereInput
 }
 
+export type EnumWorkoutClassNullableListFilter<$PrismaModel = never> = {
+  equals?: $Enums.WorkoutClass[] | Prisma.ListEnumWorkoutClassFieldRefInput<$PrismaModel> | null
+  has?: $Enums.WorkoutClass | Prisma.EnumWorkoutClassFieldRefInput<$PrismaModel> | null
+  hasEvery?: $Enums.WorkoutClass[] | Prisma.ListEnumWorkoutClassFieldRefInput<$PrismaModel>
+  hasSome?: $Enums.WorkoutClass[] | Prisma.ListEnumWorkoutClassFieldRefInput<$PrismaModel>
+  isEmpty?: boolean
+}
+
+export type EnumFocusZoneNullableListFilter<$PrismaModel = never> = {
+  equals?: $Enums.FocusZone[] | Prisma.ListEnumFocusZoneFieldRefInput<$PrismaModel> | null
+  has?: $Enums.FocusZone | Prisma.EnumFocusZoneFieldRefInput<$PrismaModel> | null
+  hasEvery?: $Enums.FocusZone[] | Prisma.ListEnumFocusZoneFieldRefInput<$PrismaModel>
+  hasSome?: $Enums.FocusZone[] | Prisma.ListEnumFocusZoneFieldRefInput<$PrismaModel>
+  isEmpty?: boolean
+}
+
+export type EnumSpecialProgramNullableListFilter<$PrismaModel = never> = {
+  equals?: $Enums.SpecialProgram[] | Prisma.ListEnumSpecialProgramFieldRefInput<$PrismaModel> | null
+  has?: $Enums.SpecialProgram | Prisma.EnumSpecialProgramFieldRefInput<$PrismaModel> | null
+  hasEvery?: $Enums.SpecialProgram[] | Prisma.ListEnumSpecialProgramFieldRefInput<$PrismaModel>
+  hasSome?: $Enums.SpecialProgram[] | Prisma.ListEnumSpecialProgramFieldRefInput<$PrismaModel>
+  isEmpty?: boolean
+}
+
 export type UserCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   email?: Prisma.SortOrder
-  fullName?: Prisma.SortOrder
   password?: Prisma.SortOrder
+  fullName?: Prisma.SortOrder
   gender?: Prisma.SortOrder
   age?: Prisma.SortOrder
   height?: Prisma.SortOrder
   weight?: Prisma.SortOrder
   mainGoal?: Prisma.SortOrder
-  familiarity?: Prisma.SortOrder
-  workoutPreference?: Prisma.SortOrder
+  likeToWorkOn?: Prisma.SortOrder
+  fimiliarityWithPilates?: Prisma.SortOrder
+  activeCurrently?: Prisma.SortOrder
+  wayOfWorkingOut?: Prisma.SortOrder
   motivation?: Prisma.SortOrder
-  activity?: Prisma.SortOrder
-  workoutProblem?: Prisma.SortOrder
+  workoutPreference?: Prisma.SortOrder
   workoutRoutine?: Prisma.SortOrder
+  NotificationsEnabled?: Prisma.SortOrder
+  dateOfBirth?: Prisma.SortOrder
+  startingWeight?: Prisma.SortOrder
+  currentWeight?: Prisma.SortOrder
+  fitnessLevel?: Prisma.SortOrder
+  classes?: Prisma.SortOrder
+  focusZones?: Prisma.SortOrder
+  specialPrograms?: Prisma.SortOrder
+  dailyStepsGoal?: Prisma.SortOrder
+  units?: Prisma.SortOrder
+  goalWeight?: Prisma.SortOrder
+  activitylevel?: Prisma.SortOrder
+  activityDetails?: Prisma.SortOrder
+  mostAttentionTo?: Prisma.SortOrder
+  weeklyStreak?: Prisma.SortOrder
+  weeklyTimeSpentSeconds?: Prisma.SortOrder
+  weeklyStatsWeekStart?: Prisma.SortOrder
+  weeklyStatsUpdatedAt?: Prisma.SortOrder
   role?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
   isDeleted?: Prisma.SortOrder
   isVerified?: Prisma.SortOrder
   isProfileComplete?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
@@ -702,53 +1118,91 @@ export type UserAvgOrderByAggregateInput = {
   age?: Prisma.SortOrder
   height?: Prisma.SortOrder
   weight?: Prisma.SortOrder
+  startingWeight?: Prisma.SortOrder
+  currentWeight?: Prisma.SortOrder
+  dailyStepsGoal?: Prisma.SortOrder
+  goalWeight?: Prisma.SortOrder
+  weeklyStreak?: Prisma.SortOrder
+  weeklyTimeSpentSeconds?: Prisma.SortOrder
 }
 
 export type UserMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   email?: Prisma.SortOrder
-  fullName?: Prisma.SortOrder
   password?: Prisma.SortOrder
+  fullName?: Prisma.SortOrder
   gender?: Prisma.SortOrder
   age?: Prisma.SortOrder
   height?: Prisma.SortOrder
   weight?: Prisma.SortOrder
   mainGoal?: Prisma.SortOrder
-  familiarity?: Prisma.SortOrder
-  workoutPreference?: Prisma.SortOrder
+  likeToWorkOn?: Prisma.SortOrder
+  fimiliarityWithPilates?: Prisma.SortOrder
+  activeCurrently?: Prisma.SortOrder
+  wayOfWorkingOut?: Prisma.SortOrder
   motivation?: Prisma.SortOrder
-  activity?: Prisma.SortOrder
-  workoutProblem?: Prisma.SortOrder
+  workoutPreference?: Prisma.SortOrder
   workoutRoutine?: Prisma.SortOrder
+  NotificationsEnabled?: Prisma.SortOrder
+  dateOfBirth?: Prisma.SortOrder
+  startingWeight?: Prisma.SortOrder
+  currentWeight?: Prisma.SortOrder
+  fitnessLevel?: Prisma.SortOrder
+  dailyStepsGoal?: Prisma.SortOrder
+  units?: Prisma.SortOrder
+  goalWeight?: Prisma.SortOrder
+  activitylevel?: Prisma.SortOrder
+  activityDetails?: Prisma.SortOrder
+  mostAttentionTo?: Prisma.SortOrder
+  weeklyStreak?: Prisma.SortOrder
+  weeklyTimeSpentSeconds?: Prisma.SortOrder
+  weeklyStatsWeekStart?: Prisma.SortOrder
+  weeklyStatsUpdatedAt?: Prisma.SortOrder
   role?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
   isDeleted?: Prisma.SortOrder
   isVerified?: Prisma.SortOrder
   isProfileComplete?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
 export type UserMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   email?: Prisma.SortOrder
-  fullName?: Prisma.SortOrder
   password?: Prisma.SortOrder
+  fullName?: Prisma.SortOrder
   gender?: Prisma.SortOrder
   age?: Prisma.SortOrder
   height?: Prisma.SortOrder
   weight?: Prisma.SortOrder
   mainGoal?: Prisma.SortOrder
-  familiarity?: Prisma.SortOrder
-  workoutPreference?: Prisma.SortOrder
+  likeToWorkOn?: Prisma.SortOrder
+  fimiliarityWithPilates?: Prisma.SortOrder
+  activeCurrently?: Prisma.SortOrder
+  wayOfWorkingOut?: Prisma.SortOrder
   motivation?: Prisma.SortOrder
-  activity?: Prisma.SortOrder
-  workoutProblem?: Prisma.SortOrder
+  workoutPreference?: Prisma.SortOrder
   workoutRoutine?: Prisma.SortOrder
+  NotificationsEnabled?: Prisma.SortOrder
+  dateOfBirth?: Prisma.SortOrder
+  startingWeight?: Prisma.SortOrder
+  currentWeight?: Prisma.SortOrder
+  fitnessLevel?: Prisma.SortOrder
+  dailyStepsGoal?: Prisma.SortOrder
+  units?: Prisma.SortOrder
+  goalWeight?: Prisma.SortOrder
+  activitylevel?: Prisma.SortOrder
+  activityDetails?: Prisma.SortOrder
+  mostAttentionTo?: Prisma.SortOrder
+  weeklyStreak?: Prisma.SortOrder
+  weeklyTimeSpentSeconds?: Prisma.SortOrder
+  weeklyStatsWeekStart?: Prisma.SortOrder
+  weeklyStatsUpdatedAt?: Prisma.SortOrder
   role?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
   isDeleted?: Prisma.SortOrder
   isVerified?: Prisma.SortOrder
   isProfileComplete?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
@@ -756,6 +1210,12 @@ export type UserSumOrderByAggregateInput = {
   age?: Prisma.SortOrder
   height?: Prisma.SortOrder
   weight?: Prisma.SortOrder
+  startingWeight?: Prisma.SortOrder
+  currentWeight?: Prisma.SortOrder
+  dailyStepsGoal?: Prisma.SortOrder
+  goalWeight?: Prisma.SortOrder
+  weeklyStreak?: Prisma.SortOrder
+  weeklyTimeSpentSeconds?: Prisma.SortOrder
 }
 
 export type UserCreateNestedOneWithoutProgramsInput = {
@@ -802,6 +1262,22 @@ export type UserUpdateOneRequiredWithoutProgramCompletionsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutProgramCompletionsInput, Prisma.UserUpdateWithoutProgramCompletionsInput>, Prisma.UserUncheckedUpdateWithoutProgramCompletionsInput>
 }
 
+export type UserCreateclassesInput = {
+  set: $Enums.WorkoutClass[]
+}
+
+export type UserCreatefocusZonesInput = {
+  set: $Enums.FocusZone[]
+}
+
+export type UserCreatespecialProgramsInput = {
+  set: $Enums.SpecialProgram[]
+}
+
+export type NullableEnumGenderFieldUpdateOperationsInput = {
+  set?: $Enums.Gender | null
+}
+
 export type FloatFieldUpdateOperationsInput = {
   set?: number
   increment?: number
@@ -810,12 +1286,55 @@ export type FloatFieldUpdateOperationsInput = {
   divide?: number
 }
 
-export type EnumUserRoleFieldUpdateOperationsInput = {
-  set?: $Enums.UserRole
+export type NullableEnumWorkoutRoutineFieldUpdateOperationsInput = {
+  set?: $Enums.WorkoutRoutine | null
 }
 
 export type BoolFieldUpdateOperationsInput = {
   set?: boolean
+}
+
+export type NullableEnumFitnessLevelFieldUpdateOperationsInput = {
+  set?: $Enums.FitnessLevel | null
+}
+
+export type UserUpdateclassesInput = {
+  set?: $Enums.WorkoutClass[]
+  push?: $Enums.WorkoutClass | $Enums.WorkoutClass[]
+}
+
+export type UserUpdatefocusZonesInput = {
+  set?: $Enums.FocusZone[]
+  push?: $Enums.FocusZone | $Enums.FocusZone[]
+}
+
+export type UserUpdatespecialProgramsInput = {
+  set?: $Enums.SpecialProgram[]
+  push?: $Enums.SpecialProgram | $Enums.SpecialProgram[]
+}
+
+export type EnumUnitSystemFieldUpdateOperationsInput = {
+  set?: $Enums.UnitSystem
+}
+
+export type NullableFloatFieldUpdateOperationsInput = {
+  set?: number | null
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
+}
+
+export type NullableEnumActivityLevelFieldUpdateOperationsInput = {
+  set?: $Enums.ActivityLevel | null
+}
+
+export type NullableEnumAttentionAreaFieldUpdateOperationsInput = {
+  set?: $Enums.AttentionArea | null
+}
+
+export type EnumUserRoleFieldUpdateOperationsInput = {
+  set?: $Enums.UserRole
 }
 
 export type UserCreateNestedOneWithoutAuthProvidersInput = {
@@ -851,24 +1370,43 @@ export type UserUpdateOneWithoutWorkoutsNestedInput = {
 export type UserCreateWithoutProgramsInput = {
   id?: string
   email: string
-  fullName: string
   password: string
-  gender?: string | null
-  age: number
-  height: number
-  weight: number
-  mainGoal: string
-  familiarity: string
-  workoutPreference: string
-  motivation: string
-  activity: string
-  workoutProblem: string
-  workoutRoutine: string
+  fullName: string
+  gender?: $Enums.Gender | null
+  age?: number | null
+  height?: number
+  weight?: number
+  mainGoal?: string | null
+  likeToWorkOn?: string | null
+  fimiliarityWithPilates?: string | null
+  activeCurrently?: string | null
+  wayOfWorkingOut?: string | null
+  motivation?: string | null
+  workoutPreference?: string | null
+  workoutRoutine?: $Enums.WorkoutRoutine | null
+  NotificationsEnabled?: boolean
+  dateOfBirth?: Date | string | null
+  startingWeight?: number
+  currentWeight?: number
+  fitnessLevel?: $Enums.FitnessLevel | null
+  classes?: Prisma.UserCreateclassesInput | $Enums.WorkoutClass[]
+  focusZones?: Prisma.UserCreatefocusZonesInput | $Enums.FocusZone[]
+  specialPrograms?: Prisma.UserCreatespecialProgramsInput | $Enums.SpecialProgram[]
+  dailyStepsGoal?: number | null
+  units?: $Enums.UnitSystem
+  goalWeight?: number | null
+  activitylevel?: $Enums.ActivityLevel | null
+  activityDetails?: string | null
+  mostAttentionTo?: $Enums.AttentionArea | null
+  weeklyStreak?: number
+  weeklyTimeSpentSeconds?: number
+  weeklyStatsWeekStart?: Date | string | null
+  weeklyStatsUpdatedAt?: Date | string | null
   role?: $Enums.UserRole
-  createdAt?: Date | string
   isDeleted?: boolean
   isVerified?: boolean
   isProfileComplete?: boolean
+  createdAt?: Date | string
   updatedAt?: Date | string
   authProviders?: Prisma.AuthProviderCreateNestedManyWithoutUserInput
   workouts?: Prisma.WorkoutCreateNestedManyWithoutCreatorInput
@@ -879,24 +1417,43 @@ export type UserCreateWithoutProgramsInput = {
 export type UserUncheckedCreateWithoutProgramsInput = {
   id?: string
   email: string
-  fullName: string
   password: string
-  gender?: string | null
-  age: number
-  height: number
-  weight: number
-  mainGoal: string
-  familiarity: string
-  workoutPreference: string
-  motivation: string
-  activity: string
-  workoutProblem: string
-  workoutRoutine: string
+  fullName: string
+  gender?: $Enums.Gender | null
+  age?: number | null
+  height?: number
+  weight?: number
+  mainGoal?: string | null
+  likeToWorkOn?: string | null
+  fimiliarityWithPilates?: string | null
+  activeCurrently?: string | null
+  wayOfWorkingOut?: string | null
+  motivation?: string | null
+  workoutPreference?: string | null
+  workoutRoutine?: $Enums.WorkoutRoutine | null
+  NotificationsEnabled?: boolean
+  dateOfBirth?: Date | string | null
+  startingWeight?: number
+  currentWeight?: number
+  fitnessLevel?: $Enums.FitnessLevel | null
+  classes?: Prisma.UserCreateclassesInput | $Enums.WorkoutClass[]
+  focusZones?: Prisma.UserCreatefocusZonesInput | $Enums.FocusZone[]
+  specialPrograms?: Prisma.UserCreatespecialProgramsInput | $Enums.SpecialProgram[]
+  dailyStepsGoal?: number | null
+  units?: $Enums.UnitSystem
+  goalWeight?: number | null
+  activitylevel?: $Enums.ActivityLevel | null
+  activityDetails?: string | null
+  mostAttentionTo?: $Enums.AttentionArea | null
+  weeklyStreak?: number
+  weeklyTimeSpentSeconds?: number
+  weeklyStatsWeekStart?: Date | string | null
+  weeklyStatsUpdatedAt?: Date | string | null
   role?: $Enums.UserRole
-  createdAt?: Date | string
   isDeleted?: boolean
   isVerified?: boolean
   isProfileComplete?: boolean
+  createdAt?: Date | string
   updatedAt?: Date | string
   authProviders?: Prisma.AuthProviderUncheckedCreateNestedManyWithoutUserInput
   workouts?: Prisma.WorkoutUncheckedCreateNestedManyWithoutCreatorInput
@@ -923,24 +1480,43 @@ export type UserUpdateToOneWithWhereWithoutProgramsInput = {
 export type UserUpdateWithoutProgramsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  fullName?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  age?: Prisma.IntFieldUpdateOperationsInput | number
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+  age?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   height?: Prisma.FloatFieldUpdateOperationsInput | number
   weight?: Prisma.FloatFieldUpdateOperationsInput | number
-  mainGoal?: Prisma.StringFieldUpdateOperationsInput | string
-  familiarity?: Prisma.StringFieldUpdateOperationsInput | string
-  workoutPreference?: Prisma.StringFieldUpdateOperationsInput | string
-  motivation?: Prisma.StringFieldUpdateOperationsInput | string
-  activity?: Prisma.StringFieldUpdateOperationsInput | string
-  workoutProblem?: Prisma.StringFieldUpdateOperationsInput | string
-  workoutRoutine?: Prisma.StringFieldUpdateOperationsInput | string
+  mainGoal?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  likeToWorkOn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fimiliarityWithPilates?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  activeCurrently?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  wayOfWorkingOut?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  motivation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  workoutPreference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  workoutRoutine?: Prisma.NullableEnumWorkoutRoutineFieldUpdateOperationsInput | $Enums.WorkoutRoutine | null
+  NotificationsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  startingWeight?: Prisma.FloatFieldUpdateOperationsInput | number
+  currentWeight?: Prisma.FloatFieldUpdateOperationsInput | number
+  fitnessLevel?: Prisma.NullableEnumFitnessLevelFieldUpdateOperationsInput | $Enums.FitnessLevel | null
+  classes?: Prisma.UserUpdateclassesInput | $Enums.WorkoutClass[]
+  focusZones?: Prisma.UserUpdatefocusZonesInput | $Enums.FocusZone[]
+  specialPrograms?: Prisma.UserUpdatespecialProgramsInput | $Enums.SpecialProgram[]
+  dailyStepsGoal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  units?: Prisma.EnumUnitSystemFieldUpdateOperationsInput | $Enums.UnitSystem
+  goalWeight?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  activitylevel?: Prisma.NullableEnumActivityLevelFieldUpdateOperationsInput | $Enums.ActivityLevel | null
+  activityDetails?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mostAttentionTo?: Prisma.NullableEnumAttentionAreaFieldUpdateOperationsInput | $Enums.AttentionArea | null
+  weeklyStreak?: Prisma.IntFieldUpdateOperationsInput | number
+  weeklyTimeSpentSeconds?: Prisma.IntFieldUpdateOperationsInput | number
+  weeklyStatsWeekStart?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  weeklyStatsUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isProfileComplete?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   authProviders?: Prisma.AuthProviderUpdateManyWithoutUserNestedInput
   workouts?: Prisma.WorkoutUpdateManyWithoutCreatorNestedInput
@@ -951,24 +1527,43 @@ export type UserUpdateWithoutProgramsInput = {
 export type UserUncheckedUpdateWithoutProgramsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  fullName?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  age?: Prisma.IntFieldUpdateOperationsInput | number
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+  age?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   height?: Prisma.FloatFieldUpdateOperationsInput | number
   weight?: Prisma.FloatFieldUpdateOperationsInput | number
-  mainGoal?: Prisma.StringFieldUpdateOperationsInput | string
-  familiarity?: Prisma.StringFieldUpdateOperationsInput | string
-  workoutPreference?: Prisma.StringFieldUpdateOperationsInput | string
-  motivation?: Prisma.StringFieldUpdateOperationsInput | string
-  activity?: Prisma.StringFieldUpdateOperationsInput | string
-  workoutProblem?: Prisma.StringFieldUpdateOperationsInput | string
-  workoutRoutine?: Prisma.StringFieldUpdateOperationsInput | string
+  mainGoal?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  likeToWorkOn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fimiliarityWithPilates?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  activeCurrently?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  wayOfWorkingOut?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  motivation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  workoutPreference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  workoutRoutine?: Prisma.NullableEnumWorkoutRoutineFieldUpdateOperationsInput | $Enums.WorkoutRoutine | null
+  NotificationsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  startingWeight?: Prisma.FloatFieldUpdateOperationsInput | number
+  currentWeight?: Prisma.FloatFieldUpdateOperationsInput | number
+  fitnessLevel?: Prisma.NullableEnumFitnessLevelFieldUpdateOperationsInput | $Enums.FitnessLevel | null
+  classes?: Prisma.UserUpdateclassesInput | $Enums.WorkoutClass[]
+  focusZones?: Prisma.UserUpdatefocusZonesInput | $Enums.FocusZone[]
+  specialPrograms?: Prisma.UserUpdatespecialProgramsInput | $Enums.SpecialProgram[]
+  dailyStepsGoal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  units?: Prisma.EnumUnitSystemFieldUpdateOperationsInput | $Enums.UnitSystem
+  goalWeight?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  activitylevel?: Prisma.NullableEnumActivityLevelFieldUpdateOperationsInput | $Enums.ActivityLevel | null
+  activityDetails?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mostAttentionTo?: Prisma.NullableEnumAttentionAreaFieldUpdateOperationsInput | $Enums.AttentionArea | null
+  weeklyStreak?: Prisma.IntFieldUpdateOperationsInput | number
+  weeklyTimeSpentSeconds?: Prisma.IntFieldUpdateOperationsInput | number
+  weeklyStatsWeekStart?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  weeklyStatsUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isProfileComplete?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   authProviders?: Prisma.AuthProviderUncheckedUpdateManyWithoutUserNestedInput
   workouts?: Prisma.WorkoutUncheckedUpdateManyWithoutCreatorNestedInput
@@ -979,24 +1574,43 @@ export type UserUncheckedUpdateWithoutProgramsInput = {
 export type UserCreateWithoutProgramEnrollmentsInput = {
   id?: string
   email: string
-  fullName: string
   password: string
-  gender?: string | null
-  age: number
-  height: number
-  weight: number
-  mainGoal: string
-  familiarity: string
-  workoutPreference: string
-  motivation: string
-  activity: string
-  workoutProblem: string
-  workoutRoutine: string
+  fullName: string
+  gender?: $Enums.Gender | null
+  age?: number | null
+  height?: number
+  weight?: number
+  mainGoal?: string | null
+  likeToWorkOn?: string | null
+  fimiliarityWithPilates?: string | null
+  activeCurrently?: string | null
+  wayOfWorkingOut?: string | null
+  motivation?: string | null
+  workoutPreference?: string | null
+  workoutRoutine?: $Enums.WorkoutRoutine | null
+  NotificationsEnabled?: boolean
+  dateOfBirth?: Date | string | null
+  startingWeight?: number
+  currentWeight?: number
+  fitnessLevel?: $Enums.FitnessLevel | null
+  classes?: Prisma.UserCreateclassesInput | $Enums.WorkoutClass[]
+  focusZones?: Prisma.UserCreatefocusZonesInput | $Enums.FocusZone[]
+  specialPrograms?: Prisma.UserCreatespecialProgramsInput | $Enums.SpecialProgram[]
+  dailyStepsGoal?: number | null
+  units?: $Enums.UnitSystem
+  goalWeight?: number | null
+  activitylevel?: $Enums.ActivityLevel | null
+  activityDetails?: string | null
+  mostAttentionTo?: $Enums.AttentionArea | null
+  weeklyStreak?: number
+  weeklyTimeSpentSeconds?: number
+  weeklyStatsWeekStart?: Date | string | null
+  weeklyStatsUpdatedAt?: Date | string | null
   role?: $Enums.UserRole
-  createdAt?: Date | string
   isDeleted?: boolean
   isVerified?: boolean
   isProfileComplete?: boolean
+  createdAt?: Date | string
   updatedAt?: Date | string
   authProviders?: Prisma.AuthProviderCreateNestedManyWithoutUserInput
   programs?: Prisma.ProgramCreateNestedManyWithoutCreatorInput
@@ -1007,24 +1621,43 @@ export type UserCreateWithoutProgramEnrollmentsInput = {
 export type UserUncheckedCreateWithoutProgramEnrollmentsInput = {
   id?: string
   email: string
-  fullName: string
   password: string
-  gender?: string | null
-  age: number
-  height: number
-  weight: number
-  mainGoal: string
-  familiarity: string
-  workoutPreference: string
-  motivation: string
-  activity: string
-  workoutProblem: string
-  workoutRoutine: string
+  fullName: string
+  gender?: $Enums.Gender | null
+  age?: number | null
+  height?: number
+  weight?: number
+  mainGoal?: string | null
+  likeToWorkOn?: string | null
+  fimiliarityWithPilates?: string | null
+  activeCurrently?: string | null
+  wayOfWorkingOut?: string | null
+  motivation?: string | null
+  workoutPreference?: string | null
+  workoutRoutine?: $Enums.WorkoutRoutine | null
+  NotificationsEnabled?: boolean
+  dateOfBirth?: Date | string | null
+  startingWeight?: number
+  currentWeight?: number
+  fitnessLevel?: $Enums.FitnessLevel | null
+  classes?: Prisma.UserCreateclassesInput | $Enums.WorkoutClass[]
+  focusZones?: Prisma.UserCreatefocusZonesInput | $Enums.FocusZone[]
+  specialPrograms?: Prisma.UserCreatespecialProgramsInput | $Enums.SpecialProgram[]
+  dailyStepsGoal?: number | null
+  units?: $Enums.UnitSystem
+  goalWeight?: number | null
+  activitylevel?: $Enums.ActivityLevel | null
+  activityDetails?: string | null
+  mostAttentionTo?: $Enums.AttentionArea | null
+  weeklyStreak?: number
+  weeklyTimeSpentSeconds?: number
+  weeklyStatsWeekStart?: Date | string | null
+  weeklyStatsUpdatedAt?: Date | string | null
   role?: $Enums.UserRole
-  createdAt?: Date | string
   isDeleted?: boolean
   isVerified?: boolean
   isProfileComplete?: boolean
+  createdAt?: Date | string
   updatedAt?: Date | string
   authProviders?: Prisma.AuthProviderUncheckedCreateNestedManyWithoutUserInput
   programs?: Prisma.ProgramUncheckedCreateNestedManyWithoutCreatorInput
@@ -1051,24 +1684,43 @@ export type UserUpdateToOneWithWhereWithoutProgramEnrollmentsInput = {
 export type UserUpdateWithoutProgramEnrollmentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  fullName?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  age?: Prisma.IntFieldUpdateOperationsInput | number
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+  age?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   height?: Prisma.FloatFieldUpdateOperationsInput | number
   weight?: Prisma.FloatFieldUpdateOperationsInput | number
-  mainGoal?: Prisma.StringFieldUpdateOperationsInput | string
-  familiarity?: Prisma.StringFieldUpdateOperationsInput | string
-  workoutPreference?: Prisma.StringFieldUpdateOperationsInput | string
-  motivation?: Prisma.StringFieldUpdateOperationsInput | string
-  activity?: Prisma.StringFieldUpdateOperationsInput | string
-  workoutProblem?: Prisma.StringFieldUpdateOperationsInput | string
-  workoutRoutine?: Prisma.StringFieldUpdateOperationsInput | string
+  mainGoal?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  likeToWorkOn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fimiliarityWithPilates?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  activeCurrently?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  wayOfWorkingOut?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  motivation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  workoutPreference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  workoutRoutine?: Prisma.NullableEnumWorkoutRoutineFieldUpdateOperationsInput | $Enums.WorkoutRoutine | null
+  NotificationsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  startingWeight?: Prisma.FloatFieldUpdateOperationsInput | number
+  currentWeight?: Prisma.FloatFieldUpdateOperationsInput | number
+  fitnessLevel?: Prisma.NullableEnumFitnessLevelFieldUpdateOperationsInput | $Enums.FitnessLevel | null
+  classes?: Prisma.UserUpdateclassesInput | $Enums.WorkoutClass[]
+  focusZones?: Prisma.UserUpdatefocusZonesInput | $Enums.FocusZone[]
+  specialPrograms?: Prisma.UserUpdatespecialProgramsInput | $Enums.SpecialProgram[]
+  dailyStepsGoal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  units?: Prisma.EnumUnitSystemFieldUpdateOperationsInput | $Enums.UnitSystem
+  goalWeight?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  activitylevel?: Prisma.NullableEnumActivityLevelFieldUpdateOperationsInput | $Enums.ActivityLevel | null
+  activityDetails?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mostAttentionTo?: Prisma.NullableEnumAttentionAreaFieldUpdateOperationsInput | $Enums.AttentionArea | null
+  weeklyStreak?: Prisma.IntFieldUpdateOperationsInput | number
+  weeklyTimeSpentSeconds?: Prisma.IntFieldUpdateOperationsInput | number
+  weeklyStatsWeekStart?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  weeklyStatsUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isProfileComplete?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   authProviders?: Prisma.AuthProviderUpdateManyWithoutUserNestedInput
   programs?: Prisma.ProgramUpdateManyWithoutCreatorNestedInput
@@ -1079,24 +1731,43 @@ export type UserUpdateWithoutProgramEnrollmentsInput = {
 export type UserUncheckedUpdateWithoutProgramEnrollmentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  fullName?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  age?: Prisma.IntFieldUpdateOperationsInput | number
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+  age?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   height?: Prisma.FloatFieldUpdateOperationsInput | number
   weight?: Prisma.FloatFieldUpdateOperationsInput | number
-  mainGoal?: Prisma.StringFieldUpdateOperationsInput | string
-  familiarity?: Prisma.StringFieldUpdateOperationsInput | string
-  workoutPreference?: Prisma.StringFieldUpdateOperationsInput | string
-  motivation?: Prisma.StringFieldUpdateOperationsInput | string
-  activity?: Prisma.StringFieldUpdateOperationsInput | string
-  workoutProblem?: Prisma.StringFieldUpdateOperationsInput | string
-  workoutRoutine?: Prisma.StringFieldUpdateOperationsInput | string
+  mainGoal?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  likeToWorkOn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fimiliarityWithPilates?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  activeCurrently?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  wayOfWorkingOut?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  motivation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  workoutPreference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  workoutRoutine?: Prisma.NullableEnumWorkoutRoutineFieldUpdateOperationsInput | $Enums.WorkoutRoutine | null
+  NotificationsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  startingWeight?: Prisma.FloatFieldUpdateOperationsInput | number
+  currentWeight?: Prisma.FloatFieldUpdateOperationsInput | number
+  fitnessLevel?: Prisma.NullableEnumFitnessLevelFieldUpdateOperationsInput | $Enums.FitnessLevel | null
+  classes?: Prisma.UserUpdateclassesInput | $Enums.WorkoutClass[]
+  focusZones?: Prisma.UserUpdatefocusZonesInput | $Enums.FocusZone[]
+  specialPrograms?: Prisma.UserUpdatespecialProgramsInput | $Enums.SpecialProgram[]
+  dailyStepsGoal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  units?: Prisma.EnumUnitSystemFieldUpdateOperationsInput | $Enums.UnitSystem
+  goalWeight?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  activitylevel?: Prisma.NullableEnumActivityLevelFieldUpdateOperationsInput | $Enums.ActivityLevel | null
+  activityDetails?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mostAttentionTo?: Prisma.NullableEnumAttentionAreaFieldUpdateOperationsInput | $Enums.AttentionArea | null
+  weeklyStreak?: Prisma.IntFieldUpdateOperationsInput | number
+  weeklyTimeSpentSeconds?: Prisma.IntFieldUpdateOperationsInput | number
+  weeklyStatsWeekStart?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  weeklyStatsUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isProfileComplete?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   authProviders?: Prisma.AuthProviderUncheckedUpdateManyWithoutUserNestedInput
   programs?: Prisma.ProgramUncheckedUpdateManyWithoutCreatorNestedInput
@@ -1107,24 +1778,43 @@ export type UserUncheckedUpdateWithoutProgramEnrollmentsInput = {
 export type UserCreateWithoutProgramCompletionsInput = {
   id?: string
   email: string
-  fullName: string
   password: string
-  gender?: string | null
-  age: number
-  height: number
-  weight: number
-  mainGoal: string
-  familiarity: string
-  workoutPreference: string
-  motivation: string
-  activity: string
-  workoutProblem: string
-  workoutRoutine: string
+  fullName: string
+  gender?: $Enums.Gender | null
+  age?: number | null
+  height?: number
+  weight?: number
+  mainGoal?: string | null
+  likeToWorkOn?: string | null
+  fimiliarityWithPilates?: string | null
+  activeCurrently?: string | null
+  wayOfWorkingOut?: string | null
+  motivation?: string | null
+  workoutPreference?: string | null
+  workoutRoutine?: $Enums.WorkoutRoutine | null
+  NotificationsEnabled?: boolean
+  dateOfBirth?: Date | string | null
+  startingWeight?: number
+  currentWeight?: number
+  fitnessLevel?: $Enums.FitnessLevel | null
+  classes?: Prisma.UserCreateclassesInput | $Enums.WorkoutClass[]
+  focusZones?: Prisma.UserCreatefocusZonesInput | $Enums.FocusZone[]
+  specialPrograms?: Prisma.UserCreatespecialProgramsInput | $Enums.SpecialProgram[]
+  dailyStepsGoal?: number | null
+  units?: $Enums.UnitSystem
+  goalWeight?: number | null
+  activitylevel?: $Enums.ActivityLevel | null
+  activityDetails?: string | null
+  mostAttentionTo?: $Enums.AttentionArea | null
+  weeklyStreak?: number
+  weeklyTimeSpentSeconds?: number
+  weeklyStatsWeekStart?: Date | string | null
+  weeklyStatsUpdatedAt?: Date | string | null
   role?: $Enums.UserRole
-  createdAt?: Date | string
   isDeleted?: boolean
   isVerified?: boolean
   isProfileComplete?: boolean
+  createdAt?: Date | string
   updatedAt?: Date | string
   authProviders?: Prisma.AuthProviderCreateNestedManyWithoutUserInput
   programs?: Prisma.ProgramCreateNestedManyWithoutCreatorInput
@@ -1135,24 +1825,43 @@ export type UserCreateWithoutProgramCompletionsInput = {
 export type UserUncheckedCreateWithoutProgramCompletionsInput = {
   id?: string
   email: string
-  fullName: string
   password: string
-  gender?: string | null
-  age: number
-  height: number
-  weight: number
-  mainGoal: string
-  familiarity: string
-  workoutPreference: string
-  motivation: string
-  activity: string
-  workoutProblem: string
-  workoutRoutine: string
+  fullName: string
+  gender?: $Enums.Gender | null
+  age?: number | null
+  height?: number
+  weight?: number
+  mainGoal?: string | null
+  likeToWorkOn?: string | null
+  fimiliarityWithPilates?: string | null
+  activeCurrently?: string | null
+  wayOfWorkingOut?: string | null
+  motivation?: string | null
+  workoutPreference?: string | null
+  workoutRoutine?: $Enums.WorkoutRoutine | null
+  NotificationsEnabled?: boolean
+  dateOfBirth?: Date | string | null
+  startingWeight?: number
+  currentWeight?: number
+  fitnessLevel?: $Enums.FitnessLevel | null
+  classes?: Prisma.UserCreateclassesInput | $Enums.WorkoutClass[]
+  focusZones?: Prisma.UserCreatefocusZonesInput | $Enums.FocusZone[]
+  specialPrograms?: Prisma.UserCreatespecialProgramsInput | $Enums.SpecialProgram[]
+  dailyStepsGoal?: number | null
+  units?: $Enums.UnitSystem
+  goalWeight?: number | null
+  activitylevel?: $Enums.ActivityLevel | null
+  activityDetails?: string | null
+  mostAttentionTo?: $Enums.AttentionArea | null
+  weeklyStreak?: number
+  weeklyTimeSpentSeconds?: number
+  weeklyStatsWeekStart?: Date | string | null
+  weeklyStatsUpdatedAt?: Date | string | null
   role?: $Enums.UserRole
-  createdAt?: Date | string
   isDeleted?: boolean
   isVerified?: boolean
   isProfileComplete?: boolean
+  createdAt?: Date | string
   updatedAt?: Date | string
   authProviders?: Prisma.AuthProviderUncheckedCreateNestedManyWithoutUserInput
   programs?: Prisma.ProgramUncheckedCreateNestedManyWithoutCreatorInput
@@ -1179,24 +1888,43 @@ export type UserUpdateToOneWithWhereWithoutProgramCompletionsInput = {
 export type UserUpdateWithoutProgramCompletionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  fullName?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  age?: Prisma.IntFieldUpdateOperationsInput | number
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+  age?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   height?: Prisma.FloatFieldUpdateOperationsInput | number
   weight?: Prisma.FloatFieldUpdateOperationsInput | number
-  mainGoal?: Prisma.StringFieldUpdateOperationsInput | string
-  familiarity?: Prisma.StringFieldUpdateOperationsInput | string
-  workoutPreference?: Prisma.StringFieldUpdateOperationsInput | string
-  motivation?: Prisma.StringFieldUpdateOperationsInput | string
-  activity?: Prisma.StringFieldUpdateOperationsInput | string
-  workoutProblem?: Prisma.StringFieldUpdateOperationsInput | string
-  workoutRoutine?: Prisma.StringFieldUpdateOperationsInput | string
+  mainGoal?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  likeToWorkOn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fimiliarityWithPilates?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  activeCurrently?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  wayOfWorkingOut?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  motivation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  workoutPreference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  workoutRoutine?: Prisma.NullableEnumWorkoutRoutineFieldUpdateOperationsInput | $Enums.WorkoutRoutine | null
+  NotificationsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  startingWeight?: Prisma.FloatFieldUpdateOperationsInput | number
+  currentWeight?: Prisma.FloatFieldUpdateOperationsInput | number
+  fitnessLevel?: Prisma.NullableEnumFitnessLevelFieldUpdateOperationsInput | $Enums.FitnessLevel | null
+  classes?: Prisma.UserUpdateclassesInput | $Enums.WorkoutClass[]
+  focusZones?: Prisma.UserUpdatefocusZonesInput | $Enums.FocusZone[]
+  specialPrograms?: Prisma.UserUpdatespecialProgramsInput | $Enums.SpecialProgram[]
+  dailyStepsGoal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  units?: Prisma.EnumUnitSystemFieldUpdateOperationsInput | $Enums.UnitSystem
+  goalWeight?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  activitylevel?: Prisma.NullableEnumActivityLevelFieldUpdateOperationsInput | $Enums.ActivityLevel | null
+  activityDetails?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mostAttentionTo?: Prisma.NullableEnumAttentionAreaFieldUpdateOperationsInput | $Enums.AttentionArea | null
+  weeklyStreak?: Prisma.IntFieldUpdateOperationsInput | number
+  weeklyTimeSpentSeconds?: Prisma.IntFieldUpdateOperationsInput | number
+  weeklyStatsWeekStart?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  weeklyStatsUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isProfileComplete?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   authProviders?: Prisma.AuthProviderUpdateManyWithoutUserNestedInput
   programs?: Prisma.ProgramUpdateManyWithoutCreatorNestedInput
@@ -1207,24 +1935,43 @@ export type UserUpdateWithoutProgramCompletionsInput = {
 export type UserUncheckedUpdateWithoutProgramCompletionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  fullName?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  age?: Prisma.IntFieldUpdateOperationsInput | number
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+  age?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   height?: Prisma.FloatFieldUpdateOperationsInput | number
   weight?: Prisma.FloatFieldUpdateOperationsInput | number
-  mainGoal?: Prisma.StringFieldUpdateOperationsInput | string
-  familiarity?: Prisma.StringFieldUpdateOperationsInput | string
-  workoutPreference?: Prisma.StringFieldUpdateOperationsInput | string
-  motivation?: Prisma.StringFieldUpdateOperationsInput | string
-  activity?: Prisma.StringFieldUpdateOperationsInput | string
-  workoutProblem?: Prisma.StringFieldUpdateOperationsInput | string
-  workoutRoutine?: Prisma.StringFieldUpdateOperationsInput | string
+  mainGoal?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  likeToWorkOn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fimiliarityWithPilates?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  activeCurrently?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  wayOfWorkingOut?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  motivation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  workoutPreference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  workoutRoutine?: Prisma.NullableEnumWorkoutRoutineFieldUpdateOperationsInput | $Enums.WorkoutRoutine | null
+  NotificationsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  startingWeight?: Prisma.FloatFieldUpdateOperationsInput | number
+  currentWeight?: Prisma.FloatFieldUpdateOperationsInput | number
+  fitnessLevel?: Prisma.NullableEnumFitnessLevelFieldUpdateOperationsInput | $Enums.FitnessLevel | null
+  classes?: Prisma.UserUpdateclassesInput | $Enums.WorkoutClass[]
+  focusZones?: Prisma.UserUpdatefocusZonesInput | $Enums.FocusZone[]
+  specialPrograms?: Prisma.UserUpdatespecialProgramsInput | $Enums.SpecialProgram[]
+  dailyStepsGoal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  units?: Prisma.EnumUnitSystemFieldUpdateOperationsInput | $Enums.UnitSystem
+  goalWeight?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  activitylevel?: Prisma.NullableEnumActivityLevelFieldUpdateOperationsInput | $Enums.ActivityLevel | null
+  activityDetails?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mostAttentionTo?: Prisma.NullableEnumAttentionAreaFieldUpdateOperationsInput | $Enums.AttentionArea | null
+  weeklyStreak?: Prisma.IntFieldUpdateOperationsInput | number
+  weeklyTimeSpentSeconds?: Prisma.IntFieldUpdateOperationsInput | number
+  weeklyStatsWeekStart?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  weeklyStatsUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isProfileComplete?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   authProviders?: Prisma.AuthProviderUncheckedUpdateManyWithoutUserNestedInput
   programs?: Prisma.ProgramUncheckedUpdateManyWithoutCreatorNestedInput
@@ -1235,24 +1982,43 @@ export type UserUncheckedUpdateWithoutProgramCompletionsInput = {
 export type UserCreateWithoutAuthProvidersInput = {
   id?: string
   email: string
-  fullName: string
   password: string
-  gender?: string | null
-  age: number
-  height: number
-  weight: number
-  mainGoal: string
-  familiarity: string
-  workoutPreference: string
-  motivation: string
-  activity: string
-  workoutProblem: string
-  workoutRoutine: string
+  fullName: string
+  gender?: $Enums.Gender | null
+  age?: number | null
+  height?: number
+  weight?: number
+  mainGoal?: string | null
+  likeToWorkOn?: string | null
+  fimiliarityWithPilates?: string | null
+  activeCurrently?: string | null
+  wayOfWorkingOut?: string | null
+  motivation?: string | null
+  workoutPreference?: string | null
+  workoutRoutine?: $Enums.WorkoutRoutine | null
+  NotificationsEnabled?: boolean
+  dateOfBirth?: Date | string | null
+  startingWeight?: number
+  currentWeight?: number
+  fitnessLevel?: $Enums.FitnessLevel | null
+  classes?: Prisma.UserCreateclassesInput | $Enums.WorkoutClass[]
+  focusZones?: Prisma.UserCreatefocusZonesInput | $Enums.FocusZone[]
+  specialPrograms?: Prisma.UserCreatespecialProgramsInput | $Enums.SpecialProgram[]
+  dailyStepsGoal?: number | null
+  units?: $Enums.UnitSystem
+  goalWeight?: number | null
+  activitylevel?: $Enums.ActivityLevel | null
+  activityDetails?: string | null
+  mostAttentionTo?: $Enums.AttentionArea | null
+  weeklyStreak?: number
+  weeklyTimeSpentSeconds?: number
+  weeklyStatsWeekStart?: Date | string | null
+  weeklyStatsUpdatedAt?: Date | string | null
   role?: $Enums.UserRole
-  createdAt?: Date | string
   isDeleted?: boolean
   isVerified?: boolean
   isProfileComplete?: boolean
+  createdAt?: Date | string
   updatedAt?: Date | string
   programs?: Prisma.ProgramCreateNestedManyWithoutCreatorInput
   workouts?: Prisma.WorkoutCreateNestedManyWithoutCreatorInput
@@ -1263,24 +2029,43 @@ export type UserCreateWithoutAuthProvidersInput = {
 export type UserUncheckedCreateWithoutAuthProvidersInput = {
   id?: string
   email: string
-  fullName: string
   password: string
-  gender?: string | null
-  age: number
-  height: number
-  weight: number
-  mainGoal: string
-  familiarity: string
-  workoutPreference: string
-  motivation: string
-  activity: string
-  workoutProblem: string
-  workoutRoutine: string
+  fullName: string
+  gender?: $Enums.Gender | null
+  age?: number | null
+  height?: number
+  weight?: number
+  mainGoal?: string | null
+  likeToWorkOn?: string | null
+  fimiliarityWithPilates?: string | null
+  activeCurrently?: string | null
+  wayOfWorkingOut?: string | null
+  motivation?: string | null
+  workoutPreference?: string | null
+  workoutRoutine?: $Enums.WorkoutRoutine | null
+  NotificationsEnabled?: boolean
+  dateOfBirth?: Date | string | null
+  startingWeight?: number
+  currentWeight?: number
+  fitnessLevel?: $Enums.FitnessLevel | null
+  classes?: Prisma.UserCreateclassesInput | $Enums.WorkoutClass[]
+  focusZones?: Prisma.UserCreatefocusZonesInput | $Enums.FocusZone[]
+  specialPrograms?: Prisma.UserCreatespecialProgramsInput | $Enums.SpecialProgram[]
+  dailyStepsGoal?: number | null
+  units?: $Enums.UnitSystem
+  goalWeight?: number | null
+  activitylevel?: $Enums.ActivityLevel | null
+  activityDetails?: string | null
+  mostAttentionTo?: $Enums.AttentionArea | null
+  weeklyStreak?: number
+  weeklyTimeSpentSeconds?: number
+  weeklyStatsWeekStart?: Date | string | null
+  weeklyStatsUpdatedAt?: Date | string | null
   role?: $Enums.UserRole
-  createdAt?: Date | string
   isDeleted?: boolean
   isVerified?: boolean
   isProfileComplete?: boolean
+  createdAt?: Date | string
   updatedAt?: Date | string
   programs?: Prisma.ProgramUncheckedCreateNestedManyWithoutCreatorInput
   workouts?: Prisma.WorkoutUncheckedCreateNestedManyWithoutCreatorInput
@@ -1307,24 +2092,43 @@ export type UserUpdateToOneWithWhereWithoutAuthProvidersInput = {
 export type UserUpdateWithoutAuthProvidersInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  fullName?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  age?: Prisma.IntFieldUpdateOperationsInput | number
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+  age?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   height?: Prisma.FloatFieldUpdateOperationsInput | number
   weight?: Prisma.FloatFieldUpdateOperationsInput | number
-  mainGoal?: Prisma.StringFieldUpdateOperationsInput | string
-  familiarity?: Prisma.StringFieldUpdateOperationsInput | string
-  workoutPreference?: Prisma.StringFieldUpdateOperationsInput | string
-  motivation?: Prisma.StringFieldUpdateOperationsInput | string
-  activity?: Prisma.StringFieldUpdateOperationsInput | string
-  workoutProblem?: Prisma.StringFieldUpdateOperationsInput | string
-  workoutRoutine?: Prisma.StringFieldUpdateOperationsInput | string
+  mainGoal?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  likeToWorkOn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fimiliarityWithPilates?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  activeCurrently?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  wayOfWorkingOut?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  motivation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  workoutPreference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  workoutRoutine?: Prisma.NullableEnumWorkoutRoutineFieldUpdateOperationsInput | $Enums.WorkoutRoutine | null
+  NotificationsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  startingWeight?: Prisma.FloatFieldUpdateOperationsInput | number
+  currentWeight?: Prisma.FloatFieldUpdateOperationsInput | number
+  fitnessLevel?: Prisma.NullableEnumFitnessLevelFieldUpdateOperationsInput | $Enums.FitnessLevel | null
+  classes?: Prisma.UserUpdateclassesInput | $Enums.WorkoutClass[]
+  focusZones?: Prisma.UserUpdatefocusZonesInput | $Enums.FocusZone[]
+  specialPrograms?: Prisma.UserUpdatespecialProgramsInput | $Enums.SpecialProgram[]
+  dailyStepsGoal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  units?: Prisma.EnumUnitSystemFieldUpdateOperationsInput | $Enums.UnitSystem
+  goalWeight?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  activitylevel?: Prisma.NullableEnumActivityLevelFieldUpdateOperationsInput | $Enums.ActivityLevel | null
+  activityDetails?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mostAttentionTo?: Prisma.NullableEnumAttentionAreaFieldUpdateOperationsInput | $Enums.AttentionArea | null
+  weeklyStreak?: Prisma.IntFieldUpdateOperationsInput | number
+  weeklyTimeSpentSeconds?: Prisma.IntFieldUpdateOperationsInput | number
+  weeklyStatsWeekStart?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  weeklyStatsUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isProfileComplete?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   programs?: Prisma.ProgramUpdateManyWithoutCreatorNestedInput
   workouts?: Prisma.WorkoutUpdateManyWithoutCreatorNestedInput
@@ -1335,24 +2139,43 @@ export type UserUpdateWithoutAuthProvidersInput = {
 export type UserUncheckedUpdateWithoutAuthProvidersInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  fullName?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  age?: Prisma.IntFieldUpdateOperationsInput | number
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+  age?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   height?: Prisma.FloatFieldUpdateOperationsInput | number
   weight?: Prisma.FloatFieldUpdateOperationsInput | number
-  mainGoal?: Prisma.StringFieldUpdateOperationsInput | string
-  familiarity?: Prisma.StringFieldUpdateOperationsInput | string
-  workoutPreference?: Prisma.StringFieldUpdateOperationsInput | string
-  motivation?: Prisma.StringFieldUpdateOperationsInput | string
-  activity?: Prisma.StringFieldUpdateOperationsInput | string
-  workoutProblem?: Prisma.StringFieldUpdateOperationsInput | string
-  workoutRoutine?: Prisma.StringFieldUpdateOperationsInput | string
+  mainGoal?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  likeToWorkOn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fimiliarityWithPilates?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  activeCurrently?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  wayOfWorkingOut?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  motivation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  workoutPreference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  workoutRoutine?: Prisma.NullableEnumWorkoutRoutineFieldUpdateOperationsInput | $Enums.WorkoutRoutine | null
+  NotificationsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  startingWeight?: Prisma.FloatFieldUpdateOperationsInput | number
+  currentWeight?: Prisma.FloatFieldUpdateOperationsInput | number
+  fitnessLevel?: Prisma.NullableEnumFitnessLevelFieldUpdateOperationsInput | $Enums.FitnessLevel | null
+  classes?: Prisma.UserUpdateclassesInput | $Enums.WorkoutClass[]
+  focusZones?: Prisma.UserUpdatefocusZonesInput | $Enums.FocusZone[]
+  specialPrograms?: Prisma.UserUpdatespecialProgramsInput | $Enums.SpecialProgram[]
+  dailyStepsGoal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  units?: Prisma.EnumUnitSystemFieldUpdateOperationsInput | $Enums.UnitSystem
+  goalWeight?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  activitylevel?: Prisma.NullableEnumActivityLevelFieldUpdateOperationsInput | $Enums.ActivityLevel | null
+  activityDetails?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mostAttentionTo?: Prisma.NullableEnumAttentionAreaFieldUpdateOperationsInput | $Enums.AttentionArea | null
+  weeklyStreak?: Prisma.IntFieldUpdateOperationsInput | number
+  weeklyTimeSpentSeconds?: Prisma.IntFieldUpdateOperationsInput | number
+  weeklyStatsWeekStart?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  weeklyStatsUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isProfileComplete?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   programs?: Prisma.ProgramUncheckedUpdateManyWithoutCreatorNestedInput
   workouts?: Prisma.WorkoutUncheckedUpdateManyWithoutCreatorNestedInput
@@ -1363,24 +2186,43 @@ export type UserUncheckedUpdateWithoutAuthProvidersInput = {
 export type UserCreateWithoutWorkoutsInput = {
   id?: string
   email: string
-  fullName: string
   password: string
-  gender?: string | null
-  age: number
-  height: number
-  weight: number
-  mainGoal: string
-  familiarity: string
-  workoutPreference: string
-  motivation: string
-  activity: string
-  workoutProblem: string
-  workoutRoutine: string
+  fullName: string
+  gender?: $Enums.Gender | null
+  age?: number | null
+  height?: number
+  weight?: number
+  mainGoal?: string | null
+  likeToWorkOn?: string | null
+  fimiliarityWithPilates?: string | null
+  activeCurrently?: string | null
+  wayOfWorkingOut?: string | null
+  motivation?: string | null
+  workoutPreference?: string | null
+  workoutRoutine?: $Enums.WorkoutRoutine | null
+  NotificationsEnabled?: boolean
+  dateOfBirth?: Date | string | null
+  startingWeight?: number
+  currentWeight?: number
+  fitnessLevel?: $Enums.FitnessLevel | null
+  classes?: Prisma.UserCreateclassesInput | $Enums.WorkoutClass[]
+  focusZones?: Prisma.UserCreatefocusZonesInput | $Enums.FocusZone[]
+  specialPrograms?: Prisma.UserCreatespecialProgramsInput | $Enums.SpecialProgram[]
+  dailyStepsGoal?: number | null
+  units?: $Enums.UnitSystem
+  goalWeight?: number | null
+  activitylevel?: $Enums.ActivityLevel | null
+  activityDetails?: string | null
+  mostAttentionTo?: $Enums.AttentionArea | null
+  weeklyStreak?: number
+  weeklyTimeSpentSeconds?: number
+  weeklyStatsWeekStart?: Date | string | null
+  weeklyStatsUpdatedAt?: Date | string | null
   role?: $Enums.UserRole
-  createdAt?: Date | string
   isDeleted?: boolean
   isVerified?: boolean
   isProfileComplete?: boolean
+  createdAt?: Date | string
   updatedAt?: Date | string
   authProviders?: Prisma.AuthProviderCreateNestedManyWithoutUserInput
   programs?: Prisma.ProgramCreateNestedManyWithoutCreatorInput
@@ -1391,24 +2233,43 @@ export type UserCreateWithoutWorkoutsInput = {
 export type UserUncheckedCreateWithoutWorkoutsInput = {
   id?: string
   email: string
-  fullName: string
   password: string
-  gender?: string | null
-  age: number
-  height: number
-  weight: number
-  mainGoal: string
-  familiarity: string
-  workoutPreference: string
-  motivation: string
-  activity: string
-  workoutProblem: string
-  workoutRoutine: string
+  fullName: string
+  gender?: $Enums.Gender | null
+  age?: number | null
+  height?: number
+  weight?: number
+  mainGoal?: string | null
+  likeToWorkOn?: string | null
+  fimiliarityWithPilates?: string | null
+  activeCurrently?: string | null
+  wayOfWorkingOut?: string | null
+  motivation?: string | null
+  workoutPreference?: string | null
+  workoutRoutine?: $Enums.WorkoutRoutine | null
+  NotificationsEnabled?: boolean
+  dateOfBirth?: Date | string | null
+  startingWeight?: number
+  currentWeight?: number
+  fitnessLevel?: $Enums.FitnessLevel | null
+  classes?: Prisma.UserCreateclassesInput | $Enums.WorkoutClass[]
+  focusZones?: Prisma.UserCreatefocusZonesInput | $Enums.FocusZone[]
+  specialPrograms?: Prisma.UserCreatespecialProgramsInput | $Enums.SpecialProgram[]
+  dailyStepsGoal?: number | null
+  units?: $Enums.UnitSystem
+  goalWeight?: number | null
+  activitylevel?: $Enums.ActivityLevel | null
+  activityDetails?: string | null
+  mostAttentionTo?: $Enums.AttentionArea | null
+  weeklyStreak?: number
+  weeklyTimeSpentSeconds?: number
+  weeklyStatsWeekStart?: Date | string | null
+  weeklyStatsUpdatedAt?: Date | string | null
   role?: $Enums.UserRole
-  createdAt?: Date | string
   isDeleted?: boolean
   isVerified?: boolean
   isProfileComplete?: boolean
+  createdAt?: Date | string
   updatedAt?: Date | string
   authProviders?: Prisma.AuthProviderUncheckedCreateNestedManyWithoutUserInput
   programs?: Prisma.ProgramUncheckedCreateNestedManyWithoutCreatorInput
@@ -1435,24 +2296,43 @@ export type UserUpdateToOneWithWhereWithoutWorkoutsInput = {
 export type UserUpdateWithoutWorkoutsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  fullName?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  age?: Prisma.IntFieldUpdateOperationsInput | number
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+  age?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   height?: Prisma.FloatFieldUpdateOperationsInput | number
   weight?: Prisma.FloatFieldUpdateOperationsInput | number
-  mainGoal?: Prisma.StringFieldUpdateOperationsInput | string
-  familiarity?: Prisma.StringFieldUpdateOperationsInput | string
-  workoutPreference?: Prisma.StringFieldUpdateOperationsInput | string
-  motivation?: Prisma.StringFieldUpdateOperationsInput | string
-  activity?: Prisma.StringFieldUpdateOperationsInput | string
-  workoutProblem?: Prisma.StringFieldUpdateOperationsInput | string
-  workoutRoutine?: Prisma.StringFieldUpdateOperationsInput | string
+  mainGoal?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  likeToWorkOn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fimiliarityWithPilates?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  activeCurrently?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  wayOfWorkingOut?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  motivation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  workoutPreference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  workoutRoutine?: Prisma.NullableEnumWorkoutRoutineFieldUpdateOperationsInput | $Enums.WorkoutRoutine | null
+  NotificationsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  startingWeight?: Prisma.FloatFieldUpdateOperationsInput | number
+  currentWeight?: Prisma.FloatFieldUpdateOperationsInput | number
+  fitnessLevel?: Prisma.NullableEnumFitnessLevelFieldUpdateOperationsInput | $Enums.FitnessLevel | null
+  classes?: Prisma.UserUpdateclassesInput | $Enums.WorkoutClass[]
+  focusZones?: Prisma.UserUpdatefocusZonesInput | $Enums.FocusZone[]
+  specialPrograms?: Prisma.UserUpdatespecialProgramsInput | $Enums.SpecialProgram[]
+  dailyStepsGoal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  units?: Prisma.EnumUnitSystemFieldUpdateOperationsInput | $Enums.UnitSystem
+  goalWeight?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  activitylevel?: Prisma.NullableEnumActivityLevelFieldUpdateOperationsInput | $Enums.ActivityLevel | null
+  activityDetails?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mostAttentionTo?: Prisma.NullableEnumAttentionAreaFieldUpdateOperationsInput | $Enums.AttentionArea | null
+  weeklyStreak?: Prisma.IntFieldUpdateOperationsInput | number
+  weeklyTimeSpentSeconds?: Prisma.IntFieldUpdateOperationsInput | number
+  weeklyStatsWeekStart?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  weeklyStatsUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isProfileComplete?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   authProviders?: Prisma.AuthProviderUpdateManyWithoutUserNestedInput
   programs?: Prisma.ProgramUpdateManyWithoutCreatorNestedInput
@@ -1463,24 +2343,43 @@ export type UserUpdateWithoutWorkoutsInput = {
 export type UserUncheckedUpdateWithoutWorkoutsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  fullName?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  age?: Prisma.IntFieldUpdateOperationsInput | number
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+  age?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   height?: Prisma.FloatFieldUpdateOperationsInput | number
   weight?: Prisma.FloatFieldUpdateOperationsInput | number
-  mainGoal?: Prisma.StringFieldUpdateOperationsInput | string
-  familiarity?: Prisma.StringFieldUpdateOperationsInput | string
-  workoutPreference?: Prisma.StringFieldUpdateOperationsInput | string
-  motivation?: Prisma.StringFieldUpdateOperationsInput | string
-  activity?: Prisma.StringFieldUpdateOperationsInput | string
-  workoutProblem?: Prisma.StringFieldUpdateOperationsInput | string
-  workoutRoutine?: Prisma.StringFieldUpdateOperationsInput | string
+  mainGoal?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  likeToWorkOn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fimiliarityWithPilates?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  activeCurrently?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  wayOfWorkingOut?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  motivation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  workoutPreference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  workoutRoutine?: Prisma.NullableEnumWorkoutRoutineFieldUpdateOperationsInput | $Enums.WorkoutRoutine | null
+  NotificationsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  startingWeight?: Prisma.FloatFieldUpdateOperationsInput | number
+  currentWeight?: Prisma.FloatFieldUpdateOperationsInput | number
+  fitnessLevel?: Prisma.NullableEnumFitnessLevelFieldUpdateOperationsInput | $Enums.FitnessLevel | null
+  classes?: Prisma.UserUpdateclassesInput | $Enums.WorkoutClass[]
+  focusZones?: Prisma.UserUpdatefocusZonesInput | $Enums.FocusZone[]
+  specialPrograms?: Prisma.UserUpdatespecialProgramsInput | $Enums.SpecialProgram[]
+  dailyStepsGoal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  units?: Prisma.EnumUnitSystemFieldUpdateOperationsInput | $Enums.UnitSystem
+  goalWeight?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  activitylevel?: Prisma.NullableEnumActivityLevelFieldUpdateOperationsInput | $Enums.ActivityLevel | null
+  activityDetails?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mostAttentionTo?: Prisma.NullableEnumAttentionAreaFieldUpdateOperationsInput | $Enums.AttentionArea | null
+  weeklyStreak?: Prisma.IntFieldUpdateOperationsInput | number
+  weeklyTimeSpentSeconds?: Prisma.IntFieldUpdateOperationsInput | number
+  weeklyStatsWeekStart?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  weeklyStatsUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isProfileComplete?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   authProviders?: Prisma.AuthProviderUncheckedUpdateManyWithoutUserNestedInput
   programs?: Prisma.ProgramUncheckedUpdateManyWithoutCreatorNestedInput
@@ -1558,24 +2457,43 @@ export type UserCountOutputTypeCountProgramCompletionsArgs<ExtArgs extends runti
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   email?: boolean
-  fullName?: boolean
   password?: boolean
+  fullName?: boolean
   gender?: boolean
   age?: boolean
   height?: boolean
   weight?: boolean
   mainGoal?: boolean
-  familiarity?: boolean
-  workoutPreference?: boolean
+  likeToWorkOn?: boolean
+  fimiliarityWithPilates?: boolean
+  activeCurrently?: boolean
+  wayOfWorkingOut?: boolean
   motivation?: boolean
-  activity?: boolean
-  workoutProblem?: boolean
+  workoutPreference?: boolean
   workoutRoutine?: boolean
+  NotificationsEnabled?: boolean
+  dateOfBirth?: boolean
+  startingWeight?: boolean
+  currentWeight?: boolean
+  fitnessLevel?: boolean
+  classes?: boolean
+  focusZones?: boolean
+  specialPrograms?: boolean
+  dailyStepsGoal?: boolean
+  units?: boolean
+  goalWeight?: boolean
+  activitylevel?: boolean
+  activityDetails?: boolean
+  mostAttentionTo?: boolean
+  weeklyStreak?: boolean
+  weeklyTimeSpentSeconds?: boolean
+  weeklyStatsWeekStart?: boolean
+  weeklyStatsUpdatedAt?: boolean
   role?: boolean
-  createdAt?: boolean
   isDeleted?: boolean
   isVerified?: boolean
   isProfileComplete?: boolean
+  createdAt?: boolean
   updatedAt?: boolean
   authProviders?: boolean | Prisma.User$authProvidersArgs<ExtArgs>
   programs?: boolean | Prisma.User$programsArgs<ExtArgs>
@@ -1588,76 +2506,133 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
 export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   email?: boolean
-  fullName?: boolean
   password?: boolean
+  fullName?: boolean
   gender?: boolean
   age?: boolean
   height?: boolean
   weight?: boolean
   mainGoal?: boolean
-  familiarity?: boolean
-  workoutPreference?: boolean
+  likeToWorkOn?: boolean
+  fimiliarityWithPilates?: boolean
+  activeCurrently?: boolean
+  wayOfWorkingOut?: boolean
   motivation?: boolean
-  activity?: boolean
-  workoutProblem?: boolean
+  workoutPreference?: boolean
   workoutRoutine?: boolean
+  NotificationsEnabled?: boolean
+  dateOfBirth?: boolean
+  startingWeight?: boolean
+  currentWeight?: boolean
+  fitnessLevel?: boolean
+  classes?: boolean
+  focusZones?: boolean
+  specialPrograms?: boolean
+  dailyStepsGoal?: boolean
+  units?: boolean
+  goalWeight?: boolean
+  activitylevel?: boolean
+  activityDetails?: boolean
+  mostAttentionTo?: boolean
+  weeklyStreak?: boolean
+  weeklyTimeSpentSeconds?: boolean
+  weeklyStatsWeekStart?: boolean
+  weeklyStatsUpdatedAt?: boolean
   role?: boolean
-  createdAt?: boolean
   isDeleted?: boolean
   isVerified?: boolean
   isProfileComplete?: boolean
+  createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   email?: boolean
-  fullName?: boolean
   password?: boolean
+  fullName?: boolean
   gender?: boolean
   age?: boolean
   height?: boolean
   weight?: boolean
   mainGoal?: boolean
-  familiarity?: boolean
-  workoutPreference?: boolean
+  likeToWorkOn?: boolean
+  fimiliarityWithPilates?: boolean
+  activeCurrently?: boolean
+  wayOfWorkingOut?: boolean
   motivation?: boolean
-  activity?: boolean
-  workoutProblem?: boolean
+  workoutPreference?: boolean
   workoutRoutine?: boolean
+  NotificationsEnabled?: boolean
+  dateOfBirth?: boolean
+  startingWeight?: boolean
+  currentWeight?: boolean
+  fitnessLevel?: boolean
+  classes?: boolean
+  focusZones?: boolean
+  specialPrograms?: boolean
+  dailyStepsGoal?: boolean
+  units?: boolean
+  goalWeight?: boolean
+  activitylevel?: boolean
+  activityDetails?: boolean
+  mostAttentionTo?: boolean
+  weeklyStreak?: boolean
+  weeklyTimeSpentSeconds?: boolean
+  weeklyStatsWeekStart?: boolean
+  weeklyStatsUpdatedAt?: boolean
   role?: boolean
-  createdAt?: boolean
   isDeleted?: boolean
   isVerified?: boolean
   isProfileComplete?: boolean
+  createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectScalar = {
   id?: boolean
   email?: boolean
-  fullName?: boolean
   password?: boolean
+  fullName?: boolean
   gender?: boolean
   age?: boolean
   height?: boolean
   weight?: boolean
   mainGoal?: boolean
-  familiarity?: boolean
-  workoutPreference?: boolean
+  likeToWorkOn?: boolean
+  fimiliarityWithPilates?: boolean
+  activeCurrently?: boolean
+  wayOfWorkingOut?: boolean
   motivation?: boolean
-  activity?: boolean
-  workoutProblem?: boolean
+  workoutPreference?: boolean
   workoutRoutine?: boolean
+  NotificationsEnabled?: boolean
+  dateOfBirth?: boolean
+  startingWeight?: boolean
+  currentWeight?: boolean
+  fitnessLevel?: boolean
+  classes?: boolean
+  focusZones?: boolean
+  specialPrograms?: boolean
+  dailyStepsGoal?: boolean
+  units?: boolean
+  goalWeight?: boolean
+  activitylevel?: boolean
+  activityDetails?: boolean
+  mostAttentionTo?: boolean
+  weeklyStreak?: boolean
+  weeklyTimeSpentSeconds?: boolean
+  weeklyStatsWeekStart?: boolean
+  weeklyStatsUpdatedAt?: boolean
   role?: boolean
-  createdAt?: boolean
   isDeleted?: boolean
   isVerified?: boolean
   isProfileComplete?: boolean
+  createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "fullName" | "password" | "gender" | "age" | "height" | "weight" | "mainGoal" | "familiarity" | "workoutPreference" | "motivation" | "activity" | "workoutProblem" | "workoutRoutine" | "role" | "createdAt" | "isDeleted" | "isVerified" | "isProfileComplete" | "updatedAt", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "password" | "fullName" | "gender" | "age" | "height" | "weight" | "mainGoal" | "likeToWorkOn" | "fimiliarityWithPilates" | "activeCurrently" | "wayOfWorkingOut" | "motivation" | "workoutPreference" | "workoutRoutine" | "NotificationsEnabled" | "dateOfBirth" | "startingWeight" | "currentWeight" | "fitnessLevel" | "classes" | "focusZones" | "specialPrograms" | "dailyStepsGoal" | "units" | "goalWeight" | "activitylevel" | "activityDetails" | "mostAttentionTo" | "weeklyStreak" | "weeklyTimeSpentSeconds" | "weeklyStatsWeekStart" | "weeklyStatsUpdatedAt" | "role" | "isDeleted" | "isVerified" | "isProfileComplete" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   authProviders?: boolean | Prisma.User$authProvidersArgs<ExtArgs>
   programs?: boolean | Prisma.User$programsArgs<ExtArgs>
@@ -1681,24 +2656,43 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     email: string
-    fullName: string
     password: string
-    gender: string | null
-    age: number
+    fullName: string
+    gender: $Enums.Gender | null
+    age: number | null
     height: number
     weight: number
-    mainGoal: string
-    familiarity: string
-    workoutPreference: string
-    motivation: string
-    activity: string
-    workoutProblem: string
-    workoutRoutine: string
+    mainGoal: string | null
+    likeToWorkOn: string | null
+    fimiliarityWithPilates: string | null
+    activeCurrently: string | null
+    wayOfWorkingOut: string | null
+    motivation: string | null
+    workoutPreference: string | null
+    workoutRoutine: $Enums.WorkoutRoutine | null
+    NotificationsEnabled: boolean
+    dateOfBirth: Date | null
+    startingWeight: number
+    currentWeight: number
+    fitnessLevel: $Enums.FitnessLevel | null
+    classes: $Enums.WorkoutClass[]
+    focusZones: $Enums.FocusZone[]
+    specialPrograms: $Enums.SpecialProgram[]
+    dailyStepsGoal: number | null
+    units: $Enums.UnitSystem
+    goalWeight: number | null
+    activitylevel: $Enums.ActivityLevel | null
+    activityDetails: string | null
+    mostAttentionTo: $Enums.AttentionArea | null
+    weeklyStreak: number
+    weeklyTimeSpentSeconds: number
+    weeklyStatsWeekStart: Date | null
+    weeklyStatsUpdatedAt: Date | null
     role: $Enums.UserRole
-    createdAt: Date
     isDeleted: boolean
     isVerified: boolean
     isProfileComplete: boolean
+    createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["user"]>
   composites: {}
@@ -2130,24 +3124,43 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
 export interface UserFieldRefs {
   readonly id: Prisma.FieldRef<"User", 'String'>
   readonly email: Prisma.FieldRef<"User", 'String'>
-  readonly fullName: Prisma.FieldRef<"User", 'String'>
   readonly password: Prisma.FieldRef<"User", 'String'>
-  readonly gender: Prisma.FieldRef<"User", 'String'>
+  readonly fullName: Prisma.FieldRef<"User", 'String'>
+  readonly gender: Prisma.FieldRef<"User", 'Gender'>
   readonly age: Prisma.FieldRef<"User", 'Int'>
   readonly height: Prisma.FieldRef<"User", 'Float'>
   readonly weight: Prisma.FieldRef<"User", 'Float'>
   readonly mainGoal: Prisma.FieldRef<"User", 'String'>
-  readonly familiarity: Prisma.FieldRef<"User", 'String'>
-  readonly workoutPreference: Prisma.FieldRef<"User", 'String'>
+  readonly likeToWorkOn: Prisma.FieldRef<"User", 'String'>
+  readonly fimiliarityWithPilates: Prisma.FieldRef<"User", 'String'>
+  readonly activeCurrently: Prisma.FieldRef<"User", 'String'>
+  readonly wayOfWorkingOut: Prisma.FieldRef<"User", 'String'>
   readonly motivation: Prisma.FieldRef<"User", 'String'>
-  readonly activity: Prisma.FieldRef<"User", 'String'>
-  readonly workoutProblem: Prisma.FieldRef<"User", 'String'>
-  readonly workoutRoutine: Prisma.FieldRef<"User", 'String'>
+  readonly workoutPreference: Prisma.FieldRef<"User", 'String'>
+  readonly workoutRoutine: Prisma.FieldRef<"User", 'WorkoutRoutine'>
+  readonly NotificationsEnabled: Prisma.FieldRef<"User", 'Boolean'>
+  readonly dateOfBirth: Prisma.FieldRef<"User", 'DateTime'>
+  readonly startingWeight: Prisma.FieldRef<"User", 'Float'>
+  readonly currentWeight: Prisma.FieldRef<"User", 'Float'>
+  readonly fitnessLevel: Prisma.FieldRef<"User", 'FitnessLevel'>
+  readonly classes: Prisma.FieldRef<"User", 'WorkoutClass[]'>
+  readonly focusZones: Prisma.FieldRef<"User", 'FocusZone[]'>
+  readonly specialPrograms: Prisma.FieldRef<"User", 'SpecialProgram[]'>
+  readonly dailyStepsGoal: Prisma.FieldRef<"User", 'Int'>
+  readonly units: Prisma.FieldRef<"User", 'UnitSystem'>
+  readonly goalWeight: Prisma.FieldRef<"User", 'Float'>
+  readonly activitylevel: Prisma.FieldRef<"User", 'ActivityLevel'>
+  readonly activityDetails: Prisma.FieldRef<"User", 'String'>
+  readonly mostAttentionTo: Prisma.FieldRef<"User", 'AttentionArea'>
+  readonly weeklyStreak: Prisma.FieldRef<"User", 'Int'>
+  readonly weeklyTimeSpentSeconds: Prisma.FieldRef<"User", 'Int'>
+  readonly weeklyStatsWeekStart: Prisma.FieldRef<"User", 'DateTime'>
+  readonly weeklyStatsUpdatedAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly role: Prisma.FieldRef<"User", 'UserRole'>
-  readonly createdAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly isDeleted: Prisma.FieldRef<"User", 'Boolean'>
   readonly isVerified: Prisma.FieldRef<"User", 'Boolean'>
   readonly isProfileComplete: Prisma.FieldRef<"User", 'Boolean'>
+  readonly createdAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"User", 'DateTime'>
 }
     

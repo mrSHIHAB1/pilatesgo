@@ -26,6 +26,99 @@ export const UserRole = {
 export type UserRole = (typeof UserRole)[keyof typeof UserRole]
 
 
+export const AttentionArea = {
+  ARMS: 'ARMS',
+  LEGS: 'LEGS',
+  CHEST: 'CHEST',
+  ABS: 'ABS',
+  BACK: 'BACK'
+} as const
+
+export type AttentionArea = (typeof AttentionArea)[keyof typeof AttentionArea]
+
+
+export const Gender = {
+  MALE: 'MALE',
+  FEMALE: 'FEMALE',
+  OTHER: 'OTHER'
+} as const
+
+export type Gender = (typeof Gender)[keyof typeof Gender]
+
+
+export const FitnessLevel = {
+  BEGINNER: 'BEGINNER',
+  INTERMEDIATE: 'INTERMEDIATE',
+  ADVANCED: 'ADVANCED'
+} as const
+
+export type FitnessLevel = (typeof FitnessLevel)[keyof typeof FitnessLevel]
+
+
+export const ActivityLevel = {
+  NEWBIE: 'NEWBIE',
+  REGULAR: 'REGULAR',
+  INTERMEDIATE: 'INTERMEDIATE',
+  ADVANCED: 'ADVANCED',
+  PRO: 'PRO'
+} as const
+
+export type ActivityLevel = (typeof ActivityLevel)[keyof typeof ActivityLevel]
+
+
+export const WorkoutRoutine = {
+  SHORT: 'SHORT',
+  MEDIUM: 'MEDIUM',
+  LONG: 'LONG'
+} as const
+
+export type WorkoutRoutine = (typeof WorkoutRoutine)[keyof typeof WorkoutRoutine]
+
+
+export const UnitSystem = {
+  METERANDGRAMS: 'METERANDGRAMS',
+  POUNDSANDFEET: 'POUNDSANDFEET'
+} as const
+
+export type UnitSystem = (typeof UnitSystem)[keyof typeof UnitSystem]
+
+
+export const FocusZone = {
+  FULL_BODY: 'FULL_BODY',
+  CORE: 'CORE',
+  UPPER_BODY: 'UPPER_BODY',
+  LOWER_BODY: 'LOWER_BODY',
+  GLUTES: 'GLUTES',
+  BACK: 'BACK',
+  ARMS: 'ARMS',
+  LEGS: 'LEGS'
+} as const
+
+export type FocusZone = (typeof FocusZone)[keyof typeof FocusZone]
+
+
+export const SpecialProgram = {
+  WEIGHT_LOSS: 'WEIGHT_LOSS',
+  STRENGTH: 'STRENGTH',
+  FLEXIBILITY: 'FLEXIBILITY',
+  MOBILITY: 'MOBILITY',
+  POSTURE: 'POSTURE'
+} as const
+
+export type SpecialProgram = (typeof SpecialProgram)[keyof typeof SpecialProgram]
+
+
+export const WorkoutClass = {
+  PILATES: 'PILATES',
+  YOGA: 'YOGA',
+  CARDIO: 'CARDIO',
+  STRENGTH: 'STRENGTH',
+  STRETCH: 'STRETCH'
+} as const
+
+export type WorkoutClass = (typeof WorkoutClass)[keyof typeof WorkoutClass]
+
+
 export const DifficultyLevel = {
   BEGINNER: 'BEGINNER',
   INTERMEDIATE: 'INTERMEDIATE',

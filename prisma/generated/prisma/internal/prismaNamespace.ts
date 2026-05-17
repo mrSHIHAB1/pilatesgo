@@ -1276,24 +1276,43 @@ export type UserProgramExerciseCompletionScalarFieldEnum = (typeof UserProgramEx
 export const UserScalarFieldEnum = {
   id: 'id',
   email: 'email',
-  fullName: 'fullName',
   password: 'password',
+  fullName: 'fullName',
   gender: 'gender',
   age: 'age',
   height: 'height',
   weight: 'weight',
   mainGoal: 'mainGoal',
-  familiarity: 'familiarity',
-  workoutPreference: 'workoutPreference',
+  likeToWorkOn: 'likeToWorkOn',
+  fimiliarityWithPilates: 'fimiliarityWithPilates',
+  activeCurrently: 'activeCurrently',
+  wayOfWorkingOut: 'wayOfWorkingOut',
   motivation: 'motivation',
-  activity: 'activity',
-  workoutProblem: 'workoutProblem',
+  workoutPreference: 'workoutPreference',
   workoutRoutine: 'workoutRoutine',
+  NotificationsEnabled: 'NotificationsEnabled',
+  dateOfBirth: 'dateOfBirth',
+  startingWeight: 'startingWeight',
+  currentWeight: 'currentWeight',
+  fitnessLevel: 'fitnessLevel',
+  classes: 'classes',
+  focusZones: 'focusZones',
+  specialPrograms: 'specialPrograms',
+  dailyStepsGoal: 'dailyStepsGoal',
+  units: 'units',
+  goalWeight: 'goalWeight',
+  activitylevel: 'activitylevel',
+  activityDetails: 'activityDetails',
+  mostAttentionTo: 'mostAttentionTo',
+  weeklyStreak: 'weeklyStreak',
+  weeklyTimeSpentSeconds: 'weeklyTimeSpentSeconds',
+  weeklyStatsWeekStart: 'weeklyStatsWeekStart',
+  weeklyStatsUpdatedAt: 'weeklyStatsUpdatedAt',
   role: 'role',
-  createdAt: 'createdAt',
   isDeleted: 'isDeleted',
   isVerified: 'isVerified',
   isProfileComplete: 'isProfileComplete',
+  createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
 
@@ -1441,6 +1460,20 @@ export type ListEnumProgramEnrollmentStatusFieldRefInput<$PrismaModel> = FieldRe
 
 
 /**
+ * Reference to a field of type 'Gender'
+ */
+export type EnumGenderFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Gender'>
+    
+
+
+/**
+ * Reference to a field of type 'Gender[]'
+ */
+export type ListEnumGenderFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Gender[]'>
+    
+
+
+/**
  * Reference to a field of type 'Float'
  */
 export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -1455,6 +1488,125 @@ export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaMode
 
 
 /**
+ * Reference to a field of type 'WorkoutRoutine'
+ */
+export type EnumWorkoutRoutineFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'WorkoutRoutine'>
+    
+
+
+/**
+ * Reference to a field of type 'WorkoutRoutine[]'
+ */
+export type ListEnumWorkoutRoutineFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'WorkoutRoutine[]'>
+    
+
+
+/**
+ * Reference to a field of type 'Boolean'
+ */
+export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+    
+
+
+/**
+ * Reference to a field of type 'FitnessLevel'
+ */
+export type EnumFitnessLevelFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'FitnessLevel'>
+    
+
+
+/**
+ * Reference to a field of type 'FitnessLevel[]'
+ */
+export type ListEnumFitnessLevelFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'FitnessLevel[]'>
+    
+
+
+/**
+ * Reference to a field of type 'WorkoutClass[]'
+ */
+export type ListEnumWorkoutClassFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'WorkoutClass[]'>
+    
+
+
+/**
+ * Reference to a field of type 'WorkoutClass'
+ */
+export type EnumWorkoutClassFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'WorkoutClass'>
+    
+
+
+/**
+ * Reference to a field of type 'FocusZone[]'
+ */
+export type ListEnumFocusZoneFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'FocusZone[]'>
+    
+
+
+/**
+ * Reference to a field of type 'FocusZone'
+ */
+export type EnumFocusZoneFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'FocusZone'>
+    
+
+
+/**
+ * Reference to a field of type 'SpecialProgram[]'
+ */
+export type ListEnumSpecialProgramFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SpecialProgram[]'>
+    
+
+
+/**
+ * Reference to a field of type 'SpecialProgram'
+ */
+export type EnumSpecialProgramFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SpecialProgram'>
+    
+
+
+/**
+ * Reference to a field of type 'UnitSystem'
+ */
+export type EnumUnitSystemFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'UnitSystem'>
+    
+
+
+/**
+ * Reference to a field of type 'UnitSystem[]'
+ */
+export type ListEnumUnitSystemFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'UnitSystem[]'>
+    
+
+
+/**
+ * Reference to a field of type 'ActivityLevel'
+ */
+export type EnumActivityLevelFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ActivityLevel'>
+    
+
+
+/**
+ * Reference to a field of type 'ActivityLevel[]'
+ */
+export type ListEnumActivityLevelFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ActivityLevel[]'>
+    
+
+
+/**
+ * Reference to a field of type 'AttentionArea'
+ */
+export type EnumAttentionAreaFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AttentionArea'>
+    
+
+
+/**
+ * Reference to a field of type 'AttentionArea[]'
+ */
+export type ListEnumAttentionAreaFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AttentionArea[]'>
+    
+
+
+/**
  * Reference to a field of type 'UserRole'
  */
 export type EnumUserRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'UserRole'>
@@ -1465,13 +1617,6 @@ export type EnumUserRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaM
  * Reference to a field of type 'UserRole[]'
  */
 export type ListEnumUserRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'UserRole[]'>
-    
-
-
-/**
- * Reference to a field of type 'Boolean'
- */
-export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
 
 

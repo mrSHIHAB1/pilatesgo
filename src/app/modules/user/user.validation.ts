@@ -23,12 +23,46 @@ export const completeProfileValidation = z.object({
     weight: z.number({ message: 'Weight is required' }).min(0.1, 'Invalid weight'),
     gender: z.string({ message: 'Gender is required' }).min(1, 'Gender is required'),
     mainGoal: z.string({ message: 'Main goal is required' }).min(1, 'Main goal is required'),
-    familiarity: z.string({ message: 'Familiarity is required' }).min(1, 'Familiarity is required'),
+    // Accept both legacy key (familiarity) and new schema key (fimiliarityWithPilates)
+    familiarity: z.string().min(1).optional(),
+    fimiliarityWithPilates: z.string().min(1).optional(),
     workoutPreference: z.string({ message: 'Workout preference is required' }).min(1, 'Workout preference is required'),
     motivation: z.string({ message: 'Motivation is required' }).min(1, 'Motivation is required'),
-    activity: z.string({ message: 'Activity is required' }).min(1, 'Activity is required'),
-    workoutProblem: z.string({ message: 'Workout problem is required' }).min(1, 'Workout problem is required'),
+    // Accept both legacy key (activity) and new schema key (activeCurrently)
+    activity: z.string().min(1).optional(),
+    activeCurrently: z.string().min(1).optional(),
+
+    // Accept both legacy key (workoutProblem) and new schema key (likeToWorkOn)
+    workoutProblem: z.string().min(1).optional(),
+    likeToWorkOn: z.string().min(1).optional(),
+
+    wayOfWorkingOut: z.string().min(1).optional(),
     workoutRoutine: z.string({ message: 'Workout routine is required' }).min(1, 'Workout routine is required'),
+  })
+  .superRefine((val, ctx) => {
+    if (!val.fimiliarityWithPilates && !val.familiarity) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ['familiarity'],
+        message: 'Familiarity is required',
+      });
+    }
+
+    if (!val.activeCurrently && !val.activity) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ['activity'],
+        message: 'Activity is required',
+      });
+    }
+
+    if (!val.likeToWorkOn && !val.workoutProblem) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ['workoutProblem'],
+        message: 'Workout problem is required',
+      });
+    }
   }),
 });
 

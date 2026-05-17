@@ -45,12 +45,22 @@ export interface ICompleteProfileRequest {
   weight: number;
   gender: string;
   mainGoal: string;
-  familiarity: string;
+  // legacy client key
+  familiarity?: string;
+  // new schema key
+  fimiliarityWithPilates?: string;
   workoutPreference: string;
   motivation: string;
-  activity: string;
+  // legacy client key
+  activity?: string;
+  // new schema key
+  activeCurrently?: string;
   isProfileComplete?: boolean;
-  workoutProblem: string;
+  // legacy client key
+  workoutProblem?: string;
+  // new schema key
+  likeToWorkOn?: string;
+  wayOfWorkingOut?: string;
   workoutRoutine: string;
 }
 
@@ -72,6 +82,17 @@ export interface ICompleteProfileResponse {
   isProfileComplete: boolean;
   isVerified: boolean;
   createdAt: Date;
+}
+
+export interface IWeeklyStatsResponse {
+  userId: string;
+  weekStart: Date;
+  weekEnd: Date;
+  weeklyStreak: number;
+  weeklyTimeSpentSeconds: number;
+  weeklyTimeSpentMinutes: number;
+  completedExercisesCount: number;
+  updatedAt: Date;
 }
 
 // Old interface (kept for backward compatibility)

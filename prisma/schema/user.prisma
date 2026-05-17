@@ -1,28 +1,58 @@
 model User {
-  id                String         @id @default(cuid())
-  email             String         @unique
-  fullName          String
-  password          String
-  gender            String?
-  age               Int
-  height            Float
-  weight            Float
-  mainGoal          String
-  familiarity       String
-  workoutPreference String
-  motivation        String
-  activity          String
-  workoutProblem    String
-  workoutRoutine    String
-  role              UserRole       @default(USER)
-  createdAt         DateTime       @default(now())
-  isDeleted         Boolean        @default(false)
-  isVerified        Boolean        @default(false)
-  isProfileComplete Boolean        @default(false)
-  updatedAt         DateTime       @updatedAt
-  authProviders     AuthProvider[]
-  programs          Program[]
-  workouts          Workout[]
+  id                     String             @id @default(cuid())
+  // Auth
+  email                  String             @unique
+  password               String
+  // Basic Profile
+  fullName               String
+  gender                 Gender?
+  age                    Int?
+  // Body Metrics
+  height                 Float              @default(0)
+  weight                 Float              @default(0)
+  mainGoal               String?
+  likeToWorkOn           String?
+  fimiliarityWithPilates String?
+  activeCurrently        String?
+  wayOfWorkingOut        String?
+  motivation             String?
+  workoutPreference      String?
+  workoutRoutine         WorkoutRoutine?
+  NotificationsEnabled   Boolean            @default(true)
+  //later we can add more detailed body metrics like body fat percentage, muscle mass, etc.
+  dateOfBirth            DateTime?
+  startingWeight         Float              @default(0)
+  currentWeight          Float              @default(0)
+  fitnessLevel           FitnessLevel?
+  classes                WorkoutClass[]
+  focusZones             FocusZone[]
+  specialPrograms        SpecialProgram[]
+  dailyStepsGoal         Int?               @default(10000)
+  units                  UnitSystem         @default(METERANDGRAMS)
+  goalWeight             Float?             @default(0)
+  activitylevel          ActivityLevel?
+  activityDetails        String?
+  mostAttentionTo        AttentionArea?
+
+  // Weekly Stats
+  weeklyStreak           Int       @default(0)
+  weeklyTimeSpentSeconds Int       @default(0)
+  weeklyStatsWeekStart   DateTime?
+  weeklyStatsUpdatedAt   DateTime?
+
+  // System
+  role              UserRole @default(USER)
+  isDeleted         Boolean  @default(false)
+  isVerified        Boolean  @default(false)
+  isProfileComplete Boolean  @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  authProviders      AuthProvider[]
+  programs           Program[]
+  workouts           Workout[]
   programEnrollments UserProgramEnrollment[]
   programCompletions UserProgramExerciseCompletion[]
 }
@@ -40,4 +70,70 @@ model AuthProvider {
 enum UserRole {
   ADMIN
   USER
+}
+enum AttentionArea {
+ ARMS
+  LEGS
+  CHEST
+ABS
+  BACK
+}
+enum Gender {
+  MALE
+  FEMALE
+  OTHER
+}
+
+enum FitnessLevel {
+  BEGINNER
+  INTERMEDIATE
+  ADVANCED
+}
+
+enum ActivityLevel {
+  NEWBIE
+  REGULAR
+  INTERMEDIATE
+  ADVANCED
+  PRO
+}
+
+
+
+enum WorkoutRoutine {
+  SHORT
+  MEDIUM
+  LONG
+}
+
+enum UnitSystem {
+  METERANDGRAMS
+  POUNDSANDFEET
+}
+
+enum FocusZone {
+  FULL_BODY
+  CORE
+  UPPER_BODY
+  LOWER_BODY
+  GLUTES
+  BACK
+  ARMS
+  LEGS
+}
+
+enum SpecialProgram {
+  WEIGHT_LOSS
+  STRENGTH
+  FLEXIBILITY
+  MOBILITY
+  POSTURE
+}
+
+enum WorkoutClass {
+  PILATES
+  YOGA
+  CARDIO
+  STRENGTH
+  STRETCH
 }
