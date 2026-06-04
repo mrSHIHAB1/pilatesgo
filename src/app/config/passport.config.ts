@@ -8,27 +8,36 @@ import {
 import { Strategy as AppleStrategy } from "passport-apple";
 import bcrypt from "bcryptjs";
 
-
-
-
 import { envVars } from "./env";
-import { User } from "../modules/user/user.model";
-import { AuthProviderType, Role } from "../modules/user/user.interface";
+import prisma from "../shared/prisma";
+import { UserRole } from "../../../prisma/generated/prisma/enums";
+
+const AuthProviderType = {
+  GOOGLE: "GOOGLE",
+  APPLE: "APPLE",
+} as const;
+
+type AuthProviderType = (typeof AuthProviderType)[keyof typeof AuthProviderType];
+
+type DoneCallback = (err: any, user?: any, info?: any) => void;
+
+const createOAuthPassword = async (seed: string) => {
+  const rounds = parseInt(envVars.BCRYPT_SALT_ROUND || "10", 10);
+  return bcrypt.hash(`oauth:${seed}:${Date.now()}`, rounds);
+};
 
 // ✅ Local strategy (BLOCK oauth accounts)
 passport.use(
   new LocalStrategy(
     { usernameField: "email", passwordField: "password" },
-    async (email, password, done) => {
+    async (email: string, password: string, done: DoneCallback) => {
       try {
-        const user = await User.findOne({ email }).select("+password");
+        const user = await prisma.user.findUnique({ where: { email } });
         if (!user) return done(null, false, { message: "Invalid email or password" });
 
         if (user.isDeleted) return done(null, false, { message: "User deleted" });
 
-        if (user.isblocked) return done(null, false, { message: "User is blocked" });
-
-        const isMatch = await bcrypt.compare(password, user.password || "");
+        const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) return done(null, false, { message: "Invalid email or password" });
 
         return done(null, user);
@@ -40,157 +49,180 @@ passport.use(
 );
 
 // ✅ Google strategy
-passport.use(
-  new GoogleStrategy(
-    {
-      clientID: envVars.GOOGLE_AUTH.GOOGLE_CLIENT_ID,
-      clientSecret: envVars.GOOGLE_AUTH.GOOGLE_CLIENT_SECRET,
-      callbackURL: envVars.GOOGLE_AUTH.GOOGLE_CALLBACK_URL,
-    },
-    async (
-      _accessToken: string,
-      _refreshToken: string,
-      profile: Profile,
-      done: VerifyCallback
-    ) => {
-      try {
-        const email = profile.emails?.[0]?.value?.toLowerCase();
-        if (!email) return done(null, false, { message: "No email found from Google" });
+if (envVars.GOOGLE_AUTH) {
+  passport.use(
+    new GoogleStrategy(
+      {
+        clientID: envVars.GOOGLE_AUTH.GOOGLE_CLIENT_ID,
+        clientSecret: envVars.GOOGLE_AUTH.GOOGLE_CLIENT_SECRET,
+        callbackURL: envVars.GOOGLE_AUTH.GOOGLE_CALLBACK_URL,
+      },
+      async (
+        _accessToken: string,
+        _refreshToken: string,
+        profile: Profile,
+        done: VerifyCallback
+      ) => {
+        try {
+          const email = profile.emails?.[0]?.value?.toLowerCase();
+          if (!email) return done(null, false, { message: "No email found from Google" });
 
-        let user = await User.findOne({ email });
-
-        if (user && user.isDeleted) return done(null, false, { message: "User is deleted" });
-
-        if (!user) {
-          // Create new user
-          user = await User.create({
-            email,
-            name: profile.displayName,
-            profileImage: profile.photos?.[0]?.value,
-            role: Role.USER,
-            isVerified: true,
-            auth_providers: [
-              { provider: AuthProviderType.GOOGLE, providerID: profile.id },
-            ],
+          let user = await prisma.user.findUnique({
+            where: { email },
+            include: { authProviders: true },
           });
-        } else {
-          // Add Google provider if missing
-          const hasGoogle = user.auth_providers?.some(
-            (p: any) => p.provider === AuthProviderType.GOOGLE
-          );
-          if (!hasGoogle) {
-            await User.updateOne(
-              { _id: user._id },
-              {
-                $addToSet: {
-                  auth_providers: {
+
+          if (user && user.isDeleted) return done(null, false, { message: "User is deleted" });
+
+          if (!user) {
+            const password = await createOAuthPassword(`google:${profile.id}`);
+            user = await prisma.user.create({
+              data: {
+                email,
+                password,
+                fullName: profile.displayName,
+                role: UserRole.USER,
+                isVerified: true,
+                authProviders: {
+                  create: {
                     provider: AuthProviderType.GOOGLE,
-                    providerID: profile.id,
-                  },
-                },
-              }
-            );
-          }
-        }
-
-        return done(null, user);
-      } catch (error) {
-        return done(error);
-      }
-    }
-  )
-);
-
-passport.use(
-  new AppleStrategy(
-    {
-      clientID: envVars.APPLE_AUTH.APPLE_CLIENT_ID, // Service ID
-      teamID: envVars.APPLE_AUTH.APPLE_TEAM_ID,
-      keyID: envVars.APPLE_AUTH.APPLE_KEY_ID,
-      privateKeyString: envVars.APPLE_AUTH.APPLE_PRIVATE_KEY_PATH,
-      callbackURL: envVars.APPLE_AUTH.APPLE_CALLBACK_URL,
-      scope: ["name", "email"],
-      passReqToCallback: false,
-    },
-    async (
-      _accessToken: string,
-      _refreshToken: string,
-      idToken: any,
-      profile: any,
-      done: any,
-    ) => {
-      try {
-        // Apple unique id => idToken.sub
-        const appleId = idToken?.sub || profile?.id;
-        const email = profile?.email; // often only first time
-        const fullName = profile?.name
-          ? `${profile.name.firstName ?? ""} ${profile.name.lastName ?? ""}`.trim()
-          : undefined;
-
-        if (!appleId)
-          return done(null, false, { message: "No Apple user id found" });
-
-        // ✅ Find by provider first
-        let user = await User.findOne({
-          "auth_providers.provider": AuthProviderType.APPLE,
-          "auth_providers.providerID": appleId,
-        });
-
-        // fallback by email (only if present)
-        if (!user && email) user = await User.findOne({ email });
-
-        if (user && user.isDeleted)
-          return done(null, false, { message: "User is deleted" });
-
-        if (!user) {
-          user = await User.create({
-            email: email ?? undefined,
-            name: fullName ?? "Apple User",
-            role: Role.USER,
-            isVerified: true,
-            auth_providers: [
-              { provider: AuthProviderType.APPLE, providerID: appleId },
-            ],
-          });
-        } else {
-          const hasApple = user.auth_providers?.some(
-            (p: any) => p.provider === AuthProviderType.APPLE,
-          );
-
-          if (!hasApple) {
-            await User.updateOne(
-              { _id: user._id },
-              {
-                $addToSet: {
-                  auth_providers: {
-                    provider: AuthProviderType.APPLE,
-                    providerID: appleId,
+                    providerId: profile.id,
                   },
                 },
               },
+              include: { authProviders: true },
+            });
+          } else {
+            const hasGoogle = user.authProviders?.some(
+              (p) => p.provider === AuthProviderType.GOOGLE
             );
+            if (!hasGoogle) {
+              await prisma.authProvider.create({
+                data: {
+                  provider: AuthProviderType.GOOGLE,
+                  providerId: profile.id,
+                  userId: user.id,
+                },
+              });
+            }
           }
 
-          // store email/name if missing (first-time only issue)
-          const update: any = {};
-          if (!user.email && email) update.email = email;
-          if (
-            (!user.name || user.name === "Apple User") &&
-            fullName
-          ) {
-            update.name = fullName;
-          }
-          if (Object.keys(update).length) {
-            await User.updateOne({ _id: user._id }, update);
-          }
+          if (!user) return done(null, false, { message: "User not found" });
+          return done(null, user);
+        } catch (error) {
+          return done(error);
         }
-
-        return done(null, user);
-      } catch (error) {
-        return done(error);
       }
-    },
-  ),
-);
+    )
+  );
+}
+
+if (envVars.APPLE_AUTH) {
+  passport.use(
+    new AppleStrategy(
+      {
+        clientID: envVars.APPLE_AUTH.APPLE_CLIENT_ID,
+        teamID: envVars.APPLE_AUTH.APPLE_TEAM_ID,
+        keyID: envVars.APPLE_AUTH.APPLE_KEY_ID,
+        privateKeyString: envVars.APPLE_AUTH.APPLE_PRIVATE_KEY_PATH,
+        callbackURL: envVars.APPLE_AUTH.APPLE_CALLBACK_URL,
+        scope: ["name", "email"],
+        passReqToCallback: false,
+      },
+      async (
+        _accessToken: string,
+        _refreshToken: string,
+        idToken: any,
+        profile: any,
+        done: DoneCallback,
+      ) => {
+        try {
+          const appleId = idToken?.sub || profile?.id;
+          const email = profile?.email;
+          const fullName = profile?.name
+            ? `${profile.name.firstName ?? ""} ${profile.name.lastName ?? ""}`.trim()
+            : undefined;
+
+          if (!appleId)
+            return done(null, false, { message: "No Apple user id found" });
+
+          let user = await prisma.user.findFirst({
+            where: {
+              authProviders: {
+                some: {
+                  provider: AuthProviderType.APPLE,
+                  providerId: appleId,
+                },
+              },
+            },
+            include: { authProviders: true },
+          });
+
+          if (!user && email) {
+            user = await prisma.user.findUnique({
+              where: { email },
+              include: { authProviders: true },
+            });
+          }
+
+          if (user && user.isDeleted)
+            return done(null, false, { message: "User is deleted" });
+
+          if (!user) {
+            const password = await createOAuthPassword(`apple:${appleId}`);
+            user = await prisma.user.create({
+              data: {
+                email: email ?? "",
+                password,
+                fullName: fullName ?? "Apple User",
+                role: UserRole.USER,
+                isVerified: true,
+                authProviders: {
+                  create: {
+                    provider: AuthProviderType.APPLE,
+                    providerId: appleId,
+                  },
+                },
+              },
+              include: { authProviders: true },
+            });
+          } else {
+            const hasApple = user.authProviders?.some(
+              (p) => p.provider === AuthProviderType.APPLE,
+            );
+
+            if (!hasApple) {
+              await prisma.authProvider.create({
+                data: {
+                  provider: AuthProviderType.APPLE,
+                  providerId: appleId,
+                  userId: user.id,
+                },
+              });
+            }
+
+            const update: { email?: string; fullName?: string } = {};
+            if (!user.email && email) update.email = email;
+            if ((!user.fullName || user.fullName === "Apple User") && fullName) {
+              update.fullName = fullName;
+            }
+
+            if (Object.keys(update).length) {
+              await prisma.user.update({
+                where: { id: user.id },
+                data: update,
+              });
+            }
+          }
+
+          if (!user) return done(null, false, { message: "User not found" });
+          return done(null, user);
+        } catch (error) {
+          return done(error);
+        }
+      },
+    )
+  );
+}
 
 export default passport;
