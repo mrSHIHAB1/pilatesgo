@@ -24,6 +24,7 @@ const uploadVideo = async (file: Express.Multer.File,payload: Omit<ICreateVideoR
   const video = await prisma.video.create({
     data: {
       title: payload.title,
+      description: payload.description,
       url: uploadResult.secure_url,
       difficulty: payload.difficulty,
       visibility: payload.visibility,
@@ -32,7 +33,10 @@ const uploadVideo = async (file: Express.Multer.File,payload: Omit<ICreateVideoR
     },
   });
 
-  return video;
+  return {
+    ...video,
+    description: video.description ?? null,
+  };
 };
 
 // Create a new video (for manual URL input)
@@ -40,6 +44,7 @@ const createVideo = async (payload: ICreateVideoRequest): Promise<IVideoResponse
   const video = await prisma.video.create({
     data: {
       title: payload.title,
+      description: payload.description,
       url: payload.url,
       difficulty: payload.difficulty,
       visibility: payload.visibility,
@@ -48,7 +53,10 @@ const createVideo = async (payload: ICreateVideoRequest): Promise<IVideoResponse
     },
   });
 
-  return video;
+  return {
+    ...video,
+    description: video.description ?? null,
+  };
 };
 
 // Get all videos with pagination and filters
@@ -76,7 +84,10 @@ const getAllVideos = async (
   const totalPages = Math.ceil(total / limit);
 
   return {
-    data: videos,
+    data: videos.map((video) => ({
+      ...video,
+      description: video.description ?? null,
+    })),
     total,
     page,
     limit,
@@ -94,7 +105,10 @@ const getVideoById = async (id: string): Promise<IVideoResponse> => {
     throw new ApiError(httpStatus.NOT_FOUND, 'Video not found');
   }
 
-  return video;
+  return {
+    ...video,
+    description: video.description ?? null,
+  };
 };
 
 // Update a video
@@ -112,6 +126,7 @@ const updateVideo = async (id: string, payload: Partial<ICreateVideoRequest>): P
     where: { id },
     data: {
       ...(payload.title && { title: payload.title }),
+      ...(payload.description !== undefined && { description: payload.description }),
       ...(payload.url && { url: payload.url }),
       ...(payload.difficulty && { difficulty: payload.difficulty }),
       ...(payload.visibility && { visibility: payload.visibility }),
@@ -120,7 +135,10 @@ const updateVideo = async (id: string, payload: Partial<ICreateVideoRequest>): P
     },
   });
 
-  return updatedVideo;
+  return {
+    ...updatedVideo,
+    description: updatedVideo.description ?? null,
+  };
 };
 
 // Delete a video

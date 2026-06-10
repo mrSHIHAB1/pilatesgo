@@ -57,6 +57,7 @@ export const authService = {
       id: user.id,
       email: user.email,
       fullName: user.fullName,
+      role: user.role
     };
 
     const tokens = createUserTokens(userResponse);

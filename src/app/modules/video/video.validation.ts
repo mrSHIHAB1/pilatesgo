@@ -3,6 +3,7 @@ import { z } from 'zod';
 export const uploadVideoValidation = z.object({
   body: z.object({
     title: z.string({ message: 'Title is required' }).min(1, 'Title is required'),
+    description: z.string().optional(),
     difficulty: z.enum(['BEGINNER', 'INTERMEDIATE', 'ADVANCED'], {
       message: 'Difficulty must be BEGINNER, INTERMEDIATE, or ADVANCED',
     }),
@@ -16,6 +17,7 @@ export const uploadVideoValidation = z.object({
 export const createVideoValidation = z.object({
   body: z.object({
     title: z.string({ message: 'Title is required' }).min(1, 'Title is required'),
+    description: z.string().optional(),
     url: z.string({ message: 'URL is required' }).url('Invalid URL format'),
     difficulty: z.enum(['BEGINNER', 'INTERMEDIATE', 'ADVANCED'], {
       message: 'Difficulty must be BEGINNER, INTERMEDIATE, or ADVANCED',
@@ -34,6 +36,7 @@ export const updateVideoValidation = z.object({
   }),
   body: z.object({
     title: z.string().min(1, 'Title must not be empty').optional(),
+    description: z.string().optional(),
     url: z.string().url('Invalid URL format').optional(),
     difficulty: z.enum(['BEGINNER', 'INTERMEDIATE', 'ADVANCED']).optional(),
     visibility: z.enum(['PUBLIC', 'PRIVATE']).optional(),

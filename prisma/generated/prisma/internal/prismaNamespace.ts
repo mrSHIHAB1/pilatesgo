@@ -1332,6 +1332,7 @@ export type AuthProviderScalarFieldEnum = (typeof AuthProviderScalarFieldEnum)[k
 export const VideoScalarFieldEnum = {
   id: 'id',
   title: 'title',
+  description: 'description',
   url: 'url',
   difficulty: 'difficulty',
   visibility: 'visibility',

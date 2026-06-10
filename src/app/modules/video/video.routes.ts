@@ -25,7 +25,7 @@ const router = Router();
 router.post(
   '/upload',
   fileUploader.upload.single('video'),
-  validateRequest(uploadVideoValidation),
+  // validateRequest(uploadVideoValidation),
   uploadVideo
 );
 

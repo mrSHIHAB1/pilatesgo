@@ -37,6 +37,7 @@ export type VideoSumAggregateOutputType = {
 export type VideoMinAggregateOutputType = {
   id: string | null
   title: string | null
+  description: string | null
   url: string | null
   difficulty: $Enums.DifficultyLevel | null
   visibility: $Enums.Visibility | null
@@ -49,6 +50,7 @@ export type VideoMinAggregateOutputType = {
 export type VideoMaxAggregateOutputType = {
   id: string | null
   title: string | null
+  description: string | null
   url: string | null
   difficulty: $Enums.DifficultyLevel | null
   visibility: $Enums.Visibility | null
@@ -61,6 +63,7 @@ export type VideoMaxAggregateOutputType = {
 export type VideoCountAggregateOutputType = {
   id: number
   title: number
+  description: number
   url: number
   difficulty: number
   visibility: number
@@ -83,6 +86,7 @@ export type VideoSumAggregateInputType = {
 export type VideoMinAggregateInputType = {
   id?: true
   title?: true
+  description?: true
   url?: true
   difficulty?: true
   visibility?: true
@@ -95,6 +99,7 @@ export type VideoMinAggregateInputType = {
 export type VideoMaxAggregateInputType = {
   id?: true
   title?: true
+  description?: true
   url?: true
   difficulty?: true
   visibility?: true
@@ -107,6 +112,7 @@ export type VideoMaxAggregateInputType = {
 export type VideoCountAggregateInputType = {
   id?: true
   title?: true
+  description?: true
   url?: true
   difficulty?: true
   visibility?: true
@@ -206,6 +212,7 @@ export type VideoGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
 export type VideoGroupByOutputType = {
   id: string
   title: string
+  description: string | null
   url: string
   difficulty: $Enums.DifficultyLevel
   visibility: $Enums.Visibility
@@ -241,6 +248,7 @@ export type VideoWhereInput = {
   NOT?: Prisma.VideoWhereInput | Prisma.VideoWhereInput[]
   id?: Prisma.StringFilter<"Video"> | string
   title?: Prisma.StringFilter<"Video"> | string
+  description?: Prisma.StringNullableFilter<"Video"> | string | null
   url?: Prisma.StringFilter<"Video"> | string
   difficulty?: Prisma.EnumDifficultyLevelFilter<"Video"> | $Enums.DifficultyLevel
   visibility?: Prisma.EnumVisibilityFilter<"Video"> | $Enums.Visibility
@@ -255,6 +263,7 @@ export type VideoWhereInput = {
 export type VideoOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
+  description?: Prisma.SortOrderInput | Prisma.SortOrder
   url?: Prisma.SortOrder
   difficulty?: Prisma.SortOrder
   visibility?: Prisma.SortOrder
@@ -272,6 +281,7 @@ export type VideoWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.VideoWhereInput[]
   NOT?: Prisma.VideoWhereInput | Prisma.VideoWhereInput[]
   title?: Prisma.StringFilter<"Video"> | string
+  description?: Prisma.StringNullableFilter<"Video"> | string | null
   url?: Prisma.StringFilter<"Video"> | string
   difficulty?: Prisma.EnumDifficultyLevelFilter<"Video"> | $Enums.DifficultyLevel
   visibility?: Prisma.EnumVisibilityFilter<"Video"> | $Enums.Visibility
@@ -286,6 +296,7 @@ export type VideoWhereUniqueInput = Prisma.AtLeast<{
 export type VideoOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
+  description?: Prisma.SortOrderInput | Prisma.SortOrder
   url?: Prisma.SortOrder
   difficulty?: Prisma.SortOrder
   visibility?: Prisma.SortOrder
@@ -306,6 +317,7 @@ export type VideoScalarWhereWithAggregatesInput = {
   NOT?: Prisma.VideoScalarWhereWithAggregatesInput | Prisma.VideoScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"Video"> | string
   title?: Prisma.StringWithAggregatesFilter<"Video"> | string
+  description?: Prisma.StringNullableWithAggregatesFilter<"Video"> | string | null
   url?: Prisma.StringWithAggregatesFilter<"Video"> | string
   difficulty?: Prisma.EnumDifficultyLevelWithAggregatesFilter<"Video"> | $Enums.DifficultyLevel
   visibility?: Prisma.EnumVisibilityWithAggregatesFilter<"Video"> | $Enums.Visibility
@@ -318,6 +330,7 @@ export type VideoScalarWhereWithAggregatesInput = {
 export type VideoCreateInput = {
   id?: string
   title: string
+  description?: string | null
   url: string
   difficulty: $Enums.DifficultyLevel
   visibility: $Enums.Visibility
@@ -331,6 +344,7 @@ export type VideoCreateInput = {
 export type VideoUncheckedCreateInput = {
   id?: string
   title: string
+  description?: string | null
   url: string
   difficulty: $Enums.DifficultyLevel
   visibility: $Enums.Visibility
@@ -344,6 +358,7 @@ export type VideoUncheckedCreateInput = {
 export type VideoUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   url?: Prisma.StringFieldUpdateOperationsInput | string
   difficulty?: Prisma.EnumDifficultyLevelFieldUpdateOperationsInput | $Enums.DifficultyLevel
   visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
@@ -357,6 +372,7 @@ export type VideoUpdateInput = {
 export type VideoUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   url?: Prisma.StringFieldUpdateOperationsInput | string
   difficulty?: Prisma.EnumDifficultyLevelFieldUpdateOperationsInput | $Enums.DifficultyLevel
   visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
@@ -370,6 +386,7 @@ export type VideoUncheckedUpdateInput = {
 export type VideoCreateManyInput = {
   id?: string
   title: string
+  description?: string | null
   url: string
   difficulty: $Enums.DifficultyLevel
   visibility: $Enums.Visibility
@@ -382,6 +399,7 @@ export type VideoCreateManyInput = {
 export type VideoUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   url?: Prisma.StringFieldUpdateOperationsInput | string
   difficulty?: Prisma.EnumDifficultyLevelFieldUpdateOperationsInput | $Enums.DifficultyLevel
   visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
@@ -393,6 +411,7 @@ export type VideoUpdateManyMutationInput = {
 export type VideoUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   url?: Prisma.StringFieldUpdateOperationsInput | string
   difficulty?: Prisma.EnumDifficultyLevelFieldUpdateOperationsInput | $Enums.DifficultyLevel
   visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
@@ -415,6 +434,7 @@ export type VideoOrderByRelationAggregateInput = {
 export type VideoCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
+  description?: Prisma.SortOrder
   url?: Prisma.SortOrder
   difficulty?: Prisma.SortOrder
   visibility?: Prisma.SortOrder
@@ -431,6 +451,7 @@ export type VideoAvgOrderByAggregateInput = {
 export type VideoMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
+  description?: Prisma.SortOrder
   url?: Prisma.SortOrder
   difficulty?: Prisma.SortOrder
   visibility?: Prisma.SortOrder
@@ -443,6 +464,7 @@ export type VideoMaxOrderByAggregateInput = {
 export type VideoMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
+  description?: Prisma.SortOrder
   url?: Prisma.SortOrder
   difficulty?: Prisma.SortOrder
   visibility?: Prisma.SortOrder
@@ -543,6 +565,7 @@ export type EnumVisibilityFieldUpdateOperationsInput = {
 export type VideoCreateWithoutCategoryInput = {
   id?: string
   title: string
+  description?: string | null
   url: string
   difficulty: $Enums.DifficultyLevel
   visibility: $Enums.Visibility
@@ -555,6 +578,7 @@ export type VideoCreateWithoutCategoryInput = {
 export type VideoUncheckedCreateWithoutCategoryInput = {
   id?: string
   title: string
+  description?: string | null
   url: string
   difficulty: $Enums.DifficultyLevel
   visibility: $Enums.Visibility
@@ -596,6 +620,7 @@ export type VideoScalarWhereInput = {
   NOT?: Prisma.VideoScalarWhereInput | Prisma.VideoScalarWhereInput[]
   id?: Prisma.StringFilter<"Video"> | string
   title?: Prisma.StringFilter<"Video"> | string
+  description?: Prisma.StringNullableFilter<"Video"> | string | null
   url?: Prisma.StringFilter<"Video"> | string
   difficulty?: Prisma.EnumDifficultyLevelFilter<"Video"> | $Enums.DifficultyLevel
   visibility?: Prisma.EnumVisibilityFilter<"Video"> | $Enums.Visibility
@@ -608,6 +633,7 @@ export type VideoScalarWhereInput = {
 export type VideoCreateWithoutExercisesInput = {
   id?: string
   title: string
+  description?: string | null
   url: string
   difficulty: $Enums.DifficultyLevel
   visibility: $Enums.Visibility
@@ -620,6 +646,7 @@ export type VideoCreateWithoutExercisesInput = {
 export type VideoUncheckedCreateWithoutExercisesInput = {
   id?: string
   title: string
+  description?: string | null
   url: string
   difficulty: $Enums.DifficultyLevel
   visibility: $Enums.Visibility
@@ -653,6 +680,7 @@ export type VideoUpdateManyWithWhereWithoutExercisesInput = {
 export type VideoCreateManyCategoryInput = {
   id?: string
   title: string
+  description?: string | null
   url: string
   difficulty: $Enums.DifficultyLevel
   visibility: $Enums.Visibility
@@ -664,6 +692,7 @@ export type VideoCreateManyCategoryInput = {
 export type VideoUpdateWithoutCategoryInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   url?: Prisma.StringFieldUpdateOperationsInput | string
   difficulty?: Prisma.EnumDifficultyLevelFieldUpdateOperationsInput | $Enums.DifficultyLevel
   visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
@@ -676,6 +705,7 @@ export type VideoUpdateWithoutCategoryInput = {
 export type VideoUncheckedUpdateWithoutCategoryInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   url?: Prisma.StringFieldUpdateOperationsInput | string
   difficulty?: Prisma.EnumDifficultyLevelFieldUpdateOperationsInput | $Enums.DifficultyLevel
   visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
@@ -688,6 +718,7 @@ export type VideoUncheckedUpdateWithoutCategoryInput = {
 export type VideoUncheckedUpdateManyWithoutCategoryInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   url?: Prisma.StringFieldUpdateOperationsInput | string
   difficulty?: Prisma.EnumDifficultyLevelFieldUpdateOperationsInput | $Enums.DifficultyLevel
   visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
@@ -699,6 +730,7 @@ export type VideoUncheckedUpdateManyWithoutCategoryInput = {
 export type VideoUpdateWithoutExercisesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   url?: Prisma.StringFieldUpdateOperationsInput | string
   difficulty?: Prisma.EnumDifficultyLevelFieldUpdateOperationsInput | $Enums.DifficultyLevel
   visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
@@ -711,6 +743,7 @@ export type VideoUpdateWithoutExercisesInput = {
 export type VideoUncheckedUpdateWithoutExercisesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   url?: Prisma.StringFieldUpdateOperationsInput | string
   difficulty?: Prisma.EnumDifficultyLevelFieldUpdateOperationsInput | $Enums.DifficultyLevel
   visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
@@ -723,6 +756,7 @@ export type VideoUncheckedUpdateWithoutExercisesInput = {
 export type VideoUncheckedUpdateManyWithoutExercisesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   url?: Prisma.StringFieldUpdateOperationsInput | string
   difficulty?: Prisma.EnumDifficultyLevelFieldUpdateOperationsInput | $Enums.DifficultyLevel
   visibility?: Prisma.EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
@@ -766,6 +800,7 @@ export type VideoCountOutputTypeCountExercisesArgs<ExtArgs extends runtime.Types
 export type VideoSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   title?: boolean
+  description?: boolean
   url?: boolean
   difficulty?: boolean
   visibility?: boolean
@@ -781,6 +816,7 @@ export type VideoSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
 export type VideoSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   title?: boolean
+  description?: boolean
   url?: boolean
   difficulty?: boolean
   visibility?: boolean
@@ -794,6 +830,7 @@ export type VideoSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
 export type VideoSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   title?: boolean
+  description?: boolean
   url?: boolean
   difficulty?: boolean
   visibility?: boolean
@@ -807,6 +844,7 @@ export type VideoSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
 export type VideoSelectScalar = {
   id?: boolean
   title?: boolean
+  description?: boolean
   url?: boolean
   difficulty?: boolean
   visibility?: boolean
@@ -816,7 +854,7 @@ export type VideoSelectScalar = {
   updatedAt?: boolean
 }
 
-export type VideoOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "url" | "difficulty" | "visibility" | "duration" | "categoriesId" | "createdAt" | "updatedAt", ExtArgs["result"]["video"]>
+export type VideoOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "description" | "url" | "difficulty" | "visibility" | "duration" | "categoriesId" | "createdAt" | "updatedAt", ExtArgs["result"]["video"]>
 export type VideoInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   category?: boolean | Prisma.Video$categoryArgs<ExtArgs>
   exercises?: boolean | Prisma.Video$exercisesArgs<ExtArgs>
@@ -838,6 +876,7 @@ export type $VideoPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     title: string
+    description: string | null
     url: string
     difficulty: $Enums.DifficultyLevel
     visibility: $Enums.Visibility
@@ -1272,6 +1311,7 @@ export interface Prisma__VideoClient<T, Null = never, ExtArgs extends runtime.Ty
 export interface VideoFieldRefs {
   readonly id: Prisma.FieldRef<"Video", 'String'>
   readonly title: Prisma.FieldRef<"Video", 'String'>
+  readonly description: Prisma.FieldRef<"Video", 'String'>
   readonly url: Prisma.FieldRef<"Video", 'String'>
   readonly difficulty: Prisma.FieldRef<"Video", 'DifficultyLevel'>
   readonly visibility: Prisma.FieldRef<"Video", 'Visibility'>

@@ -2,6 +2,7 @@ import { DifficultyLevel, Visibility } from '../../../../prisma/generated/prisma
 
 export interface ICreateVideoRequest {
   title: string;
+  description?: string;
   url: string;
   difficulty: DifficultyLevel;
   visibility: Visibility;
@@ -12,6 +13,7 @@ export interface ICreateVideoRequest {
 export interface IUpdateVideoRequest {
   id: string;
   title?: string;
+  description?: string;
   url?: string;
   difficulty?: DifficultyLevel;
   visibility?: Visibility;
@@ -22,6 +24,7 @@ export interface IUpdateVideoRequest {
 export interface IVideoResponse {
   id: string;
   title: string;
+  description?: string | null;
   url: string;
   difficulty: DifficultyLevel;
   visibility: Visibility;

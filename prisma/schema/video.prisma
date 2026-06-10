@@ -12,6 +12,7 @@ enum Visibility {
 model Video {
   id           String          @id @default(uuid())
   title        String
+  description  String?
   url          String
   difficulty   DifficultyLevel
   visibility   Visibility
