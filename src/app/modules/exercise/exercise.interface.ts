@@ -5,6 +5,7 @@ export interface ICreateExerciseRequest {
   instructions?: string;
   difficulty: 'BEGINNER' | 'INTERMEDIATE' | 'ADVANCED';
   categoryId?: string;
+  videoIds?: string[];
 }
 
 export interface IUpdateExerciseRequest {
@@ -15,6 +16,7 @@ export interface IUpdateExerciseRequest {
   instructions?: string;
   difficulty?: 'BEGINNER' | 'INTERMEDIATE' | 'ADVANCED';
   categoryId?: string;
+  videoIds?: string[];
 }
 
 export interface IExerciseResponse {

@@ -10,6 +10,7 @@ export const createExerciseValidation = z.object({
       message: 'Difficulty must be BEGINNER, INTERMEDIATE, or ADVANCED',
     }),
     categoryId: z.string().optional(),
+    videoIds: z.array(z.string()).optional(),
   }),
 });
 
@@ -24,6 +25,7 @@ export const updateExerciseValidation = z.object({
     instructions: z.string().optional(),
     difficulty: z.enum(['BEGINNER', 'INTERMEDIATE', 'ADVANCED']).optional(),
     categoryId: z.string().optional(),
+    videoIds: z.array(z.string()).optional(),
   }),
 });
 

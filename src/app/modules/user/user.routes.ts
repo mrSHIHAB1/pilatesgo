@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { createUser, getAllUsers, getUserById, verifytheOtp, completeProfile, getMyWeeklyStats } from './user.controller';
+import { createUser, getAllUsers, getUserById, verifytheOtp, completeProfile, getMyWeeklyStats, updateUser, deleteUser } from './user.controller';
 import validateRequest from '../../middlewares/validateRequest';
 import { createUserValidation, getUserValidation, verifyOTPValidation, completeProfileValidation } from './user.validation';
 import auth from '../../middlewares/auth';
@@ -24,5 +24,11 @@ router.get('/me/weekly-stats', auth(), getMyWeeklyStats);
 
 // GET /users/:id - Retrieve a single user entry
 router.get('/users/:id',auth(UserRole.ADMIN),getUserById);
+
+// PUT /users/:id - Update a single user entry
+router.put('/users/:id', auth(UserRole.ADMIN), updateUser);
+
+// DELETE /users/:id - Delete a single user entry
+router.delete('/users/:id', auth(UserRole.ADMIN), deleteUser);
 
 export const userRoutes = router;

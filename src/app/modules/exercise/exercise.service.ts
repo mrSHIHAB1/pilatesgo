@@ -26,15 +26,21 @@ const createExercise = async (payload: ICreateExerciseRequest): Promise<IExercis
   }
 
   const exercise = await prisma.exercise.create({
-    data: {
-      name: payload.name,
-      targetArea: payload.targetArea,
-      description: payload.description,
-      instructions: payload.instructions,
-      difficulty: payload.difficulty,
-      categoryId: payload.categoryId,
+  data: {
+    name: payload.name,
+    targetArea: payload.targetArea,
+    description: payload.description,
+    instructions: payload.instructions,
+    difficulty: payload.difficulty,
+    categoryId: payload.categoryId,
+    videos: {
+      connect: payload?.videoIds?.map(id => ({ id })) || [],
     },
-  });
+  },
+  include: {
+    videos: true,
+  },
+});
 
   return exercise;
 };
@@ -74,6 +80,7 @@ const getAllExercises = async (
       take: limit,
       include: {
         category: true,
+        videos:true
       },
       orderBy: { createdAt: 'desc' },
     }),
@@ -153,6 +160,11 @@ const updateExercise = async (id: string, payload: IUpdateExerciseRequest): Prom
       instructions: payload.instructions,
       difficulty: payload.difficulty,
       categoryId: payload.categoryId,
+      ...(payload.videoIds && {
+        videos: {
+          set: payload.videoIds.map(id => ({ id })),
+        },
+      }),
     },
   });
 

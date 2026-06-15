@@ -18,7 +18,9 @@ app.use(cors({
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
 }));
 app.use(cookieParser());
-app.use(morgan("dev"));
+app.use(morgan("dev", {
+    skip: (req) => req.originalUrl.includes("socket.io")
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 

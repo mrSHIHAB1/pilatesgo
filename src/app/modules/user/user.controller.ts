@@ -89,6 +89,34 @@ export const getUserById = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+// PUT handler - Update a single user entry by ID
+export const updateUser = catchAsync(async (req: Request, res: Response) => {
+  const id = Array.isArray(req.params.id) ? req.params.id[0] : req.params.id;
+
+  const result = await userService.updateUser(id, req.body);
+
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: 'User entry updated successfully',
+    data: result,
+  });
+});
+
+// DELETE handler - Delete a single user entry by ID
+export const deleteUser = catchAsync(async (req: Request, res: Response) => {
+  const id = Array.isArray(req.params.id) ? req.params.id[0] : req.params.id;
+
+  const result = await userService.deleteUser(id);
+
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: 'User entry deleted successfully',
+    data: result,
+  });
+});
+
 // GET handler - Refresh + retrieve my weekly stats (streak + time spent)
 export const getMyWeeklyStats = catchAsync(async (req: Request & { user?: any }, res: Response) => {
   const userId = req.user?.userId;

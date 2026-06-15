@@ -284,6 +284,11 @@ const getAllUsers = async (page?: number, limit?: number): Promise<{
       orderBy: {
         createdAt: 'desc',
       },
+      include: {
+        _count: {
+          select: { programCompletions: true }
+        }
+      }
     }),
     prisma.user.count(),
   ]);
@@ -295,6 +300,12 @@ const getAllUsers = async (page?: number, limit?: number): Promise<{
       email: user.email,
       createdAt: user.createdAt,
       isProfileComplete: user.isProfileComplete,
+      plan: 'Free', // Add subscriptions later if needed
+      status: user.isDeleted ? 'Inactive' : 'Active',
+      workouts: user._count?.programCompletions || 0,
+      streak: `${user.weeklyStreak || 0}W`,
+      avatarBg: 'bg-pink-200', // default
+      initials: (user.fullName || 'U').substring(0, 2).toUpperCase(),
     })),
     total,
   };
@@ -405,11 +416,51 @@ const refreshMyWeeklyStats = async (userId: string) => {
   };
 };
 
+const updateUser = async (id: string, payload: any): Promise<any> => {
+  const user = await prisma.user.findUnique({ where: { id } });
+  if (!user) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'User not found');
+  }
+
+  // Map "Active" / "Inactive" to isDeleted or a dedicated status field if exists.
+  // For now we map "Inactive" to isDeleted = true based on the dashboard logic.
+  let updateData = { ...payload };
+  if (payload.status === 'Inactive') {
+    updateData.isDeleted = true;
+    delete updateData.status;
+  } else if (payload.status === 'Active') {
+    updateData.isDeleted = false;
+    delete updateData.status;
+  }
+
+  const updatedUser = await prisma.user.update({
+    where: { id },
+    data: updateData,
+  });
+
+  return updatedUser;
+};
+
+const deleteUser = async (id: string): Promise<any> => {
+  const user = await prisma.user.findUnique({ where: { id } });
+  if (!user) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'User not found');
+  }
+
+  // Soft delete
+  return prisma.user.update({
+    where: { id },
+    data: { isDeleted: true },
+  });
+};
+
 export const userService = {
   createUser,
   verifyOTPService,
   completeProfile,
   getAllUsers,
   getUserById,
+  updateUser,
+  deleteUser,
   refreshMyWeeklyStats,
 };
