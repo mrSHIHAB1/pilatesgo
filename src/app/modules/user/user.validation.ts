@@ -11,7 +11,7 @@ export const createUserValidation = z.object({
 export const verifyOTPValidation = z.object({
   body: z.object({
     email: z.string({ message: 'Email is required' }).email('Invalid email format'),
-    otp: z.string({ message: 'OTP is required' }).length(6, 'OTP must be 6 digits'),
+    otp: z.string({ message: 'OTP is required' }).length(4, 'OTP must be 4 digits'),
   }),
 });
 

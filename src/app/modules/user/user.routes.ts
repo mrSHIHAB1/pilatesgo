@@ -7,6 +7,7 @@ import { UserRole } from '../../../../prisma/generated/prisma/enums';
 
 const router = Router();
 
+
 // Step 1: POST /create-user - Create a new user with email, name, password
 router.post('/create-user',validateRequest(createUserValidation),createUser);
 

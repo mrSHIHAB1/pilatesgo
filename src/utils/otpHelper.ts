@@ -2,11 +2,10 @@ import { redisClient } from '../app/config/redis.config';
 
 const OTP_EXPIRY = 600; // 10 minutes in seconds
 
-// Generate a random 6-digit OTP
+// Generate a random 4-digit OTP
 export const generateOTP = (): string => {
-  return Math.floor(100000 + Math.random() * 900000).toString();
+  return Math.floor(1000 + Math.random() * 9000).toString();
 };
-
 // Store OTP in Redis with email as key
 export const storeOTP = async (email: string, otp: string): Promise<void> => {
   const key = `otp:${email}`;
