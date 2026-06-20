@@ -81,3 +81,32 @@ export const deleteWorkout = catchAsync(async (req: Request, res: Response) => {
     data: result,
   });
 });
+
+export const getWorkoutCategoryStats = catchAsync(
+  async (req: Request, res: Response) => {
+    const result = await workoutService.getWorkoutCategoryStats();
+
+    sendResponse(res, {
+      statusCode: 200,
+      success: true,
+      message: 'Workout category statistics fetched successfully',
+      data: result,
+    });
+  }
+);
+export const getCategoryWiseWorkouts = catchAsync(
+  async (req: Request, res: Response) => {
+    const difficulty = req.query.difficulty as string | undefined;
+
+    const result = await workoutService.getCategoryWiseWorkouts(
+      difficulty
+    );
+
+    sendResponse(res, {
+      statusCode: 200,
+      success: true,
+      message: 'Category wise workouts fetched successfully',
+      data: result,
+    });
+  }
+);

@@ -5,6 +5,8 @@ import {
   getWorkoutById,
   updateWorkout,
   deleteWorkout,
+  getWorkoutCategoryStats,
+  getCategoryWiseWorkouts 
 } from './workout.controller';
 import validateRequest from '../../middlewares/validateRequest';
 import {
@@ -32,5 +34,7 @@ router.put('/update/:id', auth(), validateRequest(updateWorkoutValidation), upda
 
 // DELETE /workouts/:id - Delete a workout
 router.delete('/delete/:id', auth(), validateRequest(deleteWorkoutValidation), deleteWorkout);
-
+// GET /workouts/stats - Get workout category statistics
+router.get('/category-stats',auth(),getWorkoutCategoryStats);
+router.get('/category-wise',auth(),getCategoryWiseWorkouts);
 export const workoutRoutes = router;

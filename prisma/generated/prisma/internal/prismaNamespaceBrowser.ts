@@ -53,10 +53,12 @@ export const AnyNull = runtime.AnyNull
 export const ModelName = {
   Category: 'Category',
   Exercise: 'Exercise',
+  WorkoutFavourite: 'WorkoutFavourite',
   Program: 'Program',
   ProgramWeek: 'ProgramWeek',
   UserProgramEnrollment: 'UserProgramEnrollment',
   UserProgramExerciseCompletion: 'UserProgramExerciseCompletion',
+  ProgramReview: 'ProgramReview',
   User: 'User',
   AuthProvider: 'AuthProvider',
   Video: 'Video',
@@ -103,6 +105,16 @@ export const ExerciseScalarFieldEnum = {
 } as const
 
 export type ExerciseScalarFieldEnum = (typeof ExerciseScalarFieldEnum)[keyof typeof ExerciseScalarFieldEnum]
+
+
+export const WorkoutFavouriteScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  workoutId: 'workoutId',
+  createdAt: 'createdAt'
+} as const
+
+export type WorkoutFavouriteScalarFieldEnum = (typeof WorkoutFavouriteScalarFieldEnum)[keyof typeof WorkoutFavouriteScalarFieldEnum]
 
 
 export const ProgramScalarFieldEnum = {
@@ -158,6 +170,20 @@ export const UserProgramExerciseCompletionScalarFieldEnum = {
 } as const
 
 export type UserProgramExerciseCompletionScalarFieldEnum = (typeof UserProgramExerciseCompletionScalarFieldEnum)[keyof typeof UserProgramExerciseCompletionScalarFieldEnum]
+
+
+export const ProgramReviewScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  programId: 'programId',
+  rating: 'rating',
+  comment: 'comment',
+  photos: 'photos',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ProgramReviewScalarFieldEnum = (typeof ProgramReviewScalarFieldEnum)[keyof typeof ProgramReviewScalarFieldEnum]
 
 
 export const UserScalarFieldEnum = {

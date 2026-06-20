@@ -28,6 +28,11 @@ export type Category = Prisma.CategoryModel
  */
 export type Exercise = Prisma.ExerciseModel
 /**
+ * Model WorkoutFavourite
+ * 
+ */
+export type WorkoutFavourite = Prisma.WorkoutFavouriteModel
+/**
  * Model Program
  * 
  */
@@ -47,6 +52,11 @@ export type UserProgramEnrollment = Prisma.UserProgramEnrollmentModel
  * 
  */
 export type UserProgramExerciseCompletion = Prisma.UserProgramExerciseCompletionModel
+/**
+ * Model ProgramReview
+ * 
+ */
+export type ProgramReview = Prisma.ProgramReviewModel
 /**
  * Model User
  * 

@@ -3,21 +3,16 @@ import catchAsync from '../../shared/catchAsync';
 import sendResponse from '../../shared/sendResponse';
 import { programService } from './program.service';
 import { fileUploader } from '../../helpers/fileUploader';
-import httpStatus from 'http-status-codes';
+
+// ─── PROGRAM CONTROLLERS ──────────────────────────────────────────────────────
 
 // Create a new program
 export const createProgram = catchAsync(async (req: Request, res: Response) => {
-    // Get user from auth middleware
-    const user = req.user as { userId: string } | undefined;
-    
-   
-
-    const userId = user?.userId;
-  
+  const user = req.user as { userId: string } | undefined;
+  const userId = user?.userId;
 
   let coverImageUrl = req.body.coverImage;
 
-  // Handle file upload if present
   if (req.file) {
     const uploadedFile = await fileUploader.uploadToCloudinary(req.file);
     if (uploadedFile) {
@@ -85,10 +80,8 @@ export const getProgramById = catchAsync(async (req: Request, res: Response) => 
 // Update a program
 export const updateProgram = catchAsync(async (req: Request, res: Response) => {
   const { id } = req.params as { id: string };
-  
-  // Get user from auth middleware
   const user = req.user as { userId: string } | undefined;
-  
+
   if (!user || !user.userId) {
     return sendResponse(res, {
       statusCode: 401,
@@ -98,7 +91,6 @@ export const updateProgram = catchAsync(async (req: Request, res: Response) => {
     });
   }
 
-  // Validate difficulty if provided
   if (req.body.difficulty && !['BEGINNER', 'INTERMEDIATE', 'ADVANCED'].includes(req.body.difficulty)) {
     return sendResponse(res, {
       statusCode: 400,
@@ -110,7 +102,6 @@ export const updateProgram = catchAsync(async (req: Request, res: Response) => {
 
   let coverImageUrl = req.body.coverImage;
 
-  // Handle file upload if present
   if (req.file) {
     const uploadedFile = await fileUploader.uploadToCloudinary(req.file);
     if (uploadedFile) {
@@ -141,10 +132,8 @@ export const updateProgram = catchAsync(async (req: Request, res: Response) => {
 // Upload cover image for a program
 export const uploadCoverImage = catchAsync(async (req: Request, res: Response) => {
   const { id } = req.params as { id: string };
-
-  // Get user from auth middleware
   const user = req.user as { userId: string } | undefined;
-  
+
   if (!user || !user.userId) {
     return sendResponse(res, {
       statusCode: 401,
@@ -164,7 +153,7 @@ export const uploadCoverImage = catchAsync(async (req: Request, res: Response) =
   }
 
   const uploadedFile = await fileUploader.uploadToCloudinary(req.file);
-  
+
   if (!uploadedFile) {
     return sendResponse(res, {
       statusCode: 500,
@@ -196,6 +185,181 @@ export const deleteProgram = catchAsync(async (req: Request, res: Response) => {
     statusCode: 200,
     success: true,
     message: 'Program deleted successfully',
+    data: result,
+  });
+});
+
+// ─── PROGRESS CONTROLLERS ─────────────────────────────────────────────────────
+
+export const activateProgramForMe = catchAsync(async (req: Request & { user?: any }, res: Response) => {
+  const userId = req.user?.userId as string | undefined;
+  const { programId } = req.params as { programId: string };
+
+  if (!userId) {
+    return sendResponse(res, {
+      statusCode: 401,
+      success: false,
+      message: 'Unauthorized',
+      data: null,
+    });
+  }
+
+  const result = await programService.activateProgram(userId, programId);
+
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: 'Program activated successfully',
+    data: result,
+  });
+});
+
+export const getMyActivePrograms = catchAsync(async (req: Request & { user?: any }, res: Response) => {
+  const userId = req.user?.userId as string | undefined;
+
+  if (!userId) {
+    return sendResponse(res, {
+      statusCode: 401,
+      success: false,
+      message: 'Unauthorized',
+      data: null,
+    });
+  }
+
+  const result = await programService.getMyActivePrograms(userId);
+
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: 'Active programs fetched successfully',
+    data: result,
+  });
+});
+
+export const setExerciseDoneForMe = catchAsync(async (req: Request & { user?: any }, res: Response) => {
+  const userId = req.user?.userId as string | undefined;
+  const { programId, programWeekId, exerciseId } = req.params as {
+    programId: string;
+    programWeekId: string;
+    exerciseId: string;
+  };
+
+  if (!userId) {
+    return sendResponse(res, {
+      statusCode: 401,
+      success: false,
+      message: 'Unauthorized',
+      data: null,
+    });
+  }
+
+  const done = (req.body as { done?: boolean } | undefined)?.done ?? true;
+
+  const result = await programService.setExerciseDone({
+    userId,
+    programId,
+    programWeekId,
+    exerciseId,
+    done,
+  });
+
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: done ? 'Exercise marked as done' : 'Exercise marked as not done',
+    data: result,
+  });
+});
+
+export const getMyProgramProgress = catchAsync(async (req: Request & { user?: any }, res: Response) => {
+  const userId = req.user?.userId as string | undefined;
+  const { programId } = req.params as { programId: string };
+
+  if (!userId) {
+    return sendResponse(res, {
+      statusCode: 401,
+      success: false,
+      message: 'Unauthorized',
+      data: null,
+    });
+  }
+
+  const result = await programService.getProgramProgress(userId, programId);
+
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: 'Program progress fetched successfully',
+    data: result,
+  });
+});
+
+// ─── REVIEW CONTROLLERS ───────────────────────────────────────────────────────
+
+export const createOrUpdateReview = catchAsync(async (req: Request, res: Response) => {
+  const userId = (req.user as { userId: string }).userId;
+  const { programId } = req.params as { programId: string };
+
+  const rawBody = req.body?.data ? JSON.parse(req.body.data) : req.body;
+  const rating = parseInt(rawBody.rating as string, 10);
+  const comment = rawBody.comment as string | undefined;
+
+  const photoFiles = req.files as Express.Multer.File[] | undefined;
+
+  const result = await programService.createOrUpdateReview(
+    userId,
+    programId,
+    { rating, comment },
+    photoFiles
+  );
+
+  sendResponse(res, {
+    statusCode: 201,
+    success: true,
+    message: 'Review submitted successfully',
+    data: result,
+  });
+});
+
+export const getReviewsForProgram = catchAsync(async (req: Request, res: Response) => {
+  const { programId } = req.params as { programId: string };
+  const page = req.query.page ? parseInt(req.query.page as string) : 1;
+  const limit = req.query.limit ? parseInt(req.query.limit as string) : 10;
+
+  const result = await programService.getReviewsForProgram(programId, page, limit);
+
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: 'Reviews fetched successfully',
+    data: result,
+  });
+});
+
+export const deleteMyReview = catchAsync(async (req: Request, res: Response) => {
+  const userId = (req.user as { userId: string }).userId;
+  const { programId } = req.params as { programId: string };
+
+  await programService.deleteMyReview(userId, programId);
+
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: 'Review deleted successfully',
+    data: null,
+  });
+});
+
+export const getMyReview = catchAsync(async (req: Request, res: Response) => {
+  const userId = (req.user as { userId: string }).userId;
+  const { programId } = req.params as { programId: string };
+
+  const result = await programService.getMyReview(userId, programId);
+
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: result ? 'Your review fetched successfully' : 'You have not reviewed this program yet',
     data: result,
   });
 });

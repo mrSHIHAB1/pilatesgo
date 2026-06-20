@@ -1,3 +1,5 @@
+// ─── Program Interfaces ───────────────────────────────────────────────────────
+
 export interface ICreateProgramRequest {
   title: string;
   difficulty: 'BEGINNER' | 'INTERMEDIATE' | 'ADVANCED';
@@ -50,4 +52,11 @@ export interface IProgramListResponse {
   page: number;
   limit: number;
   totalPages: number;
+}
+
+// ─── Review Interface ─────────────────────────────────────────────────────────
+
+export interface ICreateReviewPayload {
+  rating: number;
+  comment?: string;
 }

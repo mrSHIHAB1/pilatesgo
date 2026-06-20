@@ -269,6 +269,7 @@ export type ProgramWhereInput = {
   weeks?: Prisma.ProgramWeekListRelationFilter
   enrollments?: Prisma.UserProgramEnrollmentListRelationFilter
   completions?: Prisma.UserProgramExerciseCompletionListRelationFilter
+  reviews?: Prisma.ProgramReviewListRelationFilter
 }
 
 export type ProgramOrderByWithRelationInput = {
@@ -288,6 +289,7 @@ export type ProgramOrderByWithRelationInput = {
   weeks?: Prisma.ProgramWeekOrderByRelationAggregateInput
   enrollments?: Prisma.UserProgramEnrollmentOrderByRelationAggregateInput
   completions?: Prisma.UserProgramExerciseCompletionOrderByRelationAggregateInput
+  reviews?: Prisma.ProgramReviewOrderByRelationAggregateInput
 }
 
 export type ProgramWhereUniqueInput = Prisma.AtLeast<{
@@ -310,6 +312,7 @@ export type ProgramWhereUniqueInput = Prisma.AtLeast<{
   weeks?: Prisma.ProgramWeekListRelationFilter
   enrollments?: Prisma.UserProgramEnrollmentListRelationFilter
   completions?: Prisma.UserProgramExerciseCompletionListRelationFilter
+  reviews?: Prisma.ProgramReviewListRelationFilter
 }, "id">
 
 export type ProgramOrderByWithAggregationInput = {
@@ -363,6 +366,7 @@ export type ProgramCreateInput = {
   weeks?: Prisma.ProgramWeekCreateNestedManyWithoutProgramInput
   enrollments?: Prisma.UserProgramEnrollmentCreateNestedManyWithoutProgramInput
   completions?: Prisma.UserProgramExerciseCompletionCreateNestedManyWithoutProgramInput
+  reviews?: Prisma.ProgramReviewCreateNestedManyWithoutProgramInput
 }
 
 export type ProgramUncheckedCreateInput = {
@@ -380,6 +384,7 @@ export type ProgramUncheckedCreateInput = {
   weeks?: Prisma.ProgramWeekUncheckedCreateNestedManyWithoutProgramInput
   enrollments?: Prisma.UserProgramEnrollmentUncheckedCreateNestedManyWithoutProgramInput
   completions?: Prisma.UserProgramExerciseCompletionUncheckedCreateNestedManyWithoutProgramInput
+  reviews?: Prisma.ProgramReviewUncheckedCreateNestedManyWithoutProgramInput
 }
 
 export type ProgramUpdateInput = {
@@ -397,6 +402,7 @@ export type ProgramUpdateInput = {
   weeks?: Prisma.ProgramWeekUpdateManyWithoutProgramNestedInput
   enrollments?: Prisma.UserProgramEnrollmentUpdateManyWithoutProgramNestedInput
   completions?: Prisma.UserProgramExerciseCompletionUpdateManyWithoutProgramNestedInput
+  reviews?: Prisma.ProgramReviewUpdateManyWithoutProgramNestedInput
 }
 
 export type ProgramUncheckedUpdateInput = {
@@ -414,6 +420,7 @@ export type ProgramUncheckedUpdateInput = {
   weeks?: Prisma.ProgramWeekUncheckedUpdateManyWithoutProgramNestedInput
   enrollments?: Prisma.UserProgramEnrollmentUncheckedUpdateManyWithoutProgramNestedInput
   completions?: Prisma.UserProgramExerciseCompletionUncheckedUpdateManyWithoutProgramNestedInput
+  reviews?: Prisma.ProgramReviewUncheckedUpdateManyWithoutProgramNestedInput
 }
 
 export type ProgramCreateManyInput = {
@@ -613,6 +620,20 @@ export type ProgramUpdateOneRequiredWithoutCompletionsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ProgramUpdateToOneWithWhereWithoutCompletionsInput, Prisma.ProgramUpdateWithoutCompletionsInput>, Prisma.ProgramUncheckedUpdateWithoutCompletionsInput>
 }
 
+export type ProgramCreateNestedOneWithoutReviewsInput = {
+  create?: Prisma.XOR<Prisma.ProgramCreateWithoutReviewsInput, Prisma.ProgramUncheckedCreateWithoutReviewsInput>
+  connectOrCreate?: Prisma.ProgramCreateOrConnectWithoutReviewsInput
+  connect?: Prisma.ProgramWhereUniqueInput
+}
+
+export type ProgramUpdateOneRequiredWithoutReviewsNestedInput = {
+  create?: Prisma.XOR<Prisma.ProgramCreateWithoutReviewsInput, Prisma.ProgramUncheckedCreateWithoutReviewsInput>
+  connectOrCreate?: Prisma.ProgramCreateOrConnectWithoutReviewsInput
+  upsert?: Prisma.ProgramUpsertWithoutReviewsInput
+  connect?: Prisma.ProgramWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ProgramUpdateToOneWithWhereWithoutReviewsInput, Prisma.ProgramUpdateWithoutReviewsInput>, Prisma.ProgramUncheckedUpdateWithoutReviewsInput>
+}
+
 export type ProgramCreateNestedManyWithoutCreatorInput = {
   create?: Prisma.XOR<Prisma.ProgramCreateWithoutCreatorInput, Prisma.ProgramUncheckedCreateWithoutCreatorInput> | Prisma.ProgramCreateWithoutCreatorInput[] | Prisma.ProgramUncheckedCreateWithoutCreatorInput[]
   connectOrCreate?: Prisma.ProgramCreateOrConnectWithoutCreatorInput | Prisma.ProgramCreateOrConnectWithoutCreatorInput[]
@@ -669,6 +690,7 @@ export type ProgramCreateWithoutCategoryInput = {
   weeks?: Prisma.ProgramWeekCreateNestedManyWithoutProgramInput
   enrollments?: Prisma.UserProgramEnrollmentCreateNestedManyWithoutProgramInput
   completions?: Prisma.UserProgramExerciseCompletionCreateNestedManyWithoutProgramInput
+  reviews?: Prisma.ProgramReviewCreateNestedManyWithoutProgramInput
 }
 
 export type ProgramUncheckedCreateWithoutCategoryInput = {
@@ -685,6 +707,7 @@ export type ProgramUncheckedCreateWithoutCategoryInput = {
   weeks?: Prisma.ProgramWeekUncheckedCreateNestedManyWithoutProgramInput
   enrollments?: Prisma.UserProgramEnrollmentUncheckedCreateNestedManyWithoutProgramInput
   completions?: Prisma.UserProgramExerciseCompletionUncheckedCreateNestedManyWithoutProgramInput
+  reviews?: Prisma.ProgramReviewUncheckedCreateNestedManyWithoutProgramInput
 }
 
 export type ProgramCreateOrConnectWithoutCategoryInput = {
@@ -744,6 +767,7 @@ export type ProgramCreateWithoutWeeksInput = {
   category?: Prisma.CategoryCreateNestedOneWithoutProgramsInput
   enrollments?: Prisma.UserProgramEnrollmentCreateNestedManyWithoutProgramInput
   completions?: Prisma.UserProgramExerciseCompletionCreateNestedManyWithoutProgramInput
+  reviews?: Prisma.ProgramReviewCreateNestedManyWithoutProgramInput
 }
 
 export type ProgramUncheckedCreateWithoutWeeksInput = {
@@ -760,6 +784,7 @@ export type ProgramUncheckedCreateWithoutWeeksInput = {
   updatedAt?: Date | string
   enrollments?: Prisma.UserProgramEnrollmentUncheckedCreateNestedManyWithoutProgramInput
   completions?: Prisma.UserProgramExerciseCompletionUncheckedCreateNestedManyWithoutProgramInput
+  reviews?: Prisma.ProgramReviewUncheckedCreateNestedManyWithoutProgramInput
 }
 
 export type ProgramCreateOrConnectWithoutWeeksInput = {
@@ -792,6 +817,7 @@ export type ProgramUpdateWithoutWeeksInput = {
   category?: Prisma.CategoryUpdateOneWithoutProgramsNestedInput
   enrollments?: Prisma.UserProgramEnrollmentUpdateManyWithoutProgramNestedInput
   completions?: Prisma.UserProgramExerciseCompletionUpdateManyWithoutProgramNestedInput
+  reviews?: Prisma.ProgramReviewUpdateManyWithoutProgramNestedInput
 }
 
 export type ProgramUncheckedUpdateWithoutWeeksInput = {
@@ -808,6 +834,7 @@ export type ProgramUncheckedUpdateWithoutWeeksInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   enrollments?: Prisma.UserProgramEnrollmentUncheckedUpdateManyWithoutProgramNestedInput
   completions?: Prisma.UserProgramExerciseCompletionUncheckedUpdateManyWithoutProgramNestedInput
+  reviews?: Prisma.ProgramReviewUncheckedUpdateManyWithoutProgramNestedInput
 }
 
 export type ProgramCreateWithoutEnrollmentsInput = {
@@ -824,6 +851,7 @@ export type ProgramCreateWithoutEnrollmentsInput = {
   category?: Prisma.CategoryCreateNestedOneWithoutProgramsInput
   weeks?: Prisma.ProgramWeekCreateNestedManyWithoutProgramInput
   completions?: Prisma.UserProgramExerciseCompletionCreateNestedManyWithoutProgramInput
+  reviews?: Prisma.ProgramReviewCreateNestedManyWithoutProgramInput
 }
 
 export type ProgramUncheckedCreateWithoutEnrollmentsInput = {
@@ -840,6 +868,7 @@ export type ProgramUncheckedCreateWithoutEnrollmentsInput = {
   updatedAt?: Date | string
   weeks?: Prisma.ProgramWeekUncheckedCreateNestedManyWithoutProgramInput
   completions?: Prisma.UserProgramExerciseCompletionUncheckedCreateNestedManyWithoutProgramInput
+  reviews?: Prisma.ProgramReviewUncheckedCreateNestedManyWithoutProgramInput
 }
 
 export type ProgramCreateOrConnectWithoutEnrollmentsInput = {
@@ -872,6 +901,7 @@ export type ProgramUpdateWithoutEnrollmentsInput = {
   category?: Prisma.CategoryUpdateOneWithoutProgramsNestedInput
   weeks?: Prisma.ProgramWeekUpdateManyWithoutProgramNestedInput
   completions?: Prisma.UserProgramExerciseCompletionUpdateManyWithoutProgramNestedInput
+  reviews?: Prisma.ProgramReviewUpdateManyWithoutProgramNestedInput
 }
 
 export type ProgramUncheckedUpdateWithoutEnrollmentsInput = {
@@ -888,6 +918,7 @@ export type ProgramUncheckedUpdateWithoutEnrollmentsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   weeks?: Prisma.ProgramWeekUncheckedUpdateManyWithoutProgramNestedInput
   completions?: Prisma.UserProgramExerciseCompletionUncheckedUpdateManyWithoutProgramNestedInput
+  reviews?: Prisma.ProgramReviewUncheckedUpdateManyWithoutProgramNestedInput
 }
 
 export type ProgramCreateWithoutCompletionsInput = {
@@ -904,6 +935,7 @@ export type ProgramCreateWithoutCompletionsInput = {
   category?: Prisma.CategoryCreateNestedOneWithoutProgramsInput
   weeks?: Prisma.ProgramWeekCreateNestedManyWithoutProgramInput
   enrollments?: Prisma.UserProgramEnrollmentCreateNestedManyWithoutProgramInput
+  reviews?: Prisma.ProgramReviewCreateNestedManyWithoutProgramInput
 }
 
 export type ProgramUncheckedCreateWithoutCompletionsInput = {
@@ -920,6 +952,7 @@ export type ProgramUncheckedCreateWithoutCompletionsInput = {
   updatedAt?: Date | string
   weeks?: Prisma.ProgramWeekUncheckedCreateNestedManyWithoutProgramInput
   enrollments?: Prisma.UserProgramEnrollmentUncheckedCreateNestedManyWithoutProgramInput
+  reviews?: Prisma.ProgramReviewUncheckedCreateNestedManyWithoutProgramInput
 }
 
 export type ProgramCreateOrConnectWithoutCompletionsInput = {
@@ -952,6 +985,7 @@ export type ProgramUpdateWithoutCompletionsInput = {
   category?: Prisma.CategoryUpdateOneWithoutProgramsNestedInput
   weeks?: Prisma.ProgramWeekUpdateManyWithoutProgramNestedInput
   enrollments?: Prisma.UserProgramEnrollmentUpdateManyWithoutProgramNestedInput
+  reviews?: Prisma.ProgramReviewUpdateManyWithoutProgramNestedInput
 }
 
 export type ProgramUncheckedUpdateWithoutCompletionsInput = {
@@ -968,6 +1002,91 @@ export type ProgramUncheckedUpdateWithoutCompletionsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   weeks?: Prisma.ProgramWeekUncheckedUpdateManyWithoutProgramNestedInput
   enrollments?: Prisma.UserProgramEnrollmentUncheckedUpdateManyWithoutProgramNestedInput
+  reviews?: Prisma.ProgramReviewUncheckedUpdateManyWithoutProgramNestedInput
+}
+
+export type ProgramCreateWithoutReviewsInput = {
+  id?: string
+  title: string
+  description?: string | null
+  thumbnail?: string | null
+  difficulty: $Enums.DifficultyLevel
+  durationWeeks?: number | null
+  coverImage?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  creator?: Prisma.UserCreateNestedOneWithoutProgramsInput
+  category?: Prisma.CategoryCreateNestedOneWithoutProgramsInput
+  weeks?: Prisma.ProgramWeekCreateNestedManyWithoutProgramInput
+  enrollments?: Prisma.UserProgramEnrollmentCreateNestedManyWithoutProgramInput
+  completions?: Prisma.UserProgramExerciseCompletionCreateNestedManyWithoutProgramInput
+}
+
+export type ProgramUncheckedCreateWithoutReviewsInput = {
+  id?: string
+  title: string
+  description?: string | null
+  thumbnail?: string | null
+  difficulty: $Enums.DifficultyLevel
+  creatorId?: string | null
+  categoryId?: string | null
+  durationWeeks?: number | null
+  coverImage?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  weeks?: Prisma.ProgramWeekUncheckedCreateNestedManyWithoutProgramInput
+  enrollments?: Prisma.UserProgramEnrollmentUncheckedCreateNestedManyWithoutProgramInput
+  completions?: Prisma.UserProgramExerciseCompletionUncheckedCreateNestedManyWithoutProgramInput
+}
+
+export type ProgramCreateOrConnectWithoutReviewsInput = {
+  where: Prisma.ProgramWhereUniqueInput
+  create: Prisma.XOR<Prisma.ProgramCreateWithoutReviewsInput, Prisma.ProgramUncheckedCreateWithoutReviewsInput>
+}
+
+export type ProgramUpsertWithoutReviewsInput = {
+  update: Prisma.XOR<Prisma.ProgramUpdateWithoutReviewsInput, Prisma.ProgramUncheckedUpdateWithoutReviewsInput>
+  create: Prisma.XOR<Prisma.ProgramCreateWithoutReviewsInput, Prisma.ProgramUncheckedCreateWithoutReviewsInput>
+  where?: Prisma.ProgramWhereInput
+}
+
+export type ProgramUpdateToOneWithWhereWithoutReviewsInput = {
+  where?: Prisma.ProgramWhereInput
+  data: Prisma.XOR<Prisma.ProgramUpdateWithoutReviewsInput, Prisma.ProgramUncheckedUpdateWithoutReviewsInput>
+}
+
+export type ProgramUpdateWithoutReviewsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  thumbnail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  difficulty?: Prisma.EnumDifficultyLevelFieldUpdateOperationsInput | $Enums.DifficultyLevel
+  durationWeeks?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  creator?: Prisma.UserUpdateOneWithoutProgramsNestedInput
+  category?: Prisma.CategoryUpdateOneWithoutProgramsNestedInput
+  weeks?: Prisma.ProgramWeekUpdateManyWithoutProgramNestedInput
+  enrollments?: Prisma.UserProgramEnrollmentUpdateManyWithoutProgramNestedInput
+  completions?: Prisma.UserProgramExerciseCompletionUpdateManyWithoutProgramNestedInput
+}
+
+export type ProgramUncheckedUpdateWithoutReviewsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  thumbnail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  difficulty?: Prisma.EnumDifficultyLevelFieldUpdateOperationsInput | $Enums.DifficultyLevel
+  creatorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  durationWeeks?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  weeks?: Prisma.ProgramWeekUncheckedUpdateManyWithoutProgramNestedInput
+  enrollments?: Prisma.UserProgramEnrollmentUncheckedUpdateManyWithoutProgramNestedInput
+  completions?: Prisma.UserProgramExerciseCompletionUncheckedUpdateManyWithoutProgramNestedInput
 }
 
 export type ProgramCreateWithoutCreatorInput = {
@@ -984,6 +1103,7 @@ export type ProgramCreateWithoutCreatorInput = {
   weeks?: Prisma.ProgramWeekCreateNestedManyWithoutProgramInput
   enrollments?: Prisma.UserProgramEnrollmentCreateNestedManyWithoutProgramInput
   completions?: Prisma.UserProgramExerciseCompletionCreateNestedManyWithoutProgramInput
+  reviews?: Prisma.ProgramReviewCreateNestedManyWithoutProgramInput
 }
 
 export type ProgramUncheckedCreateWithoutCreatorInput = {
@@ -1000,6 +1120,7 @@ export type ProgramUncheckedCreateWithoutCreatorInput = {
   weeks?: Prisma.ProgramWeekUncheckedCreateNestedManyWithoutProgramInput
   enrollments?: Prisma.UserProgramEnrollmentUncheckedCreateNestedManyWithoutProgramInput
   completions?: Prisma.UserProgramExerciseCompletionUncheckedCreateNestedManyWithoutProgramInput
+  reviews?: Prisma.ProgramReviewUncheckedCreateNestedManyWithoutProgramInput
 }
 
 export type ProgramCreateOrConnectWithoutCreatorInput = {
@@ -1055,6 +1176,7 @@ export type ProgramUpdateWithoutCategoryInput = {
   weeks?: Prisma.ProgramWeekUpdateManyWithoutProgramNestedInput
   enrollments?: Prisma.UserProgramEnrollmentUpdateManyWithoutProgramNestedInput
   completions?: Prisma.UserProgramExerciseCompletionUpdateManyWithoutProgramNestedInput
+  reviews?: Prisma.ProgramReviewUpdateManyWithoutProgramNestedInput
 }
 
 export type ProgramUncheckedUpdateWithoutCategoryInput = {
@@ -1071,6 +1193,7 @@ export type ProgramUncheckedUpdateWithoutCategoryInput = {
   weeks?: Prisma.ProgramWeekUncheckedUpdateManyWithoutProgramNestedInput
   enrollments?: Prisma.UserProgramEnrollmentUncheckedUpdateManyWithoutProgramNestedInput
   completions?: Prisma.UserProgramExerciseCompletionUncheckedUpdateManyWithoutProgramNestedInput
+  reviews?: Prisma.ProgramReviewUncheckedUpdateManyWithoutProgramNestedInput
 }
 
 export type ProgramUncheckedUpdateManyWithoutCategoryInput = {
@@ -1113,6 +1236,7 @@ export type ProgramUpdateWithoutCreatorInput = {
   weeks?: Prisma.ProgramWeekUpdateManyWithoutProgramNestedInput
   enrollments?: Prisma.UserProgramEnrollmentUpdateManyWithoutProgramNestedInput
   completions?: Prisma.UserProgramExerciseCompletionUpdateManyWithoutProgramNestedInput
+  reviews?: Prisma.ProgramReviewUpdateManyWithoutProgramNestedInput
 }
 
 export type ProgramUncheckedUpdateWithoutCreatorInput = {
@@ -1129,6 +1253,7 @@ export type ProgramUncheckedUpdateWithoutCreatorInput = {
   weeks?: Prisma.ProgramWeekUncheckedUpdateManyWithoutProgramNestedInput
   enrollments?: Prisma.UserProgramEnrollmentUncheckedUpdateManyWithoutProgramNestedInput
   completions?: Prisma.UserProgramExerciseCompletionUncheckedUpdateManyWithoutProgramNestedInput
+  reviews?: Prisma.ProgramReviewUncheckedUpdateManyWithoutProgramNestedInput
 }
 
 export type ProgramUncheckedUpdateManyWithoutCreatorInput = {
@@ -1153,12 +1278,14 @@ export type ProgramCountOutputType = {
   weeks: number
   enrollments: number
   completions: number
+  reviews: number
 }
 
 export type ProgramCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   weeks?: boolean | ProgramCountOutputTypeCountWeeksArgs
   enrollments?: boolean | ProgramCountOutputTypeCountEnrollmentsArgs
   completions?: boolean | ProgramCountOutputTypeCountCompletionsArgs
+  reviews?: boolean | ProgramCountOutputTypeCountReviewsArgs
 }
 
 /**
@@ -1192,6 +1319,13 @@ export type ProgramCountOutputTypeCountCompletionsArgs<ExtArgs extends runtime.T
   where?: Prisma.UserProgramExerciseCompletionWhereInput
 }
 
+/**
+ * ProgramCountOutputType without action
+ */
+export type ProgramCountOutputTypeCountReviewsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ProgramReviewWhereInput
+}
+
 
 export type ProgramSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1210,6 +1344,7 @@ export type ProgramSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   weeks?: boolean | Prisma.Program$weeksArgs<ExtArgs>
   enrollments?: boolean | Prisma.Program$enrollmentsArgs<ExtArgs>
   completions?: boolean | Prisma.Program$completionsArgs<ExtArgs>
+  reviews?: boolean | Prisma.Program$reviewsArgs<ExtArgs>
   _count?: boolean | Prisma.ProgramCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["program"]>
 
@@ -1266,6 +1401,7 @@ export type ProgramInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs
   weeks?: boolean | Prisma.Program$weeksArgs<ExtArgs>
   enrollments?: boolean | Prisma.Program$enrollmentsArgs<ExtArgs>
   completions?: boolean | Prisma.Program$completionsArgs<ExtArgs>
+  reviews?: boolean | Prisma.Program$reviewsArgs<ExtArgs>
   _count?: boolean | Prisma.ProgramCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ProgramIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1285,6 +1421,7 @@ export type $ProgramPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     weeks: Prisma.$ProgramWeekPayload<ExtArgs>[]
     enrollments: Prisma.$UserProgramEnrollmentPayload<ExtArgs>[]
     completions: Prisma.$UserProgramExerciseCompletionPayload<ExtArgs>[]
+    reviews: Prisma.$ProgramReviewPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1697,6 +1834,7 @@ export interface Prisma__ProgramClient<T, Null = never, ExtArgs extends runtime.
   weeks<T extends Prisma.Program$weeksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Program$weeksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProgramWeekPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   enrollments<T extends Prisma.Program$enrollmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Program$enrollmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserProgramEnrollmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   completions<T extends Prisma.Program$completionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Program$completionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserProgramExerciseCompletionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  reviews<T extends Prisma.Program$reviewsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Program$reviewsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProgramReviewPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2245,6 +2383,30 @@ export type Program$completionsArgs<ExtArgs extends runtime.Types.Extensions.Int
   take?: number
   skip?: number
   distinct?: Prisma.UserProgramExerciseCompletionScalarFieldEnum | Prisma.UserProgramExerciseCompletionScalarFieldEnum[]
+}
+
+/**
+ * Program.reviews
+ */
+export type Program$reviewsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ProgramReview
+   */
+  select?: Prisma.ProgramReviewSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ProgramReview
+   */
+  omit?: Prisma.ProgramReviewOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ProgramReviewInclude<ExtArgs> | null
+  where?: Prisma.ProgramReviewWhereInput
+  orderBy?: Prisma.ProgramReviewOrderByWithRelationInput | Prisma.ProgramReviewOrderByWithRelationInput[]
+  cursor?: Prisma.ProgramReviewWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ProgramReviewScalarFieldEnum | Prisma.ProgramReviewScalarFieldEnum[]
 }
 
 /**

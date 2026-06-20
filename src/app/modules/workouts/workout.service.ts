@@ -248,11 +248,70 @@ const deleteWorkout = async (id: string): Promise<IWorkoutResponse> => {
 
   return deletedWorkout;
 };
+const getWorkoutCategoryStats = async () => {
+  const categories = await prisma.category.findMany({
+    select: {
+      id: true,
+      name: true,
+      _count: {
+        select: {
+          workouts: true,
+        },
+      },
+    },
+    orderBy: {
+      name: 'asc',
+    },
+  });
 
+  return categories.map((category) => ({
+    categoryId: category.id,
+    categoryName: category.name,
+    totalWorkouts: category._count.workouts,
+  }));
+};
+const getCategoryWiseWorkouts = async (
+  difficulty?: string
+) => {
+  const categories = await prisma.category.findMany({
+    include: {
+      workouts: {
+        where: difficulty
+          ? {
+              difficulty: difficulty as any,
+            }
+          : undefined,
+        select: {
+          id: true,
+          title: true,
+          description: true,
+          duration: true,
+          difficulty: true,
+          createdAt: true,
+        },
+        orderBy: {
+          createdAt: 'desc',
+        },
+      },
+    },
+    orderBy: {
+      name: 'asc',
+    },
+  });
+
+  return categories.map((category) => ({
+    categoryId: category.id,
+    categoryName: category.name,
+    totalWorkouts: category.workouts.length,
+    workouts: category.workouts,
+  }));
+};
 export const workoutService = {
   createWorkout,
   getAllWorkouts,
   getWorkoutById,
   updateWorkout,
   deleteWorkout,
+  getWorkoutCategoryStats,
+  getCategoryWiseWorkouts
 };

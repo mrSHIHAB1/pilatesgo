@@ -7,7 +7,7 @@ model User {
   fullName               String
   gender                 Gender?
   age                    Int?
-  // Body Metrics
+  // Body Metrics-
   height                 Float              @default(0)
   weight                 Float              @default(0)
   mainGoal               String?
@@ -55,6 +55,8 @@ model User {
   workouts           Workout[]
   programEnrollments UserProgramEnrollment[]
   programCompletions UserProgramExerciseCompletion[]
+  favourites         WorkoutFavourite[]
+  programReviews     ProgramReview[]
 }
 
 model AuthProvider {
@@ -75,7 +77,7 @@ enum AttentionArea {
  ARMS
   LEGS
   CHEST
-ABS
+  ABS
   BACK
 }
 enum Gender {

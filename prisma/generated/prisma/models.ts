@@ -10,10 +10,12 @@
  */
 export type * from './models/Category'
 export type * from './models/Exercise'
+export type * from './models/WorkoutFavourite'
 export type * from './models/Program'
 export type * from './models/ProgramWeek'
 export type * from './models/UserProgramEnrollment'
 export type * from './models/UserProgramExerciseCompletion'
+export type * from './models/ProgramReview'
 export type * from './models/User'
 export type * from './models/AuthProvider'
 export type * from './models/Video'

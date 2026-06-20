@@ -6,6 +6,7 @@ import { categoryRoutes } from '../modules/categories/category.routes';
 import { exerciseRoutes } from '../modules/exercise/exercise.routes';
 import { workoutRoutes } from '../modules/workouts/workout.routes';
 import { programRoutes } from '../modules/programs/program.routes';
+import { favouriteRoutes } from '../modules/favourites/favourite.routes';
 
 
 const router = express.Router();
@@ -38,6 +39,10 @@ const moduleRoutes = [
     {
         path: '/programs',
         route: programRoutes
+    },
+    {
+        path: '/favourites',
+        route: favouriteRoutes
     }
       
 ];

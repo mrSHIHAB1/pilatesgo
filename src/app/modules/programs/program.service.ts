@@ -1,7 +1,16 @@
 import httpStatus from 'http-status-codes';
 import ApiError from '../../errors/ApiError';
 import prisma from '../../shared/prisma';
-import { ICreateProgramRequest, IUpdateProgramRequest, IProgramResponse, IProgramListResponse } from './program.interface';
+import { fileUploader } from '../../helpers/fileUploader';
+import {
+  ICreateProgramRequest,
+  IUpdateProgramRequest,
+  IProgramResponse,
+  IProgramListResponse,
+  ICreateReviewPayload
+} from './program.interface';
+
+// ─── HELPER FUNCTIONS ─────────────────────────────────────────────────────────
 
 const validateWeeksPayload = async (weeks: NonNullable<ICreateProgramRequest['weeks']>): Promise<void> => {
   const weekNumbers = new Set<number>();
@@ -49,9 +58,58 @@ const validateWeeksPayload = async (weeks: NonNullable<ICreateProgramRequest['we
   }
 };
 
-// Create a new program
+const ensureProgressDelegates = () => {
+  const client = prisma as any;
+  if (!client.userProgramEnrollment || !client.userProgramExerciseCompletion) {
+    throw new ApiError(
+      httpStatus.INTERNAL_SERVER_ERROR,
+      'Prisma Client is out of date. Run `npx prisma generate` and restart the server.'
+    );
+  }
+};
+
+const ensureProgramExists = async (programId: string) => {
+  const program = await prisma.program.findUnique({
+    where: { id: programId },
+    select: { id: true },
+  });
+
+  if (!program) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'Program not found');
+  }
+};
+
+const getProgramTotals = async (programId: string) => {
+  const program = await prisma.program.findUnique({
+    where: { id: programId },
+    select: {
+      id: true,
+      weeks: {
+        select: {
+          id: true,
+          weekNumber: true,
+          exercises: { select: { id: true } },
+        },
+        orderBy: { weekNumber: 'asc' },
+      },
+    },
+  });
+
+  if (!program) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'Program not found');
+  }
+
+  const totalExercises = program.weeks.reduce((sum, week) => sum + week.exercises.length, 0);
+
+  return {
+    program,
+    totalExercises,
+  };
+};
+
+// ─── PROGRAM SERVICES ─────────────────────────────────────────────────────────
+
 const createProgram = async (payload: ICreateProgramRequest): Promise<IProgramResponse> => {
-  // Check if program with same title already exists
   const existingProgram = await prisma.program.findFirst({
     where: { title: payload.title },
   });
@@ -60,7 +118,6 @@ const createProgram = async (payload: ICreateProgramRequest): Promise<IProgramRe
     throw new ApiError(httpStatus.CONFLICT, 'Program with this title already exists');
   }
 
-  // Validate category exists if categoryId is provided
   if (payload.categoryId) {
     const category = await prisma.category.findUnique({
       where: { id: payload.categoryId },
@@ -71,7 +128,6 @@ const createProgram = async (payload: ICreateProgramRequest): Promise<IProgramRe
     }
   }
 
-  // Validate user exists if creatorId is provided
   if (payload.creatorId) {
     const creator = await prisma.user.findUnique({
       where: { id: payload.creatorId },
@@ -120,7 +176,6 @@ const createProgram = async (payload: ICreateProgramRequest): Promise<IProgramRe
   return program;
 };
 
-// Get all programs with pagination, search, and filters
 const getAllPrograms = async (
   page: number = 1,
   limit: number = 10,
@@ -181,7 +236,6 @@ const getAllPrograms = async (
   };
 };
 
-// Get a specific program by ID
 const getProgramById = async (id: string): Promise<any> => {
   const program = await prisma.program.findUnique({
     where: { id },
@@ -202,9 +256,7 @@ const getProgramById = async (id: string): Promise<any> => {
   return program;
 };
 
-// Update a program
 const updateProgram = async (id: string, payload: IUpdateProgramRequest): Promise<IProgramResponse> => {
-  // Check if program exists
   const program = await prisma.program.findUnique({
     where: { id },
   });
@@ -213,7 +265,6 @@ const updateProgram = async (id: string, payload: IUpdateProgramRequest): Promis
     throw new ApiError(httpStatus.NOT_FOUND, 'Program not found');
   }
 
-  // Check if title already exists (excluding current program)
   if (payload.title) {
     const existingProgram = await prisma.program.findFirst({
       where: {
@@ -227,7 +278,6 @@ const updateProgram = async (id: string, payload: IUpdateProgramRequest): Promis
     }
   }
 
-  // Validate category exists if categoryId is provided
   if (payload.categoryId) {
     const category = await prisma.category.findUnique({
       where: { id: payload.categoryId },
@@ -238,7 +288,6 @@ const updateProgram = async (id: string, payload: IUpdateProgramRequest): Promis
     }
   }
 
-  // Validate user exists if creatorId is provided
   if (payload.creatorId) {
     const creator = await prisma.user.findUnique({
       where: { id: payload.creatorId },
@@ -289,7 +338,6 @@ const updateProgram = async (id: string, payload: IUpdateProgramRequest): Promis
   return updatedProgram;
 };
 
-// Delete a program
 const deleteProgram = async (id: string): Promise<IProgramResponse> => {
   const program = await prisma.program.findUnique({
     where: { id },
@@ -306,10 +354,398 @@ const deleteProgram = async (id: string): Promise<IProgramResponse> => {
   return deletedProgram;
 };
 
+// ─── PROGRESS SERVICES ────────────────────────────────────────────────────────
+
+const activateProgram = async (userId: string, programId: string) => {
+  ensureProgressDelegates();
+  await ensureProgramExists(programId);
+
+  const enrollment = await prisma.userProgramEnrollment.upsert({
+    where: {
+      userId_programId: {
+        userId,
+        programId,
+      },
+    },
+    create: {
+      userId,
+      programId,
+      status: 'ACTIVE',
+    },
+    update: {
+      status: 'ACTIVE',
+      completedAt: null,
+    },
+    include: {
+      program: {
+        include: {
+          category: true,
+        },
+      },
+    },
+  });
+
+  return enrollment;
+};
+
+const getMyActivePrograms = async (userId: string) => {
+  ensureProgressDelegates();
+  const enrollments = await prisma.userProgramEnrollment.findMany({
+    where: {
+      userId,
+      status: 'ACTIVE',
+    },
+    orderBy: { updatedAt: 'desc' },
+    include: {
+      program: {
+        include: {
+          category: true,
+          weeks: {
+            select: {
+              id: true,
+              weekNumber: true,
+              exercises: { select: { id: true } },
+            },
+            orderBy: { weekNumber: 'asc' },
+          },
+        },
+      },
+    },
+  });
+
+  return enrollments;
+};
+
+const setExerciseDone = async (params: {
+  userId: string;
+  programId: string;
+  programWeekId: string;
+  exerciseId: string;
+  done: boolean;
+}) => {
+  ensureProgressDelegates();
+  const { userId, programId, programWeekId, exerciseId, done } = params;
+
+  const week = await prisma.programWeek.findFirst({
+    where: {
+      id: programWeekId,
+      programId,
+    },
+    select: {
+      id: true,
+      weekNumber: true,
+      exercises: { select: { id: true } },
+    },
+  });
+
+  if (!week) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'Program week not found');
+  }
+
+  const isExerciseInWeek = week.exercises.some((e) => e.id === exerciseId);
+  if (!isExerciseInWeek) {
+    throw new ApiError(httpStatus.BAD_REQUEST, 'Exercise is not part of this program week');
+  }
+
+  await prisma.userProgramEnrollment.upsert({
+    where: {
+      userId_programId: {
+        userId,
+        programId,
+      },
+    },
+    create: {
+      userId,
+      programId,
+      status: 'ACTIVE',
+    },
+    update: {
+      status: 'ACTIVE',
+      completedAt: null,
+    },
+  });
+
+  if (done) {
+    await prisma.userProgramExerciseCompletion.upsert({
+      where: {
+        user_week_exercise: {
+          userId,
+          programWeekId,
+          exerciseId,
+        },
+      },
+      create: {
+        userId,
+        programId,
+        programWeekId,
+        exerciseId,
+      },
+      update: {
+        completedAt: new Date(),
+      },
+    });
+  } else {
+    await prisma.userProgramExerciseCompletion.deleteMany({
+      where: {
+        userId,
+        programWeekId,
+        exerciseId,
+      },
+    });
+  }
+
+  const { totalExercises } = await getProgramTotals(programId);
+  const completedExercises = await prisma.userProgramExerciseCompletion.count({
+    where: {
+      userId,
+      programId,
+    },
+  });
+
+  const percentCompleted = totalExercises > 0 ? Math.round((completedExercises / totalExercises) * 100) : 0;
+
+  if (totalExercises > 0 && completedExercises >= totalExercises) {
+    await prisma.userProgramEnrollment.update({
+      where: {
+        userId_programId: {
+          userId,
+          programId,
+        },
+      },
+      data: {
+        status: 'COMPLETED',
+        completedAt: new Date(),
+      },
+    });
+  } else {
+    await prisma.userProgramEnrollment.update({
+      where: {
+        userId_programId: {
+          userId,
+          programId,
+        },
+      },
+      data: {
+        status: 'ACTIVE',
+        completedAt: null,
+      },
+    });
+  }
+
+  return {
+    done,
+    totalExercises,
+    completedExercises,
+    percentCompleted,
+  };
+};
+
+const getProgramProgress = async (userId: string, programId: string) => {
+  ensureProgressDelegates();
+  const enrollment = await prisma.userProgramEnrollment.findUnique({
+    where: {
+      userId_programId: {
+        userId,
+        programId,
+      },
+    },
+    select: {
+      status: true,
+      startedAt: true,
+      completedAt: true,
+    },
+  });
+
+  const { program, totalExercises } = await getProgramTotals(programId);
+
+  const completions = await prisma.userProgramExerciseCompletion.findMany({
+    where: {
+      userId,
+      programId,
+    },
+    select: {
+      programWeekId: true,
+      exerciseId: true,
+    },
+  });
+
+  const completedSet = new Set(completions.map((c) => `${c.programWeekId}:${c.exerciseId}`));
+
+  const weeks = program.weeks.map((week) => {
+    const weekTotal = week.exercises.length;
+    const weekCompleted = week.exercises.reduce(
+      (sum, ex) => sum + (completedSet.has(`${week.id}:${ex.id}`) ? 1 : 0),
+      0
+    );
+    const weekPercent = weekTotal > 0 ? Math.round((weekCompleted / weekTotal) * 100) : 0;
+
+    return {
+      programWeekId: week.id,
+      weekNumber: week.weekNumber,
+      totalExercises: weekTotal,
+      completedExercises: weekCompleted,
+      percentCompleted: weekPercent,
+    };
+  });
+
+  const completedExercises = completions.length;
+  const percentCompleted = totalExercises > 0 ? Math.round((completedExercises / totalExercises) * 100) : 0;
+
+  return {
+    programId: program.id,
+    enrollment: enrollment ?? null,
+    totalExercises,
+    completedExercises,
+    percentCompleted,
+    weeks,
+  };
+};
+
+// ─── REVIEW SERVICES ──────────────────────────────────────────────────────────
+
+const createOrUpdateReview = async (
+  userId: string,
+  programId: string,
+  payload: ICreateReviewPayload,
+  photoFiles?: Express.Multer.File[]
+): Promise<any> => {
+  const program = await prisma.program.findUnique({ where: { id: programId } });
+  if (!program) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'Program not found');
+  }
+
+  if (payload.rating < 1 || payload.rating > 5) {
+    throw new ApiError(httpStatus.BAD_REQUEST, 'Rating must be between 1 and 5');
+  }
+
+  let photoUrls: string[] = [];
+  if (photoFiles && photoFiles.length > 0) {
+    const uploaded = await fileUploader.uploadManyToCloudinary(photoFiles);
+    photoUrls = uploaded.map((u) => u.url).filter(Boolean);
+  }
+
+  const existingReview = await prisma.programReview.findUnique({
+    where: { userId_programId: { userId, programId } },
+  });
+
+  const existingPhotos = existingReview?.photos ?? [];
+  const mergedPhotos =
+    photoFiles && photoFiles.length > 0 ? photoUrls : existingPhotos;
+
+  const review = await prisma.programReview.upsert({
+    where: { userId_programId: { userId, programId } },
+    update: {
+      rating: payload.rating,
+      comment: payload.comment,
+      photos: mergedPhotos,
+    },
+    create: {
+      userId,
+      programId,
+      rating: payload.rating,
+      comment: payload.comment,
+      photos: mergedPhotos,
+    },
+    include: {
+      user: {
+        select: {
+          id: true,
+          fullName: true,
+        },
+      },
+    },
+  });
+
+  return review;
+};
+
+const getReviewsForProgram = async (
+  programId: string,
+  page: number = 1,
+  limit: number = 10
+) => {
+  const program = await prisma.program.findUnique({ where: { id: programId } });
+  if (!program) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'Program not found');
+  }
+
+  const skip = (page - 1) * limit;
+
+  const [reviews, total, aggregate] = await Promise.all([
+    prisma.programReview.findMany({
+      where: { programId },
+      skip,
+      take: limit,
+      include: {
+        user: {
+          select: {
+            id: true,
+            fullName: true,
+          },
+        },
+      },
+      orderBy: { createdAt: 'desc' },
+    }),
+    prisma.programReview.count({ where: { programId } }),
+    prisma.programReview.aggregate({
+      where: { programId },
+      _avg: { rating: true },
+    }),
+  ]);
+
+  return {
+    data: reviews,
+    total,
+    page,
+    limit,
+    totalPages: Math.ceil(total / limit),
+    averageRating: aggregate._avg.rating
+      ? parseFloat(aggregate._avg.rating.toFixed(1))
+      : null,
+  };
+};
+
+const deleteMyReview = async (userId: string, programId: string): Promise<void> => {
+  const existing = await prisma.programReview.findUnique({
+    where: { userId_programId: { userId, programId } },
+  });
+
+  if (!existing) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'Review not found');
+  }
+
+  await prisma.programReview.delete({
+    where: { userId_programId: { userId, programId } },
+  });
+};
+
+const getMyReview = async (userId: string, programId: string) => {
+  const review = await prisma.programReview.findUnique({
+    where: { userId_programId: { userId, programId } },
+    include: {
+      user: {
+        select: { id: true, fullName: true },
+      },
+    },
+  });
+
+  return review;
+};
+
+// ─── EXPORTS ──────────────────────────────────────────────────────────────────
+
 export const programService = {
   createProgram,
   getAllPrograms,
   getProgramById,
   updateProgram,
   deleteProgram,
+  activateProgram,
+  getMyActivePrograms,
+  setExerciseDone,
+  getProgramProgress,
+  createOrUpdateReview,
+  getReviewsForProgram,
+  deleteMyReview,
+  getMyReview,
 };
