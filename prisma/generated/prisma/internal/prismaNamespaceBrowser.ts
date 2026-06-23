@@ -54,11 +54,19 @@ export const ModelName = {
   Category: 'Category',
   Exercise: 'Exercise',
   WorkoutFavourite: 'WorkoutFavourite',
+  Notification: 'Notification',
   Program: 'Program',
   ProgramWeek: 'ProgramWeek',
+  UserProgramSnapshot: 'UserProgramSnapshot',
+  SnapshotWeek: 'SnapshotWeek',
+  SnapshotDay: 'SnapshotDay',
+  SnapshotItem: 'SnapshotItem',
+  ProgramDay: 'ProgramDay',
   UserProgramEnrollment: 'UserProgramEnrollment',
   UserProgramExerciseCompletion: 'UserProgramExerciseCompletion',
   ProgramReview: 'ProgramReview',
+  Subscription: 'Subscription',
+  SubscriptionPlan: 'SubscriptionPlan',
   User: 'User',
   AuthProvider: 'AuthProvider',
   Video: 'Video',
@@ -117,6 +125,21 @@ export const WorkoutFavouriteScalarFieldEnum = {
 export type WorkoutFavouriteScalarFieldEnum = (typeof WorkoutFavouriteScalarFieldEnum)[keyof typeof WorkoutFavouriteScalarFieldEnum]
 
 
+export const NotificationScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  type: 'type',
+  title: 'title',
+  body: 'body',
+  data: 'data',
+  isRead: 'isRead',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type NotificationScalarFieldEnum = (typeof NotificationScalarFieldEnum)[keyof typeof NotificationScalarFieldEnum]
+
+
 export const ProgramScalarFieldEnum = {
   id: 'id',
   title: 'title',
@@ -143,6 +166,69 @@ export const ProgramWeekScalarFieldEnum = {
 } as const
 
 export type ProgramWeekScalarFieldEnum = (typeof ProgramWeekScalarFieldEnum)[keyof typeof ProgramWeekScalarFieldEnum]
+
+
+export const UserProgramSnapshotScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  programId: 'programId',
+  title: 'title',
+  description: 'description',
+  thumbnail: 'thumbnail',
+  difficulty: 'difficulty',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type UserProgramSnapshotScalarFieldEnum = (typeof UserProgramSnapshotScalarFieldEnum)[keyof typeof UserProgramSnapshotScalarFieldEnum]
+
+
+export const SnapshotWeekScalarFieldEnum = {
+  id: 'id',
+  snapshotId: 'snapshotId',
+  weekNumber: 'weekNumber',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SnapshotWeekScalarFieldEnum = (typeof SnapshotWeekScalarFieldEnum)[keyof typeof SnapshotWeekScalarFieldEnum]
+
+
+export const SnapshotDayScalarFieldEnum = {
+  id: 'id',
+  weekId: 'weekId',
+  dayNumber: 'dayNumber',
+  name: 'name',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SnapshotDayScalarFieldEnum = (typeof SnapshotDayScalarFieldEnum)[keyof typeof SnapshotDayScalarFieldEnum]
+
+
+export const SnapshotItemScalarFieldEnum = {
+  id: 'id',
+  dayId: 'dayId',
+  exerciseId: 'exerciseId',
+  workoutId: 'workoutId',
+  completed: 'completed',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SnapshotItemScalarFieldEnum = (typeof SnapshotItemScalarFieldEnum)[keyof typeof SnapshotItemScalarFieldEnum]
+
+
+export const ProgramDayScalarFieldEnum = {
+  id: 'id',
+  weekId: 'weekId',
+  dayNumber: 'dayNumber',
+  name: 'name',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ProgramDayScalarFieldEnum = (typeof ProgramDayScalarFieldEnum)[keyof typeof ProgramDayScalarFieldEnum]
 
 
 export const UserProgramEnrollmentScalarFieldEnum = {
@@ -184,6 +270,44 @@ export const ProgramReviewScalarFieldEnum = {
 } as const
 
 export type ProgramReviewScalarFieldEnum = (typeof ProgramReviewScalarFieldEnum)[keyof typeof ProgramReviewScalarFieldEnum]
+
+
+export const SubscriptionScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  type: 'type',
+  status: 'status',
+  startDate: 'startDate',
+  endDate: 'endDate',
+  renewalDate: 'renewalDate',
+  cancelledAt: 'cancelledAt',
+  price: 'price',
+  currency: 'currency',
+  paymentMethod: 'paymentMethod',
+  transactionId: 'transactionId',
+  notes: 'notes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SubscriptionScalarFieldEnum = (typeof SubscriptionScalarFieldEnum)[keyof typeof SubscriptionScalarFieldEnum]
+
+
+export const SubscriptionPlanScalarFieldEnum = {
+  id: 'id',
+  type: 'type',
+  name: 'name',
+  description: 'description',
+  price: 'price',
+  currency: 'currency',
+  durationDays: 'durationDays',
+  features: 'features',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SubscriptionPlanScalarFieldEnum = (typeof SubscriptionPlanScalarFieldEnum)[keyof typeof SubscriptionPlanScalarFieldEnum]
 
 
 export const UserScalarFieldEnum = {
@@ -281,6 +405,14 @@ export const SortOrder = {
 export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
 
 
+export const NullableJsonNullValueInput = {
+  DbNull: DbNull,
+  JsonNull: JsonNull
+} as const
+
+export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
+
+
 export const QueryMode = {
   default: 'default',
   insensitive: 'insensitive'
@@ -295,4 +427,13 @@ export const NullsOrder = {
 } as const
 
 export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
+export const JsonNullValueFilter = {
+  DbNull: DbNull,
+  JsonNull: JsonNull,
+  AnyNull: AnyNull
+} as const
+
+export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
 

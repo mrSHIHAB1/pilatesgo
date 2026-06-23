@@ -1,7 +1,7 @@
-import { Request, Response } from 'express';
+import { Request, Response, NextFunction } from 'express';
 import catchAsync from '../../shared/catchAsync';
 import sendResponse from '../../shared/sendResponse';
-import { authService } from './auth.service';
+// import { authService, appleLogin, googleAuthSystem } from './auth.service';
 import {
   ILoginResponse,
   IGetMeResponse,
@@ -10,6 +10,11 @@ import {
   IForgotPasswordResetPasswordResponse,
 } from './auth.interface';
 import { setAuthCookie } from '../../../utils/setCookie';
+import httpStatus from 'http-status-codes';
+import passport from '../../config/passport.config';
+import { envVars } from '../../config/env';
+import { createUserTokens } from '../../../utils/userTokens';
+import { appleLogin, authService, googleAuthSystem } from './auth.service';
 
 // Login controller
 export const login = catchAsync(async (req: Request, res: Response) => {
@@ -99,3 +104,82 @@ export const forgotPasswordResetPassword = catchAsync(async (req: Request, res: 
     data: result,
   });
 });
+
+export const appleLoginController = catchAsync(async (req: Request, res: Response) => {
+  const { identityToken } = req.body;
+
+  if (!identityToken) {
+    return sendResponse(res, { success: false, statusCode: httpStatus.BAD_REQUEST, message: 'identityToken required', data: null });
+  }
+
+  const roleParam = typeof req.body.role === 'string' ? req.body.role : 'USER';
+
+  const result = await appleLogin(identityToken, roleParam);
+
+  if (result && result.accessToken && result.refreshToken) {
+    setAuthCookie(res, { accessToken: result.accessToken, refreshToken: result.refreshToken });
+    return sendResponse(res, { success: true, statusCode: httpStatus.OK, message: 'Authentication success', data: result });
+  }
+
+  return sendResponse(res, { success: true, statusCode: httpStatus.OK, message: 'Authentication result', data: result });
+});
+
+// REGISTER WITH GOOGLE
+export const googleRegister = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const payload = {
+      redirect: req.query.redirect || '/',
+      mobile: req.query.mobile || false
+    };
+
+    const state = Buffer
+      .from(JSON.stringify(payload))
+      .toString('base64');
+
+    passport.authenticate('google', {
+      scope: ['profile', 'email'],
+      state,
+      prompt: 'consent select_account',
+    })(req, res, next);
+  }
+);
+
+// GOOGLE CALLBACK
+export const googleCallback = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const state = req.query.state as string;
+
+    const decoded = JSON.parse(
+      Buffer.from(state, 'base64').toString()
+    );
+
+
+    if (decoded.redirect.startsWith('/')) {
+      decoded.redirect = decoded.redirect.slice(1);
+    }
+
+    const user = req.user as any;
+    if (!user) return sendResponse(res, { success: false, statusCode: httpStatus.BAD_REQUEST, message: 'User not found', data: null });
+    const token = await createUserTokens(user);
+    setAuthCookie(res, { accessToken: token.accessToken, refreshToken: token.refreshToken });
+
+
+    // eslint-disable-next-line no-console
+    console.log(token.accessToken);
+
+
+    if (String(decoded.mobile) === 'true') {
+      res.redirect(`${envVars.FRONTEND_URL}/auth/google?access=${token.accessToken}&refresh=${token.refreshToken}`);
+    } else {
+      res.redirect(`${envVars.FRONTEND_URL}?access=${token.accessToken}`);
+    }
+  }
+);
+
+// GOOGLE AUTHENTICATION SYSTEM FOR MOBILE DEVICES
+export const googleAuthSystemController = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
+  const result = await googleAuthSystem(req.body);
+
+  return sendResponse(res, { success: true, statusCode: 200, message: 'Authentication success', data: result });
+});
+

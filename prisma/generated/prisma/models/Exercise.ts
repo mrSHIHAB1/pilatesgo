@@ -225,7 +225,7 @@ export type ExerciseWhereInput = {
   category?: Prisma.XOR<Prisma.CategoryNullableScalarRelationFilter, Prisma.CategoryWhereInput> | null
   videos?: Prisma.VideoListRelationFilter
   workout?: Prisma.XOR<Prisma.WorkoutNullableScalarRelationFilter, Prisma.WorkoutWhereInput> | null
-  programWeeks?: Prisma.ProgramWeekListRelationFilter
+  programDays?: Prisma.ProgramDayListRelationFilter
   completions?: Prisma.UserProgramExerciseCompletionListRelationFilter
 }
 
@@ -243,7 +243,7 @@ export type ExerciseOrderByWithRelationInput = {
   category?: Prisma.CategoryOrderByWithRelationInput
   videos?: Prisma.VideoOrderByRelationAggregateInput
   workout?: Prisma.WorkoutOrderByWithRelationInput
-  programWeeks?: Prisma.ProgramWeekOrderByRelationAggregateInput
+  programDays?: Prisma.ProgramDayOrderByRelationAggregateInput
   completions?: Prisma.UserProgramExerciseCompletionOrderByRelationAggregateInput
 }
 
@@ -264,7 +264,7 @@ export type ExerciseWhereUniqueInput = Prisma.AtLeast<{
   category?: Prisma.XOR<Prisma.CategoryNullableScalarRelationFilter, Prisma.CategoryWhereInput> | null
   videos?: Prisma.VideoListRelationFilter
   workout?: Prisma.XOR<Prisma.WorkoutNullableScalarRelationFilter, Prisma.WorkoutWhereInput> | null
-  programWeeks?: Prisma.ProgramWeekListRelationFilter
+  programDays?: Prisma.ProgramDayListRelationFilter
   completions?: Prisma.UserProgramExerciseCompletionListRelationFilter
 }, "id">
 
@@ -312,7 +312,7 @@ export type ExerciseCreateInput = {
   category?: Prisma.CategoryCreateNestedOneWithoutExercisesInput
   videos?: Prisma.VideoCreateNestedManyWithoutExercisesInput
   workout?: Prisma.WorkoutCreateNestedOneWithoutExercisesInput
-  programWeeks?: Prisma.ProgramWeekCreateNestedManyWithoutExercisesInput
+  programDays?: Prisma.ProgramDayCreateNestedManyWithoutExercisesInput
   completions?: Prisma.UserProgramExerciseCompletionCreateNestedManyWithoutExerciseInput
 }
 
@@ -328,7 +328,7 @@ export type ExerciseUncheckedCreateInput = {
   updatedAt?: Date | string
   workoutId?: string | null
   videos?: Prisma.VideoUncheckedCreateNestedManyWithoutExercisesInput
-  programWeeks?: Prisma.ProgramWeekUncheckedCreateNestedManyWithoutExercisesInput
+  programDays?: Prisma.ProgramDayUncheckedCreateNestedManyWithoutExercisesInput
   completions?: Prisma.UserProgramExerciseCompletionUncheckedCreateNestedManyWithoutExerciseInput
 }
 
@@ -344,7 +344,7 @@ export type ExerciseUpdateInput = {
   category?: Prisma.CategoryUpdateOneWithoutExercisesNestedInput
   videos?: Prisma.VideoUpdateManyWithoutExercisesNestedInput
   workout?: Prisma.WorkoutUpdateOneWithoutExercisesNestedInput
-  programWeeks?: Prisma.ProgramWeekUpdateManyWithoutExercisesNestedInput
+  programDays?: Prisma.ProgramDayUpdateManyWithoutExercisesNestedInput
   completions?: Prisma.UserProgramExerciseCompletionUpdateManyWithoutExerciseNestedInput
 }
 
@@ -360,7 +360,7 @@ export type ExerciseUncheckedUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   workoutId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   videos?: Prisma.VideoUncheckedUpdateManyWithoutExercisesNestedInput
-  programWeeks?: Prisma.ProgramWeekUncheckedUpdateManyWithoutExercisesNestedInput
+  programDays?: Prisma.ProgramDayUncheckedUpdateManyWithoutExercisesNestedInput
   completions?: Prisma.UserProgramExerciseCompletionUncheckedUpdateManyWithoutExerciseNestedInput
 }
 
@@ -450,9 +450,9 @@ export type ExerciseMinOrderByAggregateInput = {
   workoutId?: Prisma.SortOrder
 }
 
-export type ExerciseScalarRelationFilter = {
-  is?: Prisma.ExerciseWhereInput
-  isNot?: Prisma.ExerciseWhereInput
+export type ExerciseNullableScalarRelationFilter = {
+  is?: Prisma.ExerciseWhereInput | null
+  isNot?: Prisma.ExerciseWhereInput | null
 }
 
 export type ExerciseCreateNestedManyWithoutCategoryInput = {
@@ -501,41 +501,41 @@ export type EnumDifficultyLevelFieldUpdateOperationsInput = {
   set?: $Enums.DifficultyLevel
 }
 
-export type ExerciseCreateNestedManyWithoutProgramWeeksInput = {
-  create?: Prisma.XOR<Prisma.ExerciseCreateWithoutProgramWeeksInput, Prisma.ExerciseUncheckedCreateWithoutProgramWeeksInput> | Prisma.ExerciseCreateWithoutProgramWeeksInput[] | Prisma.ExerciseUncheckedCreateWithoutProgramWeeksInput[]
-  connectOrCreate?: Prisma.ExerciseCreateOrConnectWithoutProgramWeeksInput | Prisma.ExerciseCreateOrConnectWithoutProgramWeeksInput[]
+export type ExerciseCreateNestedManyWithoutProgramDaysInput = {
+  create?: Prisma.XOR<Prisma.ExerciseCreateWithoutProgramDaysInput, Prisma.ExerciseUncheckedCreateWithoutProgramDaysInput> | Prisma.ExerciseCreateWithoutProgramDaysInput[] | Prisma.ExerciseUncheckedCreateWithoutProgramDaysInput[]
+  connectOrCreate?: Prisma.ExerciseCreateOrConnectWithoutProgramDaysInput | Prisma.ExerciseCreateOrConnectWithoutProgramDaysInput[]
   connect?: Prisma.ExerciseWhereUniqueInput | Prisma.ExerciseWhereUniqueInput[]
 }
 
-export type ExerciseUncheckedCreateNestedManyWithoutProgramWeeksInput = {
-  create?: Prisma.XOR<Prisma.ExerciseCreateWithoutProgramWeeksInput, Prisma.ExerciseUncheckedCreateWithoutProgramWeeksInput> | Prisma.ExerciseCreateWithoutProgramWeeksInput[] | Prisma.ExerciseUncheckedCreateWithoutProgramWeeksInput[]
-  connectOrCreate?: Prisma.ExerciseCreateOrConnectWithoutProgramWeeksInput | Prisma.ExerciseCreateOrConnectWithoutProgramWeeksInput[]
+export type ExerciseUncheckedCreateNestedManyWithoutProgramDaysInput = {
+  create?: Prisma.XOR<Prisma.ExerciseCreateWithoutProgramDaysInput, Prisma.ExerciseUncheckedCreateWithoutProgramDaysInput> | Prisma.ExerciseCreateWithoutProgramDaysInput[] | Prisma.ExerciseUncheckedCreateWithoutProgramDaysInput[]
+  connectOrCreate?: Prisma.ExerciseCreateOrConnectWithoutProgramDaysInput | Prisma.ExerciseCreateOrConnectWithoutProgramDaysInput[]
   connect?: Prisma.ExerciseWhereUniqueInput | Prisma.ExerciseWhereUniqueInput[]
 }
 
-export type ExerciseUpdateManyWithoutProgramWeeksNestedInput = {
-  create?: Prisma.XOR<Prisma.ExerciseCreateWithoutProgramWeeksInput, Prisma.ExerciseUncheckedCreateWithoutProgramWeeksInput> | Prisma.ExerciseCreateWithoutProgramWeeksInput[] | Prisma.ExerciseUncheckedCreateWithoutProgramWeeksInput[]
-  connectOrCreate?: Prisma.ExerciseCreateOrConnectWithoutProgramWeeksInput | Prisma.ExerciseCreateOrConnectWithoutProgramWeeksInput[]
-  upsert?: Prisma.ExerciseUpsertWithWhereUniqueWithoutProgramWeeksInput | Prisma.ExerciseUpsertWithWhereUniqueWithoutProgramWeeksInput[]
+export type ExerciseUpdateManyWithoutProgramDaysNestedInput = {
+  create?: Prisma.XOR<Prisma.ExerciseCreateWithoutProgramDaysInput, Prisma.ExerciseUncheckedCreateWithoutProgramDaysInput> | Prisma.ExerciseCreateWithoutProgramDaysInput[] | Prisma.ExerciseUncheckedCreateWithoutProgramDaysInput[]
+  connectOrCreate?: Prisma.ExerciseCreateOrConnectWithoutProgramDaysInput | Prisma.ExerciseCreateOrConnectWithoutProgramDaysInput[]
+  upsert?: Prisma.ExerciseUpsertWithWhereUniqueWithoutProgramDaysInput | Prisma.ExerciseUpsertWithWhereUniqueWithoutProgramDaysInput[]
   set?: Prisma.ExerciseWhereUniqueInput | Prisma.ExerciseWhereUniqueInput[]
   disconnect?: Prisma.ExerciseWhereUniqueInput | Prisma.ExerciseWhereUniqueInput[]
   delete?: Prisma.ExerciseWhereUniqueInput | Prisma.ExerciseWhereUniqueInput[]
   connect?: Prisma.ExerciseWhereUniqueInput | Prisma.ExerciseWhereUniqueInput[]
-  update?: Prisma.ExerciseUpdateWithWhereUniqueWithoutProgramWeeksInput | Prisma.ExerciseUpdateWithWhereUniqueWithoutProgramWeeksInput[]
-  updateMany?: Prisma.ExerciseUpdateManyWithWhereWithoutProgramWeeksInput | Prisma.ExerciseUpdateManyWithWhereWithoutProgramWeeksInput[]
+  update?: Prisma.ExerciseUpdateWithWhereUniqueWithoutProgramDaysInput | Prisma.ExerciseUpdateWithWhereUniqueWithoutProgramDaysInput[]
+  updateMany?: Prisma.ExerciseUpdateManyWithWhereWithoutProgramDaysInput | Prisma.ExerciseUpdateManyWithWhereWithoutProgramDaysInput[]
   deleteMany?: Prisma.ExerciseScalarWhereInput | Prisma.ExerciseScalarWhereInput[]
 }
 
-export type ExerciseUncheckedUpdateManyWithoutProgramWeeksNestedInput = {
-  create?: Prisma.XOR<Prisma.ExerciseCreateWithoutProgramWeeksInput, Prisma.ExerciseUncheckedCreateWithoutProgramWeeksInput> | Prisma.ExerciseCreateWithoutProgramWeeksInput[] | Prisma.ExerciseUncheckedCreateWithoutProgramWeeksInput[]
-  connectOrCreate?: Prisma.ExerciseCreateOrConnectWithoutProgramWeeksInput | Prisma.ExerciseCreateOrConnectWithoutProgramWeeksInput[]
-  upsert?: Prisma.ExerciseUpsertWithWhereUniqueWithoutProgramWeeksInput | Prisma.ExerciseUpsertWithWhereUniqueWithoutProgramWeeksInput[]
+export type ExerciseUncheckedUpdateManyWithoutProgramDaysNestedInput = {
+  create?: Prisma.XOR<Prisma.ExerciseCreateWithoutProgramDaysInput, Prisma.ExerciseUncheckedCreateWithoutProgramDaysInput> | Prisma.ExerciseCreateWithoutProgramDaysInput[] | Prisma.ExerciseUncheckedCreateWithoutProgramDaysInput[]
+  connectOrCreate?: Prisma.ExerciseCreateOrConnectWithoutProgramDaysInput | Prisma.ExerciseCreateOrConnectWithoutProgramDaysInput[]
+  upsert?: Prisma.ExerciseUpsertWithWhereUniqueWithoutProgramDaysInput | Prisma.ExerciseUpsertWithWhereUniqueWithoutProgramDaysInput[]
   set?: Prisma.ExerciseWhereUniqueInput | Prisma.ExerciseWhereUniqueInput[]
   disconnect?: Prisma.ExerciseWhereUniqueInput | Prisma.ExerciseWhereUniqueInput[]
   delete?: Prisma.ExerciseWhereUniqueInput | Prisma.ExerciseWhereUniqueInput[]
   connect?: Prisma.ExerciseWhereUniqueInput | Prisma.ExerciseWhereUniqueInput[]
-  update?: Prisma.ExerciseUpdateWithWhereUniqueWithoutProgramWeeksInput | Prisma.ExerciseUpdateWithWhereUniqueWithoutProgramWeeksInput[]
-  updateMany?: Prisma.ExerciseUpdateManyWithWhereWithoutProgramWeeksInput | Prisma.ExerciseUpdateManyWithWhereWithoutProgramWeeksInput[]
+  update?: Prisma.ExerciseUpdateWithWhereUniqueWithoutProgramDaysInput | Prisma.ExerciseUpdateWithWhereUniqueWithoutProgramDaysInput[]
+  updateMany?: Prisma.ExerciseUpdateManyWithWhereWithoutProgramDaysInput | Prisma.ExerciseUpdateManyWithWhereWithoutProgramDaysInput[]
   deleteMany?: Prisma.ExerciseScalarWhereInput | Prisma.ExerciseScalarWhereInput[]
 }
 
@@ -545,10 +545,12 @@ export type ExerciseCreateNestedOneWithoutCompletionsInput = {
   connect?: Prisma.ExerciseWhereUniqueInput
 }
 
-export type ExerciseUpdateOneRequiredWithoutCompletionsNestedInput = {
+export type ExerciseUpdateOneWithoutCompletionsNestedInput = {
   create?: Prisma.XOR<Prisma.ExerciseCreateWithoutCompletionsInput, Prisma.ExerciseUncheckedCreateWithoutCompletionsInput>
   connectOrCreate?: Prisma.ExerciseCreateOrConnectWithoutCompletionsInput
   upsert?: Prisma.ExerciseUpsertWithoutCompletionsInput
+  disconnect?: Prisma.ExerciseWhereInput | boolean
+  delete?: Prisma.ExerciseWhereInput | boolean
   connect?: Prisma.ExerciseWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.ExerciseUpdateToOneWithWhereWithoutCompletionsInput, Prisma.ExerciseUpdateWithoutCompletionsInput>, Prisma.ExerciseUncheckedUpdateWithoutCompletionsInput>
 }
@@ -644,7 +646,7 @@ export type ExerciseCreateWithoutCategoryInput = {
   updatedAt?: Date | string
   videos?: Prisma.VideoCreateNestedManyWithoutExercisesInput
   workout?: Prisma.WorkoutCreateNestedOneWithoutExercisesInput
-  programWeeks?: Prisma.ProgramWeekCreateNestedManyWithoutExercisesInput
+  programDays?: Prisma.ProgramDayCreateNestedManyWithoutExercisesInput
   completions?: Prisma.UserProgramExerciseCompletionCreateNestedManyWithoutExerciseInput
 }
 
@@ -659,7 +661,7 @@ export type ExerciseUncheckedCreateWithoutCategoryInput = {
   updatedAt?: Date | string
   workoutId?: string | null
   videos?: Prisma.VideoUncheckedCreateNestedManyWithoutExercisesInput
-  programWeeks?: Prisma.ProgramWeekUncheckedCreateNestedManyWithoutExercisesInput
+  programDays?: Prisma.ProgramDayUncheckedCreateNestedManyWithoutExercisesInput
   completions?: Prisma.UserProgramExerciseCompletionUncheckedCreateNestedManyWithoutExerciseInput
 }
 
@@ -705,7 +707,7 @@ export type ExerciseScalarWhereInput = {
   workoutId?: Prisma.StringNullableFilter<"Exercise"> | string | null
 }
 
-export type ExerciseCreateWithoutProgramWeeksInput = {
+export type ExerciseCreateWithoutProgramDaysInput = {
   id?: string
   name: string
   targetArea: string
@@ -720,7 +722,7 @@ export type ExerciseCreateWithoutProgramWeeksInput = {
   completions?: Prisma.UserProgramExerciseCompletionCreateNestedManyWithoutExerciseInput
 }
 
-export type ExerciseUncheckedCreateWithoutProgramWeeksInput = {
+export type ExerciseUncheckedCreateWithoutProgramDaysInput = {
   id?: string
   name: string
   targetArea: string
@@ -735,25 +737,25 @@ export type ExerciseUncheckedCreateWithoutProgramWeeksInput = {
   completions?: Prisma.UserProgramExerciseCompletionUncheckedCreateNestedManyWithoutExerciseInput
 }
 
-export type ExerciseCreateOrConnectWithoutProgramWeeksInput = {
+export type ExerciseCreateOrConnectWithoutProgramDaysInput = {
   where: Prisma.ExerciseWhereUniqueInput
-  create: Prisma.XOR<Prisma.ExerciseCreateWithoutProgramWeeksInput, Prisma.ExerciseUncheckedCreateWithoutProgramWeeksInput>
+  create: Prisma.XOR<Prisma.ExerciseCreateWithoutProgramDaysInput, Prisma.ExerciseUncheckedCreateWithoutProgramDaysInput>
 }
 
-export type ExerciseUpsertWithWhereUniqueWithoutProgramWeeksInput = {
+export type ExerciseUpsertWithWhereUniqueWithoutProgramDaysInput = {
   where: Prisma.ExerciseWhereUniqueInput
-  update: Prisma.XOR<Prisma.ExerciseUpdateWithoutProgramWeeksInput, Prisma.ExerciseUncheckedUpdateWithoutProgramWeeksInput>
-  create: Prisma.XOR<Prisma.ExerciseCreateWithoutProgramWeeksInput, Prisma.ExerciseUncheckedCreateWithoutProgramWeeksInput>
+  update: Prisma.XOR<Prisma.ExerciseUpdateWithoutProgramDaysInput, Prisma.ExerciseUncheckedUpdateWithoutProgramDaysInput>
+  create: Prisma.XOR<Prisma.ExerciseCreateWithoutProgramDaysInput, Prisma.ExerciseUncheckedCreateWithoutProgramDaysInput>
 }
 
-export type ExerciseUpdateWithWhereUniqueWithoutProgramWeeksInput = {
+export type ExerciseUpdateWithWhereUniqueWithoutProgramDaysInput = {
   where: Prisma.ExerciseWhereUniqueInput
-  data: Prisma.XOR<Prisma.ExerciseUpdateWithoutProgramWeeksInput, Prisma.ExerciseUncheckedUpdateWithoutProgramWeeksInput>
+  data: Prisma.XOR<Prisma.ExerciseUpdateWithoutProgramDaysInput, Prisma.ExerciseUncheckedUpdateWithoutProgramDaysInput>
 }
 
-export type ExerciseUpdateManyWithWhereWithoutProgramWeeksInput = {
+export type ExerciseUpdateManyWithWhereWithoutProgramDaysInput = {
   where: Prisma.ExerciseScalarWhereInput
-  data: Prisma.XOR<Prisma.ExerciseUpdateManyMutationInput, Prisma.ExerciseUncheckedUpdateManyWithoutProgramWeeksInput>
+  data: Prisma.XOR<Prisma.ExerciseUpdateManyMutationInput, Prisma.ExerciseUncheckedUpdateManyWithoutProgramDaysInput>
 }
 
 export type ExerciseCreateWithoutCompletionsInput = {
@@ -768,7 +770,7 @@ export type ExerciseCreateWithoutCompletionsInput = {
   category?: Prisma.CategoryCreateNestedOneWithoutExercisesInput
   videos?: Prisma.VideoCreateNestedManyWithoutExercisesInput
   workout?: Prisma.WorkoutCreateNestedOneWithoutExercisesInput
-  programWeeks?: Prisma.ProgramWeekCreateNestedManyWithoutExercisesInput
+  programDays?: Prisma.ProgramDayCreateNestedManyWithoutExercisesInput
 }
 
 export type ExerciseUncheckedCreateWithoutCompletionsInput = {
@@ -783,7 +785,7 @@ export type ExerciseUncheckedCreateWithoutCompletionsInput = {
   updatedAt?: Date | string
   workoutId?: string | null
   videos?: Prisma.VideoUncheckedCreateNestedManyWithoutExercisesInput
-  programWeeks?: Prisma.ProgramWeekUncheckedCreateNestedManyWithoutExercisesInput
+  programDays?: Prisma.ProgramDayUncheckedCreateNestedManyWithoutExercisesInput
 }
 
 export type ExerciseCreateOrConnectWithoutCompletionsInput = {
@@ -814,7 +816,7 @@ export type ExerciseUpdateWithoutCompletionsInput = {
   category?: Prisma.CategoryUpdateOneWithoutExercisesNestedInput
   videos?: Prisma.VideoUpdateManyWithoutExercisesNestedInput
   workout?: Prisma.WorkoutUpdateOneWithoutExercisesNestedInput
-  programWeeks?: Prisma.ProgramWeekUpdateManyWithoutExercisesNestedInput
+  programDays?: Prisma.ProgramDayUpdateManyWithoutExercisesNestedInput
 }
 
 export type ExerciseUncheckedUpdateWithoutCompletionsInput = {
@@ -829,7 +831,7 @@ export type ExerciseUncheckedUpdateWithoutCompletionsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   workoutId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   videos?: Prisma.VideoUncheckedUpdateManyWithoutExercisesNestedInput
-  programWeeks?: Prisma.ProgramWeekUncheckedUpdateManyWithoutExercisesNestedInput
+  programDays?: Prisma.ProgramDayUncheckedUpdateManyWithoutExercisesNestedInput
 }
 
 export type ExerciseCreateWithoutVideosInput = {
@@ -843,7 +845,7 @@ export type ExerciseCreateWithoutVideosInput = {
   updatedAt?: Date | string
   category?: Prisma.CategoryCreateNestedOneWithoutExercisesInput
   workout?: Prisma.WorkoutCreateNestedOneWithoutExercisesInput
-  programWeeks?: Prisma.ProgramWeekCreateNestedManyWithoutExercisesInput
+  programDays?: Prisma.ProgramDayCreateNestedManyWithoutExercisesInput
   completions?: Prisma.UserProgramExerciseCompletionCreateNestedManyWithoutExerciseInput
 }
 
@@ -858,7 +860,7 @@ export type ExerciseUncheckedCreateWithoutVideosInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   workoutId?: string | null
-  programWeeks?: Prisma.ProgramWeekUncheckedCreateNestedManyWithoutExercisesInput
+  programDays?: Prisma.ProgramDayUncheckedCreateNestedManyWithoutExercisesInput
   completions?: Prisma.UserProgramExerciseCompletionUncheckedCreateNestedManyWithoutExerciseInput
 }
 
@@ -894,7 +896,7 @@ export type ExerciseCreateWithoutWorkoutInput = {
   updatedAt?: Date | string
   category?: Prisma.CategoryCreateNestedOneWithoutExercisesInput
   videos?: Prisma.VideoCreateNestedManyWithoutExercisesInput
-  programWeeks?: Prisma.ProgramWeekCreateNestedManyWithoutExercisesInput
+  programDays?: Prisma.ProgramDayCreateNestedManyWithoutExercisesInput
   completions?: Prisma.UserProgramExerciseCompletionCreateNestedManyWithoutExerciseInput
 }
 
@@ -909,7 +911,7 @@ export type ExerciseUncheckedCreateWithoutWorkoutInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   videos?: Prisma.VideoUncheckedCreateNestedManyWithoutExercisesInput
-  programWeeks?: Prisma.ProgramWeekUncheckedCreateNestedManyWithoutExercisesInput
+  programDays?: Prisma.ProgramDayUncheckedCreateNestedManyWithoutExercisesInput
   completions?: Prisma.UserProgramExerciseCompletionUncheckedCreateNestedManyWithoutExerciseInput
 }
 
@@ -962,7 +964,7 @@ export type ExerciseUpdateWithoutCategoryInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   videos?: Prisma.VideoUpdateManyWithoutExercisesNestedInput
   workout?: Prisma.WorkoutUpdateOneWithoutExercisesNestedInput
-  programWeeks?: Prisma.ProgramWeekUpdateManyWithoutExercisesNestedInput
+  programDays?: Prisma.ProgramDayUpdateManyWithoutExercisesNestedInput
   completions?: Prisma.UserProgramExerciseCompletionUpdateManyWithoutExerciseNestedInput
 }
 
@@ -977,7 +979,7 @@ export type ExerciseUncheckedUpdateWithoutCategoryInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   workoutId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   videos?: Prisma.VideoUncheckedUpdateManyWithoutExercisesNestedInput
-  programWeeks?: Prisma.ProgramWeekUncheckedUpdateManyWithoutExercisesNestedInput
+  programDays?: Prisma.ProgramDayUncheckedUpdateManyWithoutExercisesNestedInput
   completions?: Prisma.UserProgramExerciseCompletionUncheckedUpdateManyWithoutExerciseNestedInput
 }
 
@@ -993,7 +995,7 @@ export type ExerciseUncheckedUpdateManyWithoutCategoryInput = {
   workoutId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
-export type ExerciseUpdateWithoutProgramWeeksInput = {
+export type ExerciseUpdateWithoutProgramDaysInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   targetArea?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1008,7 +1010,7 @@ export type ExerciseUpdateWithoutProgramWeeksInput = {
   completions?: Prisma.UserProgramExerciseCompletionUpdateManyWithoutExerciseNestedInput
 }
 
-export type ExerciseUncheckedUpdateWithoutProgramWeeksInput = {
+export type ExerciseUncheckedUpdateWithoutProgramDaysInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   targetArea?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1023,7 +1025,7 @@ export type ExerciseUncheckedUpdateWithoutProgramWeeksInput = {
   completions?: Prisma.UserProgramExerciseCompletionUncheckedUpdateManyWithoutExerciseNestedInput
 }
 
-export type ExerciseUncheckedUpdateManyWithoutProgramWeeksInput = {
+export type ExerciseUncheckedUpdateManyWithoutProgramDaysInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   targetArea?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1047,7 +1049,7 @@ export type ExerciseUpdateWithoutVideosInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   category?: Prisma.CategoryUpdateOneWithoutExercisesNestedInput
   workout?: Prisma.WorkoutUpdateOneWithoutExercisesNestedInput
-  programWeeks?: Prisma.ProgramWeekUpdateManyWithoutExercisesNestedInput
+  programDays?: Prisma.ProgramDayUpdateManyWithoutExercisesNestedInput
   completions?: Prisma.UserProgramExerciseCompletionUpdateManyWithoutExerciseNestedInput
 }
 
@@ -1062,7 +1064,7 @@ export type ExerciseUncheckedUpdateWithoutVideosInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   workoutId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  programWeeks?: Prisma.ProgramWeekUncheckedUpdateManyWithoutExercisesNestedInput
+  programDays?: Prisma.ProgramDayUncheckedUpdateManyWithoutExercisesNestedInput
   completions?: Prisma.UserProgramExerciseCompletionUncheckedUpdateManyWithoutExerciseNestedInput
 }
 
@@ -1102,7 +1104,7 @@ export type ExerciseUpdateWithoutWorkoutInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   category?: Prisma.CategoryUpdateOneWithoutExercisesNestedInput
   videos?: Prisma.VideoUpdateManyWithoutExercisesNestedInput
-  programWeeks?: Prisma.ProgramWeekUpdateManyWithoutExercisesNestedInput
+  programDays?: Prisma.ProgramDayUpdateManyWithoutExercisesNestedInput
   completions?: Prisma.UserProgramExerciseCompletionUpdateManyWithoutExerciseNestedInput
 }
 
@@ -1117,7 +1119,7 @@ export type ExerciseUncheckedUpdateWithoutWorkoutInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   videos?: Prisma.VideoUncheckedUpdateManyWithoutExercisesNestedInput
-  programWeeks?: Prisma.ProgramWeekUncheckedUpdateManyWithoutExercisesNestedInput
+  programDays?: Prisma.ProgramDayUncheckedUpdateManyWithoutExercisesNestedInput
   completions?: Prisma.UserProgramExerciseCompletionUncheckedUpdateManyWithoutExerciseNestedInput
 }
 
@@ -1140,13 +1142,13 @@ export type ExerciseUncheckedUpdateManyWithoutWorkoutInput = {
 
 export type ExerciseCountOutputType = {
   videos: number
-  programWeeks: number
+  programDays: number
   completions: number
 }
 
 export type ExerciseCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   videos?: boolean | ExerciseCountOutputTypeCountVideosArgs
-  programWeeks?: boolean | ExerciseCountOutputTypeCountProgramWeeksArgs
+  programDays?: boolean | ExerciseCountOutputTypeCountProgramDaysArgs
   completions?: boolean | ExerciseCountOutputTypeCountCompletionsArgs
 }
 
@@ -1170,8 +1172,8 @@ export type ExerciseCountOutputTypeCountVideosArgs<ExtArgs extends runtime.Types
 /**
  * ExerciseCountOutputType without action
  */
-export type ExerciseCountOutputTypeCountProgramWeeksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.ProgramWeekWhereInput
+export type ExerciseCountOutputTypeCountProgramDaysArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ProgramDayWhereInput
 }
 
 /**
@@ -1196,7 +1198,7 @@ export type ExerciseSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   category?: boolean | Prisma.Exercise$categoryArgs<ExtArgs>
   videos?: boolean | Prisma.Exercise$videosArgs<ExtArgs>
   workout?: boolean | Prisma.Exercise$workoutArgs<ExtArgs>
-  programWeeks?: boolean | Prisma.Exercise$programWeeksArgs<ExtArgs>
+  programDays?: boolean | Prisma.Exercise$programDaysArgs<ExtArgs>
   completions?: boolean | Prisma.Exercise$completionsArgs<ExtArgs>
   _count?: boolean | Prisma.ExerciseCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["exercise"]>
@@ -1249,7 +1251,7 @@ export type ExerciseInclude<ExtArgs extends runtime.Types.Extensions.InternalArg
   category?: boolean | Prisma.Exercise$categoryArgs<ExtArgs>
   videos?: boolean | Prisma.Exercise$videosArgs<ExtArgs>
   workout?: boolean | Prisma.Exercise$workoutArgs<ExtArgs>
-  programWeeks?: boolean | Prisma.Exercise$programWeeksArgs<ExtArgs>
+  programDays?: boolean | Prisma.Exercise$programDaysArgs<ExtArgs>
   completions?: boolean | Prisma.Exercise$completionsArgs<ExtArgs>
   _count?: boolean | Prisma.ExerciseCountOutputTypeDefaultArgs<ExtArgs>
 }
@@ -1268,7 +1270,7 @@ export type $ExercisePayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     category: Prisma.$CategoryPayload<ExtArgs> | null
     videos: Prisma.$VideoPayload<ExtArgs>[]
     workout: Prisma.$WorkoutPayload<ExtArgs> | null
-    programWeeks: Prisma.$ProgramWeekPayload<ExtArgs>[]
+    programDays: Prisma.$ProgramDayPayload<ExtArgs>[]
     completions: Prisma.$UserProgramExerciseCompletionPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -1679,7 +1681,7 @@ export interface Prisma__ExerciseClient<T, Null = never, ExtArgs extends runtime
   category<T extends Prisma.Exercise$categoryArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Exercise$categoryArgs<ExtArgs>>): Prisma.Prisma__CategoryClient<runtime.Types.Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   videos<T extends Prisma.Exercise$videosArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Exercise$videosArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$VideoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   workout<T extends Prisma.Exercise$workoutArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Exercise$workoutArgs<ExtArgs>>): Prisma.Prisma__WorkoutClient<runtime.Types.Result.GetResult<Prisma.$WorkoutPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  programWeeks<T extends Prisma.Exercise$programWeeksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Exercise$programWeeksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProgramWeekPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  programDays<T extends Prisma.Exercise$programDaysArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Exercise$programDaysArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProgramDayPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   completions<T extends Prisma.Exercise$completionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Exercise$completionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserProgramExerciseCompletionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -2183,27 +2185,27 @@ export type Exercise$workoutArgs<ExtArgs extends runtime.Types.Extensions.Intern
 }
 
 /**
- * Exercise.programWeeks
+ * Exercise.programDays
  */
-export type Exercise$programWeeksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Exercise$programDaysArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the ProgramWeek
+   * Select specific fields to fetch from the ProgramDay
    */
-  select?: Prisma.ProgramWeekSelect<ExtArgs> | null
+  select?: Prisma.ProgramDaySelect<ExtArgs> | null
   /**
-   * Omit specific fields from the ProgramWeek
+   * Omit specific fields from the ProgramDay
    */
-  omit?: Prisma.ProgramWeekOmit<ExtArgs> | null
+  omit?: Prisma.ProgramDayOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.ProgramWeekInclude<ExtArgs> | null
-  where?: Prisma.ProgramWeekWhereInput
-  orderBy?: Prisma.ProgramWeekOrderByWithRelationInput | Prisma.ProgramWeekOrderByWithRelationInput[]
-  cursor?: Prisma.ProgramWeekWhereUniqueInput
+  include?: Prisma.ProgramDayInclude<ExtArgs> | null
+  where?: Prisma.ProgramDayWhereInput
+  orderBy?: Prisma.ProgramDayOrderByWithRelationInput | Prisma.ProgramDayOrderByWithRelationInput[]
+  cursor?: Prisma.ProgramDayWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.ProgramWeekScalarFieldEnum | Prisma.ProgramWeekScalarFieldEnum[]
+  distinct?: Prisma.ProgramDayScalarFieldEnum | Prisma.ProgramDayScalarFieldEnum[]
 }
 
 /**

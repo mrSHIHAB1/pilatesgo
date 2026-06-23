@@ -6,7 +6,12 @@ import {
   forgotPasswordSendOtp,
   forgotPasswordVerifyOtp,
   forgotPasswordResetPassword,
+  appleLoginController,
+  googleRegister,
+  googleCallback,
+  googleAuthSystemController,
 } from './auth.controller';
+import passport from '../../config/passport.config';
 import validateRequest from '../../middlewares/validateRequest';
 import {
   loginValidation,
@@ -50,5 +55,11 @@ router.post(
   validateRequest(forgotPasswordResetPasswordValidation),
   forgotPasswordResetPassword
 );
+router.post('/login/apple', appleLoginController);
+router.get('/google', googleRegister);
+router.get('/google/callback', passport.authenticate('google', { failureRedirect: '/login' }), googleCallback);
+
+// GOOGLE AUTH FOR MOBILE DEVICES
+router.post('/google/auth', googleAuthSystemController);
 
 export const authRoutes = router;

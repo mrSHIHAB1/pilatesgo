@@ -1,18 +1,17 @@
 model Exercise {
-  id           String          @id @default(uuid())
+  id           String                          @id @default(uuid())
   name         String
   targetArea   String
   description  String?
   instructions String?
   difficulty   DifficultyLevel
   categoryId   String?
-  category     Category?       @relation(fields: [categoryId], references: [id])
-  createdAt    DateTime        @default(now())
-  updatedAt    DateTime        @updatedAt
+  category     Category?                       @relation(fields: [categoryId], references: [id])
+  createdAt    DateTime                        @default(now())
+  updatedAt    DateTime                        @updatedAt
   videos       Video[]
-  workout      Workout?        @relation(fields: [workoutId], references: [id])
+  workout      Workout?                        @relation(fields: [workoutId], references: [id])
   workoutId    String?
-  programWeeks ProgramWeek[]   @relation("ProgramWeekExercises")
+  programDays  ProgramDay[]                    @relation("ProgramDayExercises")
   completions  UserProgramExerciseCompletion[]
-  
 }

@@ -164,7 +164,7 @@ export type UserProgramExerciseCompletionGroupByOutputType = {
   userId: string
   programId: string
   programWeekId: string
-  exerciseId: string
+  exerciseId: string | null
   completedAt: Date
   createdAt: Date
   _count: UserProgramExerciseCompletionCountAggregateOutputType | null
@@ -195,13 +195,13 @@ export type UserProgramExerciseCompletionWhereInput = {
   userId?: Prisma.StringFilter<"UserProgramExerciseCompletion"> | string
   programId?: Prisma.StringFilter<"UserProgramExerciseCompletion"> | string
   programWeekId?: Prisma.StringFilter<"UserProgramExerciseCompletion"> | string
-  exerciseId?: Prisma.StringFilter<"UserProgramExerciseCompletion"> | string
+  exerciseId?: Prisma.StringNullableFilter<"UserProgramExerciseCompletion"> | string | null
   completedAt?: Prisma.DateTimeFilter<"UserProgramExerciseCompletion"> | Date | string
   createdAt?: Prisma.DateTimeFilter<"UserProgramExerciseCompletion"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   program?: Prisma.XOR<Prisma.ProgramScalarRelationFilter, Prisma.ProgramWhereInput>
   programWeek?: Prisma.XOR<Prisma.ProgramWeekScalarRelationFilter, Prisma.ProgramWeekWhereInput>
-  exercise?: Prisma.XOR<Prisma.ExerciseScalarRelationFilter, Prisma.ExerciseWhereInput>
+  exercise?: Prisma.XOR<Prisma.ExerciseNullableScalarRelationFilter, Prisma.ExerciseWhereInput> | null
 }
 
 export type UserProgramExerciseCompletionOrderByWithRelationInput = {
@@ -209,7 +209,7 @@ export type UserProgramExerciseCompletionOrderByWithRelationInput = {
   userId?: Prisma.SortOrder
   programId?: Prisma.SortOrder
   programWeekId?: Prisma.SortOrder
-  exerciseId?: Prisma.SortOrder
+  exerciseId?: Prisma.SortOrderInput | Prisma.SortOrder
   completedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   user?: Prisma.UserOrderByWithRelationInput
@@ -227,13 +227,13 @@ export type UserProgramExerciseCompletionWhereUniqueInput = Prisma.AtLeast<{
   userId?: Prisma.StringFilter<"UserProgramExerciseCompletion"> | string
   programId?: Prisma.StringFilter<"UserProgramExerciseCompletion"> | string
   programWeekId?: Prisma.StringFilter<"UserProgramExerciseCompletion"> | string
-  exerciseId?: Prisma.StringFilter<"UserProgramExerciseCompletion"> | string
+  exerciseId?: Prisma.StringNullableFilter<"UserProgramExerciseCompletion"> | string | null
   completedAt?: Prisma.DateTimeFilter<"UserProgramExerciseCompletion"> | Date | string
   createdAt?: Prisma.DateTimeFilter<"UserProgramExerciseCompletion"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   program?: Prisma.XOR<Prisma.ProgramScalarRelationFilter, Prisma.ProgramWhereInput>
   programWeek?: Prisma.XOR<Prisma.ProgramWeekScalarRelationFilter, Prisma.ProgramWeekWhereInput>
-  exercise?: Prisma.XOR<Prisma.ExerciseScalarRelationFilter, Prisma.ExerciseWhereInput>
+  exercise?: Prisma.XOR<Prisma.ExerciseNullableScalarRelationFilter, Prisma.ExerciseWhereInput> | null
 }, "id" | "user_week_exercise">
 
 export type UserProgramExerciseCompletionOrderByWithAggregationInput = {
@@ -241,7 +241,7 @@ export type UserProgramExerciseCompletionOrderByWithAggregationInput = {
   userId?: Prisma.SortOrder
   programId?: Prisma.SortOrder
   programWeekId?: Prisma.SortOrder
-  exerciseId?: Prisma.SortOrder
+  exerciseId?: Prisma.SortOrderInput | Prisma.SortOrder
   completedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   _count?: Prisma.UserProgramExerciseCompletionCountOrderByAggregateInput
@@ -257,7 +257,7 @@ export type UserProgramExerciseCompletionScalarWhereWithAggregatesInput = {
   userId?: Prisma.StringWithAggregatesFilter<"UserProgramExerciseCompletion"> | string
   programId?: Prisma.StringWithAggregatesFilter<"UserProgramExerciseCompletion"> | string
   programWeekId?: Prisma.StringWithAggregatesFilter<"UserProgramExerciseCompletion"> | string
-  exerciseId?: Prisma.StringWithAggregatesFilter<"UserProgramExerciseCompletion"> | string
+  exerciseId?: Prisma.StringNullableWithAggregatesFilter<"UserProgramExerciseCompletion"> | string | null
   completedAt?: Prisma.DateTimeWithAggregatesFilter<"UserProgramExerciseCompletion"> | Date | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"UserProgramExerciseCompletion"> | Date | string
 }
@@ -269,7 +269,7 @@ export type UserProgramExerciseCompletionCreateInput = {
   user: Prisma.UserCreateNestedOneWithoutProgramCompletionsInput
   program: Prisma.ProgramCreateNestedOneWithoutCompletionsInput
   programWeek: Prisma.ProgramWeekCreateNestedOneWithoutCompletionsInput
-  exercise: Prisma.ExerciseCreateNestedOneWithoutCompletionsInput
+  exercise?: Prisma.ExerciseCreateNestedOneWithoutCompletionsInput
 }
 
 export type UserProgramExerciseCompletionUncheckedCreateInput = {
@@ -277,7 +277,7 @@ export type UserProgramExerciseCompletionUncheckedCreateInput = {
   userId: string
   programId: string
   programWeekId: string
-  exerciseId: string
+  exerciseId?: string | null
   completedAt?: Date | string
   createdAt?: Date | string
 }
@@ -289,7 +289,7 @@ export type UserProgramExerciseCompletionUpdateInput = {
   user?: Prisma.UserUpdateOneRequiredWithoutProgramCompletionsNestedInput
   program?: Prisma.ProgramUpdateOneRequiredWithoutCompletionsNestedInput
   programWeek?: Prisma.ProgramWeekUpdateOneRequiredWithoutCompletionsNestedInput
-  exercise?: Prisma.ExerciseUpdateOneRequiredWithoutCompletionsNestedInput
+  exercise?: Prisma.ExerciseUpdateOneWithoutCompletionsNestedInput
 }
 
 export type UserProgramExerciseCompletionUncheckedUpdateInput = {
@@ -297,7 +297,7 @@ export type UserProgramExerciseCompletionUncheckedUpdateInput = {
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   programId?: Prisma.StringFieldUpdateOperationsInput | string
   programWeekId?: Prisma.StringFieldUpdateOperationsInput | string
-  exerciseId?: Prisma.StringFieldUpdateOperationsInput | string
+  exerciseId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   completedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -307,7 +307,7 @@ export type UserProgramExerciseCompletionCreateManyInput = {
   userId: string
   programId: string
   programWeekId: string
-  exerciseId: string
+  exerciseId?: string | null
   completedAt?: Date | string
   createdAt?: Date | string
 }
@@ -323,7 +323,7 @@ export type UserProgramExerciseCompletionUncheckedUpdateManyInput = {
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   programId?: Prisma.StringFieldUpdateOperationsInput | string
   programWeekId?: Prisma.StringFieldUpdateOperationsInput | string
-  exerciseId?: Prisma.StringFieldUpdateOperationsInput | string
+  exerciseId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   completedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -594,7 +594,7 @@ export type UserProgramExerciseCompletionScalarWhereInput = {
   userId?: Prisma.StringFilter<"UserProgramExerciseCompletion"> | string
   programId?: Prisma.StringFilter<"UserProgramExerciseCompletion"> | string
   programWeekId?: Prisma.StringFilter<"UserProgramExerciseCompletion"> | string
-  exerciseId?: Prisma.StringFilter<"UserProgramExerciseCompletion"> | string
+  exerciseId?: Prisma.StringNullableFilter<"UserProgramExerciseCompletion"> | string | null
   completedAt?: Prisma.DateTimeFilter<"UserProgramExerciseCompletion"> | Date | string
   createdAt?: Prisma.DateTimeFilter<"UserProgramExerciseCompletion"> | Date | string
 }
@@ -605,14 +605,14 @@ export type UserProgramExerciseCompletionCreateWithoutProgramInput = {
   createdAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutProgramCompletionsInput
   programWeek: Prisma.ProgramWeekCreateNestedOneWithoutCompletionsInput
-  exercise: Prisma.ExerciseCreateNestedOneWithoutCompletionsInput
+  exercise?: Prisma.ExerciseCreateNestedOneWithoutCompletionsInput
 }
 
 export type UserProgramExerciseCompletionUncheckedCreateWithoutProgramInput = {
   id?: string
   userId: string
   programWeekId: string
-  exerciseId: string
+  exerciseId?: string | null
   completedAt?: Date | string
   createdAt?: Date | string
 }
@@ -649,14 +649,14 @@ export type UserProgramExerciseCompletionCreateWithoutProgramWeekInput = {
   createdAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutProgramCompletionsInput
   program: Prisma.ProgramCreateNestedOneWithoutCompletionsInput
-  exercise: Prisma.ExerciseCreateNestedOneWithoutCompletionsInput
+  exercise?: Prisma.ExerciseCreateNestedOneWithoutCompletionsInput
 }
 
 export type UserProgramExerciseCompletionUncheckedCreateWithoutProgramWeekInput = {
   id?: string
   userId: string
   programId: string
-  exerciseId: string
+  exerciseId?: string | null
   completedAt?: Date | string
   createdAt?: Date | string
 }
@@ -693,14 +693,14 @@ export type UserProgramExerciseCompletionCreateWithoutUserInput = {
   createdAt?: Date | string
   program: Prisma.ProgramCreateNestedOneWithoutCompletionsInput
   programWeek: Prisma.ProgramWeekCreateNestedOneWithoutCompletionsInput
-  exercise: Prisma.ExerciseCreateNestedOneWithoutCompletionsInput
+  exercise?: Prisma.ExerciseCreateNestedOneWithoutCompletionsInput
 }
 
 export type UserProgramExerciseCompletionUncheckedCreateWithoutUserInput = {
   id?: string
   programId: string
   programWeekId: string
-  exerciseId: string
+  exerciseId?: string | null
   completedAt?: Date | string
   createdAt?: Date | string
 }
@@ -771,7 +771,7 @@ export type UserProgramExerciseCompletionCreateManyProgramInput = {
   id?: string
   userId: string
   programWeekId: string
-  exerciseId: string
+  exerciseId?: string | null
   completedAt?: Date | string
   createdAt?: Date | string
 }
@@ -782,14 +782,14 @@ export type UserProgramExerciseCompletionUpdateWithoutProgramInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutProgramCompletionsNestedInput
   programWeek?: Prisma.ProgramWeekUpdateOneRequiredWithoutCompletionsNestedInput
-  exercise?: Prisma.ExerciseUpdateOneRequiredWithoutCompletionsNestedInput
+  exercise?: Prisma.ExerciseUpdateOneWithoutCompletionsNestedInput
 }
 
 export type UserProgramExerciseCompletionUncheckedUpdateWithoutProgramInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   programWeekId?: Prisma.StringFieldUpdateOperationsInput | string
-  exerciseId?: Prisma.StringFieldUpdateOperationsInput | string
+  exerciseId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   completedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -798,7 +798,7 @@ export type UserProgramExerciseCompletionUncheckedUpdateManyWithoutProgramInput 
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   programWeekId?: Prisma.StringFieldUpdateOperationsInput | string
-  exerciseId?: Prisma.StringFieldUpdateOperationsInput | string
+  exerciseId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   completedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -807,7 +807,7 @@ export type UserProgramExerciseCompletionCreateManyProgramWeekInput = {
   id?: string
   userId: string
   programId: string
-  exerciseId: string
+  exerciseId?: string | null
   completedAt?: Date | string
   createdAt?: Date | string
 }
@@ -818,14 +818,14 @@ export type UserProgramExerciseCompletionUpdateWithoutProgramWeekInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutProgramCompletionsNestedInput
   program?: Prisma.ProgramUpdateOneRequiredWithoutCompletionsNestedInput
-  exercise?: Prisma.ExerciseUpdateOneRequiredWithoutCompletionsNestedInput
+  exercise?: Prisma.ExerciseUpdateOneWithoutCompletionsNestedInput
 }
 
 export type UserProgramExerciseCompletionUncheckedUpdateWithoutProgramWeekInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   programId?: Prisma.StringFieldUpdateOperationsInput | string
-  exerciseId?: Prisma.StringFieldUpdateOperationsInput | string
+  exerciseId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   completedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -834,7 +834,7 @@ export type UserProgramExerciseCompletionUncheckedUpdateManyWithoutProgramWeekIn
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   programId?: Prisma.StringFieldUpdateOperationsInput | string
-  exerciseId?: Prisma.StringFieldUpdateOperationsInput | string
+  exerciseId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   completedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -843,7 +843,7 @@ export type UserProgramExerciseCompletionCreateManyUserInput = {
   id?: string
   programId: string
   programWeekId: string
-  exerciseId: string
+  exerciseId?: string | null
   completedAt?: Date | string
   createdAt?: Date | string
 }
@@ -854,14 +854,14 @@ export type UserProgramExerciseCompletionUpdateWithoutUserInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   program?: Prisma.ProgramUpdateOneRequiredWithoutCompletionsNestedInput
   programWeek?: Prisma.ProgramWeekUpdateOneRequiredWithoutCompletionsNestedInput
-  exercise?: Prisma.ExerciseUpdateOneRequiredWithoutCompletionsNestedInput
+  exercise?: Prisma.ExerciseUpdateOneWithoutCompletionsNestedInput
 }
 
 export type UserProgramExerciseCompletionUncheckedUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   programId?: Prisma.StringFieldUpdateOperationsInput | string
   programWeekId?: Prisma.StringFieldUpdateOperationsInput | string
-  exerciseId?: Prisma.StringFieldUpdateOperationsInput | string
+  exerciseId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   completedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -870,7 +870,7 @@ export type UserProgramExerciseCompletionUncheckedUpdateManyWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   programId?: Prisma.StringFieldUpdateOperationsInput | string
   programWeekId?: Prisma.StringFieldUpdateOperationsInput | string
-  exerciseId?: Prisma.StringFieldUpdateOperationsInput | string
+  exerciseId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   completedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -888,7 +888,7 @@ export type UserProgramExerciseCompletionSelect<ExtArgs extends runtime.Types.Ex
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   program?: boolean | Prisma.ProgramDefaultArgs<ExtArgs>
   programWeek?: boolean | Prisma.ProgramWeekDefaultArgs<ExtArgs>
-  exercise?: boolean | Prisma.ExerciseDefaultArgs<ExtArgs>
+  exercise?: boolean | Prisma.UserProgramExerciseCompletion$exerciseArgs<ExtArgs>
 }, ExtArgs["result"]["userProgramExerciseCompletion"]>
 
 export type UserProgramExerciseCompletionSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -902,7 +902,7 @@ export type UserProgramExerciseCompletionSelectCreateManyAndReturn<ExtArgs exten
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   program?: boolean | Prisma.ProgramDefaultArgs<ExtArgs>
   programWeek?: boolean | Prisma.ProgramWeekDefaultArgs<ExtArgs>
-  exercise?: boolean | Prisma.ExerciseDefaultArgs<ExtArgs>
+  exercise?: boolean | Prisma.UserProgramExerciseCompletion$exerciseArgs<ExtArgs>
 }, ExtArgs["result"]["userProgramExerciseCompletion"]>
 
 export type UserProgramExerciseCompletionSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -916,7 +916,7 @@ export type UserProgramExerciseCompletionSelectUpdateManyAndReturn<ExtArgs exten
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   program?: boolean | Prisma.ProgramDefaultArgs<ExtArgs>
   programWeek?: boolean | Prisma.ProgramWeekDefaultArgs<ExtArgs>
-  exercise?: boolean | Prisma.ExerciseDefaultArgs<ExtArgs>
+  exercise?: boolean | Prisma.UserProgramExerciseCompletion$exerciseArgs<ExtArgs>
 }, ExtArgs["result"]["userProgramExerciseCompletion"]>
 
 export type UserProgramExerciseCompletionSelectScalar = {
@@ -934,19 +934,19 @@ export type UserProgramExerciseCompletionInclude<ExtArgs extends runtime.Types.E
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   program?: boolean | Prisma.ProgramDefaultArgs<ExtArgs>
   programWeek?: boolean | Prisma.ProgramWeekDefaultArgs<ExtArgs>
-  exercise?: boolean | Prisma.ExerciseDefaultArgs<ExtArgs>
+  exercise?: boolean | Prisma.UserProgramExerciseCompletion$exerciseArgs<ExtArgs>
 }
 export type UserProgramExerciseCompletionIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   program?: boolean | Prisma.ProgramDefaultArgs<ExtArgs>
   programWeek?: boolean | Prisma.ProgramWeekDefaultArgs<ExtArgs>
-  exercise?: boolean | Prisma.ExerciseDefaultArgs<ExtArgs>
+  exercise?: boolean | Prisma.UserProgramExerciseCompletion$exerciseArgs<ExtArgs>
 }
 export type UserProgramExerciseCompletionIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   program?: boolean | Prisma.ProgramDefaultArgs<ExtArgs>
   programWeek?: boolean | Prisma.ProgramWeekDefaultArgs<ExtArgs>
-  exercise?: boolean | Prisma.ExerciseDefaultArgs<ExtArgs>
+  exercise?: boolean | Prisma.UserProgramExerciseCompletion$exerciseArgs<ExtArgs>
 }
 
 export type $UserProgramExerciseCompletionPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -955,14 +955,14 @@ export type $UserProgramExerciseCompletionPayload<ExtArgs extends runtime.Types.
     user: Prisma.$UserPayload<ExtArgs>
     program: Prisma.$ProgramPayload<ExtArgs>
     programWeek: Prisma.$ProgramWeekPayload<ExtArgs>
-    exercise: Prisma.$ExercisePayload<ExtArgs>
+    exercise: Prisma.$ExercisePayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     userId: string
     programId: string
     programWeekId: string
-    exerciseId: string
+    exerciseId: string | null
     completedAt: Date
     createdAt: Date
   }, ExtArgs["result"]["userProgramExerciseCompletion"]>
@@ -1362,7 +1362,7 @@ export interface Prisma__UserProgramExerciseCompletionClient<T, Null = never, Ex
   user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   program<T extends Prisma.ProgramDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProgramDefaultArgs<ExtArgs>>): Prisma.Prisma__ProgramClient<runtime.Types.Result.GetResult<Prisma.$ProgramPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   programWeek<T extends Prisma.ProgramWeekDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProgramWeekDefaultArgs<ExtArgs>>): Prisma.Prisma__ProgramWeekClient<runtime.Types.Result.GetResult<Prisma.$ProgramWeekPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  exercise<T extends Prisma.ExerciseDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ExerciseDefaultArgs<ExtArgs>>): Prisma.Prisma__ExerciseClient<runtime.Types.Result.GetResult<Prisma.$ExercisePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  exercise<T extends Prisma.UserProgramExerciseCompletion$exerciseArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserProgramExerciseCompletion$exerciseArgs<ExtArgs>>): Prisma.Prisma__ExerciseClient<runtime.Types.Result.GetResult<Prisma.$ExercisePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1797,6 +1797,25 @@ export type UserProgramExerciseCompletionDeleteManyArgs<ExtArgs extends runtime.
    * Limit how many UserProgramExerciseCompletions to delete.
    */
   limit?: number
+}
+
+/**
+ * UserProgramExerciseCompletion.exercise
+ */
+export type UserProgramExerciseCompletion$exerciseArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Exercise
+   */
+  select?: Prisma.ExerciseSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Exercise
+   */
+  omit?: Prisma.ExerciseOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ExerciseInclude<ExtArgs> | null
+  where?: Prisma.ExerciseWhereInput
 }
 
 /**

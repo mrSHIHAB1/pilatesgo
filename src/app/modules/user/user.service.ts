@@ -359,7 +359,8 @@ const refreshMyWeeklyStats = async (userId: string) => {
   });
 
   const weeklyTimeSpentSeconds = thisWeekCompletions.reduce((sum, c) => {
-    return sum + getExerciseDurationSeconds(c.exercise);
+    const exDuration = c.exercise ? getExerciseDurationSeconds(c.exercise) : 0;
+    return sum + exDuration;
   }, 0);
 
   const completedExercisesCount = thisWeekCompletions.length;
@@ -454,6 +455,91 @@ const deleteUser = async (id: string): Promise<any> => {
   });
 };
 
+const getWeekOfMonth = (date: Date) => {
+  const firstDayOfMonth = new Date(date.getFullYear(), date.getMonth(), 1);
+  const dayOfWeekOfFirstDay = firstDayOfMonth.getDay(); // 0 (Sun) to 6 (Sat)
+  const adjustedFirstDayOffset = (dayOfWeekOfFirstDay + 6) % 7;
+  const dayNumber = date.getDate();
+  const weekNum = Math.ceil((dayNumber + adjustedFirstDayOffset) / 7);
+  return `Week ${weekNum}`;
+};
+
+const getMyMonthlyActivity = async (userId: string) => {
+  ensureProgressDelegates();
+
+  const now = new Date();
+  const year = now.getFullYear();
+  const monthIdx = now.getMonth();
+
+  const startOfMonth = new Date(year, monthIdx, 1);
+  const endOfMonth = new Date(year, monthIdx + 1, 1); // start of next month
+
+  const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  const monthNames = [
+    'January', 'February', 'March', 'April', 'May', 'June',
+    'July', 'August', 'September', 'October', 'November', 'December'
+  ];
+
+  // Initialize all days of the current month
+  const daysList: {
+    date: string;
+    dayOfWeek: string;
+    weekName: string;
+    month: string;
+    duration: number;
+  }[] = [];
+
+  const tempDate = new Date(startOfMonth);
+  while (tempDate < endOfMonth) {
+    const d = new Date(tempDate);
+    const dateStr = d.toISOString().split('T')[0];
+    
+    daysList.push({
+      date: dateStr,
+      dayOfWeek: dayNames[d.getDay()],
+      weekName: getWeekOfMonth(d),
+      month: monthNames[monthIdx],
+      duration: 0,
+    });
+
+    tempDate.setDate(tempDate.getDate() + 1);
+  }
+
+  // Fetch completions in the current month
+  const completions = await prisma.userProgramExerciseCompletion.findMany({
+    where: {
+      userId,
+      completedAt: {
+        gte: startOfMonth,
+        lt: endOfMonth,
+      },
+    },
+    select: {
+      completedAt: true,
+      exercise: {
+        select: {
+          workout: { select: { duration: true } },
+          videos: { select: { duration: true } },
+        },
+      },
+    },
+  });
+
+  // Populate durations
+  for (const comp of completions) {
+    const compDateStr = comp.completedAt.toISOString().split('T')[0];
+    const exDuration = comp.exercise ? getExerciseDurationSeconds(comp.exercise) : 0;
+    const duration = exDuration;
+
+    const dayObj = daysList.find((d) => d.date === compDateStr);
+    if (dayObj) {
+      dayObj.duration += duration;
+    }
+  }
+
+  return daysList;
+};
+
 export const userService = {
   createUser,
   verifyOTPService,
@@ -463,4 +549,5 @@ export const userService = {
   updateUser,
   deleteUser,
   refreshMyWeeklyStats,
+  getMyMonthlyActivity,
 };

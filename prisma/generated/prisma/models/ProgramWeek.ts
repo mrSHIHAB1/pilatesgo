@@ -217,7 +217,7 @@ export type ProgramWeekWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"ProgramWeek"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"ProgramWeek"> | Date | string
   program?: Prisma.XOR<Prisma.ProgramScalarRelationFilter, Prisma.ProgramWhereInput>
-  exercises?: Prisma.ExerciseListRelationFilter
+  days?: Prisma.ProgramDayListRelationFilter
   completions?: Prisma.UserProgramExerciseCompletionListRelationFilter
 }
 
@@ -228,7 +228,7 @@ export type ProgramWeekOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   program?: Prisma.ProgramOrderByWithRelationInput
-  exercises?: Prisma.ExerciseOrderByRelationAggregateInput
+  days?: Prisma.ProgramDayOrderByRelationAggregateInput
   completions?: Prisma.UserProgramExerciseCompletionOrderByRelationAggregateInput
 }
 
@@ -243,7 +243,7 @@ export type ProgramWeekWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"ProgramWeek"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"ProgramWeek"> | Date | string
   program?: Prisma.XOR<Prisma.ProgramScalarRelationFilter, Prisma.ProgramWhereInput>
-  exercises?: Prisma.ExerciseListRelationFilter
+  days?: Prisma.ProgramDayListRelationFilter
   completions?: Prisma.UserProgramExerciseCompletionListRelationFilter
 }, "id" | "programId_weekNumber">
 
@@ -277,7 +277,7 @@ export type ProgramWeekCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   program: Prisma.ProgramCreateNestedOneWithoutWeeksInput
-  exercises?: Prisma.ExerciseCreateNestedManyWithoutProgramWeeksInput
+  days?: Prisma.ProgramDayCreateNestedManyWithoutWeekInput
   completions?: Prisma.UserProgramExerciseCompletionCreateNestedManyWithoutProgramWeekInput
 }
 
@@ -287,7 +287,7 @@ export type ProgramWeekUncheckedCreateInput = {
   weekNumber: number
   createdAt?: Date | string
   updatedAt?: Date | string
-  exercises?: Prisma.ExerciseUncheckedCreateNestedManyWithoutProgramWeeksInput
+  days?: Prisma.ProgramDayUncheckedCreateNestedManyWithoutWeekInput
   completions?: Prisma.UserProgramExerciseCompletionUncheckedCreateNestedManyWithoutProgramWeekInput
 }
 
@@ -297,7 +297,7 @@ export type ProgramWeekUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   program?: Prisma.ProgramUpdateOneRequiredWithoutWeeksNestedInput
-  exercises?: Prisma.ExerciseUpdateManyWithoutProgramWeeksNestedInput
+  days?: Prisma.ProgramDayUpdateManyWithoutWeekNestedInput
   completions?: Prisma.UserProgramExerciseCompletionUpdateManyWithoutProgramWeekNestedInput
 }
 
@@ -307,7 +307,7 @@ export type ProgramWeekUncheckedUpdateInput = {
   weekNumber?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  exercises?: Prisma.ExerciseUncheckedUpdateManyWithoutProgramWeeksNestedInput
+  days?: Prisma.ProgramDayUncheckedUpdateManyWithoutWeekNestedInput
   completions?: Prisma.UserProgramExerciseCompletionUncheckedUpdateManyWithoutProgramWeekNestedInput
 }
 
@@ -386,44 +386,6 @@ export type ProgramWeekScalarRelationFilter = {
   isNot?: Prisma.ProgramWeekWhereInput
 }
 
-export type ProgramWeekCreateNestedManyWithoutExercisesInput = {
-  create?: Prisma.XOR<Prisma.ProgramWeekCreateWithoutExercisesInput, Prisma.ProgramWeekUncheckedCreateWithoutExercisesInput> | Prisma.ProgramWeekCreateWithoutExercisesInput[] | Prisma.ProgramWeekUncheckedCreateWithoutExercisesInput[]
-  connectOrCreate?: Prisma.ProgramWeekCreateOrConnectWithoutExercisesInput | Prisma.ProgramWeekCreateOrConnectWithoutExercisesInput[]
-  connect?: Prisma.ProgramWeekWhereUniqueInput | Prisma.ProgramWeekWhereUniqueInput[]
-}
-
-export type ProgramWeekUncheckedCreateNestedManyWithoutExercisesInput = {
-  create?: Prisma.XOR<Prisma.ProgramWeekCreateWithoutExercisesInput, Prisma.ProgramWeekUncheckedCreateWithoutExercisesInput> | Prisma.ProgramWeekCreateWithoutExercisesInput[] | Prisma.ProgramWeekUncheckedCreateWithoutExercisesInput[]
-  connectOrCreate?: Prisma.ProgramWeekCreateOrConnectWithoutExercisesInput | Prisma.ProgramWeekCreateOrConnectWithoutExercisesInput[]
-  connect?: Prisma.ProgramWeekWhereUniqueInput | Prisma.ProgramWeekWhereUniqueInput[]
-}
-
-export type ProgramWeekUpdateManyWithoutExercisesNestedInput = {
-  create?: Prisma.XOR<Prisma.ProgramWeekCreateWithoutExercisesInput, Prisma.ProgramWeekUncheckedCreateWithoutExercisesInput> | Prisma.ProgramWeekCreateWithoutExercisesInput[] | Prisma.ProgramWeekUncheckedCreateWithoutExercisesInput[]
-  connectOrCreate?: Prisma.ProgramWeekCreateOrConnectWithoutExercisesInput | Prisma.ProgramWeekCreateOrConnectWithoutExercisesInput[]
-  upsert?: Prisma.ProgramWeekUpsertWithWhereUniqueWithoutExercisesInput | Prisma.ProgramWeekUpsertWithWhereUniqueWithoutExercisesInput[]
-  set?: Prisma.ProgramWeekWhereUniqueInput | Prisma.ProgramWeekWhereUniqueInput[]
-  disconnect?: Prisma.ProgramWeekWhereUniqueInput | Prisma.ProgramWeekWhereUniqueInput[]
-  delete?: Prisma.ProgramWeekWhereUniqueInput | Prisma.ProgramWeekWhereUniqueInput[]
-  connect?: Prisma.ProgramWeekWhereUniqueInput | Prisma.ProgramWeekWhereUniqueInput[]
-  update?: Prisma.ProgramWeekUpdateWithWhereUniqueWithoutExercisesInput | Prisma.ProgramWeekUpdateWithWhereUniqueWithoutExercisesInput[]
-  updateMany?: Prisma.ProgramWeekUpdateManyWithWhereWithoutExercisesInput | Prisma.ProgramWeekUpdateManyWithWhereWithoutExercisesInput[]
-  deleteMany?: Prisma.ProgramWeekScalarWhereInput | Prisma.ProgramWeekScalarWhereInput[]
-}
-
-export type ProgramWeekUncheckedUpdateManyWithoutExercisesNestedInput = {
-  create?: Prisma.XOR<Prisma.ProgramWeekCreateWithoutExercisesInput, Prisma.ProgramWeekUncheckedCreateWithoutExercisesInput> | Prisma.ProgramWeekCreateWithoutExercisesInput[] | Prisma.ProgramWeekUncheckedCreateWithoutExercisesInput[]
-  connectOrCreate?: Prisma.ProgramWeekCreateOrConnectWithoutExercisesInput | Prisma.ProgramWeekCreateOrConnectWithoutExercisesInput[]
-  upsert?: Prisma.ProgramWeekUpsertWithWhereUniqueWithoutExercisesInput | Prisma.ProgramWeekUpsertWithWhereUniqueWithoutExercisesInput[]
-  set?: Prisma.ProgramWeekWhereUniqueInput | Prisma.ProgramWeekWhereUniqueInput[]
-  disconnect?: Prisma.ProgramWeekWhereUniqueInput | Prisma.ProgramWeekWhereUniqueInput[]
-  delete?: Prisma.ProgramWeekWhereUniqueInput | Prisma.ProgramWeekWhereUniqueInput[]
-  connect?: Prisma.ProgramWeekWhereUniqueInput | Prisma.ProgramWeekWhereUniqueInput[]
-  update?: Prisma.ProgramWeekUpdateWithWhereUniqueWithoutExercisesInput | Prisma.ProgramWeekUpdateWithWhereUniqueWithoutExercisesInput[]
-  updateMany?: Prisma.ProgramWeekUpdateManyWithWhereWithoutExercisesInput | Prisma.ProgramWeekUpdateManyWithWhereWithoutExercisesInput[]
-  deleteMany?: Prisma.ProgramWeekScalarWhereInput | Prisma.ProgramWeekScalarWhereInput[]
-}
-
 export type ProgramWeekCreateNestedManyWithoutProgramInput = {
   create?: Prisma.XOR<Prisma.ProgramWeekCreateWithoutProgramInput, Prisma.ProgramWeekUncheckedCreateWithoutProgramInput> | Prisma.ProgramWeekCreateWithoutProgramInput[] | Prisma.ProgramWeekUncheckedCreateWithoutProgramInput[]
   connectOrCreate?: Prisma.ProgramWeekCreateOrConnectWithoutProgramInput | Prisma.ProgramWeekCreateOrConnectWithoutProgramInput[]
@@ -474,6 +436,20 @@ export type IntFieldUpdateOperationsInput = {
   divide?: number
 }
 
+export type ProgramWeekCreateNestedOneWithoutDaysInput = {
+  create?: Prisma.XOR<Prisma.ProgramWeekCreateWithoutDaysInput, Prisma.ProgramWeekUncheckedCreateWithoutDaysInput>
+  connectOrCreate?: Prisma.ProgramWeekCreateOrConnectWithoutDaysInput
+  connect?: Prisma.ProgramWeekWhereUniqueInput
+}
+
+export type ProgramWeekUpdateOneRequiredWithoutDaysNestedInput = {
+  create?: Prisma.XOR<Prisma.ProgramWeekCreateWithoutDaysInput, Prisma.ProgramWeekUncheckedCreateWithoutDaysInput>
+  connectOrCreate?: Prisma.ProgramWeekCreateOrConnectWithoutDaysInput
+  upsert?: Prisma.ProgramWeekUpsertWithoutDaysInput
+  connect?: Prisma.ProgramWeekWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ProgramWeekUpdateToOneWithWhereWithoutDaysInput, Prisma.ProgramWeekUpdateWithoutDaysInput>, Prisma.ProgramWeekUncheckedUpdateWithoutDaysInput>
+}
+
 export type ProgramWeekCreateNestedOneWithoutCompletionsInput = {
   create?: Prisma.XOR<Prisma.ProgramWeekCreateWithoutCompletionsInput, Prisma.ProgramWeekUncheckedCreateWithoutCompletionsInput>
   connectOrCreate?: Prisma.ProgramWeekCreateOrConnectWithoutCompletionsInput
@@ -488,62 +464,12 @@ export type ProgramWeekUpdateOneRequiredWithoutCompletionsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ProgramWeekUpdateToOneWithWhereWithoutCompletionsInput, Prisma.ProgramWeekUpdateWithoutCompletionsInput>, Prisma.ProgramWeekUncheckedUpdateWithoutCompletionsInput>
 }
 
-export type ProgramWeekCreateWithoutExercisesInput = {
-  id?: string
-  weekNumber: number
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  program: Prisma.ProgramCreateNestedOneWithoutWeeksInput
-  completions?: Prisma.UserProgramExerciseCompletionCreateNestedManyWithoutProgramWeekInput
-}
-
-export type ProgramWeekUncheckedCreateWithoutExercisesInput = {
-  id?: string
-  programId: string
-  weekNumber: number
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  completions?: Prisma.UserProgramExerciseCompletionUncheckedCreateNestedManyWithoutProgramWeekInput
-}
-
-export type ProgramWeekCreateOrConnectWithoutExercisesInput = {
-  where: Prisma.ProgramWeekWhereUniqueInput
-  create: Prisma.XOR<Prisma.ProgramWeekCreateWithoutExercisesInput, Prisma.ProgramWeekUncheckedCreateWithoutExercisesInput>
-}
-
-export type ProgramWeekUpsertWithWhereUniqueWithoutExercisesInput = {
-  where: Prisma.ProgramWeekWhereUniqueInput
-  update: Prisma.XOR<Prisma.ProgramWeekUpdateWithoutExercisesInput, Prisma.ProgramWeekUncheckedUpdateWithoutExercisesInput>
-  create: Prisma.XOR<Prisma.ProgramWeekCreateWithoutExercisesInput, Prisma.ProgramWeekUncheckedCreateWithoutExercisesInput>
-}
-
-export type ProgramWeekUpdateWithWhereUniqueWithoutExercisesInput = {
-  where: Prisma.ProgramWeekWhereUniqueInput
-  data: Prisma.XOR<Prisma.ProgramWeekUpdateWithoutExercisesInput, Prisma.ProgramWeekUncheckedUpdateWithoutExercisesInput>
-}
-
-export type ProgramWeekUpdateManyWithWhereWithoutExercisesInput = {
-  where: Prisma.ProgramWeekScalarWhereInput
-  data: Prisma.XOR<Prisma.ProgramWeekUpdateManyMutationInput, Prisma.ProgramWeekUncheckedUpdateManyWithoutExercisesInput>
-}
-
-export type ProgramWeekScalarWhereInput = {
-  AND?: Prisma.ProgramWeekScalarWhereInput | Prisma.ProgramWeekScalarWhereInput[]
-  OR?: Prisma.ProgramWeekScalarWhereInput[]
-  NOT?: Prisma.ProgramWeekScalarWhereInput | Prisma.ProgramWeekScalarWhereInput[]
-  id?: Prisma.StringFilter<"ProgramWeek"> | string
-  programId?: Prisma.StringFilter<"ProgramWeek"> | string
-  weekNumber?: Prisma.IntFilter<"ProgramWeek"> | number
-  createdAt?: Prisma.DateTimeFilter<"ProgramWeek"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"ProgramWeek"> | Date | string
-}
-
 export type ProgramWeekCreateWithoutProgramInput = {
   id?: string
   weekNumber: number
   createdAt?: Date | string
   updatedAt?: Date | string
-  exercises?: Prisma.ExerciseCreateNestedManyWithoutProgramWeeksInput
+  days?: Prisma.ProgramDayCreateNestedManyWithoutWeekInput
   completions?: Prisma.UserProgramExerciseCompletionCreateNestedManyWithoutProgramWeekInput
 }
 
@@ -552,7 +478,7 @@ export type ProgramWeekUncheckedCreateWithoutProgramInput = {
   weekNumber: number
   createdAt?: Date | string
   updatedAt?: Date | string
-  exercises?: Prisma.ExerciseUncheckedCreateNestedManyWithoutProgramWeeksInput
+  days?: Prisma.ProgramDayUncheckedCreateNestedManyWithoutWeekInput
   completions?: Prisma.UserProgramExerciseCompletionUncheckedCreateNestedManyWithoutProgramWeekInput
 }
 
@@ -582,13 +508,76 @@ export type ProgramWeekUpdateManyWithWhereWithoutProgramInput = {
   data: Prisma.XOR<Prisma.ProgramWeekUpdateManyMutationInput, Prisma.ProgramWeekUncheckedUpdateManyWithoutProgramInput>
 }
 
+export type ProgramWeekScalarWhereInput = {
+  AND?: Prisma.ProgramWeekScalarWhereInput | Prisma.ProgramWeekScalarWhereInput[]
+  OR?: Prisma.ProgramWeekScalarWhereInput[]
+  NOT?: Prisma.ProgramWeekScalarWhereInput | Prisma.ProgramWeekScalarWhereInput[]
+  id?: Prisma.StringFilter<"ProgramWeek"> | string
+  programId?: Prisma.StringFilter<"ProgramWeek"> | string
+  weekNumber?: Prisma.IntFilter<"ProgramWeek"> | number
+  createdAt?: Prisma.DateTimeFilter<"ProgramWeek"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"ProgramWeek"> | Date | string
+}
+
+export type ProgramWeekCreateWithoutDaysInput = {
+  id?: string
+  weekNumber: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  program: Prisma.ProgramCreateNestedOneWithoutWeeksInput
+  completions?: Prisma.UserProgramExerciseCompletionCreateNestedManyWithoutProgramWeekInput
+}
+
+export type ProgramWeekUncheckedCreateWithoutDaysInput = {
+  id?: string
+  programId: string
+  weekNumber: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  completions?: Prisma.UserProgramExerciseCompletionUncheckedCreateNestedManyWithoutProgramWeekInput
+}
+
+export type ProgramWeekCreateOrConnectWithoutDaysInput = {
+  where: Prisma.ProgramWeekWhereUniqueInput
+  create: Prisma.XOR<Prisma.ProgramWeekCreateWithoutDaysInput, Prisma.ProgramWeekUncheckedCreateWithoutDaysInput>
+}
+
+export type ProgramWeekUpsertWithoutDaysInput = {
+  update: Prisma.XOR<Prisma.ProgramWeekUpdateWithoutDaysInput, Prisma.ProgramWeekUncheckedUpdateWithoutDaysInput>
+  create: Prisma.XOR<Prisma.ProgramWeekCreateWithoutDaysInput, Prisma.ProgramWeekUncheckedCreateWithoutDaysInput>
+  where?: Prisma.ProgramWeekWhereInput
+}
+
+export type ProgramWeekUpdateToOneWithWhereWithoutDaysInput = {
+  where?: Prisma.ProgramWeekWhereInput
+  data: Prisma.XOR<Prisma.ProgramWeekUpdateWithoutDaysInput, Prisma.ProgramWeekUncheckedUpdateWithoutDaysInput>
+}
+
+export type ProgramWeekUpdateWithoutDaysInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  weekNumber?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  program?: Prisma.ProgramUpdateOneRequiredWithoutWeeksNestedInput
+  completions?: Prisma.UserProgramExerciseCompletionUpdateManyWithoutProgramWeekNestedInput
+}
+
+export type ProgramWeekUncheckedUpdateWithoutDaysInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  programId?: Prisma.StringFieldUpdateOperationsInput | string
+  weekNumber?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  completions?: Prisma.UserProgramExerciseCompletionUncheckedUpdateManyWithoutProgramWeekNestedInput
+}
+
 export type ProgramWeekCreateWithoutCompletionsInput = {
   id?: string
   weekNumber: number
   createdAt?: Date | string
   updatedAt?: Date | string
   program: Prisma.ProgramCreateNestedOneWithoutWeeksInput
-  exercises?: Prisma.ExerciseCreateNestedManyWithoutProgramWeeksInput
+  days?: Prisma.ProgramDayCreateNestedManyWithoutWeekInput
 }
 
 export type ProgramWeekUncheckedCreateWithoutCompletionsInput = {
@@ -597,7 +586,7 @@ export type ProgramWeekUncheckedCreateWithoutCompletionsInput = {
   weekNumber: number
   createdAt?: Date | string
   updatedAt?: Date | string
-  exercises?: Prisma.ExerciseUncheckedCreateNestedManyWithoutProgramWeeksInput
+  days?: Prisma.ProgramDayUncheckedCreateNestedManyWithoutWeekInput
 }
 
 export type ProgramWeekCreateOrConnectWithoutCompletionsInput = {
@@ -622,7 +611,7 @@ export type ProgramWeekUpdateWithoutCompletionsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   program?: Prisma.ProgramUpdateOneRequiredWithoutWeeksNestedInput
-  exercises?: Prisma.ExerciseUpdateManyWithoutProgramWeeksNestedInput
+  days?: Prisma.ProgramDayUpdateManyWithoutWeekNestedInput
 }
 
 export type ProgramWeekUncheckedUpdateWithoutCompletionsInput = {
@@ -631,33 +620,7 @@ export type ProgramWeekUncheckedUpdateWithoutCompletionsInput = {
   weekNumber?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  exercises?: Prisma.ExerciseUncheckedUpdateManyWithoutProgramWeeksNestedInput
-}
-
-export type ProgramWeekUpdateWithoutExercisesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  weekNumber?: Prisma.IntFieldUpdateOperationsInput | number
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  program?: Prisma.ProgramUpdateOneRequiredWithoutWeeksNestedInput
-  completions?: Prisma.UserProgramExerciseCompletionUpdateManyWithoutProgramWeekNestedInput
-}
-
-export type ProgramWeekUncheckedUpdateWithoutExercisesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  programId?: Prisma.StringFieldUpdateOperationsInput | string
-  weekNumber?: Prisma.IntFieldUpdateOperationsInput | number
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  completions?: Prisma.UserProgramExerciseCompletionUncheckedUpdateManyWithoutProgramWeekNestedInput
-}
-
-export type ProgramWeekUncheckedUpdateManyWithoutExercisesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  programId?: Prisma.StringFieldUpdateOperationsInput | string
-  weekNumber?: Prisma.IntFieldUpdateOperationsInput | number
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  days?: Prisma.ProgramDayUncheckedUpdateManyWithoutWeekNestedInput
 }
 
 export type ProgramWeekCreateManyProgramInput = {
@@ -672,7 +635,7 @@ export type ProgramWeekUpdateWithoutProgramInput = {
   weekNumber?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  exercises?: Prisma.ExerciseUpdateManyWithoutProgramWeeksNestedInput
+  days?: Prisma.ProgramDayUpdateManyWithoutWeekNestedInput
   completions?: Prisma.UserProgramExerciseCompletionUpdateManyWithoutProgramWeekNestedInput
 }
 
@@ -681,7 +644,7 @@ export type ProgramWeekUncheckedUpdateWithoutProgramInput = {
   weekNumber?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  exercises?: Prisma.ExerciseUncheckedUpdateManyWithoutProgramWeeksNestedInput
+  days?: Prisma.ProgramDayUncheckedUpdateManyWithoutWeekNestedInput
   completions?: Prisma.UserProgramExerciseCompletionUncheckedUpdateManyWithoutProgramWeekNestedInput
 }
 
@@ -698,12 +661,12 @@ export type ProgramWeekUncheckedUpdateManyWithoutProgramInput = {
  */
 
 export type ProgramWeekCountOutputType = {
-  exercises: number
+  days: number
   completions: number
 }
 
 export type ProgramWeekCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  exercises?: boolean | ProgramWeekCountOutputTypeCountExercisesArgs
+  days?: boolean | ProgramWeekCountOutputTypeCountDaysArgs
   completions?: boolean | ProgramWeekCountOutputTypeCountCompletionsArgs
 }
 
@@ -720,8 +683,8 @@ export type ProgramWeekCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.
 /**
  * ProgramWeekCountOutputType without action
  */
-export type ProgramWeekCountOutputTypeCountExercisesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.ExerciseWhereInput
+export type ProgramWeekCountOutputTypeCountDaysArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ProgramDayWhereInput
 }
 
 /**
@@ -739,7 +702,7 @@ export type ProgramWeekSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   createdAt?: boolean
   updatedAt?: boolean
   program?: boolean | Prisma.ProgramDefaultArgs<ExtArgs>
-  exercises?: boolean | Prisma.ProgramWeek$exercisesArgs<ExtArgs>
+  days?: boolean | Prisma.ProgramWeek$daysArgs<ExtArgs>
   completions?: boolean | Prisma.ProgramWeek$completionsArgs<ExtArgs>
   _count?: boolean | Prisma.ProgramWeekCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["programWeek"]>
@@ -773,7 +736,7 @@ export type ProgramWeekSelectScalar = {
 export type ProgramWeekOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "programId" | "weekNumber" | "createdAt" | "updatedAt", ExtArgs["result"]["programWeek"]>
 export type ProgramWeekInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   program?: boolean | Prisma.ProgramDefaultArgs<ExtArgs>
-  exercises?: boolean | Prisma.ProgramWeek$exercisesArgs<ExtArgs>
+  days?: boolean | Prisma.ProgramWeek$daysArgs<ExtArgs>
   completions?: boolean | Prisma.ProgramWeek$completionsArgs<ExtArgs>
   _count?: boolean | Prisma.ProgramWeekCountOutputTypeDefaultArgs<ExtArgs>
 }
@@ -788,7 +751,7 @@ export type $ProgramWeekPayload<ExtArgs extends runtime.Types.Extensions.Interna
   name: "ProgramWeek"
   objects: {
     program: Prisma.$ProgramPayload<ExtArgs>
-    exercises: Prisma.$ExercisePayload<ExtArgs>[]
+    days: Prisma.$ProgramDayPayload<ExtArgs>[]
     completions: Prisma.$UserProgramExerciseCompletionPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -1192,7 +1155,7 @@ readonly fields: ProgramWeekFieldRefs;
 export interface Prisma__ProgramWeekClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   program<T extends Prisma.ProgramDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProgramDefaultArgs<ExtArgs>>): Prisma.Prisma__ProgramClient<runtime.Types.Result.GetResult<Prisma.$ProgramPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  exercises<T extends Prisma.ProgramWeek$exercisesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProgramWeek$exercisesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ExercisePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  days<T extends Prisma.ProgramWeek$daysArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProgramWeek$daysArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProgramDayPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   completions<T extends Prisma.ProgramWeek$completionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProgramWeek$completionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserProgramExerciseCompletionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1629,27 +1592,27 @@ export type ProgramWeekDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.I
 }
 
 /**
- * ProgramWeek.exercises
+ * ProgramWeek.days
  */
-export type ProgramWeek$exercisesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type ProgramWeek$daysArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Exercise
+   * Select specific fields to fetch from the ProgramDay
    */
-  select?: Prisma.ExerciseSelect<ExtArgs> | null
+  select?: Prisma.ProgramDaySelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Exercise
+   * Omit specific fields from the ProgramDay
    */
-  omit?: Prisma.ExerciseOmit<ExtArgs> | null
+  omit?: Prisma.ProgramDayOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.ExerciseInclude<ExtArgs> | null
-  where?: Prisma.ExerciseWhereInput
-  orderBy?: Prisma.ExerciseOrderByWithRelationInput | Prisma.ExerciseOrderByWithRelationInput[]
-  cursor?: Prisma.ExerciseWhereUniqueInput
+  include?: Prisma.ProgramDayInclude<ExtArgs> | null
+  where?: Prisma.ProgramDayWhereInput
+  orderBy?: Prisma.ProgramDayOrderByWithRelationInput | Prisma.ProgramDayOrderByWithRelationInput[]
+  cursor?: Prisma.ProgramDayWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.ExerciseScalarFieldEnum | Prisma.ExerciseScalarFieldEnum[]
+  distinct?: Prisma.ProgramDayScalarFieldEnum | Prisma.ProgramDayScalarFieldEnum[]
 }
 
 /**

@@ -15,6 +15,7 @@ import {
   deleteExerciseValidation,
 } from './exercise.validation';
 import auth from '../../middlewares/auth';
+import { checkSubscription } from '../../middlewares/checkSubscription';
 
 const router = Router();
 
@@ -25,7 +26,7 @@ router.post('/create', validateRequest(createExerciseValidation), createExercise
 router.get('/all', auth(), getAllExercises);
 
 // GET /exercises/:id - Get a specific exercise by ID
-router.get('/by-id/:id', auth(), validateRequest(getExerciseValidation), getExerciseById);
+router.get('/by-id/:id', auth(),  validateRequest(getExerciseValidation), getExerciseById);
 
 // PUT /exercises/:id - Update an exercise
 router.put('/update/:id', auth(), validateRequest(updateExerciseValidation), updateExercise);

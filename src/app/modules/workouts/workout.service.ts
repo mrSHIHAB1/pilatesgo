@@ -253,6 +253,7 @@ const getWorkoutCategoryStats = async () => {
     select: {
       id: true,
       name: true,
+      description:true,
       _count: {
         select: {
           workouts: true,
@@ -267,6 +268,7 @@ const getWorkoutCategoryStats = async () => {
   return categories.map((category) => ({
     categoryId: category.id,
     categoryName: category.name,
+    categoryDescription:category.description,
     totalWorkouts: category._count.workouts,
   }));
 };

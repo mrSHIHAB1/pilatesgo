@@ -23,18 +23,18 @@ model UserProgramEnrollment {
 }
 
 model UserProgramExerciseCompletion {
-  id            String    @id @default(uuid())
+  id            String   @id @default(uuid())
   userId        String
   programId     String
   programWeekId String
-  exerciseId    String
-  completedAt   DateTime  @default(now())
-  createdAt     DateTime  @default(now())
+  exerciseId    String?
+  completedAt   DateTime @default(now())
+  createdAt     DateTime @default(now())
 
   user        User        @relation(fields: [userId], references: [id], onDelete: Cascade)
   program     Program     @relation(fields: [programId], references: [id], onDelete: Cascade)
   programWeek ProgramWeek @relation(fields: [programWeekId], references: [id], onDelete: Cascade)
-  exercise    Exercise    @relation(fields: [exerciseId], references: [id], onDelete: Cascade)
+  exercise    Exercise?   @relation(fields: [exerciseId], references: [id], onDelete: Cascade)
 
   @@unique([userId, programWeekId, exerciseId], name: "user_week_exercise")
   @@index([userId, programId])

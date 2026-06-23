@@ -9,6 +9,28 @@
 * 🟢 You can import this file directly.
 */
 
+export const NotificationType = {
+  CHAT_MESSAGE: 'CHAT_MESSAGE',
+  FEEDBACK_SUBMITTED: 'FEEDBACK_SUBMITTED',
+  SYSTEM: 'SYSTEM',
+  NEW_LIKE: 'NEW_LIKE',
+  NEW_MATCH: 'NEW_MATCH',
+  POST_LIKED: 'POST_LIKED',
+  COMMENT_LIKED: 'COMMENT_LIKED',
+  POST_COMMENTED: 'POST_COMMENTED',
+  BADGE_EARNED: 'BADGE_EARNED',
+  BADGE_DOWNGRADE_WARNING: 'BADGE_DOWNGRADE_WARNING',
+  BADGE_PROXIMITY: 'BADGE_PROXIMITY',
+  CLUBHOUSE_INACTIVITY: 'CLUBHOUSE_INACTIVITY',
+  SUBSCRIPTION_CHANGE: 'SUBSCRIPTION_CHANGE',
+  PAYMENT_ALERT: 'PAYMENT_ALERT',
+  ADMIN_UPDATE: 'ADMIN_UPDATE',
+  WEEKLY_UPDATE: 'WEEKLY_UPDATE'
+} as const
+
+export type NotificationType = (typeof NotificationType)[keyof typeof NotificationType]
+
+
 export const ProgramEnrollmentStatus = {
   ACTIVE: 'ACTIVE',
   PAUSED: 'PAUSED',
@@ -16,6 +38,25 @@ export const ProgramEnrollmentStatus = {
 } as const
 
 export type ProgramEnrollmentStatus = (typeof ProgramEnrollmentStatus)[keyof typeof ProgramEnrollmentStatus]
+
+
+export const SubscriptionType = {
+  WEEKLY: 'WEEKLY',
+  MONTHLY: 'MONTHLY',
+  YEARLY: 'YEARLY'
+} as const
+
+export type SubscriptionType = (typeof SubscriptionType)[keyof typeof SubscriptionType]
+
+
+export const SubscriptionStatus = {
+  ACTIVE: 'ACTIVE',
+  EXPIRED: 'EXPIRED',
+  CANCELLED: 'CANCELLED',
+  PAUSED: 'PAUSED'
+} as const
+
+export type SubscriptionStatus = (typeof SubscriptionStatus)[keyof typeof SubscriptionStatus]
 
 
 export const UserRole = {

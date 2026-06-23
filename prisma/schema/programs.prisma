@@ -1,33 +1,118 @@
 model Program {
-  id            String          @id @default(uuid())
+  id            String                          @id @default(uuid())
   title         String
   description   String?
   thumbnail     String?
   difficulty    DifficultyLevel
   creatorId     String?
-  creator       User?           @relation(fields: [creatorId], references: [id])
+  creator       User?                           @relation(fields: [creatorId], references: [id])
   categoryId    String?
-  category      Category?       @relation(fields: [categoryId], references: [id])
+  category      Category?                       @relation(fields: [categoryId], references: [id])
   durationWeeks Int?
   coverImage    String?
   weeks         ProgramWeek[]
   enrollments   UserProgramEnrollment[]
   completions   UserProgramExerciseCompletion[]
   reviews       ProgramReview[]
-  createdAt     DateTime        @default(now())
-  updatedAt     DateTime        @updatedAt
+  createdAt     DateTime                        @default(now())
+  updatedAt     DateTime                        @updatedAt
 }
 
 model ProgramWeek {
-  id         String     @id @default(uuid())
-  programId  String
-  program    Program    @relation(fields: [programId], references: [id], onDelete: Cascade)
-  weekNumber Int
-  exercises  Exercise[] @relation("ProgramWeekExercises")
+  id          String                          @id @default(uuid())
+  programId   String
+  program     Program                         @relation(fields: [programId], references: [id], onDelete: Cascade)
+  weekNumber  Int
+  days        ProgramDay[]
   completions UserProgramExerciseCompletion[]
-  createdAt  DateTime   @default(now())
-  updatedAt  DateTime   @updatedAt
+  createdAt   DateTime                        @default(now())
+  updatedAt   DateTime                        @updatedAt
 
   @@unique([programId, weekNumber])
   @@index([programId])
+}
+
+// Per-user snapshot of a program when a user activates it. This stores a copy
+// of the program structure so users can mark items completed without mutating
+// the canonical Program model.
+model UserProgramSnapshot {
+  id          String          @id @default(uuid())
+  userId      String
+  programId   String
+  title       String
+  description String?
+  thumbnail   String?
+  difficulty  DifficultyLevel
+  weeks       SnapshotWeek[]
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+
+  // keep userId and programId as scalar references (no back-relation fields added to User/Program models)
+
+  @@index([userId, programId])
+}
+
+model SnapshotWeek {
+  id         String         @id @default(uuid())
+  snapshotId String
+  weekNumber Int
+  days       SnapshotDay[]
+  createdAt  DateTime       @default(now())
+  updatedAt  DateTime       @updatedAt
+
+  snapshot UserProgramSnapshot @relation(fields: [snapshotId], references: [id], onDelete: Cascade)
+
+  @@unique([snapshotId, weekNumber])
+  @@index([snapshotId])
+}
+
+model SnapshotDay {
+  id        String       @id @default(uuid())
+  weekId    String
+  dayNumber Int
+  name      String?
+  items     SnapshotItem[]
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
+
+  week SnapshotWeek @relation(fields: [weekId], references: [id], onDelete: Cascade)
+
+  @@unique([weekId, dayNumber])
+  @@index([weekId])
+}
+
+model SnapshotItem {
+  id         String   @id @default(uuid())
+  dayId      String
+  exerciseId String?
+  workoutId  String?
+  completed  Boolean  @default(false)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  day SnapshotDay @relation(fields: [dayId], references: [id], onDelete: Cascade)
+  // exerciseId and workoutId are scalar ids referencing existing models; we don't declare back-relations here
+
+  @@unique([dayId, exerciseId], name: "snapshot_day_exercise")
+  @@unique([dayId, workoutId], name: "snapshot_day_workout")
+  @@index([dayId])
+  @@index([exerciseId])
+  @@index([workoutId])
+}
+
+model ProgramDay {
+  id        String      @id @default(uuid())
+  weekId    String
+  week      ProgramWeek @relation(fields: [weekId], references: [id], onDelete: Cascade)
+  dayNumber Int
+  name      String?
+
+  exercises Exercise[] @relation("ProgramDayExercises")
+  workouts  Workout[]  @relation("ProgramDayWorkouts")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([weekId, dayNumber])
+  @@index([weekId])
 }

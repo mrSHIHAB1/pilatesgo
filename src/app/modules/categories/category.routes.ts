@@ -13,6 +13,7 @@ import {
   deleteCategoryValidation,
 } from './category.validation';
 import auth from '../../middlewares/auth';
+import { checkSubscription } from '../../middlewares/checkSubscription';
 
 const router = Router();
 
@@ -20,10 +21,10 @@ const router = Router();
 router.post('/create', auth(), validateRequest(createCategoryValidation), createCategory);
 
 // GET /categories - Get all categories with pagination and search
-router.get('/all', auth(), getAllCategories);
+router.get('/all', auth(),  getAllCategories);
 
 // GET /categories/:id - Get a specific category by ID
-router.get('/by-id/:id', auth(), getCategoryById);
+router.get('/by-id/:id', auth(),  getCategoryById);
 
 // PUT /categories/:id - Update a category
 router.put('/update/:id', auth(), validateRequest(updateCategoryValidation), updateCategory);

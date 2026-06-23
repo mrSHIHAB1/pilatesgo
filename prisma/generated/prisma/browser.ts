@@ -33,6 +33,11 @@ export type Exercise = Prisma.ExerciseModel
  */
 export type WorkoutFavourite = Prisma.WorkoutFavouriteModel
 /**
+ * Model Notification
+ * 
+ */
+export type Notification = Prisma.NotificationModel
+/**
  * Model Program
  * 
  */
@@ -42,6 +47,31 @@ export type Program = Prisma.ProgramModel
  * 
  */
 export type ProgramWeek = Prisma.ProgramWeekModel
+/**
+ * Model UserProgramSnapshot
+ * 
+ */
+export type UserProgramSnapshot = Prisma.UserProgramSnapshotModel
+/**
+ * Model SnapshotWeek
+ * 
+ */
+export type SnapshotWeek = Prisma.SnapshotWeekModel
+/**
+ * Model SnapshotDay
+ * 
+ */
+export type SnapshotDay = Prisma.SnapshotDayModel
+/**
+ * Model SnapshotItem
+ * 
+ */
+export type SnapshotItem = Prisma.SnapshotItemModel
+/**
+ * Model ProgramDay
+ * 
+ */
+export type ProgramDay = Prisma.ProgramDayModel
 /**
  * Model UserProgramEnrollment
  * 
@@ -57,6 +87,16 @@ export type UserProgramExerciseCompletion = Prisma.UserProgramExerciseCompletion
  * 
  */
 export type ProgramReview = Prisma.ProgramReviewModel
+/**
+ * Model Subscription
+ * 
+ */
+export type Subscription = Prisma.SubscriptionModel
+/**
+ * Model SubscriptionPlan
+ * 
+ */
+export type SubscriptionPlan = Prisma.SubscriptionPlanModel
 /**
  * Model User
  * 

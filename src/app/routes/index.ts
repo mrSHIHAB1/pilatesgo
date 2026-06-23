@@ -7,6 +7,8 @@ import { exerciseRoutes } from '../modules/exercise/exercise.routes';
 import { workoutRoutes } from '../modules/workouts/workout.routes';
 import { programRoutes } from '../modules/programs/program.routes';
 import { favouriteRoutes } from '../modules/favourites/favourite.routes';
+import { notificationRoutes } from '../modules/notification/notification.router';
+import { subscriptionRoutes } from '../modules/subscription/subscription.routes';
 
 
 const router = express.Router();
@@ -43,6 +45,14 @@ const moduleRoutes = [
     {
         path: '/favourites',
         route: favouriteRoutes
+    },
+    {
+        path: '/notifications',
+        route: notificationRoutes
+    },
+    {
+        path: '/subscriptions',
+        route: subscriptionRoutes
     }
       
 ];

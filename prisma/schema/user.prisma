@@ -1,15 +1,15 @@
 model User {
-  id                     String             @id @default(cuid())
+  id                     String           @id @default(cuid())
   // Auth
-  email                  String             @unique
+  email                  String           @unique
   password               String
   // Basic Profile
   fullName               String
   gender                 Gender?
   age                    Int?
   // Body Metrics-
-  height                 Float              @default(0)
-  weight                 Float              @default(0)
+  height                 Float            @default(0)
+  weight                 Float            @default(0)
   mainGoal               String?
   likeToWorkOn           String?
   fimiliarityWithPilates String?
@@ -18,18 +18,18 @@ model User {
   motivation             String?
   workoutPreference      String?
   workoutRoutine         WorkoutRoutine?
-  NotificationsEnabled   Boolean            @default(true)
+  NotificationsEnabled   Boolean          @default(true)
   //later we can add more detailed body metrics like body fat percentage, muscle mass, etc.
   dateOfBirth            DateTime?
-  startingWeight         Float              @default(0)
-  currentWeight          Float              @default(0)
+  startingWeight         Float            @default(0)
+  currentWeight          Float            @default(0)
   fitnessLevel           FitnessLevel?
   classes                WorkoutClass[]
   focusZones             FocusZone[]
   specialPrograms        SpecialProgram[]
-  dailyStepsGoal         Int?               @default(10000)
-  units                  UnitSystem         @default(METERANDGRAMS)
-  goalWeight             Float?             @default(0)
+  dailyStepsGoal         Int?             @default(10000)
+  units                  UnitSystem       @default(METERANDGRAMS)
+  goalWeight             Float?           @default(0)
   activitylevel          ActivityLevel?
   activityDetails        String?
   mostAttentionTo        AttentionArea?
@@ -57,6 +57,8 @@ model User {
   programCompletions UserProgramExerciseCompletion[]
   favourites         WorkoutFavourite[]
   programReviews     ProgramReview[]
+  notifications      Notification[]
+  subscriptions      Subscription[]
 }
 
 model AuthProvider {
@@ -73,13 +75,15 @@ enum UserRole {
   ADMIN
   USER
 }
+
 enum AttentionArea {
- ARMS
+  ARMS
   LEGS
   CHEST
   ABS
   BACK
 }
+
 enum Gender {
   MALE
   FEMALE
@@ -99,8 +103,6 @@ enum ActivityLevel {
   ADVANCED
   PRO
 }
-
-
 
 enum WorkoutRoutine {
   SHORT

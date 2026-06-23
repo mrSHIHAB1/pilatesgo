@@ -2,7 +2,7 @@ model ProgramReview {
   id        String   @id @default(uuid())
   userId    String
   programId String
-  rating    Int      // 1-5
+  rating    Int // 1-5
   comment   String?
   photos    String[] // Cloudinary URLs
   createdAt DateTime @default(now())

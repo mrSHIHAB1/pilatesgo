@@ -25,19 +25,25 @@ const validateWeeksPayload = async (weeks: NonNullable<ICreateProgramRequest['we
     }
     weekNumbers.add(week.weekNumber);
 
-    if (!Array.isArray(week.exerciseIds)) {
-      throw new ApiError(httpStatus.BAD_REQUEST, 'exerciseIds must be an array of strings');
+    if (!Array.isArray(week.days)) {
+      throw new ApiError(httpStatus.BAD_REQUEST, 'days must be an array');
     }
 
-    const uniqueWeekExerciseIds = new Set(week.exerciseIds);
-    if (uniqueWeekExerciseIds.size !== week.exerciseIds.length) {
-      throw new ApiError(
-        httpStatus.BAD_REQUEST,
-        `Duplicate exerciseIds found in weekNumber ${week.weekNumber}`
-      );
-    }
+    const dayNumbers = new Set<number>();
+    for (const day of week.days) {
+      if (!Number.isInteger(day.dayNumber) || day.dayNumber < 1) {
+        throw new ApiError(httpStatus.BAD_REQUEST, 'dayNumber must be a positive integer');
+      }
+      if (dayNumbers.has(day.dayNumber)) {
+        throw new ApiError(httpStatus.BAD_REQUEST, `Duplicate dayNumber: ${day.dayNumber} in week ${week.weekNumber}`);
+      }
+      dayNumbers.add(day.dayNumber);
 
-    allExerciseIds.push(...week.exerciseIds);
+      if (day.exerciseIds) {
+        if (!Array.isArray(day.exerciseIds)) throw new ApiError(httpStatus.BAD_REQUEST, 'exerciseIds must be an array of strings');
+        allExerciseIds.push(...day.exerciseIds);
+      }
+    }
   }
 
   const uniqueExerciseIds = Array.from(new Set(allExerciseIds));
@@ -56,6 +62,8 @@ const validateWeeksPayload = async (weeks: NonNullable<ICreateProgramRequest['we
       );
     }
   }
+
+  // workouts are no longer supported in program days; only exercises are allowed
 };
 
 const ensureProgressDelegates = () => {
@@ -88,7 +96,14 @@ const getProgramTotals = async (programId: string) => {
         select: {
           id: true,
           weekNumber: true,
-          exercises: { select: { id: true } },
+          days: {
+            select: {
+              id: true,
+              dayNumber: true,
+              name: true,
+              exercises: { select: { id: true } },
+            },
+          },
         },
         orderBy: { weekNumber: 'asc' },
       },
@@ -99,11 +114,16 @@ const getProgramTotals = async (programId: string) => {
     throw new ApiError(httpStatus.NOT_FOUND, 'Program not found');
   }
 
-  const totalExercises = program.weeks.reduce((sum, week) => sum + week.exercises.length, 0);
+  let totalItems = 0;
+  program.weeks.forEach((week) => {
+    week.days.forEach((day) => {
+      totalItems += day.exercises.length;
+    });
+  });
 
   return {
     program,
-    totalExercises,
+    totalExercises: totalItems, // keeping variable name for compatibility
   };
 };
 
@@ -156,8 +176,17 @@ const createProgram = async (payload: ICreateProgramRequest): Promise<IProgramRe
         weeks: {
           create: payload.weeks.map((week) => ({
             weekNumber: week.weekNumber,
-            exercises: {
-              connect: week.exerciseIds.map((id) => ({ id })),
+            days: {
+              create: week.days?.map((day) => ({
+                dayNumber: day.dayNumber,
+                name: day.name,
+                exercises: day.exerciseIds?.length ? {
+                  connect: day.exerciseIds.map((id) => ({ id })),
+                } : undefined,
+                workouts: day.workoutIds?.length ? {
+                  connect: day.workoutIds.map((id) => ({ id })),
+                } : undefined,
+              })) || [],
             },
           })),
         },
@@ -166,10 +195,15 @@ const createProgram = async (payload: ICreateProgramRequest): Promise<IProgramRe
     include: {
       weeks: {
         orderBy: { weekNumber: 'asc' },
-        include: { exercises: true },
+        include: {
+          days: {
+            orderBy: { dayNumber: 'asc' },
+                include: { exercises: true },
+          },
+        },
       },
       category: true,
-      creator: true,
+      
     },
   });
 
@@ -214,11 +248,11 @@ const getAllPrograms = async (
       take: limit,
       include: {
         category: true,
-        creator: true,
-        weeks: {
-          orderBy: { weekNumber: 'asc' },
-          include: { exercises: true },
-        },
+        // creator: true,
+        // weeks: {
+        //   orderBy: { weekNumber: 'asc' },
+        //   include: { exercises: true },
+        // },
       },
       orderBy: { createdAt: 'desc' },
     }),
@@ -241,10 +275,15 @@ const getProgramById = async (id: string): Promise<any> => {
     where: { id },
     include: {
       category: true,
-      creator: true,
+      // creator: true,
       weeks: {
         orderBy: { weekNumber: 'asc' },
-        include: { exercises: true },
+        include: {
+          days: {
+            orderBy: { dayNumber: 'asc' },
+            include: { exercises: true },
+          },
+        },
       },
     },
   });
@@ -318,8 +357,17 @@ const updateProgram = async (id: string, payload: IUpdateProgramRequest): Promis
           deleteMany: {},
           create: payload.weeks.map((week) => ({
             weekNumber: week.weekNumber,
-            exercises: {
-              connect: week.exerciseIds.map((exerciseId) => ({ id: exerciseId })),
+            days: {
+              create: week.days?.map((day) => ({
+                dayNumber: day.dayNumber,
+                name: day.name,
+                exercises: day.exerciseIds?.length ? {
+                  connect: day.exerciseIds.map((id) => ({ id })),
+                } : undefined,
+                workouts: day.workoutIds?.length ? {
+                  connect: day.workoutIds.map((id) => ({ id })),
+                } : undefined,
+              })) || [],
             },
           })),
         },
@@ -328,7 +376,12 @@ const updateProgram = async (id: string, payload: IUpdateProgramRequest): Promis
     include: {
       weeks: {
         orderBy: { weekNumber: 'asc' },
-        include: { exercises: true },
+        include: {
+          days: {
+            orderBy: { dayNumber: 'asc' },
+                include: { exercises: true },
+          },
+        },
       },
       category: true,
       creator: true,
@@ -385,7 +438,69 @@ const activateProgram = async (userId: string, programId: string) => {
     },
   });
 
+  // create per-user snapshot on activate
+  try {
+    await createProgramSnapshotForUser(userId, programId);
+  } catch (err: any) {
+    // don't fail activation if snapshot creation fails; log silently
+    // eslint-disable-next-line no-console
+    console.error('Failed to create program snapshot:', (err as any)?.message ?? err);
+  }
+
   return enrollment;
+};
+
+// Create a per-user snapshot of the program structure when a user activates it
+const createProgramSnapshotForUser = async (userId: string, programId: string) => {
+  const program = await prisma.program.findUnique({
+    where: { id: programId },
+    include: {
+      weeks: {
+        orderBy: { weekNumber: 'asc' },
+        include: {
+          days: {
+            orderBy: { dayNumber: 'asc' },
+            include: { exercises: { select: { id: true } } },
+          },
+        },
+      },
+    },
+  });
+
+  if (!program) throw new ApiError(httpStatus.NOT_FOUND, 'Program not found');
+
+  // If snapshot already exists for this user+program, do nothing
+  const existing = await prisma.userProgramSnapshot.findFirst({ where: { userId, programId } });
+  if (existing) return existing;
+
+  // Create snapshot with nested weeks/days/items using transactions
+  const created = await prisma.$transaction(async (tx) => {
+    const snapshot = await tx.userProgramSnapshot.create({
+      data: {
+        userId,
+        programId,
+        title: program.title,
+        description: program.description,
+        thumbnail: program.thumbnail,
+        difficulty: program.difficulty,
+      },
+    });
+
+    for (const week of program.weeks) {
+      const sw = await tx.snapshotWeek.create({ data: { snapshotId: snapshot.id, weekNumber: week.weekNumber } });
+      for (const day of week.days) {
+        const sd = await tx.snapshotDay.create({ data: { weekId: sw.id, dayNumber: day.dayNumber, name: day.name } });
+        // create items for exercises only
+        for (const ex of day.exercises) {
+          await tx.snapshotItem.create({ data: { dayId: sd.id, exerciseId: ex.id } });
+        }
+      }
+    }
+
+    return snapshot;
+  });
+
+  return created;
 };
 
 const getMyActivePrograms = async (userId: string) => {
@@ -404,7 +519,15 @@ const getMyActivePrograms = async (userId: string) => {
             select: {
               id: true,
               weekNumber: true,
-              exercises: { select: { id: true } },
+              days: {
+                select: {
+                  id: true,
+                  dayNumber: true,
+                  name: true,
+                  exercises: { select: { id: true } },
+                },
+                orderBy: { dayNumber: 'asc' },
+              },
             },
             orderBy: { weekNumber: 'asc' },
           },
@@ -416,35 +539,131 @@ const getMyActivePrograms = async (userId: string) => {
   return enrollments;
 };
 
+const getProgramSnapshot = async (userId: string, programId: string) => {
+  ensureProgressDelegates();
+  const snapshot = await prisma.userProgramSnapshot.findFirst({
+    where: { userId, programId },
+    include: {
+      weeks: {
+        orderBy: { weekNumber: 'asc' },
+        include: {
+          days: {
+            orderBy: { dayNumber: 'asc' },
+            include: {
+              items: {
+                orderBy: { createdAt: 'asc' },
+              },
+            },
+          },
+        },
+      },
+    },
+  });
+
+  if (!snapshot) throw new ApiError(httpStatus.NOT_FOUND, 'Snapshot not found for this user and program');
+
+  // collect exercise ids to fetch details
+  const exerciseIds: string[] = [];
+  for (const w of snapshot.weeks) {
+    for (const d of w.days) {
+      for (const it of d.items) {
+        if (it.exerciseId) exerciseIds.push(it.exerciseId);
+      }
+    }
+  }
+
+  const exercises = exerciseIds.length ? await prisma.exercise.findMany({ where: { id: { in: Array.from(new Set(exerciseIds)) } } }) : [];
+  const exerciseMap = new Map((exercises as any[]).map((e: any) => [e.id, e]));
+
+  // attach details to items (exercises only)
+  const snapshotWithDetails = {
+    ...snapshot,
+    weeks: snapshot.weeks.map((w) => ({
+      ...w,
+      days: w.days.map((d) => ({
+        ...d,
+        items: d.items.map((it) => ({
+          ...it,
+          exercise: it.exerciseId ? exerciseMap.get(it.exerciseId) ?? null : null,
+        })),
+      })),
+    })),
+  };
+
+  return snapshotWithDetails;
+};
+
+const setSnapshotItemDone = async (params: {
+  userId: string;
+  programId: string;
+  snapshotWeekId: string;
+  snapshotDayId: string;
+  snapshotItemId: string;
+  done: boolean;
+}) => {
+  const { userId, programId, snapshotWeekId, snapshotDayId, snapshotItemId, done } = params;
+
+  // Validate snapshot belongs to user and program via joins
+  const item = await prisma.snapshotItem.findUnique({
+    where: { id: snapshotItemId },
+    include: {
+      day: { include: { week: { include: { snapshot: true } } } },
+    },
+  });
+
+  if (!item) throw new ApiError(httpStatus.NOT_FOUND, 'Snapshot item not found');
+
+  const snap = item.day?.week?.snapshot;
+  if (!snap || snap.userId !== userId || snap.programId !== programId) {
+    throw new ApiError(httpStatus.FORBIDDEN, 'Snapshot item does not belong to this user/program');
+  }
+
+  // Ensure week/day ids match (optional stricter check)
+  if (item.day.week.id !== snapshotWeekId || item.day.id !== snapshotDayId) {
+    throw new ApiError(httpStatus.BAD_REQUEST, 'Snapshot week/day mismatch');
+  }
+
+  const updated = await prisma.snapshotItem.update({ where: { id: snapshotItemId }, data: { completed: done } });
+
+  return updated;
+};
+
 const setExerciseDone = async (params: {
   userId: string;
   programId: string;
   programWeekId: string;
-  exerciseId: string;
+  programDayId: string;
+  exerciseId?: string;
   done: boolean;
 }) => {
   ensureProgressDelegates();
-  const { userId, programId, programWeekId, exerciseId, done } = params;
+  const { userId, programId, programWeekId, programDayId, exerciseId, done } = params;
 
-  const week = await prisma.programWeek.findFirst({
+  if (!exerciseId) {
+    throw new ApiError(httpStatus.BAD_REQUEST, 'exerciseId must be provided');
+  }
+
+  const day = await prisma.programDay.findFirst({
     where: {
-      id: programWeekId,
-      programId,
+      id: programDayId,
+      week: {
+        id: programWeekId,
+        programId,
+      },
     },
     select: {
       id: true,
-      weekNumber: true,
       exercises: { select: { id: true } },
     },
   });
 
-  if (!week) {
-    throw new ApiError(httpStatus.NOT_FOUND, 'Program week not found');
+  if (!day) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'Program day not found');
   }
 
-  const isExerciseInWeek = week.exercises.some((e) => e.id === exerciseId);
-  if (!isExerciseInWeek) {
-    throw new ApiError(httpStatus.BAD_REQUEST, 'Exercise is not part of this program week');
+  const isExerciseInDay = day.exercises.some((e) => e.id === exerciseId);
+  if (!isExerciseInDay) {
+    throw new ApiError(httpStatus.BAD_REQUEST, 'Exercise is not part of this program day');
   }
 
   await prisma.userProgramEnrollment.upsert({
@@ -565,26 +784,48 @@ const getProgramProgress = async (userId: string, programId: string) => {
     },
     select: {
       programWeekId: true,
+      programDayId: true,
       exerciseId: true,
     },
   });
 
-  const completedSet = new Set(completions.map((c) => `${c.programWeekId}:${c.exerciseId}`));
+  const completedExerciseSet = new Set(completions.filter(c => c.exerciseId).map((c) => `${c.programDayId}:${c.exerciseId}`));
 
   const weeks = program.weeks.map((week) => {
-    const weekTotal = week.exercises.length;
-    const weekCompleted = week.exercises.reduce(
-      (sum, ex) => sum + (completedSet.has(`${week.id}:${ex.id}`) ? 1 : 0),
-      0
-    );
+    let weekTotal = 0;
+    let weekCompleted = 0;
+
+      const days = week.days.map((day) => {
+      const dayTotal = day.exercises.length;
+      let dayCompleted = 0;
+
+      dayCompleted += day.exercises.reduce(
+        (sum, ex) => sum + (completedExerciseSet.has(`${day.id}:${ex.id}`) ? 1 : 0),
+        0
+      );
+
+      weekTotal += dayTotal;
+      weekCompleted += dayCompleted;
+
+      return {
+        programDayId: day.id,
+        dayNumber: day.dayNumber,
+        name: day.name,
+        totalItems: dayTotal,
+        completedItems: dayCompleted,
+        percentCompleted: dayTotal > 0 ? Math.round((dayCompleted / dayTotal) * 100) : 0,
+      };
+    });
+
     const weekPercent = weekTotal > 0 ? Math.round((weekCompleted / weekTotal) * 100) : 0;
 
     return {
       programWeekId: week.id,
       weekNumber: week.weekNumber,
-      totalExercises: weekTotal,
-      completedExercises: weekCompleted,
+      totalItems: weekTotal,
+      completedItems: weekCompleted,
       percentCompleted: weekPercent,
+      days,
     };
   });
 
@@ -594,7 +835,9 @@ const getProgramProgress = async (userId: string, programId: string) => {
   return {
     programId: program.id,
     enrollment: enrollment ?? null,
-    totalExercises,
+    totalItems: totalExercises, // rename in output to avoid breaking change but actually keep it as totalExercises for now if needed, or totalItems. 
+    // actually, let's keep totalExercises and add totalItems
+    totalExercises: totalExercises,
     completedExercises,
     percentCompleted,
     weeks,
@@ -732,6 +975,187 @@ const getMyReview = async (userId: string, programId: string) => {
   return review;
 };
 
+const getMyTodaysChallenges = async (userId: string) => {
+  ensureProgressDelegates();
+
+  const enrollments = await prisma.userProgramEnrollment.findMany({
+    where: {
+      userId,
+      status: 'ACTIVE',
+    },
+    include: {
+      program: {
+        include: {
+          weeks: {
+            include: {
+              days: {
+                include: {
+                  exercises: {
+                    include: {
+                      videos: true,
+                      category: true,
+                    },
+                  },
+                },
+                orderBy: { dayNumber: 'asc' },
+              },
+            },
+            orderBy: { weekNumber: 'asc' },
+          },
+        },
+      },
+    },
+  });
+
+  const now = new Date();
+  const challenges = [];
+
+  for (const enrollment of enrollments) {
+    const { program, startedAt } = enrollment;
+    const diffTime = Math.max(0, now.getTime() - startedAt.getTime());
+    const daysActive = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+    const currentWeekNumber = Math.floor(daysActive / 7) + 1;
+    const dayOfWeek = (daysActive % 7) + 1;
+
+    const currentWeek = program.weeks.find((w) => w.weekNumber === currentWeekNumber);
+    if (!currentWeek || !currentWeek.days.length) {
+      continue;
+    }
+
+    const dayIndex = (dayOfWeek - 1) % currentWeek.days.length;
+    const currentDay = currentWeek.days[dayIndex];
+
+    for (const exercise of currentDay.exercises) {
+      const completion = await prisma.userProgramExerciseCompletion.findFirst({
+        where: {
+          userId,
+          programId: program.id,
+          exerciseId: exercise.id,
+        },
+        orderBy: { createdAt: 'desc' },
+      });
+
+      // Only include if not completed (today's challenges should show incomplete items)
+      if (!completion) {
+        challenges.push({
+          programId: program.id,
+          programTitle: program.title,
+          weekNumber: currentWeekNumber,
+          dayOfWeek,
+          programWeekId: currentWeek.id,
+          programDayId: currentDay.id,
+          dayName: currentDay.name,
+          itemType: 'exercise',
+          item: exercise,
+          completed: false,
+        });
+      }
+    }
+
+    // workouts are not included in challenges anymore
+  }
+
+  return challenges;
+};
+
+const getMyUpcomingChallenges = async (userId: string) => {
+  ensureProgressDelegates();
+
+  const enrollments = await prisma.userProgramEnrollment.findMany({
+    where: {
+      userId,
+      status: 'ACTIVE',
+    },
+    include: {
+      program: {
+        include: {
+          weeks: {
+            include: {
+              days: {
+                include: {
+                  exercises: {
+                    include: {
+                      videos: true,
+                      category: true,
+                    },
+                  },
+                },
+                orderBy: { dayNumber: 'asc' },
+              },
+            },
+            orderBy: { weekNumber: 'asc' },
+          },
+        },
+      },
+    },
+  });
+
+  const now = new Date();
+  const upcomingChallenges: any[] = [];
+
+  for (const enrollment of enrollments) {
+    const { program, startedAt } = enrollment;
+    const diffTime = Math.max(0, now.getTime() - startedAt.getTime());
+    const daysActive = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+    const currentWeekNumber = Math.floor(daysActive / 7) + 1;
+    const dayOfWeek = (daysActive % 7) + 1;
+
+    for (const week of program.weeks) {
+      if (week.weekNumber < currentWeekNumber) {
+        continue;
+      }
+
+      const startDayIndex = week.weekNumber === currentWeekNumber ? ((dayOfWeek - 1) % Math.max(1, week.days.length)) + 1 : 0;
+
+      for (let i = startDayIndex; i < week.days.length; i++) {
+        const day = week.days[i];
+
+        let daysFromNow = 0;
+        if (week.weekNumber === currentWeekNumber) {
+          daysFromNow = i - ((dayOfWeek - 1) % Math.max(1, week.days.length));
+        } else {
+          const weeksDiff = week.weekNumber - currentWeekNumber;
+          daysFromNow = weeksDiff * 7 + i - ((dayOfWeek - 1) % Math.max(1, week.days.length));
+        }
+
+        for (const exercise of day.exercises) {
+          const completion = await prisma.userProgramExerciseCompletion.findFirst({
+            where: {
+              userId,
+              programId: program.id,
+              exerciseId: exercise.id,
+            },
+            orderBy: { createdAt: 'desc' },
+          });
+
+          // Only include if not completed (upcoming challenges should show incomplete items)
+          if (!completion) {
+            upcomingChallenges.push({
+              programId: program.id,
+              programTitle: program.title,
+              weekNumber: week.weekNumber,
+              dayNumber: day.dayNumber,
+              programWeekId: week.id,
+              programDayId: day.id,
+              dayName: day.name,
+              daysFromNow,
+              itemType: 'exercise',
+              item: exercise,
+              completed: false,
+            });
+          }
+        }
+
+        // workouts are not included in upcoming challenges anymore
+      }
+    }
+  }
+
+  upcomingChallenges.sort((a, b) => a.daysFromNow - b.daysFromNow);
+
+  return upcomingChallenges;
+};
+
 // ─── EXPORTS ──────────────────────────────────────────────────────────────────
 
 export const programService = {
@@ -748,4 +1172,10 @@ export const programService = {
   getReviewsForProgram,
   deleteMyReview,
   getMyReview,
+  getMyTodaysChallenges,
+  getMyUpcomingChallenges,
+  // snapshot APIs
+  createProgramSnapshotForUser,
+  getProgramSnapshot,
+  setSnapshotItemDone,
 };

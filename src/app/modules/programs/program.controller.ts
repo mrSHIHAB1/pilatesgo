@@ -238,10 +238,10 @@ export const getMyActivePrograms = catchAsync(async (req: Request & { user?: any
 
 export const setExerciseDoneForMe = catchAsync(async (req: Request & { user?: any }, res: Response) => {
   const userId = req.user?.userId as string | undefined;
-  const { programId, programWeekId, exerciseId } = req.params as {
+  const { programId, programWeekId, programDayId } = req.params as {
     programId: string;
     programWeekId: string;
-    exerciseId: string;
+    programDayId: string;
   };
 
   if (!userId) {
@@ -253,12 +253,13 @@ export const setExerciseDoneForMe = catchAsync(async (req: Request & { user?: an
     });
   }
 
-  const done = (req.body as { done?: boolean } | undefined)?.done ?? true;
+  const { exerciseId, done = true } = (req.body || {}) as { exerciseId: string; done?: boolean };
 
   const result = await programService.setExerciseDone({
     userId,
     programId,
     programWeekId,
+    programDayId,
     exerciseId,
     done,
   });
@@ -266,9 +267,45 @@ export const setExerciseDoneForMe = catchAsync(async (req: Request & { user?: an
   sendResponse(res, {
     statusCode: 200,
     success: true,
-    message: done ? 'Exercise marked as done' : 'Exercise marked as not done',
+    message: done ? 'Item marked as done' : 'Item marked as not done',
     data: result,
   });
+});
+
+export const getMyProgramSnapshot = catchAsync(async (req: Request & { user?: any }, res: Response) => {
+  const userId = req.user?.userId as string | undefined;
+  const { programId } = req.params as { programId: string };
+
+  if (!userId) return sendResponse(res, { statusCode: 401, success: false, message: 'Unauthorized', data: null });
+
+  const result = await programService.getProgramSnapshot(userId, programId);
+
+  sendResponse(res, { statusCode: 200, success: true, message: 'Program snapshot fetched', data: result });
+});
+
+export const setSnapshotItemDoneForMe = catchAsync(async (req: Request & { user?: any }, res: Response) => {
+  const userId = req.user?.userId as string | undefined;
+  const { programId, snapshotWeekId, snapshotDayId, snapshotItemId } = req.params as {
+    programId: string;
+    snapshotWeekId: string;
+    snapshotDayId: string;
+    snapshotItemId: string;
+  };
+
+  if (!userId) return sendResponse(res, { statusCode: 401, success: false, message: 'Unauthorized', data: null });
+
+  const { done = true } = (req.body || {}) as { done?: boolean };
+
+  const result = await programService.setSnapshotItemDone({
+    userId,
+    programId,
+    snapshotWeekId,
+    snapshotDayId,
+    snapshotItemId,
+    done,
+  });
+
+  sendResponse(res, { statusCode: 200, success: true, message: done ? 'Item marked done' : 'Item marked not done', data: result });
 });
 
 export const getMyProgramProgress = catchAsync(async (req: Request & { user?: any }, res: Response) => {
@@ -360,6 +397,50 @@ export const getMyReview = catchAsync(async (req: Request, res: Response) => {
     statusCode: 200,
     success: true,
     message: result ? 'Your review fetched successfully' : 'You have not reviewed this program yet',
+    data: result,
+  });
+});
+
+export const getMyTodaysChallenges = catchAsync(async (req: Request & { user?: any }, res: Response) => {
+  const userId = req.user?.userId;
+
+  if (!userId) {
+    return sendResponse(res, {
+      statusCode: 401,
+      success: false,
+      message: 'Unauthorized',
+      data: null,
+    });
+  }
+
+  const result = await programService.getMyTodaysChallenges(userId);
+
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: "Today's challenges fetched successfully",
+    data: result,
+  });
+});
+
+export const getMyUpcomingChallenges = catchAsync(async (req: Request & { user?: any }, res: Response) => {
+  const userId = req.user?.userId;
+
+  if (!userId) {
+    return sendResponse(res, {
+      statusCode: 401,
+      success: false,
+      message: 'Unauthorized',
+      data: null,
+    });
+  }
+
+  const result = await programService.getMyUpcomingChallenges(userId);
+
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: 'Upcoming challenges fetched successfully',
     data: result,
   });
 });

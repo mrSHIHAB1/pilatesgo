@@ -1,15 +1,16 @@
 model Workout {
-  id          String          @id @default(uuid())
-  title       String
-  difficulty  DifficultyLevel
-  description String?
-  duration    Int? // seconds
-  categoryId  String?
-  category    Category?       @relation(fields: [categoryId], references: [id])
-  creatorId   String?
-  creator     User?           @relation(fields: [creatorId], references: [id])
-  exercises   Exercise[]
-  favourites  WorkoutFavourite[]
-  createdAt   DateTime        @default(now())
-  updatedAt   DateTime        @updatedAt
+  id                             String                          @id @default(uuid())
+  title                          String
+  difficulty                     DifficultyLevel
+  description                    String?
+  duration                       Int? // seconds
+  categoryId                     String?
+  category                       Category?                       @relation(fields: [categoryId], references: [id])
+  creatorId                      String?
+  creator                        User?                           @relation(fields: [creatorId], references: [id])
+  exercises                      Exercise[]
+  programDays                    ProgramDay[]                    @relation("ProgramDayWorkouts")
+  favourites                     WorkoutFavourite[]
+  createdAt                      DateTime                        @default(now())
+  updatedAt                      DateTime                        @updatedAt
 }

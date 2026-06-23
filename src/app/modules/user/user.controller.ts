@@ -140,3 +140,27 @@ export const getMyWeeklyStats = catchAsync(async (req: Request & { user?: any },
     data: result,
   });
 });
+
+// GET handler - Retrieve my monthly activity (day-wise exercise time for current month)
+export const getMyMonthlyActivity = catchAsync(async (req: Request & { user?: any }, res: Response) => {
+  const userId = req.user?.userId;
+
+  if (!userId) {
+    sendResponse(res, {
+      statusCode: 401,
+      success: false,
+      message: 'You are not authorized!',
+      data: null,
+    });
+    return;
+  }
+
+  const result = await userService.getMyMonthlyActivity(userId);
+
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: 'Monthly day-wise activity retrieved successfully',
+    data: result,
+  });
+});

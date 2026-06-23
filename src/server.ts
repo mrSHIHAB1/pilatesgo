@@ -2,6 +2,7 @@ import "dotenv/config";
 import app from "./app";
 import prisma from "./app/shared/prisma";
 import { connectRedis, redisClient } from "./app/config/redis.config";
+import { subscriptionService } from "./app/modules/subscription/subscription.service";
 
 // ============================================
 // CONFIG
@@ -38,6 +39,10 @@ const startServer = async () => {
     // Connect Redis
     await connectRedis();
     console.log("✓ Redis connection successful");
+
+    // Initialize subscription plans
+    // await subscriptionService.initializeSubscriptionPlans();
+    // console.log("✓ Subscription plans initialized");
 
     const http = await import("http");
     server = http.createServer(app);

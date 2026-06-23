@@ -11,7 +11,12 @@ export interface ICreateProgramRequest {
   coverImage?: string;
   weeks?: Array<{
     weekNumber: number;
-    exerciseIds: string[];
+    days: Array<{
+      dayNumber: number;
+      name?: string;
+      exerciseIds?: string[];
+      workoutIds?: string[];
+    }>;
   }>;
 }
 
@@ -27,7 +32,12 @@ export interface IUpdateProgramRequest {
   coverImage?: string;
   weeks?: Array<{
     weekNumber: number;
-    exerciseIds: string[];
+    days: Array<{
+      dayNumber: number;
+      name?: string;
+      exerciseIds?: string[];
+      workoutIds?: string[];
+    }>;
   }>;
 }
 

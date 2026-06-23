@@ -52,11 +52,11 @@ export const setExerciseDoneValidation = z.object({
   params: z.object({
     programId: z.string({ message: 'Program ID is required' }),
     programWeekId: z.string({ message: 'Program Week ID is required' }),
-    exerciseId: z.string({ message: 'Exercise ID is required' }),
+    programDayId: z.string({ message: 'Program Day ID is required' }),
   }),
   body: z
     .object({
+      exerciseId: z.string({ message: 'exerciseId is required' }),
       done: z.boolean({ message: 'done must be boolean' }).optional(),
-    })
-    .optional(),
+    }),
 });
